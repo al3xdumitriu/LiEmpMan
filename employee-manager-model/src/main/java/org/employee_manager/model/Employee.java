@@ -56,7 +56,7 @@ public class Employee {
 //	
 //	@Column(name="EMPLOYEE_EMPLOYEE_PROJECTS")
 //	@OneToMany(mappedBy="projectId")
-// 	private List<Employee_Project> employeeProjects;
+// 	private List<EmployeeProject> employeeProjects;
 // 	
 // 	@Column(name="EMPLOYEE_EVALUATIONS")
 //	@OneToMany(mappedBy="id")
