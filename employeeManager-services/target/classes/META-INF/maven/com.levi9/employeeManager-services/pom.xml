@@ -2,76 +2,37 @@
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
 	<modelVersion>4.0.0</modelVersion>
-
 	<parent>
 		<groupId>com.levi9</groupId>
-		<artifactId>employee-manager-root</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<artifactId>employeeManager-root</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
 	<groupId>com.levi9</groupId>
-	<artifactId>employee-manager-web</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-
-	<packaging>war</packaging>
-	<name>employee-manager-web</name>
+	<artifactId>employeeManager-services</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>employeeManager-services</name>
 	<url>http://maven.apache.org</url>
-
-	<build>
-	<finalName>employee-manager-web</finalName>
-		<pluginManagement>
-			<plugins>
-				<!-- Plugin to create the test jar used by the services module -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<executions>
-						<execution>
-							<goals>
-								<goal>test-jar</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.3</version>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-						<encoding>${project.build.sourceEncoding}</encoding>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
-
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
-		<!-- common modules -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>employee-manager-services</artifactId>
-		</dependency>
-
 		<!-- javax validation -->
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 		</dependency>
 
-		<!-- postgresql -->
-		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-		</dependency>
-
 		<!-- Apache Tomcat -->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-catalina</artifactId>
+		</dependency>
+
+		<!-- postgresql -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 		</dependency>
 
 		<!-- Hibernate -->
@@ -87,6 +48,7 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
+
 
 
 		<!-- Spring -->
@@ -158,6 +120,7 @@
 			<artifactId>log4j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -167,5 +130,4 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
-
 </project>
