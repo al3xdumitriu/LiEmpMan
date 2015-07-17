@@ -14,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "SKILL_EVALUATION")
 public class SkillEvaluation {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "SKILL_EVALUATION_ID")
@@ -24,12 +25,8 @@ public class SkillEvaluation {
 	private Skill skillId;
 
 	@JoinColumn(name = "EVALUATION_ID")
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Evaluation evaluationId;
-
-	public SkillEvaluation() {
-		super();
-	}
 
 	public long getId() {
 		return id;

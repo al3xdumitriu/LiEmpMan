@@ -1,12 +1,15 @@
 package org.employee_manager.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,18 +26,18 @@ public class Evaluation {
 	@Column(name = "EVALUATION_COMMENT")
 	private String comment;
 
-	/*
-	 * @ManyToOne
-	 * 
-	 * @Column(name = "EVALUATION_EMPLOYEE_ID") private Employee employeeId;
-	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "EMPLOYEE_ID")
+	private Employee employeeId;
 
 	@Column(name = "EVALUATION_ANONYM")
 	private boolean anonym;
 
-	public Evaluation() {
-		super();
-	}
+	@OneToOne(mappedBy = "evaluationId")
+	private ProjectEvaluation projectEvaluation;
+
+	@OneToOne(mappedBy = "evaluationId")
+	private SkillEvaluation skillEvaluation;
 
 	public long getId() {
 		return id;
@@ -60,12 +63,36 @@ public class Evaluation {
 		this.comment = comment;
 	}
 
+	public Employee getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Employee employeeId) {
+		this.employeeId = employeeId;
+	}
+
 	public boolean isAnonym() {
 		return anonym;
 	}
 
 	public void setAnonym(boolean anonym) {
 		this.anonym = anonym;
+	}
+
+	public ProjectEvaluation getProjectEvaluation() {
+		return projectEvaluation;
+	}
+
+	public void setProjectEvaluation(ProjectEvaluation projectEvaluation) {
+		this.projectEvaluation = projectEvaluation;
+	}
+
+	public SkillEvaluation getSkillEvaluation() {
+		return skillEvaluation;
+	}
+
+	public void setSkillEvaluation(SkillEvaluation skillEvaluation) {
+		this.skillEvaluation = skillEvaluation;
 	}
 
 }

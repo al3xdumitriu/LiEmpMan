@@ -1,11 +1,16 @@
 package org.employee_manager.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,11 +20,7 @@ public class Skill {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "SKILL_ID")
 	private long id;
-	/*
-	 * @ManyToOne
-	 * 
-	 * @Column(name = "SKILL_EMPLOYEE_ID") private Employee skillEmployeeId;
-	 */
+
 	@Column(name = "SKILL_NAME")
 	private String name;
 
@@ -29,9 +30,12 @@ public class Skill {
 	@Column(name = "SKILL_EXPERIENCE")
 	private String experience;
 
-	public Skill() {
-		super();
-	}
+	@JoinColumn(name = "EMPLOYEE_ID")
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Employee employeeId;
+
+	@OneToMany(mappedBy="skillId")
+	private List<SkillEvaluation> skillEvaluations;
 
 	public long getId() {
 		return id;
@@ -64,5 +68,22 @@ public class Skill {
 	public void setExperience(String experience) {
 		this.experience = experience;
 	}
+
+	public Employee getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Employee employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public List<SkillEvaluation> getSkillEvaluations() {
+		return skillEvaluations;
+	}
+
+	public void setSkillEvaluations(List<SkillEvaluation> skillEvaluations) {
+		this.skillEvaluations = skillEvaluations;
+	}
+	
 
 }

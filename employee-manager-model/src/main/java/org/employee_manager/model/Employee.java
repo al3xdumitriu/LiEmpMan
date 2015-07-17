@@ -56,6 +56,15 @@ public class Employee {
 	@OneToMany(mappedBy = "employeeId")
 	private List<Achievement> achievements;
 
+	@OneToMany(mappedBy = "employeeId")
+	private List<EmployeeProject> employeeProjects;
+
+	@OneToMany(mappedBy = "employeeId")
+	private List<Evaluation> evaluations;
+
+	@OneToMany(mappedBy = "employeeId")
+	private List<Skill> skills;
+
 	public long getId() {
 		return id;
 	}
@@ -144,17 +153,28 @@ public class Employee {
 		this.achievements = achievements;
 	}
 
-	
-	// @Column(name="EMPLOYEE_EMPLOYEE_PROJECTS")
-	// @OneToMany(mappedBy="projectId")
-	// private List<EmployeeProject> employeeProjects;
-	//
-	// @Column(name="EMPLOYEE_EVALUATIONS")
-	// @OneToMany(mappedBy="id")
-	// private List<Evaluation> evaluations;
-	//
-	// @Column(name="EMPLOYEE_SKILLS")
-	// @OneToMany(mappedBy="id")
-	// private List<Skill> skills;
+	public List<EmployeeProject> getEmployeeProjects() {
+		return employeeProjects;
+	}
+
+	public void setEmployeeProjects(List<EmployeeProject> employeeProjects) {
+		this.employeeProjects = employeeProjects;
+	}
+
+	public List<Evaluation> getEvaluations() {
+		return evaluations;
+	}
+
+	public void setEvaluations(List<Evaluation> evaluations) {
+		this.evaluations = evaluations;
+	}
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
 
 }

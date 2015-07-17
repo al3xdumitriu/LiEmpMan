@@ -21,11 +21,11 @@ public class ProjectEvaluation {
 
 	@JoinColumn(name = "PROJECT_ID")
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Project idProject;
+	private Project projectId;
 
 	@JoinColumn(name = "EVALUATION_ID")
-	@OneToOne
-	private Evaluation idEvaluation;
+	@OneToOne(cascade=CascadeType.ALL)
+	private Evaluation evaluationId;
 
 	public long getId() {
 		return id;
@@ -36,19 +36,19 @@ public class ProjectEvaluation {
 	}
 
 	public Project getIdProject() {
-		return idProject;
+		return projectId;
 	}
 
 	public void setIdProject(Project idProject) {
-		this.idProject = idProject;
+		this.projectId = idProject;
 	}
 
 	public Evaluation getIdEvaluation() {
-		return idEvaluation;
+		return evaluationId;
 	}
 
 	public void setIdEvaluation(Evaluation idEvaluation) {
-		this.idEvaluation = idEvaluation;
+		this.evaluationId = idEvaluation;
 	}
 
 }

@@ -1,12 +1,14 @@
 package org.employee_manager.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,11 +36,13 @@ public class Project {
 	private Date endDate;
 
 	@Column(name = "PROJECT_STATUS")
-	private boolean statust;
+	private boolean status;
 
-	public Project() {
-		super();
-	}
+	@OneToMany(mappedBy="projectId")
+	private List<EmployeeProject> employeeProjects;
+	
+	@OneToMany(mappedBy="projectId")
+	private List<ProjectEvaluation> projectEvaluations;
 
 	public long getId() {
 		return id;
@@ -80,12 +84,28 @@ public class Project {
 		this.endDate = endDate;
 	}
 
-	public boolean isStatust() {
-		return statust;
+	public boolean isStatus() {
+		return status;
 	}
 
-	public void setStatust(boolean statust) {
-		this.statust = statust;
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public List<EmployeeProject> getEmployeeProjects() {
+		return employeeProjects;
+	}
+
+	public void setEmployeeProjects(List<EmployeeProject> employeeProjects) {
+		this.employeeProjects = employeeProjects;
+	}
+
+	public List<ProjectEvaluation> getProjectEvaluations() {
+		return projectEvaluations;
+	}
+
+	public void setProjectEvaluations(List<ProjectEvaluation> projectEvaluations) {
+		this.projectEvaluations = projectEvaluations;
 	}
 
 }

@@ -10,31 +10,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "EMPLOYEE_PROJECT")
 public class EmployeeProject {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EMPLOYEE_PROJECT_ID")
 	private long id;
-	/*
-	 * @JoinColumn(name = "employeeId")
-	 * 
-	 * @ManyToOne(cascade = CascadeType.ALL) private Employee idEmployee;
-	 */
-	@JoinColumn(name = "PROJECT_ID")
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Project projectId;
 
 	@Column(name = "EMPLOYEE_PROJECT_HOURS_ALLOCATED")
 	private int hoursAllocated;
 
-	public EmployeeProject() {
-		super();
-	}
+	@JoinColumn(name = "PROJECT_ID")
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Project projectId;
+
+	@JoinColumn(name = "EMPLOYEE_ID")
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Project employeeId;
 
 	public long getId() {
 		return id;
@@ -42,6 +38,14 @@ public class EmployeeProject {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public int getHoursAllocated() {
+		return hoursAllocated;
+	}
+
+	public void setHoursAllocated(int hoursAllocated) {
+		this.hoursAllocated = hoursAllocated;
 	}
 
 	public Project getProjectId() {
@@ -52,12 +56,13 @@ public class EmployeeProject {
 		this.projectId = projectId;
 	}
 
-	public int getHoursAllocated() {
-		return hoursAllocated;
+	public Project getEmployeeId() {
+		return employeeId;
 	}
 
-	public void setHoursAllocated(int hoursAllocated) {
-		this.hoursAllocated = hoursAllocated;
+	public void setEmployeeId(Project employeeId) {
+		this.employeeId = employeeId;
 	}
+	
 
 }
