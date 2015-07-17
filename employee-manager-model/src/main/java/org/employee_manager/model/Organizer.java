@@ -14,21 +14,20 @@ import javax.persistence.Table;
 @Table(name="ORGANIZER")
 public class Organizer extends Employee{
 	
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="EVENT_ID")
-//	@Column(name="ORGANIZER_EVENT")
-//	private Event organizerEvent;
-
-//	public Event getOrganizerEvent() {
-//		return organizerEvent;
-//	}
-//
-//	public void setOrganizerEvent(Event organizerEvent) {
-//		this.organizerEvent = organizerEvent;
-//	}	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="EVENT_ID")
+	private Event eventId;	
 	
 	@OneToMany(mappedBy="organizerId")
 	private List<OrganizerEvaluation> organizerEvaluations;
+
+	public Event getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(Event eventId) {
+		this.eventId = eventId;
+	}
 
 	public List<OrganizerEvaluation> getOrganizerEvaluations() {
 		return organizerEvaluations;
@@ -37,5 +36,6 @@ public class Organizer extends Employee{
 	public void setOrganizerEvaluations(List<OrganizerEvaluation> organizerEvaluations) {
 		this.organizerEvaluations = organizerEvaluations;
 	}
-	
+
+
 }

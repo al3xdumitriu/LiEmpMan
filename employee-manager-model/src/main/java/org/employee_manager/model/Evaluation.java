@@ -44,6 +44,9 @@ public class Evaluation {
 	
 	@OneToOne(mappedBy="evaluationId")
 	private OrganizerEvaluation organizerEvaluation;
+	
+	@OneToOne(mappedBy="evaluationId")
+	private OrganizerEvaluation eventEvaluation;
 
 	public long getId() {
 		return id;
@@ -117,5 +120,13 @@ public class Evaluation {
 		this.organizerEvaluation = organizerEvaluation;
 	}
 
+	public OrganizerEvaluation getEventEvaluation() {
+		return eventEvaluation;
+	}
 
+	public void setEventEvaluation(OrganizerEvaluation eventEvaluation) {
+		this.eventEvaluation = eventEvaluation;
+	}
+
+	
 }

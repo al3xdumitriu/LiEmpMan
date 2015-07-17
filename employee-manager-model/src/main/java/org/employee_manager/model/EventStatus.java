@@ -1,6 +1,7 @@
 package org.employee_manager.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -22,9 +24,11 @@ public class EventStatus implements Serializable {
 	@SequenceGenerator(name = "SEQ_GEN_EVENT_STATUS", sequenceName = "event_status_id_sequence", allocationSize = 10)
 	private long id;
 	
-	@OneToOne
-	@JoinColumn(name = "EVENT_ID", nullable=false)
-    private Event eventId;
+	@Column(name="EVENT_STATUS_NAME")
+	private String name;
+	
+	@OneToMany(mappedBy="eventStatusId")
+    private List<Event> event;
 
 	public long getId() {
 		return id;
@@ -34,11 +38,22 @@ public class EventStatus implements Serializable {
 		this.id = id;
 	}
 
-	public Event getEventId() {
-		return eventId;
+	public String getName() {
+		return name;
 	}
 
-	public void setEventId(Event eventId) {
-		this.eventId = eventId;
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	public List<Event> getEvent() {
+		return event;
+	}
+
+	public void setEvent(List<Event> event) {
+		this.event = event;
+	}
+
+
+
 }

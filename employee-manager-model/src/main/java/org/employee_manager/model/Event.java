@@ -2,13 +2,17 @@ package org.employee_manager.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -24,29 +28,38 @@ public class Event implements Serializable {
 	@SequenceGenerator(name = "SEQ_GEN_EVENT", sequenceName = "event_id_sequence", allocationSize = 10)
 	private long id;
 
-	@Column(name = "NAME")
+	@Column(name = "EVENT_NAME")
 	private String name;
 
-	@Column(name = "START_DATE")
+	@Column(name = "EVENT_START_DATE")
 	private Date startDate;
 
-	@Column(name = "END_DATE")
+	@Column(name = "EVENT_END_DATE")
 	private Date endDate;
 
-	@Column(name = "DESCRIPTION")
+	@Column(name = "EVENT_DESCRIPTION")
 	private String description;
 
-	@Column(name = "PARTICIPANTS_NUMBER")
+	@Column(name = "EVENT_PARTICIPANTS_NUMBER")
 	private String participantsNumber;
-
-	@OneToOne(mappedBy = "eventId")
-	private EventType eventType;
-	
-	@OneToOne(mappedBy = "eventId")
-	private EventType eventStatus;
 	
 	@OneToMany(mappedBy="accountId")
     private Set<Role> eventEvaluations;
+	
+	@OneToOne(cascade=CascadeType.ALL )
+	@JoinColumn(name="COORDINATOR_ID")
+	private Coordinator coordinatorId;
+	
+	@OneToMany(mappedBy="eventId")
+	private List<Organizer> organizers;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="EVENT_TYPE_ID")
+	private EventType eventTypeId;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="EVENT_STATUS_ID")
+	private EventType eventStatusId;
 
 	public long getId() {
 		return id;
@@ -96,22 +109,6 @@ public class Event implements Serializable {
 		this.participantsNumber = participantsNumber;
 	}
 
-	public EventType getEventType() {
-		return eventType;
-	}
-
-	public void setEventType(EventType eventType) {
-		this.eventType = eventType;
-	}
-
-	public EventType getEventStatus() {
-		return eventStatus;
-	}
-
-	public void setEventStatus(EventType eventStatus) {
-		this.eventStatus = eventStatus;
-	}
-
 	public Set<Role> getEventEvaluations() {
 		return eventEvaluations;
 	}
@@ -119,4 +116,38 @@ public class Event implements Serializable {
 	public void setEventEvaluations(Set<Role> eventEvaluations) {
 		this.eventEvaluations = eventEvaluations;
 	}
+
+	public Coordinator getCoordinatorId() {
+		return coordinatorId;
+	}
+
+	public void setCoordinatorId(Coordinator coordinatorId) {
+		this.coordinatorId = coordinatorId;
+	}
+
+	public List<Organizer> getOrganizers() {
+		return organizers;
+	}
+
+	public void setOrganizers(List<Organizer> organizers) {
+		this.organizers = organizers;
+	}
+
+	public EventType getEventTypeId() {
+		return eventTypeId;
+	}
+
+	public void setEventTypeId(EventType eventTypeId) {
+		this.eventTypeId = eventTypeId;
+	}
+
+	public EventType getEventStatusId() {
+		return eventStatusId;
+	}
+
+	public void setEventStatusId(EventType eventStatusId) {
+		this.eventStatusId = eventStatusId;
+	}
+
+
 }
