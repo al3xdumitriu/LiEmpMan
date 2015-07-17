@@ -21,7 +21,7 @@ public class Evaluation implements Serializable {
 	@Id
 	@Column(name = "EVALUATION_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_EVALUATION")
-	@SequenceGenerator(name = "SEQ_GEN_EVALUATION", sequenceName = "evaluation_evaluation_id_sequence", allocationSize = 10)
+	@SequenceGenerator(name = "SEQ_GEN_EVALUATION", sequenceName = "evaluation_id_sequence", allocationSize = 10)
 	private long id;
 
 	@Column(name = "EVALUATION_GRADE")
