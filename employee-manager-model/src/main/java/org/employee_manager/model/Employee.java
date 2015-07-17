@@ -49,10 +49,8 @@ public class Employee {
 	@Column(name="EMPLOYEE_JOB_TITLE")
 	private String jobTitle;
 
-//	@Column(name="EMPLOYEE_ACCOUNT")
-//	@OneToOne(cascade=CascadeType.ALL)
-//	@JoinColumn(name="ACCOUNT_ID")
-//	private Account account;
+	@OneToOne(mappedBy = "employeeId")
+    public Account account;
 //	
 //	@Column(name="EMPLOYEE_EMPLOYEE_PROJECTS")
 //	@OneToMany(mappedBy="projectId")
@@ -65,10 +63,6 @@ public class Employee {
 // 	@Column(name="EMPLOYEE_SKILLS")
 //	@OneToMany(mappedBy="id")
 // 	private List<Skill> skills;
-	
-	public Employee() {
-		super();
-	}
 
 	public long getId() {
 		return id;
@@ -93,14 +87,6 @@ public class Employee {
 	public void setCnp(long cnp) {
 		this.cnp = cnp;
 	}
-
-//	public Address getAddress() {
-//		return address;
-//	}
-//
-//	public void setAddress(Address address) {
-//		this.address = address;
-//	}
 
 	public String getPhone() {
 		return phone;
@@ -142,36 +128,11 @@ public class Employee {
 		this.jobTitle = jobTitle;
 	}
 
-//	public Account getAccount() {
-//		return account;
-//	}
-//
-//	public void setAccount(Account account) {
-//		this.account = account;
-//	}
-//
-//	public List<Employee_Project> getEmployeeProjects() {
-//		return employeeProjects;
-//	}
-//
-//	public void setEmployeeProjects(List<Employee_Project> employeeProjects) {
-//		this.employeeProjects = employeeProjects;
-//	}
-//
-//	public List<Evaluation> getEvaluations() {
-//		return evaluations;
-//	}
-//
-//	public void setEvaluations(List<Evaluation> evaluations) {
-//		this.evaluations = evaluations;
-//	}
-//
-//	public List<Skill> getSkills() {
-//		return skills;
-//	}
-//
-//	public void setSkills(List<Skill> skills) {
-//		this.skills = skills;
-//	}
-	
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 }
