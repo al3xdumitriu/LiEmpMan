@@ -26,7 +26,7 @@ public class Account implements Serializable {
 	@OneToMany(mappedBy="accountId")
     private Set<Role> roles;
 	
-	@Column(name="USERNAME")
+	@Column(name="USER_NAME")
 	private String username;
 	
 	@Column(name="PASSWORD")
