@@ -13,10 +13,6 @@ public class Coordinator extends Employee{
 //	@OneToOne(mappedBy = "id")
 //	@Column(name="COORDINATOR_EVENT")
 //	private Event event;
-	
-	public Coordinator() {
-		super();
-	}
 
 //	public Event getEvent() {
 //		return event;

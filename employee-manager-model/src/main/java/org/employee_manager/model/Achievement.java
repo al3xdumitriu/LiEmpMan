@@ -24,22 +24,9 @@ public class Achievement {
 	@Column(name = "ACHIEVEMENT_DESCRIPTION")
 	private String description;
 
-	// When Employee is added!!!
-	// @ManyToOne
-	// @JoinColumn(name = "EMPLOYEE_ID")
-	// private Employee employee;
-	//
-	// public Employee getEmployee() {
-	// return employee;
-	// }
-	//
-	// public void setEmployee(Employee employee) {
-	// this.employee = employee;
-	// }
-
-	public Achievement() {
-
-	}
+	@ManyToOne
+	@JoinColumn(name = "EMPLOYEE_ID")
+	private Employee employeeId;
 
 	public long getId() {
 		return id;
@@ -63,6 +50,14 @@ public class Achievement {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Employee getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Employee employeeId) {
+		this.employeeId = employeeId;
 	}
 
 }

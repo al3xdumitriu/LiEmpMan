@@ -15,10 +15,6 @@ public class Organizer extends Employee{
 //	@JoinColumn(name="EVENT_ID")
 //	@Column(name="ORGANIZER_EVENT")
 //	private Event organizerEvent;
-	
-	public Organizer() {
-		super();
-	}
 
 //	public Event getOrganizerEvent() {
 //		return organizerEvent;

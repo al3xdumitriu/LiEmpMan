@@ -1,5 +1,7 @@
 package org.employee_manager.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,55 +16,45 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="EMPLOYEE")
+@Table(name = "EMPLOYEE")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="EMPLOYEE_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "EMPLOYEE_ID")
 	private long id;
-	
-	@Column(name="EMPLOYEE_NAME")
+
+	@Column(name = "EMPLOYEE_NAME")
 	private String name;
-	
-	@Column(name="EMPLOYEE_CNP")
+
+	@Column(name = "EMPLOYEE_CNP")
 	private long cnp;
-	
-//	@Column(name="EMPLOYEE_ADDRESS")
-//	@OneToOne(cascade=CascadeType.ALL)
-//	@JoinColumn(name="ADDRESS_ID")
-//	private Address address;
-	
-	@Column(name="EMPLOYEE_PHONE")
+
+	@Column(name = "EMPLOYEE_PHONE")
 	private String phone;
 
-	@Column(name="EMPLOYEE_EMAIL")
+	@Column(name = "EMPLOYEE_EMAIL")
 	private String email;
-	
-	@Column(name="EMPLOYEE_EXPERIENCE_LEVEL")
+
+	@Column(name = "EMPLOYEE_EXPERIENCE_LEVEL")
 	private String experienceLevel;
-	
-	@Column(name="EMPLOYEE_AVAILABLE_HOURS")
+
+	@Column(name = "EMPLOYEE_AVAILABLE_HOURS")
 	private int availableHours;
-	
-	@Column(name="EMPLOYEE_JOB_TITLE")
+
+	@Column(name = "EMPLOYEE_JOB_TITLE")
 	private String jobTitle;
 
 	@OneToOne(mappedBy = "employeeId")
-    public Account account;
-//	
-//	@Column(name="EMPLOYEE_EMPLOYEE_PROJECTS")
-//	@OneToMany(mappedBy="projectId")
-// 	private List<EmployeeProject> employeeProjects;
-// 	
-// 	@Column(name="EMPLOYEE_EVALUATIONS")
-//	@OneToMany(mappedBy="id")
-// 	private List<Evaluation> evaluations;
-// 	
-// 	@Column(name="EMPLOYEE_SKILLS")
-//	@OneToMany(mappedBy="id")
-// 	private List<Skill> skills;
+	public Account account;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ADDRESS_ID")
+	private Address addressId;
+
+	@OneToMany(mappedBy = "employeeId")
+	private List<Achievement> achievements;
 
 	public long getId() {
 		return id;
@@ -135,4 +127,34 @@ public class Employee {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+
+	public Address getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Address addressId) {
+		this.addressId = addressId;
+	}
+
+	public List<Achievement> getAchievements() {
+		return achievements;
+	}
+
+	public void setAchievements(List<Achievement> achievements) {
+		this.achievements = achievements;
+	}
+
+	
+	// @Column(name="EMPLOYEE_EMPLOYEE_PROJECTS")
+	// @OneToMany(mappedBy="projectId")
+	// private List<EmployeeProject> employeeProjects;
+	//
+	// @Column(name="EMPLOYEE_EVALUATIONS")
+	// @OneToMany(mappedBy="id")
+	// private List<Evaluation> evaluations;
+	//
+	// @Column(name="EMPLOYEE_SKILLS")
+	// @OneToMany(mappedBy="id")
+	// private List<Skill> skills;
+
 }

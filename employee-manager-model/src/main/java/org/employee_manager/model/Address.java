@@ -11,36 +11,31 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ADRESS")
-public class Adress {
+@Table(name = "ADDRESS")
+public class Address {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ADRESS_ID")
+	@Column(name = "ADDRESS_ID")
 	private long id;
 
-	@Column(name = "ADRESS_CODE")
+	@Column(name = "ADDRESS_CODE")
 	private String code;
 
-	@Column(name = "ADRESS_STREET")
+	@Column(name = "ADDRESS_STREET")
 	private int street;
 
-	@Column(name = "ADRESS_STREET_NO")
+	@Column(name = "ADDRESS_STREET_NO")
 	private int streetNo;
 
-	@Column(name = "ADRESS_CITY")
+	@Column(name = "ADDRESS_CITY")
 	private String city;
 
-	@Column(name = "ADRESS_COUNTRY")
+	@Column(name = "ADDRESS_COUNTRY")
 	private String Country;
 
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "EMPLOYEE_ID")
-//	private Employee employee;
-
-	public Adress() {
-
-	}
+	@OneToOne(mappedBy="addressId")
+	private Employee employee;
 
 	public int getStreet() {
 		return street;
@@ -50,14 +45,13 @@ public class Adress {
 		this.street = street;
 	}
 
-//WHEN EMPLOYEE APPEARS!
-//	public Employee getEmployee() {
-//		return employee;
-//	}
-//
-//	public void setEmployee(Employee employee) {
-//		this.employee = employee;
-//	}
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 
 	public long getId() {
 		return id;
