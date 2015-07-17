@@ -12,9 +12,9 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url"
-			value="jdbc:postgresql://localhost:5432/employeeManager?useUnicode=true;characterEncoding=UTF-8;" />
+			value="jdbc:postgresql://localhost:5432/employee-manager?useUnicode=true;characterEncoding=UTF-8;" />
 		<property name="username" value="postgres" />
-		<property name="password" value="Himawari15" />
+		<property name="password" value="postgres" />
 	</bean>
 
 	<util:properties id="hibernateProps">
