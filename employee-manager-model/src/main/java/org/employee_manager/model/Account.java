@@ -26,7 +26,7 @@ public class Account implements Serializable {
 	@SequenceGenerator(name = "SEQ_GEN_ACCOUNT", sequenceName = "account_id_sequence", allocationSize = 10)
 	private long id;
 	
-	@Column(name="USERNAME")
+	@Column(name="USER_NAME")
 	private String username;
 	
 	@Column(name="PASSWORD")
