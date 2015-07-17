@@ -1,20 +1,24 @@
 package org.employee_manager.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ADDRESS")
-public class Address {
+public class Address implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ADDRESS_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_ADDRESS")
+	@SequenceGenerator(name = "SEQ_GEN_ADDRESS", sequenceName = "address_id_sequence", allocationSize = 10)
 	private long id;
 
 	@Column(name = "ADDRESS_CODE")
@@ -32,7 +36,7 @@ public class Address {
 	@Column(name = "ADDRESS_COUNTRY")
 	private String Country;
 
-	@OneToOne(mappedBy="addressId")
+	@OneToOne(mappedBy = "addressId")
 	private Employee employee;
 
 	public int getStreet() {

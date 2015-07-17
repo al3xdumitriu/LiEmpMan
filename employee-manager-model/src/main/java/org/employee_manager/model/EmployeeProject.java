@@ -1,5 +1,7 @@
 package org.employee_manager.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,15 +10,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "EMPLOYEE_PROJECT")
-public class EmployeeProject {
+public class EmployeeProject implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EMPLOYEE_PROJECT_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_EMPLOYEE_PROJECT")
+	@SequenceGenerator(name = "SEQ_GEN_EMPLOYEE_PROJECT", sequenceName = "employee_project_id_sequence", allocationSize = 10)
 	private long id;
 
 	@Column(name = "EMPLOYEE_PROJECT_HOURS_ALLOCATED")
@@ -61,6 +65,5 @@ public class EmployeeProject {
 	public void setEmployeeId(Project employeeId) {
 		this.employeeId = employeeId;
 	}
-	
 
 }

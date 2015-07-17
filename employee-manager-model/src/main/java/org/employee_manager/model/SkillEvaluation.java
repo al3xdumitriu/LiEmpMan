@@ -1,5 +1,7 @@
 package org.employee_manager.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,15 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "SKILL_EVALUATION")
-public class SkillEvaluation {
+public class SkillEvaluation implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "SKILL_EVALUATION_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_SKILL_EVALUATION")
+	@SequenceGenerator(name = "SEQ_GEN_SKILL_EVALUATION", sequenceName = "skill_evaluation_id_sequence", allocationSize = 10)
 	private long id;
 
 	@JoinColumn(name = "SKILL_ID")
@@ -51,5 +55,4 @@ public class SkillEvaluation {
 	public void setEvaluationId(Evaluation evaluationId) {
 		this.evaluationId = evaluationId;
 	}
-
 }

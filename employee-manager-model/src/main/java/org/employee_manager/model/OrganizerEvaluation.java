@@ -1,5 +1,7 @@
 package org.employee_manager.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,21 +11,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
-public class OrganizerEvaluation {
+@Table(name = "ORGANIZER_EVALUATION")
+public class OrganizerEvaluation implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ORGANIZER_EVALUATION_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_ORGANIZER_EVALUATION")
+	@SequenceGenerator(name = "SEQ_GEN_ORGANIZER_EVALUATION", sequenceName = "organizer_evaluation_id_sequence", allocationSize = 10)
 	private long id;
-	
+
 	@JoinColumn(name = "ORGANIZER_ID")
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Organizer organizerId;
 
 	@JoinColumn(name = "EVALUATION_ID")
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Evaluation evaluationId;
 
 	public long getId() {

@@ -52,5 +52,11 @@ public class EventType implements Serializable {
 		this.event = eventId;
 	}
 
-	
+	public List<Event> getEvent() {
+		return event;
+	}
+
+	public void setEvent(List<Event> event) {
+		this.event = event;
+	}
 }

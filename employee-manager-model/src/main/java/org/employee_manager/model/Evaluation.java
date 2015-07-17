@@ -1,5 +1,7 @@
 package org.employee_manager.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,14 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "EVALUATION")
-public class Evaluation {
+public class Evaluation implements Serializable {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EVALUATION_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_EVALUATION")
+	@SequenceGenerator(name = "SEQ_GEN_EVALUATION", sequenceName = "evaluation_evaluation_id_sequence", allocationSize = 10)
 	private long id;
 
 	@Column(name = "EVALUATION_GRADE")
@@ -37,14 +42,14 @@ public class Evaluation {
 
 	@OneToOne(mappedBy = "evaluationId")
 	private SkillEvaluation skillEvaluation;
-	
-	@OneToOne(mappedBy="evaluationId")
+
+	@OneToOne(mappedBy = "evaluationId")
 	private CoordinatorEvaluation coordinatorEvaluation;
-	
-	@OneToOne(mappedBy="evaluationId")
+
+	@OneToOne(mappedBy = "evaluationId")
 	private OrganizerEvaluation organizerEvaluation;
-	
-	@OneToOne(mappedBy="evaluationId")
+
+	@OneToOne(mappedBy = "evaluationId")
 	private OrganizerEvaluation eventEvaluation;
 
 	public long getId() {
@@ -127,5 +132,4 @@ public class Evaluation {
 		this.eventEvaluation = eventEvaluation;
 	}
 
-	
 }

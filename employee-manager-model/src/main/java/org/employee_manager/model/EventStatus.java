@@ -26,7 +26,7 @@ public class EventStatus implements Serializable {
 	private String name;
 
 	@OneToMany(mappedBy = "eventStatusId")
-	private List<Event> event;
+	private List<Event> events;
 
 	public long getId() {
 		return id;
@@ -45,10 +45,10 @@ public class EventStatus implements Serializable {
 	}
 
 	public List<Event> getEvent() {
-		return event;
+		return events;
 	}
 
 	public void setEvent(List<Event> event) {
-		this.event = event;
+		this.events = event;
 	}
 }

@@ -8,13 +8,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="COORDINATOR")
-public class Coordinator extends Employee{
-	
+@Table(name = "COORDINATOR")
+public class Coordinator extends Employee {
+
 	@OneToOne(mappedBy = "coordinatorId")
 	private Event event;
-	
-	@OneToMany(mappedBy="coordinatorId")
+
+	@OneToMany(mappedBy = "coordinatorId")
 	private List<CoordinatorEvaluation> coordinatorEvaluations;
 
 	public Event getEvent() {

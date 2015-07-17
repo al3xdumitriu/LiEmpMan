@@ -1,5 +1,6 @@
 package org.employee_manager.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -9,16 +10,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "PROJECT")
-public class Project {
+public class Project implements Serializable {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "PROJECT_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_PROJECT")
+	@SequenceGenerator(name = "SEQ_GEN_PROJECT", sequenceName = "project_id_sequence", allocationSize = 10)
 	private long id;
 
 	@Column(name = "PROJECT_NAME")
@@ -38,10 +42,10 @@ public class Project {
 	@Column(name = "PROJECT_STATUS")
 	private boolean status;
 
-	@OneToMany(mappedBy="projectId")
+	@OneToMany(mappedBy = "projectId")
 	private List<EmployeeProject> employeeProjects;
-	
-	@OneToMany(mappedBy="projectId")
+
+	@OneToMany(mappedBy = "projectId")
 	private List<ProjectEvaluation> projectEvaluations;
 
 	public long getId() {

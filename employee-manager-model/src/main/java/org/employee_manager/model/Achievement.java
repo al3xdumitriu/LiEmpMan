@@ -1,5 +1,7 @@
 package org.employee_manager.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,15 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ACHIEVEMENT")
-public class Achievement {
+public class Achievement implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ACHIEVEMENT_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_ACHIEVEMENT")
+	@SequenceGenerator(name = "SEQ_GEN_ACHIEVEMENT", sequenceName = "achievement_id_sequence", allocationSize = 10)
 	private long id;
 
 	@Column(name = "ACHIEVEMENT_NAME")
