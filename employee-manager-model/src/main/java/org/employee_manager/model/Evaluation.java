@@ -38,6 +38,12 @@ public class Evaluation {
 
 	@OneToOne(mappedBy = "evaluationId")
 	private SkillEvaluation skillEvaluation;
+	
+	@OneToOne(mappedBy="evaluationId")
+	private CoordinatorEvaluation coordinatorEvaluation;
+	
+	@OneToOne(mappedBy="evaluationId")
+	private OrganizerEvaluation organizerEvaluation;
 
 	public long getId() {
 		return id;
@@ -94,5 +100,22 @@ public class Evaluation {
 	public void setSkillEvaluation(SkillEvaluation skillEvaluation) {
 		this.skillEvaluation = skillEvaluation;
 	}
+
+	public CoordinatorEvaluation getCoordinatorEvaluation() {
+		return coordinatorEvaluation;
+	}
+
+	public void setCoordinatorEvaluation(CoordinatorEvaluation coordinatorEvaluation) {
+		this.coordinatorEvaluation = coordinatorEvaluation;
+	}
+
+	public OrganizerEvaluation getOrganizerEvaluation() {
+		return organizerEvaluation;
+	}
+
+	public void setOrganizerEvaluation(OrganizerEvaluation organizerEvaluation) {
+		this.organizerEvaluation = organizerEvaluation;
+	}
+
 
 }
