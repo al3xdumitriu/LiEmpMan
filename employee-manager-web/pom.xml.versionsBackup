@@ -2,26 +2,25 @@
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>com.levi9</groupId>
 		<artifactId>employee-manager-root</artifactId>
-		<version>1.1.0-SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.levi9</groupId>
-	<artifactId>employee-manager-model</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<artifactId>employee-manager-web</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 
-	<name>employee-manager-model</name>
-
+	<packaging>war</packaging>
+	<name>employee-manager-web</name>
 	<url>http://maven.apache.org</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
 	<build>
+	<finalName>employee-manager-web</finalName>
 		<pluginManagement>
 			<plugins>
 				<!-- Plugin to create the test jar used by the services module -->
@@ -49,23 +48,30 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
 	<dependencies>
+		<!-- common modules -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>employee-manager-services</artifactId>
+		</dependency>
+
 		<!-- javax validation -->
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 		</dependency>
 
-		<!-- Apache Tomcat -->
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-catalina</artifactId>
-		</dependency>
-
 		<!-- postgresql -->
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+		</dependency>
+
+		<!-- Apache Tomcat -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-catalina</artifactId>
 		</dependency>
 
 		<!-- Hibernate -->
@@ -81,7 +87,6 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
-
 
 
 		<!-- Spring -->
@@ -153,7 +158,6 @@
 			<artifactId>log4j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -163,6 +167,5 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
-	
-	
+
 </project>
