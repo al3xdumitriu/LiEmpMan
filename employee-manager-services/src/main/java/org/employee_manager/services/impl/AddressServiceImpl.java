@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class AddressServiceImpl implements AddressService{
+public class AddressServiceImpl implements AddressService {
 
 	@Autowired
-    private AddressRepository addressRepository;
-	
+	private AddressRepository addressRepository;
+
 	@Override
 	public Address saveAddress(Address address) {
 		return this.addressRepository.save(address);

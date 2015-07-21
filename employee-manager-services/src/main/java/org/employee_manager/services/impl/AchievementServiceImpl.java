@@ -11,10 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class AchievementServiceImpl implements AchievementService{
-	
+public class AchievementServiceImpl implements AchievementService {
+
 	@Autowired
-    private AchievementRepository achievementRepository;
+	private AchievementRepository achievementRepository;
 
 	@Override
 	public Achievement saveAchievement(Achievement achievement) {
