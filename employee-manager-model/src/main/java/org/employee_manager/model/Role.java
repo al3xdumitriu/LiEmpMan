@@ -23,7 +23,7 @@ public class Role implements Serializable {
 	private long id;
 	
 	@ManyToOne
-    @JoinColumn(name="ACCOUNT_ID", nullable=false)
+    @JoinColumn(name="ACCOUNT_ID")
     private Account accountId;
 	
 	@Column(name="NAME")
