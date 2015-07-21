@@ -8,7 +8,7 @@ import org.employee_manager.model.Employee;
 import org.junit.Test;
 import junit.framework.Assert;
 
-public class AchievementServiceTest extends BaseServicesTest{
+public class AchievementServiceImplTest extends BaseServicesTest{
 	
 	@Test
 	public void testSaveAchievement() {

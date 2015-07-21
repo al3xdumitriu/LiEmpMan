@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import junit.framework.Assert;
 
-public class AddressServiceTest extends BaseServicesTest{
+public class AddressServiceImplTest extends BaseServicesTest{
 
 	@Test
 	public void testSaveAddress() {
