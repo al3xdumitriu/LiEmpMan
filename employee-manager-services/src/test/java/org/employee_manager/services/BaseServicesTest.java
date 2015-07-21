@@ -14,5 +14,10 @@ public abstract class BaseServicesTest {
 	@Autowired
 	protected PersonService personService;
 	
+	@Autowired
+	protected AchievementService achievementService;
+	
+	@Autowired
+	protected AddressService addressService;
 	
 }

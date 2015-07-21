@@ -25,7 +25,7 @@ public class Address implements Serializable {
 	private String code;
 
 	@Column(name = "ADDRESS_STREET")
-	private int street;
+	private String street;
 
 	@Column(name = "ADDRESS_STREET_NO")
 	private int streetNo;
@@ -39,11 +39,11 @@ public class Address implements Serializable {
 	@OneToOne(mappedBy = "addressId")
 	private Employee employee;
 
-	public int getStreet() {
+	public String getStreet() {
 		return street;
 	}
 
-	public void setStreet(int street) {
+	public void setStreet(String street) {
 		this.street = street;
 	}
 
