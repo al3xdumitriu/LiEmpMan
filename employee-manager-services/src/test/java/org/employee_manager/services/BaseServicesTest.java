@@ -12,7 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 public abstract class BaseServicesTest {
 
 	@Autowired
+	protected EvaluationService evaluationService;
+	
+	@Autowired
 	protected PersonService personService;
 	
+	@Autowired
+	protected SkillService skillService;
+	
+	@Autowired
+	protected ProjectService projectService;
 	
 }

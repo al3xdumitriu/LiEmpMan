@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +41,7 @@ public class Project implements Serializable {
 	private Date endDate;
 
 	@Column(name = "PROJECT_STATUS")
-	private boolean status;
+	private String status;
 
 	@OneToMany(mappedBy = "projectId")
 	private List<EmployeeProject> employeeProjects;
@@ -88,11 +89,13 @@ public class Project implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public boolean isStatus() {
+
+
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
