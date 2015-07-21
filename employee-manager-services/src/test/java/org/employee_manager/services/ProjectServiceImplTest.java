@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import junit.framework.Assert;
 
-public class ProjectServiceTest extends BaseServicesTest {
+public class ProjectServiceImplTest extends BaseServicesTest {
 
 	@Test
 	public void testSave() {
