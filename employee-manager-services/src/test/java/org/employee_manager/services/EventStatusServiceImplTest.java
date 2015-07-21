@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import junit.framework.Assert;
 
-public class EventStatusServiceTest extends BaseServicesTest {
+public class EventStatusServiceImplTest extends BaseServicesTest {
 
 	@Test
 	public void testSave() {

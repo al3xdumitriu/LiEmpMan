@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import junit.framework.Assert;
 
-public class EventTypeServiceTest extends BaseServicesTest {
+public class EventTypeServiceImplTest extends BaseServicesTest {
 	@Test
 	public void testSave() {
 		EventType eventType = new EventType();
