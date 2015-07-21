@@ -13,8 +13,9 @@ public class PersonTest extends BaseServicesTest {
 		Person p = new Person();
 		p.setName("TTT");
 		Person newPErson = this.personService.savePerson(p);
-		Person found = this.personService.getById(newPErson.getId());
-		
+		Person found = this.personService.getById(newPErson.getId());	
 		Assert.assertEquals("TTT", found.getName());
 	}
+	
+
 }

@@ -13,18 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class SkillServiceImpl implements SkillService{
+public class SkillServiceImpl implements SkillService {
 
 	@Autowired
 	private SkillRepository skillRepository;
-
-
 
 	@Override
 	public Skill saveSkill(Skill skill) {
 		return this.skillRepository.save(skill);
 	}
-	
+
 	@Override
 	public List<Skill> saveAllSkills(List<Skill> skill) {
 		return this.skillRepository.save(skill);
@@ -40,8 +38,4 @@ public class SkillServiceImpl implements SkillService{
 		return this.skillRepository.findAll();
 	}
 
-
-
-	
-	
 }

@@ -11,20 +11,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class ProjectServiceImpl implements ProjectService{
+public class ProjectServiceImpl implements ProjectService {
 
 	@Autowired
 	private ProjectRepository projectRepository;
-	
+
 	@Override
 	public Project saveProject(Project project) {
-		
+
 		return this.projectRepository.save(project);
 	}
 
 	@Override
 	public List<Project> saveAllProjects(List<Project> projects) {
-		
+
 		return this.projectRepository.save(projects);
 	}
 

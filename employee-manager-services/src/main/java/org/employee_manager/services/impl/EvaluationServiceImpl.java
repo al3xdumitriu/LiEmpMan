@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class EvaluationServiceImpl implements EvaluationService{
+public class EvaluationServiceImpl implements EvaluationService {
 
 	@Autowired
 	private EvaluationRepository evaluationRepository;
@@ -23,13 +23,13 @@ public class EvaluationServiceImpl implements EvaluationService{
 
 	@Override
 	public List<Evaluation> saveAllEvaluations(List<Evaluation> evaluations) {
-		
+
 		return this.evaluationRepository.save(evaluations);
 	}
 
 	@Override
 	public Evaluation findById(Long id) {
-	
+
 		return this.evaluationRepository.findOne(id);
 	}
 
@@ -37,8 +37,5 @@ public class EvaluationServiceImpl implements EvaluationService{
 	public List<Evaluation> findAllEvaluations() {
 		return this.evaluationRepository.findAll();
 	}
-	
-	
-	
-	
+
 }

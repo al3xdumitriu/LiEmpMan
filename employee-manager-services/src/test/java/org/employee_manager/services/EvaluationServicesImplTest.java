@@ -17,7 +17,7 @@ public class EvaluationServicesImplTest extends BaseServicesTest {
 	public void testSave() {
 		Evaluation eval = new Evaluation();
 		eval.setGrade(2);
-		eval.setComment("Awesome comment");		
+		eval.setComment("Awesome comment");
 		eval.setEmployeeId(null);
 		eval.setAnonym(true);
 		eval.setProjectEvaluation(null);
@@ -25,8 +25,7 @@ public class EvaluationServicesImplTest extends BaseServicesTest {
 		eval.setCoordinatorEvaluation(null);
 		eval.setOrganizerEvaluation(null);
 		eval.setEventEvaluation(null);
-		
-		
+
 		Evaluation newEval = this.evaluationService.saveEvaluation(eval);
 
 		Assert.assertEquals(2, newEval.getGrade());
@@ -38,8 +37,7 @@ public class EvaluationServicesImplTest extends BaseServicesTest {
 		Assert.assertEquals(null, newEval.getCoordinatorEvaluation());
 		Assert.assertEquals(null, newEval.getOrganizerEvaluation());
 		Assert.assertEquals(null, newEval.getEventEvaluation());
-		
-		
+
 	}
 
 	@Test
