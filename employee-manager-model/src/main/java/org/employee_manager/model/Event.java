@@ -42,24 +42,24 @@ public class Event implements Serializable {
 
 	@Column(name = "EVENT_PARTICIPANTS_NUMBER")
 	private String participantsNumber;
-	
-	@OneToMany(mappedBy="accountId")
-    private Set<Role> eventEvaluations;
-	
-	@OneToOne(cascade=CascadeType.ALL )
-	@JoinColumn(name="COORDINATOR_ID")
+
+	@OneToMany(mappedBy = "accountId")
+	private Set<Role> eventEvaluations;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "COORDINATOR_ID")
 	private Coordinator coordinatorId;
-	
-	@OneToMany(mappedBy="eventId")
+
+	@OneToMany(mappedBy = "eventId")
 	private List<Organizer> organizers;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="EVENT_TYPE_ID")
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "EVENT_TYPE_ID")
 	private EventType eventTypeId;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="EVENT_STATUS_ID")
-	private EventType eventStatusId;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "EVENT_STATUS_ID")
+	private EventStatus eventStatusId;
 
 	public long getId() {
 		return id;
@@ -141,13 +141,12 @@ public class Event implements Serializable {
 		this.eventTypeId = eventTypeId;
 	}
 
-	public EventType getEventStatusId() {
+	public EventStatus getEventStatusId() {
 		return eventStatusId;
 	}
 
-	public void setEventStatusId(EventType eventStatusId) {
+	public void setEventStatusId(EventStatus eventStatusId) {
 		this.eventStatusId = eventStatusId;
 	}
-
 
 }

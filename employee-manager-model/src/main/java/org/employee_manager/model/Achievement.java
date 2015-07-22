@@ -2,6 +2,7 @@ package org.employee_manager.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class Achievement implements Serializable {
 	@Column(name = "ACHIEVEMENT_DESCRIPTION")
 	private String description;
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "EMPLOYEE_ID")
 	private Employee employeeId;
 
