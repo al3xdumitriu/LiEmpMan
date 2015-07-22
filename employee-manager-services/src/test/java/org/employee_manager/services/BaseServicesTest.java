@@ -12,11 +12,25 @@ public abstract class BaseServicesTest {
 
 	@Autowired
 	protected PersonService personService;
-
+	
+	@Autowired
+	protected RoleService roleService;
+	
 	@Autowired
 	protected AchievementService achievementService;
 
 	@Autowired
 	protected AddressService addressService;
 
+	@Autowired 
+	protected AccountService accountService;
+	
+	@Autowired
+	protected EmployeeService employeeService;
+	
+	@Autowired
+    protected CoordinatorService coordinatorService;
+	
+	@Autowired
+    protected OrganizerService organizerService;
 }

@@ -42,7 +42,7 @@ public class Employee implements Serializable {
 
 	@Column(name = "EMPLOYEE_EXPERIENCE_LEVEL")
 	private String experienceLevel;
-
+	
 	@Column(name = "EMPLOYEE_AVAILABLE_HOURS")
 	private int availableHours;
 
