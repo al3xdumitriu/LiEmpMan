@@ -20,6 +20,12 @@ public abstract class BaseServicesTest {
 	protected RoleService roleService;
 	
 	@Autowired
+	protected AchievementService achievementService;
+
+	@Autowired
+	protected AddressService addressService;
+
+	@Autowired
 	protected EventStatusService eventStatusService;
 	
 	@Autowired 
