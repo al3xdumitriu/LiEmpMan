@@ -9,7 +9,7 @@ import org.employee_manager.model.Employee;
 import org.junit.Before;
 import org.junit.Test;
 
-public class EmployeeServiceTest extends BaseServicesTest {
+public class EmployeeServiceImplTest extends BaseServicesTest {
 
     private Employee employee, employeeSecond;
 
