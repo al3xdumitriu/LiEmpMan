@@ -5,6 +5,7 @@ import java.util.List;
 import org.employee_manager.model.Project;
 
 public interface ProjectService {
+	
 	Project saveProject(Project project);
 
 	List<Project> saveAllProjects(List<Project> projects);

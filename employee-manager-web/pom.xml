@@ -20,7 +20,7 @@
 	<url>http://maven.apache.org</url>
 
 	<build>
-	<finalName>employee-manager-web</finalName>
+		<finalName>employee-manager-web</finalName>
 		<pluginManagement>
 			<plugins>
 				<!-- Plugin to create the test jar used by the services module -->
@@ -167,5 +167,4 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
-
 </project>
