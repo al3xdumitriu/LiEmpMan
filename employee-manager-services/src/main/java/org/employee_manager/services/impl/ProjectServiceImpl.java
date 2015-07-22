@@ -30,12 +30,13 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public Project findById(Long id) {
-		// TODO Auto-generated method stub
+
 		return this.projectRepository.findOne(id);
 	}
 
 	@Override
 	public List<Project> findAllProjects() {
+
 		return this.projectRepository.findAll();
 	}
 
