@@ -12,7 +12,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	<import resource="classpath:spring/employee-manager-model-config.xml" />
 
 	<jpa:repositories base-package="org.employee_manager.services.repositories" />
-	<context:component-scan base-package="org.employee_manager.services" annotation-config="true" />
+	<context:component-scan base-package="org.employee_manager.services,org.employee_manager.services.rest" annotation-config="true" />
 
 	<!-- Drives transactions in a local Hibernate environment -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
