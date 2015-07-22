@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class PersonServiceImpl implements PersonService{
+public class PersonServiceImpl implements PersonService {
 
 	@Autowired
-    private PersonRepository personRepository;
-	
+	private PersonRepository personRepository;
+
 	public List<Person> getAllPersons() {
 		return this.personRepository.findAll();
 	}
@@ -30,7 +30,7 @@ public class PersonServiceImpl implements PersonService{
 
 	public void deleteById(Long id) {
 		this.personRepository.delete(id);
-		
+
 	}
 
 	public Person getByName(String name) {
@@ -43,7 +43,7 @@ public class PersonServiceImpl implements PersonService{
 
 	public void updateById(String name, Long id) {
 		this.personRepository.updateById(name, id);
-		
+
 	}
 
 }

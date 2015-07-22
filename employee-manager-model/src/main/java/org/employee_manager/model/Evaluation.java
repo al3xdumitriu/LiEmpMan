@@ -50,7 +50,7 @@ public class Evaluation implements Serializable {
 	private OrganizerEvaluation organizerEvaluation;
 
 	@OneToOne(mappedBy = "evaluationId")
-	private OrganizerEvaluation eventEvaluation;
+	private EventEvaluation eventEvaluation;
 
 	public long getId() {
 		return id;
@@ -124,11 +124,11 @@ public class Evaluation implements Serializable {
 		this.organizerEvaluation = organizerEvaluation;
 	}
 
-	public OrganizerEvaluation getEventEvaluation() {
+	public EventEvaluation getEventEvaluation() {
 		return eventEvaluation;
 	}
 
-	public void setEventEvaluation(OrganizerEvaluation eventEvaluation) {
+	public void setEventEvaluation(EventEvaluation eventEvaluation) {
 		this.eventEvaluation = eventEvaluation;
 	}
 
