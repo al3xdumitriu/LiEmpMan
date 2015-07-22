@@ -17,7 +17,22 @@ public abstract class BaseServicesTest {
 	protected EventService eventService;
 	
 	@Autowired
+	protected RoleService roleService;
+	
+	@Autowired
 	protected EventStatusService eventStatusService;
+	
+	@Autowired 
+	protected AccountService accountService;
+	
+	@Autowired
+	protected EmployeeService employeeService;
+	
+	@Autowired
+    protected CoordinatorService coordinatorService;
+	
+	@Autowired
+    protected OrganizerService organizerService;
 	
 	@Autowired
 	protected EventTypeService eventTypeService;
