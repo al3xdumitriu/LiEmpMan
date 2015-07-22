@@ -22,7 +22,6 @@ public abstract class BaseServicesTest {
 	@Autowired
 	protected RoleService roleService;
 	
-
 	@Autowired
 	protected SkillService skillService;
 
