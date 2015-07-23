@@ -3,9 +3,16 @@ package org.employee_manager.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.core.MediaType;
+
+import org.apache.catalina.WebResource;
 import org.employee_manager.model.Achievement;
 import org.employee_manager.model.Employee;
+import org.glassfish.jersey.client.ClientResponse;
 import org.junit.Test;
+
+
 import junit.framework.Assert;
 
 public class AchievementServiceImplTest extends BaseServicesTest {
@@ -80,4 +87,17 @@ public class AchievementServiceImplTest extends BaseServicesTest {
 		Assert.assertEquals(achievements.get(1).getName(), foundAchievements.get(1).getName());
 
 	}
+	
+	
+//	@Test
+//	public void testSaveAchievementRest(){
+//		
+//		Client client=Client.create();     
+//		WebResource webResourceTest =client.resource("http://localhost:8080/rentCar-web/rest/customer");
+//		ClientResponse response=webResourceTest.type(MediaType.APPLICATION_JSON).post(ClientResponse.class);
+//		Assert.assertEquals(200, response.getStatus());
+//	}
+	
+	
+	
 }
