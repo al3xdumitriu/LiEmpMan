@@ -24,6 +24,7 @@
 		<junit.version>4.12</junit.version>
 		<apache.tomcat.version>8.0.24</apache.tomcat.version>
 		<jersey-container-servlet.version>2.19</jersey-container-servlet.version>
+		<org.glassfish.jersey.ext.version>2.11</org.glassfish.jersey.ext.version>
 	</properties>
 
 	<build>
@@ -203,11 +204,50 @@
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.glassfish.jersey.containers</groupId>
 				<artifactId>jersey-container-servlet-core</artifactId>
 				<version>${jersey-container-servlet.version}</version>
+			</dependency>
+
+			<!-- Jersey -->
+			<dependency>
+				<groupId>org.glassfish.jersey.ext</groupId>
+				<artifactId>jersey-spring3</artifactId>
+				<version>${org.glassfish.jersey.ext.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>spring-context</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-beans</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-core</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-web</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>jersey-server</artifactId>
+						<groupId>org.glassfish.jersey.core</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>
+                    jersey-container-servlet-core
+                </artifactId>
+						<groupId>org.glassfish.jersey.containers</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>hk2</artifactId>
+						<groupId>org.glassfish.hk2</groupId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
