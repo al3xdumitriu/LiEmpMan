@@ -24,7 +24,8 @@
 		<junit.version>4.12</junit.version>
 		<apache.tomcat.version>8.0.24</apache.tomcat.version>
 		<jersey-container-servlet.version>2.19</jersey-container-servlet.version>
-		<org.glassfish.jersey.ext.version>2.11</org.glassfish.jersey.ext.version>
+		<org.glassfish.jersey.ext.version>2.19</org.glassfish.jersey.ext.version>
+		<jersey-media-json-jackson.version>2.19</jersey-media-json-jackson.version>
 	</properties>
 
 	<build>
@@ -248,6 +249,12 @@
 						<groupId>org.glassfish.hk2</groupId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jersey.media</groupId>
+				<artifactId>jersey-media-json-jackson</artifactId>
+				<version>${jersey-media-json-jackson.version}</version>
+				<scope>runtime</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

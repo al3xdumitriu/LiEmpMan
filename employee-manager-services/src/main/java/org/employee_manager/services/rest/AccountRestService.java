@@ -20,11 +20,12 @@ public class AccountRestService {
 
 	@GET
 	@Path("")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllAccounts() {
 
 		List<Account> accountList = accountService.findAll();
-
+		for(Account a:accountList)
+			a.setRoles(null);
 		return Response.ok(accountList).build();
 	}
 }
