@@ -13,6 +13,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
 	<jpa:repositories base-package="org.employee_manager.services.repositories" />
 	<context:component-scan base-package="org.employee_manager.services" annotation-config="true" />
+	
 
 	<!-- Drives transactions in a local Hibernate environment -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
