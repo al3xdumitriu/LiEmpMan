@@ -11,6 +11,8 @@ public interface AchievementService {
 	List<Achievement> saveAllAchievements(List<Achievement> achievements);
 
 	Achievement findById(Long id);
+	
+	List<Achievement> findByName(String name);
 
 	List<Achievement> findAllAchievements();
 

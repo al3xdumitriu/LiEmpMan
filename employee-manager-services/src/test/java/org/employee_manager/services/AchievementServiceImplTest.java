@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.apache.catalina.WebResource;
 import org.employee_manager.model.Achievement;
@@ -89,14 +93,39 @@ public class AchievementServiceImplTest extends BaseServicesTest {
 	}
 	
 	
-//	@Test
-//	public void testSaveAchievementRest(){
-//		
-//		Client client=Client.create();     
-//		WebResource webResourceTest =client.resource("http://localhost:8080/rentCar-web/rest/customer");
-//		ClientResponse response=webResourceTest.type(MediaType.APPLICATION_JSON).post(ClientResponse.class);
-//		Assert.assertEquals(200, response.getStatus());
-//	}
+	@Test
+	public void testGetAllAchievementsRest(){
+		
+		Client client = ClientBuilder.newClient();
+		  WebTarget target = client.target("http://localhost:8080/employee-manager-web/rest/achievement");
+		  Response response = target.request(MediaType.APPLICATION_JSON).get();
+		  System.out.println(response.toString());
+		  Assert.assertEquals(200, response.getStatus());
+	}
+	
+	
+	@Test
+	public void testGetAchievementRest(){
+		
+		Client client = ClientBuilder.newClient();
+		  WebTarget target = client.target("http://localhost:8080/employee-manager-web/rest/achievement/10");
+		  Response response = target.request(MediaType.APPLICATION_JSON).get();
+		  System.out.println(response.toString());
+		  Assert.assertEquals(200, response.getStatus());
+	}
+	
+	@Test
+	public void testPostAchievementRest(){
+		
+		 Achievement achiev = new Achievement();
+		 achiev.setName("CodeCamp");
+		  Client client = ClientBuilder.newClient();
+		  WebTarget target = client.target("http://localhost:8080/employee-manager-web/rest/achievement/");
+		  Response response = target.request(MediaType.APPLICATION_JSON).post(Entity.entity(achiev,MediaType.APPLICATION_JSON_TYPE));
+		  System.out.println(response.toString());
+		  Assert.assertEquals(200, response.getStatus());
+	}
+	
 	
 	
 	
