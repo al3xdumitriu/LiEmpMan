@@ -65,8 +65,10 @@ public class AchievementServiceImplTest extends BaseServicesTest {
 		achievements.add(achievement2);
 
 		List<Achievement> newAchievements = this.achievementService.saveAllAchievements(achievements);
-		Assert.assertEquals(achievements.get(0).getName(), newAchievements.get(0).getName());
-		Assert.assertEquals(achievements.get(1).getName(), newAchievements.get(1).getName());
+		Achievement found1 = this.achievementService.findById(achievement1.getId());
+		Achievement found2 = this.achievementService.findById(achievement2.getId());
+		Assert.assertEquals(achievements.get(0).getName(), found1.getName());
+		Assert.assertEquals(achievements.get(1).getName(), found2.getName());
 	}
 
 	@Test
@@ -84,12 +86,12 @@ public class AchievementServiceImplTest extends BaseServicesTest {
 		List<Achievement> achievements = new ArrayList<Achievement>();
 		achievements.add(achievement1);
 		achievements.add(achievement2);
-
+		
+		List<Achievement> initialFoundAchievements = this.achievementService.findAllAchievements();
 		List<Achievement> newAchievements = this.achievementService.saveAllAchievements(achievements);
 		List<Achievement> foundAchievements = this.achievementService.findAllAchievements();
-		Assert.assertEquals(achievements.get(0).getName(), foundAchievements.get(0).getName());
-		Assert.assertEquals(achievements.get(1).getName(), foundAchievements.get(1).getName());
-
+		Assert.assertEquals(initialFoundAchievements.size()+newAchievements.size(), foundAchievements.size());
+	
 	}
 	
 	
