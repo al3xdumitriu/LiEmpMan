@@ -43,8 +43,8 @@ public class Event implements Serializable {
 	@Column(name = "EVENT_PARTICIPANTS_NUMBER")
 	private String participantsNumber;
 
-	@OneToMany(mappedBy = "accountId")
-	private Set<Role> eventEvaluations;
+	@OneToMany(mappedBy = "eventId")
+	private Set<EventEvaluation> eventEvaluations;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "COORDINATOR_ID")
@@ -109,11 +109,11 @@ public class Event implements Serializable {
 		this.participantsNumber = participantsNumber;
 	}
 
-	public Set<Role> getEventEvaluations() {
+	public Set<EventEvaluation> getEventEvaluations() {
 		return eventEvaluations;
 	}
 
-	public void setEventEvaluations(Set<Role> eventEvaluations) {
+	public void setEventEvaluations(Set<EventEvaluation> eventEvaluations) {
 		this.eventEvaluations = eventEvaluations;
 	}
 
