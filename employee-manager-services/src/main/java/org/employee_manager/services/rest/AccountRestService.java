@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import org.employee_manager.model.Account;
 import org.employee_manager.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-
+/*
 @Path("account")
 public class AccountRestService {
 
@@ -29,3 +29,4 @@ public class AccountRestService {
 		return Response.ok(accountList).build();
 	}
 }
+*/
