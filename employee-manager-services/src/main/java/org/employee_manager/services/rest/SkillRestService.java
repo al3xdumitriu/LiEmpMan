@@ -16,7 +16,7 @@ import org.employee_manager.model.Skill;
 import org.employee_manager.services.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+/*
 @Component
 @Path("/skill")
 public class SkillRestService {
@@ -88,3 +88,4 @@ public class SkillRestService {
 	}
 
 }
+*/

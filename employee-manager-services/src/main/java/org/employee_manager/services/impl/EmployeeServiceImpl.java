@@ -36,4 +36,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.findAll();
 	}
 
+	@Override
+	public List<Employee> findByName(String name) {
+		return employeeRepository.getByName(name);
+	}
+
 }
