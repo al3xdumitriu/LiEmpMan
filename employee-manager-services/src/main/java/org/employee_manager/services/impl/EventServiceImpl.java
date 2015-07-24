@@ -36,4 +36,9 @@ public class EventServiceImpl implements EventService {
 		return this.eventRepository.findOne(id);
 	}
 
+	@Override
+	public Event findByName(String name) {
+		return eventRepository.findByName(name);
+	}
+
 }

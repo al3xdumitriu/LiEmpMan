@@ -12,5 +12,7 @@ public interface EventService {
 	List<Event> saveEvents(List<Event> events);
 
 	Event findById(Long id);
+	
+	Event findByName(String name);
 
 }
