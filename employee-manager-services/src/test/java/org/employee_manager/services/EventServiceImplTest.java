@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.validation.constraints.AssertTrue;
+
 import org.employee_manager.model.Coordinator;
 import org.employee_manager.model.Event;
 import org.employee_manager.model.EventStatus;
@@ -174,8 +176,8 @@ public class EventServiceImplTest extends BaseServicesTest {
 	@Test
 	public void testFindAll() {
 
-		Coordinator coordninator = new Coordinator();
-		coordninator.setName("Andrei");
+		Coordinator coordinator = new Coordinator();
+		coordinator.setName("Andrei");
 
 		EventType eventType = new EventType();
 		eventType.setName("Extern");
@@ -196,7 +198,7 @@ public class EventServiceImplTest extends BaseServicesTest {
 		event.setEndDate(new Date());
 		event.setParticipantsNumber("2");
 		event.setEventTypeId(eventType);
-		event.setCoordinatorId(coordninator);
+		event.setCoordinatorId(coordinator);
 		event.setEventStatusId(eventStatus);
 
 		Event event2 = new Event();
@@ -206,7 +208,7 @@ public class EventServiceImplTest extends BaseServicesTest {
 		event2.setEndDate(new Date());
 		event2.setParticipantsNumber("20");
 		event2.setEventTypeId(eventType2);
-		event2.setCoordinatorId(coordninator);
+		event2.setCoordinatorId(coordinator);
 		event.setEventStatusId(eventStatus);
 
 		List<Event> events = new LinkedList<>();
@@ -219,15 +221,17 @@ public class EventServiceImplTest extends BaseServicesTest {
 		List<Event> newEventList = this.eventService.findAllEvents();
 		// compare && test the event object with
 		// the first object found in newEventLiss
+		
+		Assert.assertEquals(true, (newEventList.containsAll(events)));
 
-		Assert.assertEquals(event.getName(), newEventList.get(0).getName());
-		Assert.assertEquals(event.getDescription(), newEventList.get(0).getDescription());
-		Assert.assertEquals(event.getStartDate(), newEventList.get(0).getStartDate());
-		Assert.assertEquals(event.getEndDate(), newEventList.get(0).getEndDate());
-		Assert.assertEquals(event.getParticipantsNumber(), newEventList.get(0).getParticipantsNumber());
-		Assert.assertEquals(event.getCoordinatorId(), newEventList.get(0).getCoordinatorId());
-		Assert.assertEquals(event.getEventStatusId(), newEventList.get(0).getEventStatusId());
-		Assert.assertEquals(event.getEventTypeId(), newEventList.get(0).getEventTypeId());
+//		Assert.assertEquals(event.getName(), newEventList.get(0).getName());
+//		Assert.assertEquals(event.getDescription(), newEventList.get(0).getDescription());
+//		Assert.assertEquals(event.getStartDate(), newEventList.get(0).getStartDate());
+//		Assert.assertEquals(event.getEndDate(), newEventList.get(0).getEndDate());
+//		Assert.assertEquals(event.getParticipantsNumber(), newEventList.get(0).getParticipantsNumber());
+//		Assert.assertEquals(event.getCoordinatorId(), newEventList.get(0).getCoordinatorId());
+//		Assert.assertEquals(event.getEventStatusId(), newEventList.get(0).getEventStatusId());
+//		Assert.assertEquals(event.getEventTypeId(), newEventList.get(0).getEventTypeId());
 
 		// retrieve && test eventSavedList size saved in db
 		// Assert.assertEquals(event.getName(), newEventList.get(0).getName());
