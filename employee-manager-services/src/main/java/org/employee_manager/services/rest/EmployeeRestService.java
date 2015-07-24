@@ -87,6 +87,7 @@ public class EmployeeRestService {
 				status = 404;
 				res = Response.status(status).entity(employeeFound).build();
 			} else {
+				
 				employeeFound = employeeService.findById(idParse);
 				employeeFound.setEmployeeProjects(null);
 				employeeFound.setAchievements(null);
