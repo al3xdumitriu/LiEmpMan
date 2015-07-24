@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -12,15 +12,15 @@
 	</parent>
 
 	<groupId>com.levi9</groupId>
-	<artifactId>employee-manager-web</artifactId>
+	<artifactId>employee-manager-container</artifactId>
 	<version>1.1.0-SNAPSHOT</version>
 
 	<packaging>war</packaging>
-	<name>employee-manager-web</name>
+	<name>employee-manager-container</name>
 	<url>http://maven.apache.org</url>
 
 	<build>
-		<finalName>employee-manager-web</finalName>
+		<finalName>employee-manager-container</finalName>
 		<pluginManagement>
 			<plugins>
 				<!-- Plugin to create the test jar used by the services module -->
