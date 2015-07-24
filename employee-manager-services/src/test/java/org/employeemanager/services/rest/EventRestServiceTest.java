@@ -1,4 +1,4 @@
-package org.employee_manager.services;
+package org.employeemanager.services.rest;
 
 import static org.junit.Assert.*;
 
@@ -11,15 +11,21 @@ import javax.ws.rs.core.Response;
 
 import org.employee_manager.model.Event;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import junit.framework.Assert;
 
+@RunWith(org.springframework.test.context.junit4.SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring/employee-manager-services-config-test.xml")
+@Transactional
 public class EventRestServiceTest {
 
 	@Test
 	public void testGetAllEvents() {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080/employee-manager-web/rest/event/");
+		WebTarget target = client.target("http://localhost:8080/employee-manager-container/rest/event/");
 		Response response = target.request(MediaType.APPLICATION_JSON).get();
 		assertEquals(200, response.getStatus());
 	}
@@ -27,7 +33,7 @@ public class EventRestServiceTest {
 	@Test
 	public void testGetByName() {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080/employee-manager-web/rest/event/?name=ziuaIsabelei");
+		WebTarget target = client.target("http://localhost:8080/employee-manager-container/rest/event/?name=ziuaIsabelei");
 		Response response = target.request(MediaType.APPLICATION_JSON).get();
 		assertEquals(200, response.getStatus());
 	}
@@ -36,9 +42,9 @@ public class EventRestServiceTest {
 	public void testSaveEvent() {
 		
 		Event event = new Event();
-		event.setName("CodeCamp");
+		event.setName("rrrrrrrrrrr");
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080/employee-manager-web/rest/event");
+		WebTarget target = client.target("http://localhost:8080/employee-manager-container/rest/event");
 		Response response = target.request(MediaType.APPLICATION_JSON).post(Entity.entity(event,MediaType.APPLICATION_JSON_TYPE));
 		assertEquals(200, response.getStatus());
 	}
@@ -47,7 +53,7 @@ public class EventRestServiceTest {
 	public void testGetById() {
 		
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080/employee-manager-web/rest/event/10");
+		WebTarget target = client.target("http://localhost:8080/employee-manager-container/rest/event/10");
 		Response response = target.request(MediaType.APPLICATION_JSON).get();
 		assertEquals(200, response.getStatus());
 	}
