@@ -1,5 +1,6 @@
 package org.employee_manager.services;
 
+import org.employee_manager.model.SkillEvaluation;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -52,4 +53,6 @@ public abstract class BaseServicesTest {
 	@Autowired
 	protected EventTypeService eventTypeService;
 
+	@Autowired
+	protected SkillEvaluationService skillEvaluationService;
 }
