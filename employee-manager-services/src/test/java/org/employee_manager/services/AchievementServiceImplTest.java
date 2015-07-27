@@ -39,7 +39,6 @@ public class AchievementServiceImplTest extends BaseServicesTest {
 	public void testFindById() {
 		Achievement achievement = new Achievement();
 		achievement.setName("myAchievement");
-		;
 		achievement.setDescription("description");
 		achievement.setEmployeeId(null);
 		Achievement newAchievement = this.achievementService.saveAchievement(achievement);

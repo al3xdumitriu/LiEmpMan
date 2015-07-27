@@ -13,13 +13,17 @@ import org.junit.Test;
 import junit.framework.Assert;
 
 public class EmployeeRestServiceTest {
+
 	@Test
 	public void testGetEmployee() {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:8080/employee-manager-container/rest/employee/10");
 		Response response = target.request(MediaType.APPLICATION_JSON).get();
-		System.out.println(response.toString());
-		Assert.assertEquals(200, response.getStatus());
+		if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+			Assert.assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());	
+		} else {
+			Assert.assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+		}
 	}
 
 	@Test
@@ -27,7 +31,6 @@ public class EmployeeRestServiceTest {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:8080/employee-manager-container/rest/employee");
 		Response response = target.request(MediaType.APPLICATION_JSON).get();
-		System.out.println(response.toString());
 		Assert.assertEquals(200, response.getStatus());
 	}
 
@@ -39,7 +42,6 @@ public class EmployeeRestServiceTest {
 		WebTarget target = client.target("http://localhost:8080/employee-manager-container/rest/employee/");
 		Response response = target.request(MediaType.APPLICATION_JSON)
 				.post(Entity.entity(emp, MediaType.APPLICATION_JSON_TYPE));
-		System.out.println(response.toString());
 		Assert.assertEquals(200, response.getStatus());
 	}
 

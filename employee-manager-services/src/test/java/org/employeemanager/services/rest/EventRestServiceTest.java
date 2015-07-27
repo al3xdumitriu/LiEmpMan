@@ -33,9 +33,13 @@ public class EventRestServiceTest {
 	@Test
 	public void testGetByName() {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080/employee-manager-container/rest/event/?name=ziuaIsabelei");
+		WebTarget target = client.target("http://localhost:8080/employee-manager-container/rest/event/?name=ziuaaIsabelei");
 		Response response = target.request(MediaType.APPLICATION_JSON).get();
-		assertEquals(200, response.getStatus());
+		if (response.getStatus() ==  Response.Status.OK.getStatusCode()) {
+			Assert.assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+		} else {
+			Assert.assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
+		}
 	}
 	
 	@Test
@@ -55,7 +59,11 @@ public class EventRestServiceTest {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:8080/employee-manager-container/rest/event/10");
 		Response response = target.request(MediaType.APPLICATION_JSON).get();
-		assertEquals(200, response.getStatus());
+		if (response.getStatus() ==  Response.Status.OK.getStatusCode()) {
+			Assert.assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+		} else {
+			Assert.assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
+		}
 	}
 
 }
