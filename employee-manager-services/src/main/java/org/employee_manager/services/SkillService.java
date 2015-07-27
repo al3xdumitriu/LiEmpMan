@@ -13,4 +13,6 @@ public interface SkillService {
 
 	List<Skill> findAllSkills();
 
+	List<Skill> findAllSkillsWithName(String name);
+
 }
