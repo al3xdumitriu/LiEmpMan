@@ -1,6 +1,6 @@
 package org.employeemanager.services.rest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 
 import org.employee_manager.model.Account;
 import org.junit.Test;
+
 
 public class AccountRestServiceTest {
 
