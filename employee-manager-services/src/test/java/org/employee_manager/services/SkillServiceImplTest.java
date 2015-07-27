@@ -61,6 +61,7 @@ public class SkillServiceImplTest extends BaseServicesTest {
 
 	@Test
 	public void testFindAllSkills() {
+		int skillsBefore=this.skillService.findAllSkills().size();
 		List<Skill> skills = new ArrayList();
 		Skill eval1 = new Skill();
 		Skill eval2 = new Skill();
@@ -72,7 +73,7 @@ public class SkillServiceImplTest extends BaseServicesTest {
 		List<Skill> result = this.skillService.saveAllSkills(skills);
 		List<Skill> found = this.skillService.findAllSkills();
 
-		Assert.assertEquals(result.size(), found.size());
+		Assert.assertEquals(result.size()+skillsBefore, found.size());
 	}
 
 }
