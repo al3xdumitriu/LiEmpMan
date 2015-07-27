@@ -36,4 +36,9 @@ public class AchievementServiceImpl implements AchievementService {
 		return this.achievementRepository.findAll();
 	}
 
+	@Override
+	public List<Achievement> findByName(String name) {
+		return this.achievementRepository.getByName(name);
+	}
+
 }

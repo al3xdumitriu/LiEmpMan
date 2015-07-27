@@ -12,7 +12,6 @@ import javax.ws.rs.core.Response;
 import org.employee_manager.model.Account;
 import org.junit.Test;
 
-
 public class AccountRestServiceTest {
 
 	@Test
