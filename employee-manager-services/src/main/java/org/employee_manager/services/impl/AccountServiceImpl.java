@@ -36,4 +36,10 @@ public class AccountServiceImpl implements AccountService {
 		return accountRepository.findAll();
 	}
 
+	@Override
+	public Account findAccountByName(String username) {
+		return accountRepository.findAccountByName(username);
+	}
+
+
 }
