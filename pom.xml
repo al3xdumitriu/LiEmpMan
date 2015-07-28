@@ -59,14 +59,14 @@
 		</pluginManagement>
 	</build>
 	
-	<repositories>		
+	<distributionManagement>
 		<repository>
 			<id>nexus</id>
 			<name>Nexus repository</name>
 			<url>https://repo.levi9.com/content/repositories/levi9-employeemanager.snapshots/</url>
 			<layout>default</layout>
 		</repository>
-	</repositories>	
+	</distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>
