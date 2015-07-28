@@ -33,19 +33,22 @@
 <body>
 	<div align="center">
 		<h2>Create Account</h2>
-		<div ng-controller="AccountController as accountCtrl"
-			ng-submit="accountCtrl.addAccount(accountCtrl.account)">
-			<form name="accountForm">
+		<div novalidate>
+			<form name="accountForm"
+				ng-controller="AccountController as accountCtrl"
+				ng-submit="accountCtrl.addAccount(accountCtrl.account)">
 				<div class="form-group">
 					<label for="username">Username</label> <input type="text"
-						id="username" ng-model="accountCtrl.account.username"> <br></br>
+						id="username" ng-model="accountCtrl.account.username" required>
+					<br></br>
 				</div>
 				<div class="form-group">
 					<label for="password">Password</label> <input type="text"
-						id="password" ng-model="accountCtrl.account.password"> <br></br>
+						id="password" ng-model="accountCtrl.account.password" required>
+					<br></br>
 				</div>
 				<div class="form-group">
-					<input type="text" id="confirmPassword"> <br></br>
+					<input type="text" id="confirmPassword" required> <br></br>
 				</div>
 				<button type="submit" class="btn btn-default">Create
 					Account</button>
