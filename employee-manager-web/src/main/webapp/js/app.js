@@ -1,5 +1,5 @@
 var restAngular = angular.module('restAngular', [ 'ngRoute', 'raControllers',
-		'raServices' ]);
+		'raServices', 'accountApp' ]);
 
 restAngular.config(function($routeProvider) {
 
@@ -25,29 +25,16 @@ restAngular.config(function($routeProvider) {
 
 });
 
-var restAccount = angular.module('restAccount', [ 'ngRoute', 'acControllers',
-		'acServices' ]);
+(function() {
+	var accountApp = angular.module('accountApp', []);
+	accountApp.controller('AccountController', [ '$scope', '$http', function($scope, $http) {
 
-restAccount.config(function($routeProvider) {
-
-	$routeProvider.
-
-	when('/', {
-
-		templateUrl : 'employee-list.jsp',
-		controller : 'EmployeesListController'
-
-	}).when('/employee/:id', {
-
-		templateUrl : 'employee-details.jsp',
-		controller : 'EmployeeDetailsController'
-
-	}).
-
-	otherwise({
-
-		redirectTo : '/employesse'
-
-	});
-
-});
+		this.addAccount = function(account){
+			$http({
+				method : 'POST',
+				url : '/employee-manager-container/rest/account',
+				data : account
+			});
+		};
+	}]);
+})();
