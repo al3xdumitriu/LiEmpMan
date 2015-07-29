@@ -16,29 +16,35 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "ACCOUNT")
 public class Account implements Serializable {
 
 	@Id
-	@Column(name="ACCOUNT_ID", nullable=false)
+	@Column(name = "ACCOUNT_ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_ACCOUNT")
 	@SequenceGenerator(name = "SEQ_GEN_ACCOUNT", sequenceName = "account_id_sequence", allocationSize = 10)
 	private long id;
-	
-	@Column(name="USER_NAME")
+
+	@Column(name = "USER_NAME")
 	private String username;
-	
-	@Column(name="PASSWORD")
+
+	@Column(name = "PASSWORD")
 	private String password;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="EMPLOYEE_ID")
-    public Employee employeeId;
-	
-	@OneToMany(mappedBy="accountId")
-    private Set<Role> roles;
+	@JoinColumn(name = "EMPLOYEE_ID")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonBackReference
+	public Employee employeeId;
+
+	@OneToMany(mappedBy = "accountId")
+	private Set<Role> roles;
 
 	public long getId() {
 		return id;
@@ -79,5 +85,5 @@ public class Account implements Serializable {
 	public void setEmployeeId(Employee employeeId) {
 		this.employeeId = employeeId;
 	}
-	
+
 }

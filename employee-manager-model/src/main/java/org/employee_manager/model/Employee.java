@@ -17,6 +17,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "EMPLOYEE")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -42,7 +47,7 @@ public class Employee implements Serializable {
 
 	@Column(name = "EMPLOYEE_EXPERIENCE_LEVEL")
 	private String experienceLevel;
-	
+
 	@Column(name = "EMPLOYEE_AVAILABLE_HOURS")
 	private int availableHours;
 
@@ -50,6 +55,8 @@ public class Employee implements Serializable {
 	private String jobTitle;
 
 	@OneToOne(mappedBy = "employeeId")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference
 	public Account account;
 
 	@OneToOne(cascade = CascadeType.ALL)
