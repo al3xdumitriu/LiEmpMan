@@ -9,7 +9,7 @@ raServices
 						function($resource) {
 
 							return $resource(
-									'http://localhost:8080/employee-manager-container/rest/:call/:id',
+									'/employee-manager-container/rest/:call/:id',
 									{
 										id : "@id"
 									}, {

@@ -10,9 +10,15 @@ restAngular.config(function($routeProvider) {
 		templateUrl : 'employee-list.jsp',
 		controller : 'EmployeesListController'
 
-	}).when('/employee/:id', {
+	})/*
+		 * .when('/employee/:id', {
+		 * 
+		 * templateUrl : 'employee-details.jsp', controller :
+		 * 'EmployeeDetailsController' })
+		 */
+	.when('/employee/:id', {
 
-		templateUrl : 'employee-details.jsp',
+		templateUrl : 'myProfile.jsp',
 		controller : 'EmployeeDetailsController'
 
 	}).

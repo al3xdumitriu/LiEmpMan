@@ -9,8 +9,8 @@
 <title>Employees</title>
 
 <script src="js/jquery-2.1.4.js"></script>
-<link href="js/bootstrap-3.3.5-dist/css/bootstrap.css"
-	rel="stylesheet" type="text/css" />
+<link href="js/bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet"
+	type="text/css" />
 
 <!-- Downloaded Scripts -->
 
@@ -34,7 +34,7 @@
 
 <body>
 	<div align="center">
-		<div style="width: 300px;">
+		 <div style="width: 300px;">
 			<div ng-view></div>
 		</div>
 	</div>

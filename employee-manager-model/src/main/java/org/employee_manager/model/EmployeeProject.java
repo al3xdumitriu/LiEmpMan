@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,9 +14,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "EMPLOYEE_PROJECT")
 public class EmployeeProject implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "EMPLOYEE_PROJECT_ID")
@@ -28,11 +39,15 @@ public class EmployeeProject implements Serializable {
 
 	@JoinColumn(name = "PROJECT_ID")
 	@ManyToOne(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonBackReference
 	private Project projectId;
 
 	@JoinColumn(name = "EMPLOYEE_ID")
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Project employeeId;
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonBackReference(value="employee-employeeProjects")
+	private Employee employeeId;
 
 	public long getId() {
 		return id;
@@ -58,11 +73,11 @@ public class EmployeeProject implements Serializable {
 		this.projectId = projectId;
 	}
 
-	public Project getEmployeeId() {
+	public Employee getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(Project employeeId) {
+	public void setEmployeeId(Employee employeeId) {
 		this.employeeId = employeeId;
 	}
 

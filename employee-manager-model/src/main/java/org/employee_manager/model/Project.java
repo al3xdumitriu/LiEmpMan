@@ -16,9 +16,19 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "PROJECT")
 public class Project implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "PROJECT_ID")
@@ -44,6 +54,8 @@ public class Project implements Serializable {
 	private String status;
 
 	@OneToMany(mappedBy = "projectId")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference
 	private List<EmployeeProject> employeeProjects;
 
 	@OneToMany(mappedBy = "projectId")

@@ -16,5 +16,7 @@ raControllers.controller('EmployeeDetailsController', [ '$scope',
 			$scope.employee = EmployeesService.employee({
 				id : $routeParams.id
 			});
+			
+			$scope.profileImage = 'http://s3.postimg.org/jr4bh5xr3/profile_Photo.jpg' ;
 
 		} ]);
