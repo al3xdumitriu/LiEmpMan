@@ -39,8 +39,11 @@
 			<!--  <div ng-view></div>  -->
 			<div  ng-controller="myCtrl">
 				<h1>Achievements</h1>
-				<div ng-repeat="achievement in achievements | limitTo:limit |orderBy :'id'">
+				<br>
+
+				<div ng-repeat="achievement in achievements | limitTo:limit |orderBy :'id' ">
 					<p>
+
 						<b>{{achievement.name}} </b>
 					</p>
 					<textarea rows="4" cols="50" disabled>
@@ -57,17 +60,24 @@
 				app
 						.controller(
 								'myCtrl',
-								function($scope, $http) {
-
+								function($scope, $http,$location) {
+									
+									if ($location.path().indexOf('/',1) >0)$scope.pathul =  $location.path().substring(0, $location.path().indexOf('/',1));
+									else $scope.pathul =  $location.path();
+									if($scope.pathul=="")$scope.urlfinal="/employee-manager-container/rest/achievement";
+									else $scope.urlfinal="/employee-manager-container/rest/employee"+$scope.pathul+"/achievement";
+										
+		
+									
 									$http
-											.get(
-													"/employee-manager-container/rest/achievement")
+											.get( 
+													$scope.urlfinal)
 											.success(function(response) {
 												$scope.achievements = response;
 											});
 									$scope.limit = "4";
 									$scope.add = function() {
-										$scope.limit = parseInt($scope.limit) + 4;
+									$scope.limit = parseInt($scope.limit) + 4;
 									}
 								});
 			</script>

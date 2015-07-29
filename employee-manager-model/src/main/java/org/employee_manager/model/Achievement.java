@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,9 +14,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "ACHIEVEMENT")
 public class Achievement implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2594631964604917094L;
 
 	@Id
 	@Column(name = "ACHIEVEMENT_ID")
@@ -31,6 +42,8 @@ public class Achievement implements Serializable {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "EMPLOYEE_ID")
+	 @LazyCollection(LazyCollectionOption.FALSE)
+	@JsonBackReference
 	private Employee employeeId;
 
 	public long getId() {

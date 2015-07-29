@@ -35,7 +35,7 @@
 <body>
 	<div align="center">
 		<div style="width: 300px;">
-			<div ng-view></div>
+			<!-- <div ng-view></div> -->
 		</div>
 	</div>
 
