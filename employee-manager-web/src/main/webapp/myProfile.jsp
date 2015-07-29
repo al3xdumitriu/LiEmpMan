@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en" ng-app="restAngular">
+<html lang="en" ng-app="restEmployee">
 
 <head>
 <meta charset="utf-8">
@@ -30,6 +30,8 @@
 <script src="js/angular-resource.js"></script>
 
 <script src="js/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+<script src="jquery-2.1.4.min.js"></script>
 
 <!-- Created Scripts -->
 
@@ -82,7 +84,7 @@
 					<div class="form-group">
 						<label for="phone">Phone:</label><br>
 						<div class="col-lg-12">
-							<input type="text" class="form-control" id="phonne"
+							<input type="text" class="form-control" id="phone"
 								ng-model="employee.phone" disabled>
 						</div>
 					</div>
@@ -111,12 +113,37 @@
 						</div>
 					</div>
 
-					<input class="btn btn-default" type="button" value="Save" disabled>
-					<input class="btn btn-default" type="button" value="Cancel"
-						disabled>
+					<input class="btn btn-default" id="edit" type="button" value="Edit">
+					<input class="btn btn-default" id="save" type="button" value="Save"
+						disabled ng-click="changeEmployee(employee)"> <input class="btn btn-default" id="cancel"
+						type="button" value="Cancel" disabled>
 		</div>
 	</div>
+	<script>
+		$('#edit').click(
+				function() {
+					$('#expLevel').prop('disabled', false), $('#jobTitle')
+							.prop('disabled', false);
+					$('#email').prop('disabled', false);
+					$('#phone').prop('disabled', false);
+					$('#userName').prop('disabled', false);
+					$('#save').prop('disabled', false);
+					$('#cancel').prop('disabled', false);
+				});
+	</script>
 
+	<script>
+		$('#cancel').click(
+				function() {
+					$('#expLevel').prop('disabled', true),
+					$('#jobTitle').prop('disabled', true);
+					$('#email').prop('disabled', true);
+					$('#phone').prop('disabled', true);
+					$('#userName').prop('disabled', true);
+					$('#save').prop('disabled', true);
+					$('#cancel').prop('disabled', true);
+				});
+	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->

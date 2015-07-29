@@ -1,7 +1,7 @@
-var restAngular = angular.module('restAngular', [ 'ngRoute', 'raControllers',
+var restEmployee = angular.module('restEmployee', [ 'ngRoute', 'raControllers',
 		'raServices' ]);
 
-restAngular.config(function($routeProvider) {
+restEmployee.config(function($routeProvider) {
 
 	$routeProvider.
 

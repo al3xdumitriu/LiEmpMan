@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en" ng-app="restAngular">
+<html lang="en" ng-app="restEmployee">
 
 <head>
 
@@ -22,6 +22,8 @@
 
 <script src="js/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
+<script src="jquery-2.1.4.min.js"></script>
+
 <!-- Created Scripts -->
 
 <script src="js/app.js"></script>
@@ -34,7 +36,7 @@
 
 <body>
 	<div align="center">
-		 <div style="width: 300px;">
+		<div style="width: 300px;">
 			<div ng-view></div>
 		</div>
 	</div>

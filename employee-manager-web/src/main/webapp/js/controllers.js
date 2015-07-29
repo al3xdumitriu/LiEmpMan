@@ -9,14 +9,17 @@ raControllers.controller('EmployeesListController', [ '$scope',
 
 		} ]);
 
-raControllers.controller('EmployeeDetailsController', [ '$scope',
-		'$routeParams', 'EmployeesService',
+raControllers
+		.controller(
+				'EmployeeDetailsController',
+				[
+						'$scope',
+						'$routeParams',
+						'EmployeesService',
+						function($scope, $routeParams, EmployeesService) {
+							$scope.employee = EmployeesService.employee({
+								id : $routeParams.id
+							});
 
-		function($scope, $routeParams, EmployeesService) {
-			$scope.employee = EmployeesService.employee({
-				id : $routeParams.id
-			});
-			
-			$scope.profileImage = 'http://s3.postimg.org/jr4bh5xr3/profile_Photo.jpg' ;
-
-		} ]);
+							$scope.profileImage = 'http://s3.postimg.org/jr4bh5xr3/profile_Photo.jpg';
+						} ]);
