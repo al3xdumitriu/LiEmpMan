@@ -23,6 +23,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
 @Entity
 @Table(name = "EMPLOYEE")
 @Inheritance(strategy = InheritanceType.JOINED)

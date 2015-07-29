@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en" ng-app="restAngular">
+<html lang="en" ng-app="restAchievement" ng-controller="myCtrlAchiev">
 
 <head>
 
@@ -24,11 +24,13 @@
 
 <!-- Created Scripts -->
 
-<!-- <script src="js/app.js"></script>
+<script src="js/app.js"></script>
 
-<script src="js/controllers.js"></script>
+<!-- <script src="js/controllers.js"></script>
 
-<script src="js/services.js"></script> -->
+<script src="js/services.js"></script> 
+
+<script src="js/achievementController.js"></script> -->
 
 </head>
 <script
@@ -36,12 +38,14 @@
 <body>
 	<div align="center">
 		<div style="width: 300px;">
-			<!--  <div ng-view></div>  -->
-			<div  ng-controller="myCtrl">
+			<!-- 	  <div ng-view></div>   -->
+			<div>
 				<h1>Achievements</h1>
+
 				<br>
 
-				<div ng-repeat="achievement in achievements | limitTo:limit |orderBy :'id' ">
+				<div
+					ng-repeat="achievement in achievements | limitTo:limit |orderBy :'id' ">
 					<p>
 
 						<b>{{achievement.name}} </b>
@@ -52,35 +56,17 @@
 				</div>
 				<br>
 				<button ng-click="add()">Show More!</button>
-
+				<button ng-click="arata()">Add Achievement!</button>
+				<div ng-hide=ascunde>
+					<form novalidate>
+						<br> Title: <input type="text" ng-model="titluAdaugat"><br>
+						Description:<br> <input type="text"
+							ng-model="descriereAdaugata"> <br> <br>
+						<button ng-click="reset()">SUBMIT</button>
+					</form>
+				</div>
 			</div>
 
-			<script>
-				var app = angular.module('restAngular', []);
-				app
-						.controller(
-								'myCtrl',
-								function($scope, $http,$location) {
-									
-									if ($location.path().indexOf('/',1) >0)$scope.pathul =  $location.path().substring(0, $location.path().indexOf('/',1));
-									else $scope.pathul =  $location.path();
-									if($scope.pathul=="")$scope.urlfinal="/employee-manager-container/rest/achievement";
-									else $scope.urlfinal="/employee-manager-container/rest/employee"+$scope.pathul+"/achievement";
-										
-		
-									
-									$http
-											.get( 
-													$scope.urlfinal)
-											.success(function(response) {
-												$scope.achievements = response;
-											});
-									$scope.limit = "4";
-									$scope.add = function() {
-									$scope.limit = parseInt($scope.limit) + 4;
-									}
-								});
-			</script>
 
 		</div>
 	</div>

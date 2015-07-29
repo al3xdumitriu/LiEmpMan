@@ -18,3 +18,4 @@ raControllers.controller('EmployeeDetailsController', [ '$scope',
 			});
 
 		} ]);
+
