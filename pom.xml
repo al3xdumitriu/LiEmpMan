@@ -59,14 +59,85 @@
 		</pluginManagement>
 	</build>
 	
-	<distributionManagement>
+	<profiles>
+		<profile>
+			<id>release</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<nexus.repo>${project.distributionManagement.repository.url}</nexus.repo>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>2.5.2</version>
+						<configuration>
+							<arguments>-DskipTests -Dmaven.javadoc.skip=true</arguments>
+							<preparationGoals>clean install</preparationGoals>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<goals>deploy</goals>
+							<providerImplementations>
+								<git>jgit</git>
+							</providerImplementations>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.maven.scm</groupId>
+								<artifactId>maven-scm-provider-jgit</artifactId>
+								<version>1.9</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-scm-plugin</artifactId>
+						<version>1.9.4</version>
+						<configuration>
+							<providerImplementations>
+								<git>jgit</git>
+							</providerImplementations>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.maven.scm</groupId>
+								<artifactId>maven-scm-provider-jgit</artifactId>
+								<version>1.9.4</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>	
+	
+	<repositories>
 		<repository>
 			<id>nexus</id>
 			<name>Nexus repository</name>
-			<url>https://repo.levi9.com/content/repositories/levi9-employeemanager.snapshots/</url>
+			<url>https://repo.levi9.com/content/repositories/levi9-employeemanager.releases</url>
 			<layout>default</layout>
 		</repository>
+	</repositories>	
+	
+	<distributionManagement>
+		<repository>
+			<id>levi9-employee-manager-release-repo</id>
+			<name>Levi9 Employee Manager Releases</name>
+			<url>https://repo.levi9.com/content/repositories/levi9-employeemanager.releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>levi9-employee-manager-snapshots-repo</id>
+			<name>Levi9 Employee Manager Snapshots</name>
+			<url>https://repo.levi9.com/content/repositories/levi9-employeemanager.snapshots</url>
+		</snapshotRepository>
 	</distributionManagement>
+	
+	<scm>
+		<connection>scm:git:https://git.levi9.com/levi9-employee-manager.git</connection>
+	</scm>		
 
 	<dependencyManagement>
 		<dependencies>
