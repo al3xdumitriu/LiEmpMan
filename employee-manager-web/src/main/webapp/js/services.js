@@ -1,6 +1,6 @@
-var raServices = angular.module('raServices', [ 'ngResource' ]);
+var employeeManagerServices = angular.module('employeeManagerServices', [ 'ngResource' ]);
 
-raServices
+employeeManagerServices
 		.factory(
 				'EmployeesService',
 				[
