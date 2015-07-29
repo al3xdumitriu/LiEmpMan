@@ -1,29 +1,35 @@
-var raServices = angular.module('raServices', [ 'ngResource' ]);
+var employeeManagerServices = angular.module('employeeManagerServices', [ 'ngResource' ]);
 
-raServices.factory('EmployeesService', [ '$resource',
+employeeManagerServices
+		.factory(
+				'EmployeesService',
+				[
+						'$resource',
 
-function($resource) {
+						function($resource) {
 
-	return $resource('/employee-manager-container/rest/:call/:id', {
-		id : "@id"
-	}, {
+							return $resource(
+									'/employee-manager-container/rest/:call/:id',
+									{
+										id : "@id"
+									}, {
 
-		employees : {
-			method : 'GET',
-			params : {
-				call : 'employee'
-			},
-			isArray : true
-		},
+										employees : {
+											method : 'GET',
+											params : {
+												call : 'employee'
+											},
+											isArray : true
+										},
 
-		employee : {
-			method : 'GET',
-			params : {
-				call : 'employee'
-			},
-			isArray : false
-		},
+										employee : {
+											method : 'GET',
+											params : {
+												call : 'employee'
+											},
+											isArray : false
+										}
 
-	});
+									});
 
-} ]);
+						} ]);
