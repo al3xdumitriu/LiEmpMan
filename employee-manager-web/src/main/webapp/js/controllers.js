@@ -42,14 +42,17 @@ achievControllers.controller('myCtrlAchievEmp', [
 				$scope.ascunde = !$scope.ascunde;
 			}
 	
-			$scope.achievementTest={id:213213,name:'Hannibal',description:'Lecter',employeeId :{id:$routeParams.id}};
+			$scope.achievementTest={id:213213,name:'',description:'',employeeId :{id:$routeParams.id}};
 
 			$scope.incearcaPost=function(){
+				$scope.ascunde = !$scope.ascunde;
 				$http({
 					method : 'POST',
 					url : '/employee-manager-container/rest/achievement',
 					data : $scope.achievementTest
+					
 				});
+				$scope.achievementTest={id:213213,name:'',description:'',employeeId :{id:$routeParams.id}};
 			}
 			
 			

@@ -26,7 +26,11 @@
 						<br> Title: <input type="text" ng-model="achievementTest.name"><br>
 						Description:<br> <input type="text"
 							ng-model="achievementTest.description"> <br> <br>
+						<div ng-if="achievementTest.name!=''">
+						
 						<button ng-click="incearcaPost()">posteaza!</button>
+						
+						</div>
 					</form>
 				</div>
 				
