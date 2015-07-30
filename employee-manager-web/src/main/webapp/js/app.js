@@ -1,19 +1,17 @@
-var restAngular = angular.module('restAngular', [ 'ngRoute', 'employeeManagerControllers',
-		'employeeManagerServices' ]);
+var applicationModule = angular.module('appModule', [ 'ngRoute',
+		'employeeManagerControllers', 'employeeManagerServices' ]);
 
-restAngular.config(function($routeProvider) {
+applicationModule.config(function($routeProvider) {
 
-	$routeProvider.
-	when('/', {
+	$routeProvider.when('/', {
 
-		templateUrl : 'design.jsp',
-		controller : 'MainController'})
-		
-	.when('/design.jsp', {
+		templateUrl : 'content.jsp',
+		controller : 'mainController'
+	})
 
-		templateUrl : 'design.jsp',
-		controller : 'MainController'
+	.when('/content.jsp', {
 
+		templateUrl : 'content.jsp',
+		controller : 'mainController'
 	});
-
 });

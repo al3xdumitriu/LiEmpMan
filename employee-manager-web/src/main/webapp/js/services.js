@@ -2,7 +2,7 @@ var employeeManagerServices = angular.module('employeeManagerServices', [ 'ngRes
 
 employeeManagerServices
 		.factory(
-				'EmployeesService',
+				'employeesService',
 				[
 						'$resource',
 

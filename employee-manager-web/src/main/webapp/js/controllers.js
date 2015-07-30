@@ -1,9 +1,17 @@
-var employeeManagerControllers = angular.module('employeeManagerControllers', []);
+var employeeManagerControllers = angular.module('employeeManagerControllers',
+		[]);
 
-employeeManagerControllers.controller('MainController', [ '$scope',
-		'EmployeesService', function($scope, EmployeesService)
-		{
-			$scope.employees = EmployeesService.employees();
-
+employeeManagerControllers.controller('mainController', [ '$scope',
+		'employeesService', function($scope, EmployeesService) {
+			$scope.content = "content";
 		} ]);
 
+employeeManagerControllers.controller('headerController', [ '$scope',
+		function($scope) {
+			$scope.header = "header";
+		} ]);
+
+employeeManagerControllers.controller('footerController', [ '$scope',
+		function($scope) {
+			$scope.footer = "footer";
+		} ]);

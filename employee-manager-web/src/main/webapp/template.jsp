@@ -11,7 +11,6 @@
 <script src="js/jquery-2.1.4.js"></script>
 <link href="js/bootstrap-3.3.5-dist/css-blue-theme/bootstrap-them.css"
 	rel="stylesheet" type="text/css" />
-	
 
 <!-- Downloaded Scripts -->
 
@@ -33,13 +32,11 @@
 
 </head>
 
-<body>
-	<div align="left" ng-app="restAngular">
-		<div style="width: 300px;">
-			<div ng-view></div>
-		</div>
-	</div>
-
+<body ng-app="appModule">
+	<header ng-include="'template/header.jsp'" ng-controller="headerController"></header>
+    <content ng-view></content>
+	<footer ng-include="'template/footer.jsp'" ng-controller="footerController"></footer>
 </body>
 
 </html>
+
