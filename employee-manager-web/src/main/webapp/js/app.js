@@ -9,7 +9,7 @@ applicationModule.config(function($routeProvider) {
 		controller : 'mainController'
 	})
 
-	.when('/content.jsp', {
+	.when('/content', {
 
 		templateUrl : 'content.jsp',
 		controller : 'mainController'
