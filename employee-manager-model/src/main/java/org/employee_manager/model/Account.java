@@ -16,6 +16,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name = "ACCOUNT")
@@ -35,6 +37,7 @@ public class Account implements Serializable {
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="EMPLOYEE_ID")
+	@JsonBackReference
     public Employee employeeId;
 	
 	@OneToMany(mappedBy="accountId")

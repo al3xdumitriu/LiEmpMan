@@ -14,9 +14,12 @@
 
 <!-- Downloaded Scripts -->
 
+
 <script src="js/angular.js"></script>
 
 <script src="js/angular-route.js"></script>
+
+<script src="js/angular-cookies.js"></script>
 
 <script src="js/angular-resource.js"></script>
 
