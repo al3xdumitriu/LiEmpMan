@@ -1,20 +1,17 @@
-var raControllers = angular.module('raControllers', []);
+var employeeManagerControllers = angular.module('employeeManagerControllers',
+		[]);
 
-raControllers.controller('EmployeesListController', [ '$scope',
-		'EmployeesService', function($scope, EmployeesService)
-
-		{
-
-			$scope.employees = EmployeesService.employees();
-
+employeeManagerControllers.controller('mainController', [ '$scope',
+		'employeesService', function($scope, EmployeesService) {
+			$scope.content = "content";
 		} ]);
 
-raControllers.controller('EmployeeDetailsController', [ '$scope',
-		'$routeParams', 'EmployeesService',
+employeeManagerControllers.controller('headerController', [ '$scope',
+		function($scope) {
+			$scope.header = "header";
+		} ]);
 
-		function($scope, $routeParams, EmployeesService) {
-			$scope.employee = EmployeesService.employee({
-				id : $routeParams.id
-			});
-
+employeeManagerControllers.controller('footerController', [ '$scope',
+		function($scope) {
+			$scope.footer = "footer";
 		} ]);

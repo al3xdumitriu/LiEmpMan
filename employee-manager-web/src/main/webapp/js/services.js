@@ -1,15 +1,15 @@
-var raServices = angular.module('raServices', [ 'ngResource' ]);
+var employeeManagerServices = angular.module('employeeManagerServices', [ 'ngResource' ]);
 
-raServices
+employeeManagerServices
 		.factory(
-				'EmployeesService',
+				'employeesService',
 				[
 						'$resource',
 
 						function($resource) {
 
 							return $resource(
-									'http://localhost:8080/employee-manager-container/rest/:call/:id',
+									'/employee-manager-container/rest/:call/:id',
 									{
 										id : "@id"
 									}, {
