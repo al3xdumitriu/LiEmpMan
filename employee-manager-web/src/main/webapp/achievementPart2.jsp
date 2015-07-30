@@ -1,12 +1,11 @@
-<script
-	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<!-- <script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script> -->
 <div align="center">
 		<div style="width: 300px;">
 			<!-- 	  <div ng-view></div>   -->
 			<div>
 				<h1>Achievements</h1>
-	{{testeazaruta}}
-	{{testeaza}}
+
 				<br>
 
 				<div
@@ -23,13 +22,16 @@
 				<button ng-click="add()">Show More!</button>
 				<button ng-click="arata()">Add Achievement!</button>
 				<div ng-hide=ascunde>
-					<form novalidate>
-						<br> Title: <input type="text" ng-model="titluAdaugat"><br>
+					<form name="achievementForm" ">
+						<br> Title: <input type="text" ng-model="achievementTest.name"><br>
 						Description:<br> <input type="text"
-							ng-model="descriereAdaugata"> <br> <br>
-						<button ng-click="reset()">SUBMIT</button>
+							ng-model="achievementTest.description"> <br> <br>
+						<button ng-click="incearcaPost()">posteaza!</button>
 					</form>
 				</div>
+				
+				
+				
 			</div>
 
 
