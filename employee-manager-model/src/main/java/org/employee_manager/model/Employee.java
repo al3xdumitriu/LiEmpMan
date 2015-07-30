@@ -53,7 +53,7 @@ public class Employee implements Serializable {
 
 	@Column(name = "EMPLOYEE_EXPERIENCE_LEVEL")
 	private String experienceLevel;
-	
+
 	@Column(name = "EMPLOYEE_AVAILABLE_HOURS")
 	private int availableHours;
 
@@ -61,6 +61,7 @@ public class Employee implements Serializable {
 	private String jobTitle;
 
 	@OneToOne(mappedBy = "employeeId")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonManagedReference
 	public Account account;
 

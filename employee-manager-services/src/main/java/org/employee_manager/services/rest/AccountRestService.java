@@ -13,14 +13,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.employee_manager.model.Account;
+import org.employee_manager.model.Employee;
 import org.employee_manager.services.AccountService;
+import org.employee_manager.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Path("account")
+@Path("/account")
 public class AccountRestService {
 
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private EmployeeService employeeService;
 
 	@GET
 	@Path("")
@@ -66,9 +71,9 @@ public class AccountRestService {
 	public Response saveAccount(Account account) {
 
 		Response resultResponse = null;
-
 		try {
 			accountService.save(account);
+			employeeService.save(account.getEmployeeId());
 			resultResponse = Response.status(Response.Status.CREATED).build();
 		} catch (Exception e) {
 			resultResponse = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
