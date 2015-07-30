@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en" ng-app="restAngular">
+<html lang="en">
 
 <head>
 
@@ -9,7 +9,7 @@
 <title>Employees</title>
 
 <script src="js/jquery-2.1.4.js"></script>
-<link href="js/bootstrap-3.3.5-dist/css/bootstrap.css"
+<link href="js/bootstrap-3.3.5-dist/css-blue-theme/bootstrap-them.css"
 	rel="stylesheet" type="text/css" />
 
 <!-- Downloaded Scripts -->
@@ -35,13 +35,11 @@
 
 </head>
 
-<body>
-	<div align="center">
-		<div style="width: 300px;">
-			<div ng-view></div>
-		</div>
-	</div>
-
+<body ng-app="appModule">
+	<header ng-include="'template/header.jsp'" ng-controller="headerController"></header>
+    <content ng-view></content>
+	<footer ng-include="'template/footer.jsp'" ng-controller="footerController"></footer>
 </body>
 
 </html>
+

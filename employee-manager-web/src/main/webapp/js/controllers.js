@@ -1,6 +1,22 @@
-var raControllers = angular.module('raControllers', []);
+var employeeManagerControllers = angular.module('employeeManagerControllers',
+		[]);
 
-raControllers.controller('LoginController', LoginController);
+employeeManagerControllers.controller('mainController', [ '$scope',
+		'employeesService', function($scope, EmployeesService) {
+			$scope.content = "content";
+		} ]);
+
+employeeManagerControllers.controller('headerController', [ '$scope',
+		function($scope) {
+			$scope.header = "header";
+		} ]);
+
+employeeManagerControllers.controller('footerController', [ '$scope',
+		function($scope) {
+			$scope.footer = "footer";
+		} ]);
+
+employeeManagerControllers.controller('LoginController', LoginController);
 LoginController.$inject = [ '$scope', '$routeParams', '$location',
 		'AuthenticationService' ];
 
@@ -34,22 +50,3 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 	;
 
 }
-
-raControllers.controller('EmployeesListController', [ '$scope',
-		'EmployeesService', function($scope, EmployeesService)
-
-		{
-
-			$scope.employees = EmployeesService.employees();
-
-		} ]);
-
-raControllers.controller('EmployeeDetailsController', [ '$scope',
-		'$routeParams', 'EmployeesService',
-
-		function($scope, $routeParams, EmployeesService) {
-			$scope.employee = EmployeesService.employee({
-				id : $routeParams.id
-			});
-
-		} ]);

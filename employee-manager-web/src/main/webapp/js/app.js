@@ -1,42 +1,31 @@
-var restAngular = angular.module('restAngular', [ 'ngRoute', 'raControllers', 'ngCookies' ,
-		'raServices' ]);
+var applicationModule = angular.module('appModule', [ 'ngRoute','ngCookies',
+		'employeeManagerControllers', 'employeeManagerServices' ]);
 
-restAngular.config(function($routeProvider) {
+applicationModule.config(function($routeProvider) {
 
-	$routeProvider.
-
-	when('/', {
+	$routeProvider.when('/', {
 
 		templateUrl : 'login.jsp',
 		controller : 'LoginController',
 		controllerAs: 'vm'
+	})
+	.when('/content', {
 
-	}).
-	/*when('/', {
-
-		templateUrl : 'employee-list.jsp',
-		controller : 'EmployeesListController'
-
-	}).*/when('/employee/:id', {
-
-		templateUrl : 'employee-details.jsp',
-		controller : 'EmployeeDetailsController'
-
-	}).
-	when('/myProfile', {
+		templateUrl : 'content.jsp',
+		controller : 'mainController'
+	})
+	.when('/myProfile', {
 
 		templateUrl : 'myProfile.jsp',
 		controller : 'LoginController',
 		controllerAs: 'vm'
 
-	}).
-
-	otherwise({
+	})
+	.otherwise({
 
 		redirectTo : '/employesse'
 
 	});
-
 }).run(run);
 
 run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
@@ -56,4 +45,3 @@ function run($rootScope, $location, $cookieStore, $http) {
         }
     });
 }
-
