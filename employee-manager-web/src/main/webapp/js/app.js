@@ -10,6 +10,11 @@ restAngular.config(function($routeProvider) {
 		templateUrl : 'achievementPart.jsp',
 		controller : 'myCtrlAchiev'
 
+	}).when('/achievement/:id', {
+
+		templateUrl : 'achievementPart2.jsp',
+		controller : 'myCtrlAchiev2'
+
 	}).
 
 	otherwise({
