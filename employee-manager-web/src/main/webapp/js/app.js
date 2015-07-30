@@ -13,7 +13,7 @@ restAngular.config(function($routeProvider) {
 	}).when('/achievement/:id', {
 
 		templateUrl : 'achievementPart2.jsp',
-		controller : 'myCtrlAchiev2'
+		controller : 'myCtrlAchievEmp'
 
 	}).
 

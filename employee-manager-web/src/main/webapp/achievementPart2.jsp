@@ -5,7 +5,8 @@
 			<!-- 	  <div ng-view></div>   -->
 			<div>
 				<h1>Achievements</h1>
-	2
+	{{testeazaruta}}
+	{{testeaza}}
 				<br>
 
 				<div
