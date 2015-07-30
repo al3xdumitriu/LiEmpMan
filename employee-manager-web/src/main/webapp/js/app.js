@@ -27,7 +27,7 @@ restAngular.config(function($routeProvider) {
 
 (function() {
 	var accountApp = angular.module('accountApp', []);
-	accountApp.controller('AccountController', [ '$scope', '$http', '$location', function($scope, $http, $location) {
+	accountApp.controller('AccountController', [ '$scope', '$http', '$window', function($scope, $http, $window) {
 		
 		$scope.submissionSuccess = false;
 		
@@ -41,7 +41,7 @@ restAngular.config(function($routeProvider) {
 				url : '/employee-manager-container/rest/account',
 				data : account
 			}).success(function (data) {
-			    $location.path('http://localhost:8080/employee-manager-web/index.jsp#/');
+				$window.location.href="http://localhost:8080/employee-manager-web/index.jsp#/";
 			  });
 			$scope.submission();
 		};
