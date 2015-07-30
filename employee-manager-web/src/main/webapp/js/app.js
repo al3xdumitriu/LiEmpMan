@@ -1,19 +1,14 @@
-var restAngular = angular.module('restAngular', [ 'ngRoute', 'raControllers',
-		'raServices','restAchievement' ]);
+var restAngular = angular.module('restAngular', [ 'ngRoute', ,'achievControllers',
+		 ]);
 
 restAngular.config(function($routeProvider) {
 
 	$routeProvider.
 
-	when('/', {
+	when('/achievement', {
 
-		templateUrl : 'employee-list.jsp',
-		controller : 'EmployeesListController'
-
-	}).when('/employee/:id', {
-
-		templateUrl : 'employee-details.jsp',
-		controller : 'EmployeeDetailsController'
+		templateUrl : 'achievementPart.jsp',
+		controller : 'myCtrlAchiev'
 
 	}).
 
@@ -24,7 +19,7 @@ restAngular.config(function($routeProvider) {
 	});
 
 });
-(function() {
+/*(function() {
 var app = angular.module('restAchievement', []);
 app.controller('myCtrlAchiev', ['$scope','$http','$location',function($scope, $http, $location) {
 	
@@ -55,5 +50,5 @@ app.controller('myCtrlAchiev', ['$scope','$http','$location',function($scope, $h
 	
 }]);
 
-})();
+})();*/
 

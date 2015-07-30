@@ -28,7 +28,7 @@
 
 <script src="js/controllers.js"></script>
 
-<script src="js/services.js"></script>
+<!-- <script src="js/services.js"></script> -->
 
 </head>
 

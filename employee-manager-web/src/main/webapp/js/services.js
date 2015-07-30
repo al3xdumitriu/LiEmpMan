@@ -2,7 +2,7 @@ var raServices = angular.module('raServices', [ 'ngResource' ]);
 
 raServices
 		.factory(
-				'EmployeesService',
+				'AchievementService',
 				[
 						'$resource',
 
@@ -17,7 +17,7 @@ raServices
 										employees : {
 											method : 'GET',
 											params : {
-												call : 'employee'
+												call : 'achievement'
 											},
 											isArray : true
 										},
@@ -25,7 +25,7 @@ raServices
 										employee : {
 											method : 'GET',
 											params : {
-												call : 'employee'
+												call : 'achievement'
 											},
 											isArray : false
 										}
