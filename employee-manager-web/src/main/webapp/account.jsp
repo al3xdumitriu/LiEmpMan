@@ -102,6 +102,7 @@
 				<div
 					ng-show="!accountForm.confirmPassword.$valid && accountForm.confirmPassword.$dirty"
 					class="error">Passwords don't match.</div>
+				<div ng-show=submissionSuccess>Your account was created successfully!</div> <br></br>
 				<button ng-disabled="!accountForm.$valid" type="submit"
 					class="btn btn-default">Create Account</button>
 		</div>

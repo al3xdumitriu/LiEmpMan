@@ -27,14 +27,23 @@ restAngular.config(function($routeProvider) {
 
 (function() {
 	var accountApp = angular.module('accountApp', []);
-	accountApp.controller('AccountController', [ '$scope', '$http', function($scope, $http) {
+	accountApp.controller('AccountController', [ '$scope', '$http', '$location', function($scope, $http, $location) {
+		
+		$scope.submissionSuccess = false;
+		
+		$scope.submission = function() {
+		    $scope.submissionSuccess = !$scope.submissionSuccess;
+		   }
 		
 		this.addAccount = function(account){
 			$http({
 				method : 'POST',
 				url : '/employee-manager-container/rest/account',
 				data : account
-			});
+			}).success(function (data) {
+			    $location.path('http://localhost:8080/employee-manager-web/index.jsp#/');
+			  });
+			$scope.submission();
 		};
 	}]);
 	
