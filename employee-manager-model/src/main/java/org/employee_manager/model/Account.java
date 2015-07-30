@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -42,6 +43,9 @@ public class Account implements Serializable {
 	
 	@OneToMany(mappedBy="accountId")
     private Set<Role> roles;
+	
+	@Transient
+	private long employeeIdJson;
 
 	public long getId() {
 		return id;
@@ -82,5 +86,15 @@ public class Account implements Serializable {
 	public void setEmployeeId(Employee employeeId) {
 		this.employeeId = employeeId;
 	}
+
+	public long getEmployeeIdJson() {
+		return employeeIdJson;
+	}
+
+	public void setEmployeeIdJson(long employeeIdJson) {
+		this.employeeIdJson = employeeIdJson;
+	}
+	
+	
 	
 }

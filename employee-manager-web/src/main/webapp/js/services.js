@@ -50,15 +50,12 @@ function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserSe
     return service;
 
     function Login(username, password, callback) {
-
-        /* Dummy authentication for testing, uses $timeout to simulate api call
-         ----------------------------------------------*/
-        
+    	
             var response;
             UserService.GetByUsername(username,password)
                 .then(function (user) {
                     if (user !== null && user.data.password === password) {
-                        response = { success: true, employeeId : user.data.employeeId };
+                        response = { success: true, employeeId : user.data.employeeIdJson };
                     } else {
                         response = { success: false, message: 'Username or password is incorrect' };
                     }
