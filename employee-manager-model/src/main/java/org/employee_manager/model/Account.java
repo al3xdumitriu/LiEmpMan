@@ -45,6 +45,7 @@ public class Account implements Serializable {
 	@JoinColumn(name = "EMPLOYEE_ID")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonBackReference
+	@JsonBackReference
 	public Employee employeeId;
 
 	@OneToMany(mappedBy = "accountId")
