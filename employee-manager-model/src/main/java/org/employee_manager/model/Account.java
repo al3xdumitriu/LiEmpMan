@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.LazyCollection;
@@ -36,6 +37,9 @@ public class Account implements Serializable {
 
 	@Column(name = "PASSWORD")
 	private String password;
+	
+	@Transient
+	private String confirmPassword;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "EMPLOYEE_ID")
@@ -54,14 +58,6 @@ public class Account implements Serializable {
 		this.id = id;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
 	public String getUsername() {
 		return username;
 	}
@@ -78,6 +74,14 @@ public class Account implements Serializable {
 		this.password = password;
 	}
 
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
 	public Employee getEmployeeId() {
 		return employeeId;
 	}
@@ -86,4 +90,11 @@ public class Account implements Serializable {
 		this.employeeId = employeeId;
 	}
 
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 }

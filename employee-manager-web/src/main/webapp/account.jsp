@@ -33,45 +33,75 @@
 <body>
 	<div align="center">
 		<h2>Create Account</h2>
-		<div novalidate>
+		<div ng-controller="validateCtrl">
 			<form name="accountForm"
 				ng-controller="AccountController as accountCtrl"
 				ng-submit="accountCtrl.addAccount(accountCtrl.account)" novalidate>
 				<div class="form-group">
-					<label for="name">Name</label> <input type="text" id="name"
-						ng-model="accountCtrl.account.employeeId.name" required> <br></br>
-				</div>
-				<div ng-show="accountForm.name.$pristine" class="error">Field is
-					required!</div>
-				<div class="form-group">
-					<label for="email">Email</label> <input type="text" id="email"
-						ng-model="accountCtrl.account.employeeId.email" required>
-					<br></br>
-				</div>
-				<div class="form-group">
-					<label for="phone">Phone Number</label> <input type="text"
-						id="phone" ng-model="accountCtrl.account.employeeId.phone"
-						required> <br></br>
+					<label for="name">Name<span style="color: red">*</span></label> <input
+						type="text" name="name"
+						ng-model="accountCtrl.account.employeeId.name" required> <span
+						style="color: red"
+						ng-show="accountForm.name.$dirty && accountForm.name.$invalid">
+						<span ng-show="accountForm.name.$error.required">Name is
+							required.</span>
+					</span> <br></br>
 				</div>
 				<div class="form-group">
-					<label for="username">Username</label> <input type="text"
-						id="username" ng-model="accountCtrl.account.username" required>
-					<br></br>
+					<label for="email">Email<span style="color: red">*</span></label> <input
+						type="text" name="email"
+						ng-model="accountCtrl.account.employeeId.email" required><span
+						style="color: red"
+						ng-show="accountForm.email.$dirty && accountForm.email.$invalid">
+						<span ng-show="accountForm.email.$error.required">Email is
+							required.</span>
+					</span> <br></br>
 				</div>
 				<div class="form-group">
-					<label for="password">Password</label> <input type="password"
-						name="password" ng-model="accountCtrl.account.password"
-						validation-check="accountCtrl.account.username == accountCtrl.account.password"
-						ng-minlength="6" required> <br></br>
+					<label for="phone">Phone Number<span style="color: red">*</span></label>
+					<input type="text" name="phone"
+						ng-model="accountCtrl.account.employeeId.phone" required><span
+						style="color: red"
+						ng-show="accountForm.phone.$dirty && accountForm.phone.$invalid">
+						<span ng-show="accountForm.phone.$error.required">Phone
+							number is required.</span>
+					</span> <br></br>
 				</div>
 				<div class="form-group">
-					<input type="password" name="confirmPassword" required /> <br></br>
+					<label for="username">Username<span style="color: red">*</span></label>
+					<input type="text" name="username"
+						ng-model="accountCtrl.account.username" required> <span
+						style="color: red"
+						ng-show="accountForm.username.$dirty && accountForm.username.$invalid">
+						<span ng-show="accountForm.username.$error.required">Username
+							is required.</span>
+					</span> <br></br>
+				</div>
+				<div class="form-group">
+					<label for="password">Password<span style="color: red">*</span></label>
+					<input type="password" name="password"
+						ng-model="accountCtrl.account.password" ng-minlength="6" required><span
+						style="color: red"
+						ng-show="accountForm.password.$dirty && accountForm.password.$invalid">
+						<span ng-show="accountForm.password.$error.required">Password
+							is required.</span>
+					</span> <br></br>
+				</div>
+				<div class="form-group">
+					<input type="password" name="confirmPassword"
+						ng-model="accountCtrl.account.confirmPassword"
+						validation-check="accountCtrl.account.password == accountCtrl.account.confirmPassword"
+						required><span style="color: red"
+						ng-show="accountForm.confirmPassword.$dirty && accountForm.confirmPassword.$invalid">
+						<span ng-show="accountForm.confirmPassword.$error.required">Password
+							confirmation is required.</span>
+					</span> <br></br>
 				</div>
 				<div ng-show="accountForm.password.$error.minlength" class="error">
 					Must be at least 6 characters.</div>
 				<div
-					ng-show="!accountForm.password.$valid && accountForm.password.$dirty"
-					class="error">Passwords don't match!</div>
+					ng-show="!accountForm.confirmPassword.$valid && accountForm.confirmPassword.$dirty"
+					class="error">Passwords don't match.</div>
 				<button ng-disabled="!accountForm.$valid" type="submit"
 					class="btn btn-default">Create Account</button>
 		</div>

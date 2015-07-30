@@ -38,6 +38,9 @@ restAngular.config(function($routeProvider) {
 		};
 	}]);
 	
+	accountApp.controller('validateCtrl', function($scope) {
+	});
+	
 	accountApp.directive('validationCheck', ['$parse', function ($parse) {
 		  return {
 			    require: 'ngModel',
