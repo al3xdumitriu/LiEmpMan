@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -15,6 +16,10 @@ import javax.ws.rs.core.Response;
 
 import org.employee_manager.model.Achievement;
 import org.employee_manager.model.Employee;
+import org.employee_manager.model.EmployeeProject;
+import org.employee_manager.model.Evaluation;
+import org.employee_manager.model.Project;
+import org.employee_manager.model.Skill;
 import org.employee_manager.services.EmployeeService;
 import org.employee_manager.services.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +81,119 @@ public class EmployeeRestService {
 	}
 
 	@GET
+	@Path("{id}/achievement")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getEmployeeAchievements(@PathParam("id") String id) {
+		Long idParse = Long.parseLong(id);
+		Employee employeeFound = new Employee();
+
+		List<Achievement> achievements = new ArrayList<Achievement>();
+
+		Response res = null;
+		int status = 200;
+		try {
+			if (id == null) {
+				status = 404;
+				res = Response.status(status).entity(employeeFound).build();
+			} else {
+				employeeFound = employeeService.findById(idParse);
+				achievements.addAll(employeeFound.getAchievements());
+
+			}
+		} catch (Exception e) {
+			status = 404;
+			e.getStackTrace();
+		}
+		res = Response.status(status).entity(achievements).build();
+		return res;
+	}
+
+	@GET
+	@Path("{id}/skill")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getEmployeeSkills(@PathParam("id") String id) {
+		Long idParse = Long.parseLong(id);
+		Employee employeeFound = new Employee();
+
+		List<Skill> skills = new ArrayList<Skill>();
+
+		Response res = null;
+		int status = 200;
+		try {
+			if (id == null) {
+				status = 404;
+				res = Response.status(status).entity(employeeFound).build();
+			} else {
+				employeeFound = employeeService.findById(idParse);
+				skills.addAll(employeeFound.getSkills());
+
+			}
+		} catch (Exception e) {
+			status = 404;
+			e.getStackTrace();
+		}
+		res = Response.status(status).entity(skills).build();
+		return res;
+	}
+
+	@GET
+	@Path("{id}/project")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getEmployeeProjects(@PathParam("id") String id) {
+		Long idParse = Long.parseLong(id);
+		Employee employeeFound = new Employee();
+
+		List<EmployeeProject> employeeProjects = new ArrayList<EmployeeProject>();
+		List<Project> project = new ArrayList<Project>();
+
+		Response res = null;
+		int status = 200;
+		try {
+			if (id == null) {
+				status = 404;
+				res = Response.status(status).entity(employeeFound).build();
+			} else {
+				employeeFound = employeeService.findById(idParse);
+				employeeProjects.addAll(employeeFound.getEmployeeProjects());
+
+			}
+		} catch (Exception e) {
+			status = 404;
+			e.getStackTrace();
+		}
+		res = Response.status(status).entity(employeeProjects).build();
+		return res;
+	}
+
+	@GET
+	@Path("{id}/evaluation")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getEmployeeEvaluations(@PathParam("id") String id) {
+		Long idParse = Long.parseLong(id);
+		Employee employeeFound = new Employee();
+
+		List<Evaluation> employeeEvaluations = new ArrayList<Evaluation>();
+
+		Response res = null;
+		int status = 200;
+		try {
+			if (id == null) {
+				status = 404;
+				res = Response.status(status).entity(employeeFound).build();
+			} else {
+				employeeFound = employeeService.findById(idParse);
+				employeeEvaluations.addAll(employeeFound.getEvaluations());
+
+			}
+		} catch (Exception e) {
+			status = 404;
+			e.getStackTrace();
+		}
+		res = Response.status(status).entity(employeeEvaluations).build();
+		return res;
+	}
+
+	@GET
 	@Path("{id}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getEmployee(@PathParam("id") String id) {
@@ -88,12 +206,8 @@ public class EmployeeRestService {
 				status = 404;
 				res = Response.status(status).entity(employeeFound).build();
 			} else {
-				 
-				
+
 				employeeFound = employeeService.findById(idParse);
-				employeeFound.setEmployeeProjects(null);
-				employeeFound.setEvaluations(null);
-				employeeFound.setSkills(null);
 			}
 		} catch (Exception e) {
 			status = 404;
@@ -129,6 +243,32 @@ public class EmployeeRestService {
 		}
 		res = Response.status(status).entity(achievements).build();
 		return res;
+	}
+
+	@PUT
+	@Path("")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response update( Employee emp) {
+		
+		Long idParse = emp.getId();
+		Employee employeeFound = new Employee();
+		Response res = null;
+		
+		try {
+			if (idParse == null) {
+				res = Response.status(Response.Status.NOT_FOUND).entity(employeeFound).build();
+			} else {
+				employeeFound = employeeService.findById(idParse);
+				employeeService.updateById(emp.getName(), emp.getCnp(), emp.getPhone(), emp.getEmail(),
+						emp.getExperienceLevel(), emp.getJobTitle(), emp.getId());
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		res = Response.status(Response.Status.OK).entity(employeeFound).build();
+		return res;
+
 	}
 
 }

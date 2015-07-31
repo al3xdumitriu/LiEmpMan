@@ -23,11 +23,15 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
 @Entity
 @Table(name = "EMPLOYEE")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Employee implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "EMPLOYEE_ID")
@@ -49,7 +53,7 @@ public class Employee implements Serializable {
 
 	@Column(name = "EMPLOYEE_EXPERIENCE_LEVEL")
 	private String experienceLevel;
-	
+
 	@Column(name = "EMPLOYEE_AVAILABLE_HOURS")
 	private int availableHours;
 
@@ -57,6 +61,8 @@ public class Employee implements Serializable {
 	private String jobTitle;
 
 	@OneToOne(mappedBy = "employeeId")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference
 	public Account account;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -65,16 +71,22 @@ public class Employee implements Serializable {
 
 	@OneToMany(mappedBy = "employeeId")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JsonManagedReference
+	@JsonManagedReference(value="employee-achievements")
 	private List<Achievement> achievements;
 
 	@OneToMany(mappedBy = "employeeId")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference(value="employee-employeeProjects")
 	private List<EmployeeProject> employeeProjects;
 
 	@OneToMany(mappedBy = "employeeId")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference(value="employee-evaluations")
 	private List<Evaluation> evaluations;
 
 	@OneToMany(mappedBy = "employeeId")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference(value="employee-skills")
 	private List<Skill> skills;
 
 	public long getId() {

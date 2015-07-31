@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.levi9</groupId>
@@ -26,6 +27,7 @@
 		<jersey-container-servlet.version>2.19</jersey-container-servlet.version>
 		<org.glassfish.jersey.ext.version>2.19</org.glassfish.jersey.ext.version>
 		<jersey-media-json-jackson.version>2.19</jersey-media-json-jackson.version>
+		<powermock-api-mockito>1.6.2</powermock-api-mockito>
 	</properties>
 
 	<build>
@@ -56,6 +58,86 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	
+	<profiles>
+		<profile>
+			<id>release</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<nexus.repo>${project.distributionManagement.repository.url}</nexus.repo>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>2.5.2</version>
+						<configuration>
+							<arguments>-DskipTests -Dmaven.javadoc.skip=true</arguments>
+							<preparationGoals>clean install</preparationGoals>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<goals>deploy</goals>
+							<providerImplementations>
+								<git>jgit</git>
+							</providerImplementations>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.maven.scm</groupId>
+								<artifactId>maven-scm-provider-jgit</artifactId>
+								<version>1.9</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-scm-plugin</artifactId>
+						<version>1.9.4</version>
+						<configuration>
+							<providerImplementations>
+								<git>jgit</git>
+							</providerImplementations>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.maven.scm</groupId>
+								<artifactId>maven-scm-provider-jgit</artifactId>
+								<version>1.9.4</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>	
+	
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>Nexus repository</name>
+			<url>https://repo.levi9.com/content/repositories/levi9-employeemanager.releases</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>	
+	
+	<distributionManagement>
+		<repository>
+			<id>levi9-employee-manager-release-repo</id>
+			<name>Levi9 Employee Manager Releases</name>
+			<url>https://repo.levi9.com/content/repositories/levi9-employeemanager.releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>levi9-employee-manager-snapshots-repo</id>
+			<name>Levi9 Employee Manager Snapshots</name>
+			<url>https://repo.levi9.com/content/repositories/levi9-employeemanager.snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
+	<scm>
+		<connection>scm:git:https://git.levi9.com/levi9-employee-manager.git</connection>
+	</scm>		
 
 	<dependencyManagement>
 		<dependencies>
@@ -200,10 +282,17 @@
 				<version>${spring.version}</version>
 			</dependency>
 
+			<!-- JUnit -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
+			</dependency>
+			<!-- Mockito -->
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-api-mockito</artifactId>
+				<version>${powermock-api-mockito}</version>
 			</dependency>
 
 			<dependency>
