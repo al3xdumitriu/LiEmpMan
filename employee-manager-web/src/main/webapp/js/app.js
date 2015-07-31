@@ -14,11 +14,10 @@ applicationModule.config(function($routeProvider) {
 		templateUrl : 'content.jsp',
 		controller : 'mainController'
 			
-	}).when('/myProfile', {
+	}).when('/profile/:id', {
 
-		templateUrl : 'myProfile.jsp',
-		controller : 'LoginController',
-		controllerAs : 'vm'
+		templateUrl : 'profile.jsp',
+		controller : 'EmployeeDetailsController',
 
 	}).when('/account', {
 

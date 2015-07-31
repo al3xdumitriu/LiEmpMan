@@ -1,5 +1,5 @@
 var employeeManagerControllers = angular.module('employeeManagerControllers',
-		[]);
+		[ 'employeeManagerServices' ]);
 
 employeeManagerControllers.controller('mainController', [ '$scope',
 		'employeesService', function($scope, EmployeesService) {
@@ -24,8 +24,6 @@ employeeManagerControllers
 						'$http',
 						'$window',
 						function($scope, $http, $window) {
-							$scope.profileImage = 'http://s8.postimg.org/3nq8fmwxt/profile_Photo.jpg'
-							
 
 							$scope.submissionSuccess = false;
 
@@ -48,7 +46,6 @@ employeeManagerControllers
 							};
 						} ]);
 
-
 employeeManagerControllers.controller('LoginController', LoginController);
 LoginController.$inject = [ '$scope', '$routeParams', '$location',
 		'AuthenticationService' ];
@@ -65,7 +62,6 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 		AuthenticationService.ClearCredentials();
 	}
 	;
-
 	function login() {
 		initController();
 		vm.dataLoading = true;
@@ -82,5 +78,21 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 				});
 	}
 	;
-
 }
+
+employeeManagerControllers.controller('EmployeeDetailsController', [ '$scope',
+		'$routeParams', 'employeesService', '$http',
+		function($scope, $routeParams, employeesService, $http) {
+
+			$scope.employee = employeesService.employee({
+				id : $routeParams.id
+			});
+
+			$scope.saveMethode = function() {
+				$http({
+					method : 'PUT',
+					url : '/employee-manager-container/rest/employee',
+					data : $scope.employee
+				})
+			};
+		} ]);

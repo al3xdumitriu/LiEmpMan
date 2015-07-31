@@ -218,28 +218,27 @@ public class EmployeeRestService {
 	}
 
 	@PUT
-	@Path("{id}")
+	@Path("")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response update(@PathParam("id") String id, Employee emp) {
-		Long idParse = Long.parseLong(id);
+	public Response update( Employee emp) {
+		
+		Long idParse = emp.getId();
 		Employee employeeFound = new Employee();
 		Response res = null;
-		int status = 200;
+		
 		try {
-			if (id == null) {
-				status = 404;
-				res = Response.status(status).entity(employeeFound).build();
+			if (idParse == null) {
+				res = Response.status(Response.Status.NOT_FOUND).entity(employeeFound).build();
 			} else {
 				employeeFound = employeeService.findById(idParse);
 				employeeService.updateById(emp.getName(), emp.getCnp(), emp.getPhone(), emp.getEmail(),
 						emp.getExperienceLevel(), emp.getJobTitle(), emp.getId());
 			}
 		} catch (Exception e) {
-			status = 404;
 			e.getStackTrace();
 		}
-		res = Response.status(status).entity(employeeFound).build();
+		res = Response.status(Response.Status.OK).entity(employeeFound).build();
 		return res;
 
 	}
