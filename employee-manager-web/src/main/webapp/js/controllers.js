@@ -70,7 +70,7 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 					if (response.success) {
 						AuthenticationService.SetCredentials(vm.username,
 								vm.password, response.employeeId);
-						$location.path('/myProfile');
+						$location.path('/profile/'+response.employeeId);
 					} else {
 						$scope.loginFailed = response.message
 						vm.dataLoading = false;

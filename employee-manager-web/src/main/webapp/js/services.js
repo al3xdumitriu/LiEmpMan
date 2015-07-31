@@ -54,7 +54,7 @@ function AuthenticationService($http, $cookieStore, $rootScope, $timeout,
 			if (user !== null && user.data.password === password) {
 				response = {
 					success : true,
-					employeeId : user.data.employeeId
+					employeeId : user.data.employeeId.id
 				};
 			} else {
 				response = {
