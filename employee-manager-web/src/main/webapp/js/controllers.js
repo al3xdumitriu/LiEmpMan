@@ -40,7 +40,7 @@ employeeManagerControllers
 										})
 										.success(
 												function(data) {
-													$window.location.href = "http://localhost:8080/employee-manager-web/index.jsp#/";
+													setTimeout(function(){$window.location.href = "http://localhost:8080/employee-manager-web/index.jsp#/"}, 2000);
 												});
 								$scope.submission();
 							};
