@@ -15,5 +15,7 @@ public interface AccountService {
 	List<Account> findAll();
 	
 	Account findAccountByName(String username);
+	
+	Account findAccountByNameAndPassword(String username,String password);
 
 }

@@ -1,28 +1,86 @@
-var raControllers = angular.module('raControllers', []);
+var employeeManagerControllers = angular.module('employeeManagerControllers',
+		[]);
 
-raControllers.controller('EmployeesListController', [ '$scope',
-		'EmployeesService', function($scope, EmployeesService)
-
-		{
-
-			$scope.employees = EmployeesService.employees();
-
+employeeManagerControllers.controller('mainController', [ '$scope',
+		'employeesService', function($scope, EmployeesService) {
+			$scope.content = "content";
 		} ]);
 
-raControllers
+employeeManagerControllers.controller('headerController', [ '$scope',
+		function($scope) {
+			$scope.header = "header";
+		} ]);
+
+employeeManagerControllers.controller('footerController', [ '$scope',
+		function($scope) {
+			$scope.footer = "footer";
+		} ]);
+
+employeeManagerControllers
 		.controller(
-				'EmployeeDetailsController',
+				'AccountController',
 				[
 						'$scope',
-						'$routeParams',
-						'EmployeesService',
-
-						function($scope, $routeParams, EmployeesService) {
-							$scope.employee = EmployeesService.employee({
-								id : $routeParams.id
-							});
+						'$http',
+						'$window',
+						function($scope, $http, $window) {
 							$scope.profileImage = 'http://s8.postimg.org/3nq8fmwxt/profile_Photo.jpg'
 							
 
-							
+							$scope.submissionSuccess = false;
+
+							$scope.submission = function() {
+								$scope.submissionSuccess = !$scope.submissionSuccess;
+							}
+
+							this.addAccount = function(account) {
+								$http(
+										{
+											method : 'POST',
+											url : '/employee-manager-container/rest/account',
+											data : account
+										})
+										.success(
+												function(data) {
+													$window.location.href = "http://localhost:8080/employee-manager-web/index.jsp#/";
+												});
+								$scope.submission();
+							};
 						} ]);
+
+
+employeeManagerControllers.controller('LoginController', LoginController);
+LoginController.$inject = [ '$scope', '$routeParams', '$location',
+		'AuthenticationService' ];
+
+function LoginController($scope, $routeParams, $location, AuthenticationService) {
+
+	var vm = this;
+
+	vm.login = login;
+
+	vm.loginFailed
+
+	function initController() { // reset login status //
+		AuthenticationService.ClearCredentials();
+	}
+	;
+
+	function login() {
+		initController();
+		vm.dataLoading = true;
+		AuthenticationService.Login(vm.username, vm.password,
+				function(response) {
+					if (response.success) {
+						AuthenticationService.SetCredentials(vm.username,
+								vm.password, response.employeeId);
+						$location.path('/myProfile');
+					} else {
+						$scope.loginFailed = response.message
+						vm.dataLoading = false;
+					}
+				});
+	}
+	;
+
+}
