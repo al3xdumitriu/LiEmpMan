@@ -1,7 +1,8 @@
-<div >
+<div class="jumbotron ">
+<div align="center">
     <h2>Please Login</h2>
     <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-    <form name="form" ng-submit="vm.login()" role="form">
+    <form name="form" " role="form">
         <div class="form-group form-inline" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
             <label for="username">Username: </label>
             <input type="text" name="username" id="username" class="form-control" ng-model="vm.username" required />
@@ -14,13 +15,15 @@
         </div>
         <div class="form-actions">
         	<div class="btn-group">
-            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>
-            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Register</button>
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" ng-click="vm.login()" class="btn btn-primary">Login</button>
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" ng-click="vm.register()" class="btn btn-primary">Register</button>
             </div>
             
         </div>
         <div>
-        {{loginFailed}}
         </div>
     </form>
+    <div class="text-danger">{{loginFailed}}</div>
 </div>
+
+

@@ -56,8 +56,10 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 	var vm = this;
 
 	vm.login = login;
+	
+	vm.register = register;
 
-	vm.loginFailed
+	vm.loginFailed;
 
 	function initController() { // reset login status //
 		AuthenticationService.ClearCredentials();
@@ -80,5 +82,9 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 				});
 	}
 	;
+	
+	function register() {
+		$location.path('/account');
+	}
 
 }
