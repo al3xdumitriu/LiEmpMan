@@ -26,7 +26,7 @@ public class Achievement implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2594631964604917094L;
 
 	@Id
 	@Column(name = "ACHIEVEMENT_ID")

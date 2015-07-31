@@ -41,4 +41,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.getByName(name);
 	}
 
+	@Override
+	public void updateById(String name, Long cnp, String phone, String email, String experienceLevel, String jobTitle,
+			Long id) {
+		this.employeeRepository.updateById(name, cnp, phone, email, experienceLevel, jobTitle, id);
+		
+	}
+
+	
+
 }
