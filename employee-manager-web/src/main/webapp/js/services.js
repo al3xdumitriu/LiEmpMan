@@ -78,7 +78,7 @@ function AuthenticationService($http, $cookieStore, $rootScope, $timeout,
                     callback(response);
                 });        
         
-    }
+    
 
 	function SetCredentials(username, password, employeeId) {
 		var authdata = Base64.encode(username + ':' + password);

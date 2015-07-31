@@ -78,13 +78,13 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 						vm.dataLoading = false;
 					}
 				});
-	}
-	;
-}
+	};
+
 	
 	function register() {
 		$location.path('/account');
 	}
+}
 
 employeeManagerControllers.controller('EmployeeDetailsController', [ '$scope',
 		'$routeParams', 'employeesService', '$http',
