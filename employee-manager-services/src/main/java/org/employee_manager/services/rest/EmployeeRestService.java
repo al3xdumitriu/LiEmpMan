@@ -195,7 +195,7 @@ public class EmployeeRestService {
 	}
 	
 	@GET
-	@Path("{employeeId}/skill")
+	@Path("{employeeId}/skills")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getSkillForEmployee(@PathParam("employeeId") String employeeId) {
 		Status status = Response.Status.OK;

@@ -28,10 +28,8 @@ function($resource) {
 
 } ]);
 
-						} ]);
 
-
-raServices
+employeeManagerServices
 .factory(
 		'StarService',
 		[
@@ -40,7 +38,7 @@ raServices
 				function($resource) {
 
 					return $resource(
-							'http://localhost:8080/employee-manager-container/rest/:call/:id/skill',
+							'http://localhost:8080/employee-manager-container/rest/:call/:id/skills',
 							{
 								id : "@id"
 							}, {

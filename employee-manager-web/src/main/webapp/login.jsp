@@ -16,7 +16,7 @@
         <div class="form-actions">
         	<div class="btn-group">
             <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" ng-click="vm.login()" class="btn btn-primary">Login</button>
-            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" ng-click="vm.register()" class="btn btn-primary">Register</button>
+            <button type="submit" ng-click="vm.register()" class="btn btn-primary">Register</button>
             </div>
             
         </div>
