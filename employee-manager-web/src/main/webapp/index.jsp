@@ -14,7 +14,6 @@
 
 <!-- Downloaded Scripts -->
 
-
 <script src="js/angular.js"></script>
 
 <script src="js/angular-route.js"></script>
@@ -32,7 +31,7 @@
 
 <script src="js/controllers.js"></script>
 
-<!-- <script src="js/services.js"></script> -->
+<script src="js/services.js"></script>
 
 </head>
 

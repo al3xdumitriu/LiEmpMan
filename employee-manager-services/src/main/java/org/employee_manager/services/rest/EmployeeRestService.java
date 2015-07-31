@@ -81,34 +81,6 @@ public class EmployeeRestService {
 	}
 
 	@GET
-	@Path("{id}/achievement")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getEmployeeAchievements(@PathParam("id") String id) {
-		Long idParse = Long.parseLong(id);
-		Employee employeeFound = new Employee();
-
-		List<Achievement> achievements = new ArrayList<Achievement>();
-
-		Response res = null;
-		int status = 200;
-		try {
-			if (id == null) {
-				status = 404;
-				res = Response.status(status).entity(employeeFound).build();
-			} else {
-				employeeFound = employeeService.findById(idParse);
-				achievements.addAll(employeeFound.getAchievements());
-
-			}
-		} catch (Exception e) {
-			status = 404;
-			e.getStackTrace();
-		}
-		res = Response.status(status).entity(achievements).build();
-		return res;
-	}
-
-	@GET
 	@Path("{id}/skill")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getEmployeeSkills(@PathParam("id") String id) {

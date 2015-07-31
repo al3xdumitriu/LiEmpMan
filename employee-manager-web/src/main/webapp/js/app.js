@@ -22,7 +22,7 @@ applicationModule.config(function($routeProvider) {
 	}).when('/achievement/:id', {
 
 		templateUrl : 'achievement.jsp',
-		controller : 'EmployeeDetailsController',
+		controller : 'myCtrlAchievEmp',
 
 	}).when('/account', {
 

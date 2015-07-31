@@ -1,12 +1,11 @@
-
 <div>
 	<div>
 		<div>
-			
-
 			<br>
 			<div class="well bs-component">
-				<h1 class="page-header"><font color="#0597F2">Achievements</font></h1>
+				<h1 class="page-header">
+					<font color="#0597F2">Achievements</font>
+				</h1>
 				<div
 					ng-repeat="achievement in achievements | limitTo:limit |orderBy :'id' 
 					">
@@ -26,9 +25,10 @@
 				Achievement!</button>
 			<div ng-hide=ascunde class="well bs-component">
 				<form name="achievementForm">
-					<br> Title: <input type="text" ng-model="achievementTest.name" class="form-control"><br>
-					Description:<br> <input type="text"
-						ng-model="achievementTest.description" class="form-control"> <br> <br>
+					<br> Title: <input type="text" ng-model="achievementTest.name"
+						class="form-control"><br> Description:<br> <input
+						type="text" ng-model="achievementTest.description"
+						class="form-control"> <br> <br>
 					<div ng-if="achievementTest.name!=''">
 
 						<button ng-click="incearcaPost()" class="btn btn-primary">posteaza!</button>
@@ -36,11 +36,6 @@
 					</div>
 				</form>
 			</div>
-
-
-
 		</div>
-
-
 	</div>
 </div>
