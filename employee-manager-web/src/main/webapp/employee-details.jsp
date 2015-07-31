@@ -14,4 +14,7 @@
 			</div>
 		</div>
 	</div>
+	<div>
+		<jsp:include page="skill-view.jsp"/>
+	</div>
 </div>

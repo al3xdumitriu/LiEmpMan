@@ -12,9 +12,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.employee_manager.model.Employee;
+import org.employee_manager.model.Evaluation;
+import org.employee_manager.model.Skill;
+import org.employee_manager.model.SkillEvaluation;
 import org.employee_manager.services.EmployeeService;
+import org.employee_manager.services.SkillService;
 import org.employee_manager.services.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +28,8 @@ public class EmployeeRestService {
 
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private SkillService skillService;
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -102,5 +109,53 @@ public class EmployeeRestService {
 		res = Response.status(status).entity(employeeFound).build();
 		return res;
 	}
+	
+	@GET
+	@Path("{employeeId}/skill")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getSkillForEmployee(@PathParam("employeeId") String employeeId) {
+		Status status = Response.Status.OK;
+		Long id = Long.parseLong(employeeId);
+		List<Skill> skills = null;
 
+		try {
+			skills = skillService.findAllSkillsForEmployee(id);
+			for(Skill skill: skills){
+				skill.setEmployeeId(null);
+				List<SkillEvaluation> se = skill.getSkillEvaluations();
+				
+				for(SkillEvaluation s : se){
+					s.setSkillId(null);
+					Evaluation eval = s.getEvaluationId();					
+					eval.setEmployeeId(null);
+				}
+				
+			}
+		} catch (Exception e) {
+			status = Response.Status.INTERNAL_SERVER_ERROR;
+			e.getStackTrace();
+		}
+		Response res = Response.status(status).entity(skills).build();
+		return res;
+	}
+	
+	@POST
+	@Path("{employeeId}/skill")
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response saveSkill2(@PathParam("employeeId") Long employeeId, Skill skill) {
+		Status status = null;		
+		try {			
+			skillService.createSkill(employeeId, skill);
+//			skill = skillService.saveSkill(skill);			
+			status = Response.Status.CREATED;
+		} catch (Exception e) {
+			status = Response.Status.INTERNAL_SERVER_ERROR;
+			e.getStackTrace();
+		}
+
+		Response res = Response.status(status).entity(skill).build();
+		return res;
+
+	}
 }

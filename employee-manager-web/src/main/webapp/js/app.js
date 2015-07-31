@@ -15,6 +15,10 @@ restAngular.config(function($routeProvider) {
 		templateUrl : 'employee-details.jsp',
 		controller : 'EmployeeDetailsController'
 
+	}).when('/employee/:id/skill', {
+		
+		templateUrl : 'skill-view.jsp',
+		controller : 'StarCtrl'
 	}).
 
 	otherwise({

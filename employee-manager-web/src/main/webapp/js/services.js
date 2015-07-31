@@ -33,3 +33,32 @@ raServices
 									});
 
 						} ]);
+
+
+raServices
+.factory(
+		'StarService',
+		[
+				'$resource',
+
+				function($resource) {
+
+					return $resource(
+							'http://localhost:8080/employee-manager-container/rest/:call/:id/skill',
+							{
+								id : "@id"
+							}, {
+
+								skills : {
+									method : 'GET',
+									params : {
+										call : 'employee'
+									},
+									isArray : true
+								}
+
+							});
+
+				} ]);
+						
+						

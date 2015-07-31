@@ -15,11 +15,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "SKILL")
 @XmlRootElement
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Skill implements Serializable {
 	@Id
 	@Column(name = "SKILL_ID")
@@ -40,7 +45,7 @@ public class Skill implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Employee employeeId;
 
-	@OneToMany(mappedBy = "skillId", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "skillId", fetch = FetchType.EAGER)
 	private List<SkillEvaluation> skillEvaluations;
 
 	public long getId() {
@@ -89,5 +94,23 @@ public class Skill implements Serializable {
 
 	public void setSkillEvaluations(List<SkillEvaluation> skillEvaluations) {
 		this.skillEvaluations = skillEvaluations;
+	}
+
+	@Transient
+	public double getRating() {
+		if(skillEvaluations == null){
+			return 0;
+		}
+		double avg = 0;
+		int count = 0;
+		for(SkillEvaluation se : skillEvaluations){
+			avg = avg + se.getEvaluationId().getGrade();
+			count++;
+		}
+		if(count != 0){
+			avg = avg / count;
+		}
+		
+		return avg;		
 	}
 }
