@@ -16,10 +16,13 @@ raControllers
 						'$scope',
 						'$routeParams',
 						'EmployeesService',
+
 						function($scope, $routeParams, EmployeesService) {
 							$scope.employee = EmployeesService.employee({
 								id : $routeParams.id
 							});
+							$scope.profileImage = 'http://s8.postimg.org/3nq8fmwxt/profile_Photo.jpg'
+							
 
-							$scope.profileImage = 'http://s3.postimg.org/jr4bh5xr3/profile_Photo.jpg';
+							
 						} ]);

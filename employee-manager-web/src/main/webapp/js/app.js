@@ -1,7 +1,7 @@
-var restEmployee = angular.module('restEmployee', [ 'ngRoute', 'raControllers',
+var restAngular = angular.module('restAngular', [ 'ngRoute', 'raControllers',
 		'raServices' ]);
 
-restEmployee.config(function($routeProvider) {
+restAngular.config(function($routeProvider) {
 
 	$routeProvider.
 
@@ -10,13 +10,7 @@ restEmployee.config(function($routeProvider) {
 		templateUrl : 'employee-list.jsp',
 		controller : 'EmployeesListController'
 
-	})/*
-		 * .when('/employee/:id', {
-		 * 
-		 * templateUrl : 'employee-details.jsp', controller :
-		 * 'EmployeeDetailsController' })
-		 */
-	.when('/employee/:id', {
+	}).when('/employee/:id', {
 
 		templateUrl : 'myProfile.jsp',
 		controller : 'EmployeeDetailsController'
@@ -30,3 +24,5 @@ restEmployee.config(function($routeProvider) {
 	});
 
 });
+
+

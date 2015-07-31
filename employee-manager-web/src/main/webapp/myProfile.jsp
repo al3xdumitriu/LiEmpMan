@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en" ng-app="restEmployee">
+<html lang="en" ng-app="restAngular">
 
 <head>
 <meta charset="utf-8">
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 -->
-			<form class="form-horizontal">
+			<form class="form-horizontal"  >
 				<img ng-src="{{profileImage}}" alt="Profile image"
 					class="img-thumbnail">
 				<fieldset>
@@ -115,7 +115,7 @@
 
 					<input class="btn btn-default" id="edit" type="button" value="Edit">
 					<input class="btn btn-default" id="save" type="button" value="Save"
-						disabled ng-click="changeEmployee(employee)"> <input class="btn btn-default" id="cancel"
+						disabled > <input class="btn btn-default" id="cancel"
 						type="button" value="Cancel" disabled>
 		</div>
 	</div>

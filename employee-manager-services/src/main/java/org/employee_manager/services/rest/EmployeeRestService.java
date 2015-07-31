@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -154,7 +155,6 @@ public class EmployeeRestService {
 			} else {
 				employeeFound = employeeService.findById(idParse);
 				employeeProjects.addAll(employeeFound.getEmployeeProjects());
-			
 
 			}
 		} catch (Exception e) {
@@ -215,6 +215,33 @@ public class EmployeeRestService {
 		}
 		res = Response.status(status).entity(employeeFound).build();
 		return res;
+	}
+
+	@PUT
+	@Path("{id}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response update(@PathParam("id") String id, Employee emp) {
+		Long idParse = Long.parseLong(id);
+		Employee employeeFound = new Employee();
+		Response res = null;
+		int status = 200;
+		try {
+			if (id == null) {
+				status = 404;
+				res = Response.status(status).entity(employeeFound).build();
+			} else {
+				employeeFound = employeeService.findById(idParse);
+				employeeService.updateById(emp.getName(), emp.getCnp(), emp.getPhone(), emp.getEmail(),
+						emp.getExperienceLevel(), emp.getJobTitle(), emp.getId());
+			}
+		} catch (Exception e) {
+			status = 404;
+			e.getStackTrace();
+		}
+		res = Response.status(status).entity(employeeFound).build();
+		return res;
+
 	}
 
 }

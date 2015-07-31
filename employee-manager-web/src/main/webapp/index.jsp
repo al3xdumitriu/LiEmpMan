@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en" ng-app="restEmployee">
+<html lang="en" ng-app="restAngular">
 
 <head>
 
