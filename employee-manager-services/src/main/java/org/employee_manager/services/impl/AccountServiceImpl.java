@@ -41,5 +41,11 @@ public class AccountServiceImpl implements AccountService {
 		return accountRepository.findAccountByName(username);
 	}
 
+	@Override
+	public Account findAccountByNameAndPassword(String username, String password) {
+		// TODO Auto-generated method stub
+		return accountRepository.findAccountByUsernameAndPassword(username,password);
+	}
+
 
 }

@@ -93,7 +93,7 @@ public class SkillRestService {
 			status = Response.Status.INTERNAL_SERVER_ERROR;
 			e.getStackTrace();
 		}
-		Response res = Response.status(status).entity(mySkill).build();
+		Response res = Response.status(Response.Status.OK).entity(mySkill).build();
 		return res;
 
 	}

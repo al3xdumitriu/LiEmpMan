@@ -6,12 +6,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -20,11 +22,22 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "EMPLOYEE")
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Employee implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "EMPLOYEE_ID")
@@ -46,7 +59,7 @@ public class Employee implements Serializable {
 
 	@Column(name = "EMPLOYEE_EXPERIENCE_LEVEL")
 	private String experienceLevel;
-	
+
 	@Column(name = "EMPLOYEE_AVAILABLE_HOURS")
 	private int availableHours;
 
@@ -54,6 +67,8 @@ public class Employee implements Serializable {
 	private String jobTitle;
 
 	@OneToOne(mappedBy = "employeeId")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonBackReference
 	public Account account;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -61,16 +76,30 @@ public class Employee implements Serializable {
 	private Address addressId;
 
 	@OneToMany(mappedBy = "employeeId")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference(value="employee-achievements")
 	private List<Achievement> achievements;
 
 	@OneToMany(mappedBy = "employeeId")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference(value="employee-employeeProjects")
 	private List<EmployeeProject> employeeProjects;
 
 	@OneToMany(mappedBy = "employeeId")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference(value="employee-evaluations")
 	private List<Evaluation> evaluations;
 
 	@OneToMany(mappedBy = "employeeId")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference(value="employee-skills")
 	private List<Skill> skills;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinColumn(name="JOB_ID")
+	@JsonBackReference(value="job-employees")
+	private Job job;
 
 	public long getId() {
 		return id;
@@ -182,6 +211,14 @@ public class Employee implements Serializable {
 
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
+	}
+
+	public Job getJob() {
+		return job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
 	}
 
 }

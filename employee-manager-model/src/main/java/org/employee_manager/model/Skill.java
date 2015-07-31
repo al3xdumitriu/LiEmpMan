@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "SKILL")
 @XmlRootElement
@@ -42,7 +44,8 @@ public class Skill implements Serializable {
 	private String experience;
 
 	@JoinColumn(name = "EMPLOYEE_ID")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.EAGER)
+	@JsonBackReference(value="employee-skills")
 	private Employee employeeId;
 
 	@OneToMany(mappedBy = "skillId", fetch = FetchType.EAGER)
