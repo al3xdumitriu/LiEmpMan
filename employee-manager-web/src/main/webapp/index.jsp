@@ -14,7 +14,6 @@
 
 <!-- Downloaded Scripts -->
 
-
 <script src="js/angular.js"></script>
 
 <script src="js/angular-route.js"></script>
@@ -24,6 +23,7 @@
 <script src="js/angular-resource.js"></script>
 
 <script src="js/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
 
 <!-- Created Scripts -->
 

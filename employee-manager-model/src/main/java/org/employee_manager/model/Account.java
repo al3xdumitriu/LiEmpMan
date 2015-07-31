@@ -21,6 +21,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "ACCOUNT")
@@ -44,7 +45,7 @@ public class Account implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "EMPLOYEE_ID")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JsonBackReference
+	@JsonManagedReference
 	public Employee employeeId;
 
 	@OneToMany(mappedBy = "accountId")

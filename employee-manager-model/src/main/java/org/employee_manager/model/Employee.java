@@ -64,7 +64,7 @@ public class Employee implements Serializable {
 
 	@OneToOne(mappedBy = "employeeId")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JsonManagedReference
+	@JsonBackReference
 	public Account account;
 
 	@OneToOne(cascade = CascadeType.ALL)
