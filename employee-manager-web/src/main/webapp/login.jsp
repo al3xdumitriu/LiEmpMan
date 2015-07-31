@@ -1,5 +1,5 @@
-<div class="jumbotron ">
-<div align="center">
+<div>
+<div align="center" style= "position: absolute; top :30%;left:40%">
     <h2>Please Login</h2>
     <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
     <form name="form" " role="form">

@@ -35,7 +35,7 @@
 
 </head>
 
-<body ng-app="appModule" class="jumbotron">
+<body ng-app="appModule">
 	
     <content ng-view></content>
 
