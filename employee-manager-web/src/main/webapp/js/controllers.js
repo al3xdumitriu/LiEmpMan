@@ -96,3 +96,6 @@ employeeManagerControllers.controller('EmployeeDetailsController', [ '$scope',
 				})
 			};
 		} ]);
+
+                                         			
+                                         			

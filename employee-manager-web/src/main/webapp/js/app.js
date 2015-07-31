@@ -19,6 +19,11 @@ applicationModule.config(function($routeProvider) {
 		templateUrl : 'profile.jsp',
 		controller : 'EmployeeDetailsController',
 
+	}).when('/achievement/:id', {
+
+		templateUrl : 'achievement.jsp',
+		controller : 'EmployeeDetailsController',
+
 	}).when('/account', {
 
 		templateUrl : 'account.jsp',
