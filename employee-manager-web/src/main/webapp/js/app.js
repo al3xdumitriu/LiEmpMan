@@ -24,6 +24,11 @@ applicationModule.config(function($routeProvider) {
 		templateUrl : 'achievement.jsp',
 		controller : 'myCtrlAchievEmp',
 
+	}).when('/event', {
+
+		templateUrl : 'event.jsp',
+		controller : 'myCtrlEvent',
+
 	}).when('/account', {
 
 		templateUrl : 'account.jsp',

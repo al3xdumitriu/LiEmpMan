@@ -16,34 +16,35 @@ employeeManagerControllers.controller('footerController', [ '$scope',
 			$scope.footer = "footer";
 		} ]);
 
-employeeManagerControllers.controller('StarCtrl', ['$scope','$routeParams' , 'StarService', function ($scope,$routeParams,StarService) {
-    var skills = StarService.skills({ id :  $routeParams.id });
-        
-	$scope.skills =  skills;
-}]);
+employeeManagerControllers.controller('StarCtrl', [ '$scope', '$routeParams',
+		'StarService', function($scope, $routeParams, StarService) {
+			var skills = StarService.skills({
+				id : $routeParams.id
+			});
 
-employeeManagerControllers.directive('starRating', function () {
-    return {
-        restrict: 'A',
-        template: '<ul class="rating">' +
-            '<li ng-repeat="star in stars" ng-class="star">' +
-            '\u2605' +
-            '</li>' +
-            '</ul>',
-        scope: {
-            ratingValue: '=',
-            max: '='
-        },
-        link: function (scope, elem, attrs) {
-        	console.log("Recognized the fundoo-rating directive usage");
-            scope.stars = [];
-            for (var i = 0; i < scope.max; i++) {
-                scope.stars.push({
-                    filled: i < scope.ratingValue
-                });
-            }
-        }
-    }
+			$scope.skills = skills;
+		} ]);
+
+employeeManagerControllers.directive('starRating', function() {
+	return {
+		restrict : 'A',
+		template : '<ul class="rating">'
+				+ '<li ng-repeat="star in stars" ng-class="star">' + '\u2605'
+				+ '</li>' + '</ul>',
+		scope : {
+			ratingValue : '=',
+			max : '='
+		},
+		link : function(scope, elem, attrs) {
+			console.log("Recognized the fundoo-rating directive usage");
+			scope.stars = [];
+			for (var i = 0; i < scope.max; i++) {
+				scope.stars.push({
+					filled : i < scope.ratingValue
+				});
+			}
+		}
+	}
 });
 
 employeeManagerControllers
@@ -70,7 +71,10 @@ employeeManagerControllers
 										})
 										.success(
 												function(data) {
-													setTimeout(function(){$window.location.href = "http://localhost:8080/employee-manager-web/index.jsp#/"}, 2000);
+													setTimeout(
+															function() {
+																$window.location.href = "http://localhost:8080/employee-manager-web/index.jsp#/"
+															}, 2000);
 												});
 								$scope.submission();
 							};
@@ -85,7 +89,7 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 	var vm = this;
 
 	vm.login = login;
-	
+
 	vm.register = register;
 
 	vm.loginFailed;
@@ -102,15 +106,15 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 					if (response.success) {
 						AuthenticationService.SetCredentials(vm.username,
 								vm.password, response.employeeId);
-						$location.path('/profile/'+response.employeeId);
+						$location.path('/profile/' + response.employeeId);
 					} else {
 						$scope.loginFailed = response.message
 						vm.dataLoading = false;
 					}
 				});
-	};
+	}
+	;
 
-	
 	function register() {
 		$location.path('/account');
 	}
@@ -184,4 +188,85 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 			}
 
 		} ]);
+employeeManagerControllers
+		.controller(
+				'myCtrlEvent',
+				[
+						'$scope',
+						'$http',
+						'$routeParams',
+						function($scope, $http, $routeParams) {
 
+							$scope.urlfinal = "/employee-manager-container/rest/event";
+
+							$http.get($scope.urlfinal).success(
+									function(response) {
+										$scope.events = response;
+									});
+
+							$scope.limit = "2";
+							$scope.add = function() {
+								$scope.limit = parseInt($scope.limit) + 2;
+							}
+							$scope.ascunde = true;
+
+							$scope.arata = function() {
+								$scope.ascunde = !$scope.ascunde;
+							}
+
+							$scope.achievementTest = {
+								id : 213213,
+								name : '',
+								description : '',
+								employeeId : {
+									id : $routeParams.id
+								}
+							};
+
+							$scope.arataLocatia = function(eventId,coordEvent) {
+								var mapCanvas = document
+										.getElementById(eventId);
+								var mapOptions = {
+									center : new google.maps.LatLng(47.160456,
+											27.589030),
+									zoom : 14,
+									mapTypeId : google.maps.MapTypeId.ROADMAP
+								}
+								var map = new google.maps.Map(mapCanvas,
+										mapOptions)
+
+								var directionsService = new google.maps.DirectionsService();
+
+								var directionsDisplay = new google.maps.DirectionsRenderer();
+								directionsDisplay.setMap(map);
+
+								var request = {
+									origin : "47.155576, 27.612222",
+									destination : coordEvent,
+									travelMode : google.maps.TravelMode.DRIVING
+								};
+								directionsService
+										.route(
+												request,
+												function(response, status) {
+													if (status == google.maps.DirectionsStatus.OK) {
+														directionsDisplay
+																.setDirections(response);
+													}
+												});
+
+							}
+
+
+
+							/*
+							 * $scope.incearcaPost = function() { $scope.ascunde =
+							 * !$scope.ascunde; $http({ method : 'POST', url :
+							 * '/employee-manager-container/rest/achievement',
+							 * data : $scope.achievementTest
+							 * 
+							 * }); $scope.achievementTest = { id : 213213, name :
+							 * '', description : '', employeeId : { id : 190 } }; }
+							 */
+
+						} ]);

@@ -33,6 +33,15 @@
 
 <script src="js/services.js"></script>
 
+ <style>
+      .map-canvas {
+        width: 500px;
+        height: 400px;
+      }
+    </style>
+    
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+
 </head>
 
 <body ng-app="appModule">
