@@ -1,6 +1,7 @@
 <header ng-include="'template/header.jsp'" ng-controller="headerController"></header>
 <div ng-include="'details.jsp'"></div>
-<jsp:include page="skill-view.jsp"/>
+<div ng-include="'achievement.jsp'" ng-controller="myCtrlAchievEmp"/>
+<div ng-include="'skill-view.jsp'"/>
 <footer ng-include="'template/footer.jsp'" ng-controller="footerController"></footer>
 <script>
 	$('#edit').click(
