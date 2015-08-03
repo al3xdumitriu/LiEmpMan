@@ -10,21 +10,21 @@
 					<label for="userName">Username:</label><br>
 
 					<div>
-						<input type="text" id="userName" ng-model="employee.name" disabled>
+						<input type="text" id="userName" ng-model="employee.name" class="form-control" disabled>
 					</div>
 				</div>
 
 				<div>
 					<label for="phone">Phone:</label><br>
 					<div>
-						<input type="text" id="phone" ng-model="employee.phone" disabled>
+						<input type="text" id="phone" ng-model="employee.phone" class="form-control" disabled>
 					</div>
 				</div>
 
 				<div>
 					<label for="email">Email:</label><br>
 					<div>
-						<input type="text" id="email" ng-model="employee.email" disabled>
+						<input type="text" id="email" ng-model="employee.email" class="form-control" disabled>
 					</div>
 				</div>
 
@@ -32,7 +32,7 @@
 					<label for="jobTitle">Job Title:</label><br>
 					<div>
 						<input type="text" id="jobTitle" ng-model="employee.jobTitle"
-							disabled>
+							class="form-control" disabled>
 					</div>
 				</div>
 
@@ -40,7 +40,7 @@
 					<label for="expLevel">Experience Level:</label><br>
 					<div>
 						<input type="text" id="expLevel"
-							ng-model="employee.experienceLevel" disabled>
+							ng-model="employee.experienceLevel" class="form-control" disabled>
 					</div>
 				</div>
 				</br> <input class="btn btn-primary" id="edit" type="button" value="Edit">
