@@ -28,6 +28,34 @@ function($resource) {
 
 } ]);
 
+
+employeeManagerServices
+.factory(
+		'StarService',
+		[
+				'$resource',
+
+				function($resource) {
+
+					return $resource(
+							'http://localhost:8080/employee-manager-container/rest/:call/:id/skills',
+							{
+								id : "@id"
+							}, {
+
+								skills : {
+									method : 'GET',
+									params : {
+										call : 'employee'
+									},
+									isArray : true
+								}
+
+							});
+
+				} ]);
+						
+						
 employeeManagerServices.factory('AuthenticationService', AuthenticationService);
 
 AuthenticationService.$inject = [ '$http', '$cookieStore', '$rootScope',
@@ -66,6 +94,19 @@ function AuthenticationService($http, $cookieStore, $rootScope, $timeout,
 		});
 
 	}
+    	
+            var response;
+            UserService.GetByUsername(username,password)
+                .then(function (user) {
+                    if (user !== null && user.data.password === password) {
+                        response = { success: true, employeeId : user.data.employeeIdJson };
+                    } else {
+                        response = { success: false, message: 'Username or password is incorrect' };
+                    }
+                    callback(response);
+                });        
+        
+    
 
 	function SetCredentials(username, password, employeeId) {
 		var authdata = Base64.encode(username + ':' + password);

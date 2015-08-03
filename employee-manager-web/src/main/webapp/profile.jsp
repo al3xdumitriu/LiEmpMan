@@ -1,55 +1,8 @@
-
-<div>
-	<div>
-		<form>
-			<img ng-src="{{profileImage}}" alt="Profile image">
-			<fieldset>
-				<legend>My profile</legend>
-
-				<div ng-model="employee.id"></div>
-				<div>
-					<label for="userName">Username:</label><br>
-
-					<div>
-						<input type="text" id="userName" ng-model="employee.name" disabled>
-					</div>
-				</div>
-
-				<div>
-					<label for="phone">Phone:</label><br>
-					<div>
-						<input type="text" id="phone" ng-model="employee.phone" disabled>
-					</div>
-				</div>
-
-				<div>
-					<label for="email">Email:</label><br>
-					<div>
-						<input type="text" id="email" ng-model="employee.email" disabled>
-					</div>
-				</div>
-
-				<div>
-					<label for="jobTitle">Job Title:</label><br>
-					<div>
-						<input type="text" id="jobTitle" ng-model="employee.jobTitle"
-							disabled>
-					</div>
-				</div>
-
-				<div>
-					<label for="expLevel">Experience Level:</label><br>
-					<div>
-						<input type="text" id="expLevel"
-							ng-model="employee.experienceLevel" disabled>
-					</div>
-				</div>
-				</br> <input class="btn btn-primary" id="edit" type="button" value="Edit">
-				<input class="btn btn-primary" id="save" type="button" value="Save"
-					disabled ng-click="saveMethode()"> <input class="btn btn-primary"
-					id="cancel" type="button" value="Cancel" disabled>
-	</div>
-</div>
+<header ng-include="'template/header.jsp'" ng-controller="headerController"></header>
+<div ng-include="'details.jsp'"></div>
+<div ng-include="'achievement.jsp'" ng-controller="myCtrlAchievEmp"/>
+<div ng-include="'skill-view.jsp'"/>
+<footer ng-include="'template/footer.jsp'" ng-controller="footerController"></footer>
 <script>
 	$('#edit').click(
 			function() {

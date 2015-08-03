@@ -47,6 +47,9 @@ public class Account implements Serializable {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonManagedReference
 	public Employee employeeId;
+	
+	@Transient
+	private long employeeIdJson;
 
 	@OneToMany(mappedBy = "accountId")
 	private Set<Role> roles;
@@ -98,4 +101,15 @@ public class Account implements Serializable {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public long getEmployeeIdJson() {
+		return employeeIdJson;
+	}
+
+	public void setEmployeeIdJson(long employeeIdJson) {
+		this.employeeIdJson = employeeIdJson;
+	}
+	
+	
+	
 }

@@ -15,4 +15,7 @@ public interface SkillService {
 
 	List<Skill> findAllSkillsWithName(String name);
 
+	List<Skill> findAllSkillsForEmployee(Long employeeId);
+		
+	Skill createSkill(Long employeeId, Skill skill);
 }

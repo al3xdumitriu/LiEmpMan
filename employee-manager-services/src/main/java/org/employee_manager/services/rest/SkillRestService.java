@@ -53,8 +53,11 @@ public class SkillRestService {
 				e.getStackTrace();
 			}
 		}
-		for (Skill skill : allSkills)
+		for (Skill skill : allSkills){
 			skill.setSkillEvaluations(null);
+			skill.setEmployeeId(null);
+		}
+			
 		Response res = Response.status(status).entity(allSkills).build();
 		return res;
 
@@ -64,7 +67,7 @@ public class SkillRestService {
 	@Path("{param1}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getSkill(@PathParam("param1") String param1) {
-		Status status = null;;
+		Status status = null;
 		Long id;
 		try {
 			id = Long.parseLong(param1);
@@ -81,8 +84,11 @@ public class SkillRestService {
 			{
 				return Response.status(Response.Status.NO_CONTENT).entity("There is no object in database with this id").build();
 			}
-			else
+			else{
 				mySkill.setSkillEvaluations(null);
+				mySkill.setEmployeeId(null);
+			}
+				
 		} catch (Exception e) {
 			status = Response.Status.INTERNAL_SERVER_ERROR;
 			e.getStackTrace();

@@ -16,6 +16,36 @@ employeeManagerControllers.controller('footerController', [ '$scope',
 			$scope.footer = "footer";
 		} ]);
 
+employeeManagerControllers.controller('StarCtrl', ['$scope','$routeParams' , 'StarService', function ($scope,$routeParams,StarService) {
+    var skills = StarService.skills({ id :  $routeParams.id });
+        
+	$scope.skills =  skills;
+}]);
+
+employeeManagerControllers.directive('starRating', function () {
+    return {
+        restrict: 'A',
+        template: '<ul class="rating">' +
+            '<li ng-repeat="star in stars" ng-class="star">' +
+            '\u2605' +
+            '</li>' +
+            '</ul>',
+        scope: {
+            ratingValue: '=',
+            max: '='
+        },
+        link: function (scope, elem, attrs) {
+        	console.log("Recognized the fundoo-rating directive usage");
+            scope.stars = [];
+            for (var i = 0; i < scope.max; i++) {
+                scope.stars.push({
+                    filled: i < scope.ratingValue
+                });
+            }
+        }
+    }
+});
+
 employeeManagerControllers
 		.controller(
 				'AccountController',
@@ -55,8 +85,10 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 	var vm = this;
 
 	vm.login = login;
+	
+	vm.register = register;
 
-	vm.loginFailed
+	vm.loginFailed;
 
 	function initController() { // reset login status //
 		AuthenticationService.ClearCredentials();
@@ -76,8 +108,12 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 						vm.dataLoading = false;
 					}
 				});
+	};
+
+	
+	function register() {
+		$location.path('/account');
 	}
-	;
 }
 
 employeeManagerControllers.controller('EmployeeDetailsController', [ '$scope',
@@ -148,3 +184,4 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 			}
 
 		} ]);
+

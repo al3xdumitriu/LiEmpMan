@@ -43,6 +43,7 @@ public class AccountRestService {
 				if (account == null)
 					return Response.status(Response.Status.NO_CONTENT).build();
 				account.setRoles(null);
+				account.setEmployeeIdJson(account.getEmployeeId().getId());
 				resultResponse = Response.status(Response.Status.OK).entity(account).build();
 			} catch (Exception e) {
 				resultResponse = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

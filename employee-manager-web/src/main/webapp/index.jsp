@@ -36,9 +36,9 @@
 </head>
 
 <body ng-app="appModule">
-	<header ng-include="'template/header.jsp'" ng-controller="headerController"></header>
+	
     <content ng-view></content>
-	<footer ng-include="'template/footer.jsp'" ng-controller="footerController"></footer>
+
 </body>
 
 </html>

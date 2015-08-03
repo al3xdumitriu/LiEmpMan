@@ -40,7 +40,7 @@ public class Achievement implements Serializable {
 	@Column(name = "ACHIEVEMENT_DESCRIPTION")
 	private String description;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne()
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "EMPLOYEE_ID")
 	@JsonBackReference(value="employee-achievements")
