@@ -56,6 +56,8 @@ employeeManagerControllers
 						function($scope, $http, $window) {
 
 							$scope.submissionSuccess = false;
+							
+							$scope.ip = location.hostname;
 
 							$scope.submission = function() {
 								$scope.submissionSuccess = !$scope.submissionSuccess;
@@ -70,7 +72,7 @@ employeeManagerControllers
 										})
 										.success(
 												function(data) {
-													setTimeout(function(){$window.location.href = "http://localhost:8080/employee-manager-web/index.jsp#/"}, 2000);
+													setTimeout(function(){$window.location.href = "http://" + $scope.ip + ":8080/employee-manager-web/index.jsp#/"}, 2000);
 												});
 								$scope.submission();
 							};
