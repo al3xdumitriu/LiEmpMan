@@ -197,7 +197,7 @@ employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
 				$scope.events = response;
 			});
 
-			$scope.limit = "5";
+			$scope.limit = "2";
 			$scope.add = function() {
 				$scope.limit = parseInt($scope.limit) + 2;
 			}
@@ -207,25 +207,8 @@ employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
 				$scope.ascunde = !$scope.ascunde;
 			}
 
-			$scope.achievementTest = {
-				id : 213213,
-				name : '',
-				description : '',
-				employeeId : {
-					id : $routeParams.id
-				}
-			};
-			/*
-			 * $scope.urlvalid =
-			 * $sce.trustAsResourceUrl("http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0");
-			 * $scope.incearcaVideo=function(){
-			 * 
-			 * $scope.urlvalid =
-			 * $sce.trustAsResourceUrl("http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0");
-			 * 
-			 * alert($scope.urlvalid);
-			 *  }
-			 */
+
+
 			$scope.arataLocatia = function(eventId, coordEvent) {
 				var mapCanvas = document.getElementById(eventId);
 				var mapOptions = {
@@ -267,7 +250,7 @@ employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
 				    organizers: null,
 				    eventTypeId: null,
 				    eventStatusId: null
-			}	
+			};	
 			
 			$scope.incearcaPost = function() {
 				$scope.ascunde = !$scope.ascunde;
@@ -276,7 +259,23 @@ employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
 					url : '/employee-manager-container/rest/event',
 					data : $scope.eventTest
 
+					
 				});
+				$scope.eventTest = {
+					    id: null,
+					    name: null,
+					    coordinates: null,
+					    video: null,
+					    startDate: null,
+					    endDate: null,
+					    description: null,
+					    participantsNumber: null,
+					    eventEvaluations: null,
+					    coordinatorId: null,
+					    organizers: null,
+					    eventTypeId: null,
+					    eventStatusId: null
+				};	
 				
 			}
 

@@ -8,7 +8,7 @@
 
 				</h1>
 				<div
-					ng-repeat="event in events | limitTo:limit |orderBy :'id' 
+					ng-repeat="event in events | limitTo:limit  
 					">
 
 					<p>
