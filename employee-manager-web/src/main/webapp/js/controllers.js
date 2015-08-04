@@ -195,7 +195,8 @@ employeeManagerControllers
 						'$scope',
 						'$http',
 						'$routeParams',
-						function($scope, $http, $routeParams) {
+						'$sce',
+						function($scope, $http, $routeParams,$sce) {
 
 							$scope.urlfinal = "/employee-manager-container/rest/event";
 
@@ -222,6 +223,14 @@ employeeManagerControllers
 									id : $routeParams.id
 								}
 							};
+							$scope.urlvalid = $sce.trustAsResourceUrl("http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0");
+							$scope.incearcaVideo=function(){
+								
+								$scope.urlvalid = $sce.trustAsResourceUrl("http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0");
+								
+								/*alert($scope.urlvalid);*/
+								
+							}
 
 							$scope.arataLocatia = function(eventId,coordEvent) {
 								var mapCanvas = document
@@ -256,8 +265,8 @@ employeeManagerControllers
 												});
 
 							}
-
-
+							
+							
 
 							/*
 							 * $scope.incearcaPost = function() { $scope.ascunde =

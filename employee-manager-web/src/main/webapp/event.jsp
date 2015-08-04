@@ -5,7 +5,7 @@
 			<div class="well bs-component">
 				<h1 class="page-header">
 					<font color="#0597F2">Events</font>
-					
+
 				</h1>
 				<div
 					ng-repeat="event in events | limitTo:limit |orderBy :'id' 
@@ -13,22 +13,23 @@
 
 					<p>
 
-						<b>{{event.name}} </b>{{event.coordinates}}
+						<b>{{event.name}} </b>
 					</p>
-					
+{{urlvalid}}
+<button ng-click="incearcaVideo()"
+						class="btn btn-primary">Arata Video</button>
 					<iframe width="420" height="315"
-src="http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0">
-</iframe>
-<button ng-click="arataLocatia(event.id,event.coordinates)" class="btn btn-primary">Arataa Locatia</button>
-<div id="{{event.id}}" class="map-canvas">
+						ng-src="{{trustAsResourceUrl('http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0')}}">
+					</iframe>
+					<div ng-if="event.coordinates!=null">
+					<button ng-click="arataLocatia(event.id,event.coordinates)"
+						class="btn btn-primary">Arataa Locatia</button>
+					<div id="{{event.id}}" class="map-canvas"></div>
 
-
-
-</div>
-					
 					<textarea rows="4" cols="40" class="form-control" disabled>
 			descriere
 			</textarea>
+				</div>
 				</div>
 				<br>
 			</div>
