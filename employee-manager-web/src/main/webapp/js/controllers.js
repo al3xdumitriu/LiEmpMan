@@ -188,8 +188,12 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 			}
 
 		} ]);
-employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
-		'$routeParams', '$sce', function($scope, $http, $routeParams, $sce) {
+employeeManagerControllers.controller('myCtrlEvent', [
+		'$scope',
+		'$http',
+		'$routeParams',
+		'$sce',
+		function($scope, $http, $routeParams, $sce) {
 
 			$scope.urlfinal = "/employee-manager-container/rest/event";
 
@@ -207,10 +211,8 @@ employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
 				$scope.ascunde = !$scope.ascunde;
 			}
 
-
-
 			$scope.arataLocatia = function(eventId, coordEvent) {
-				
+
 				var mapCanvas = document.getElementById(eventId);
 				var mapOptions = {
 					center : new google.maps.LatLng(47.160456, 27.589030),
@@ -236,64 +238,69 @@ employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
 				});
 
 			}
-			
-			
-			$scope.incarcaTot= function(){
-				
-				for (i = 0; i < $scope.events.length; i++) { 
-				    /*alert($scope.events[i].id);*/
-				   if($scope.events[i].coordinates!=null) $scope.arataLocatia($scope.events[i].id,$scope.events[i].coordinates);
+
+			$scope.incarcaTot = function() {
+
+				for (i = 0; i < $scope.events.length; i++) {
+					/* alert($scope.events[i].id); */
+					if ($scope.events[i].coordinates != null)
+						$scope.arataLocatia($scope.events[i].id,
+								$scope.events[i].coordinates);
 				}
-				
-				
-				
+
 			};
 
-			$scope.parseazaLink= function(link){
+			$scope.parseazaLink = function(link) {
 
-				if(link.indexOf('embed')!=-1)return link;
+				if (link.indexOf('embed') != -1)
+					return link;
 				else {
-					
-					if(link.indexOf('v=')!=-1)
-					{var positionV=link.indexOf('v=');
-					positionV=positionV+2;
-					if(link.indexOf('&')!=-1) {
-						var positionS=link.indexOf('&');				
-						var noutate='https://www.youtube.com/embed/'+link.substring(positionV,positionS);
-						/*alert("pozitia initiala "+positionV + "poz finala " +positionS + "=substring" +noutate);
-						*/link=null;
-						return noutate;
-						}else{
-							var noutate='https://www.youtube.com/embed/'+link.substring(positionV,100);
-							link=null;
-							/*alert("pozitia initiala "+positionV+2 + "poz finala " +positionS + "=substring" +noutate);
-							*/
+
+					if (link.indexOf('v=') != -1) {
+						var positionV = link.indexOf('v=');
+						positionV = positionV + 2;
+						if (link.indexOf('&') != -1) {
+							var positionS = link.indexOf('&');
+							var noutate = 'https://www.youtube.com/embed/'
+									+ link.substring(positionV, positionS);
+							/*
+							 * alert("pozitia initiala "+positionV + "poz finala "
+							 * +positionS + "=substring" +noutate);
+							 */link = null;
+							return noutate;
+						} else {
+							var noutate = 'https://www.youtube.com/embed/'
+									+ link.substring(positionV, 100);
+							link = null;
+							/*
+							 * alert("pozitia initiala "+positionV+2 + "poz
+							 * finala " +positionS + "=substring" +noutate);
+							 */
 							return noutate;
 						}
-					
-					
+
 					}
 				}
-				link=null;
+				link = null;
 				return null;
 			}
-			
+
 			$scope.eventTest = {
-				    id: null,
-				    name: null,
-				    coordinates: null,
-				    video: null,
-				    startDate: null,
-				    endDate: null,
-				    description: null,
-				    participantsNumber: null,
-				    eventEvaluations: null,
-				    coordinatorId: null,
-				    organizers: null,
-				    eventTypeId: null,
-				    eventStatusId: null
-			};	
-			
+				id : null,
+				name : null,
+				coordinates : null,
+				video : null,
+				startDate : null,
+				endDate : null,
+				description : null,
+				participantsNumber : null,
+				eventEvaluations : null,
+				coordinatorId : null,
+				organizers : null,
+				eventTypeId : null,
+				eventStatusId : null
+			};
+
 			$scope.incearcaPost = function() {
 				$scope.ascunde = !$scope.ascunde;
 				$http({
@@ -301,29 +308,28 @@ employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
 					url : '/employee-manager-container/rest/event',
 					data : $scope.eventTest
 
-					
 				});
 				$scope.eventTest = {
-					    id: null,
-					    name: null,
-					    coordinates: null,
-					    video: null,
-					    startDate: null,
-					    endDate: null,
-					    description: null,
-					    participantsNumber: null,
-					    eventEvaluations: null,
-					    coordinatorId: null,
-					    organizers: null,
-					    eventTypeId: null,
-					    eventStatusId: null
-				};	
-				
+					id : null,
+					name : null,
+					coordinates : null,
+					video : null,
+					startDate : null,
+					endDate : null,
+					description : null,
+					participantsNumber : null,
+					eventEvaluations : null,
+					coordinatorId : null,
+					organizers : null,
+					eventTypeId : null,
+					eventStatusId : null
+				};
+
 			}
-			
-/*			$scope.$on('$viewContentLoaded', function() {
-				$scope.incarcaTot();
-			});
-			*/
+
+			/*
+			 * $scope.$on('$viewContentLoaded', function() {
+			 * $scope.incarcaTot(); });
+			 */
 
 		} ]);
