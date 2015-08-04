@@ -16,10 +16,6 @@
 						<b>{{event.name}} </b>
 					</p>
 
-					<!-- <button ng-click="incearcaVideo()"
-						class="btn btn-primary">Arata Video</button> -->
-
-
 					<div ng-if="event.video!=null">
 						<iframe width="420" height="315" ng-src="{{parseazaLink(event.video)}}">
 						</iframe>
@@ -29,6 +25,7 @@
 							class="btn btn-primary">Arataa Locatia</button>
 						<div id="{{event.id}}" class="map-canvas"></div>
 					</div>
+					
 					<textarea rows="4" cols="40" class="form-control" disabled>
 			{{event.description}}
 			</textarea>
@@ -51,8 +48,12 @@
 						<button ng-click="incearcaPost()" class="btn btn-primary">posteaza!</button>
 
 					</div>
+					
 				</form>
 			</div>
+			
+			<button ng-click="incarcaTot()" class="btn btn-primary">incarcaMape!!!</button>
+			
 		</div>
 	</div>
 </div>

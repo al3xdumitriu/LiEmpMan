@@ -210,6 +210,7 @@ employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
 
 
 			$scope.arataLocatia = function(eventId, coordEvent) {
+				
 				var mapCanvas = document.getElementById(eventId);
 				var mapOptions = {
 					center : new google.maps.LatLng(47.160456, 27.589030),
@@ -235,6 +236,18 @@ employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
 				});
 
 			}
+			
+			
+			$scope.incarcaTot= function(){
+				
+				for (i = 0; i < $scope.events.length; i++) { 
+				    /*alert($scope.events[i].id);*/
+				   if($scope.events[i].coordinates!=null) $scope.arataLocatia($scope.events[i].id,$scope.events[i].coordinates);
+				}
+				
+				
+				
+			};
 
 			$scope.parseazaLink= function(link){
 
@@ -307,5 +320,10 @@ employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
 				};	
 				
 			}
+			
+/*			$scope.$on('$viewContentLoaded', function() {
+				$scope.incarcaTot();
+			});
+			*/
 
 		} ]);
