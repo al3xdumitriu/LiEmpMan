@@ -10,21 +10,24 @@
 					<label for="userName">Username:</label><br>
 
 					<div>
-						<input type="text" id="userName" ng-model="employee.name" class="form-control" disabled>
+						<input type="text" id="userName" ng-model="employee.name"
+							class="form-control" disabled>
 					</div>
 				</div>
 
 				<div>
 					<label for="phone">Phone:</label><br>
 					<div>
-						<input type="text" id="phone" ng-model="employee.phone" class="form-control" disabled>
+						<input type="text" id="phone" ng-model="employee.phone"
+							class="form-control" disabled>
 					</div>
 				</div>
 
 				<div>
 					<label for="email">Email:</label><br>
 					<div>
-						<input type="text" id="email" ng-model="employee.email" class="form-control" disabled>
+						<input type="text" id="email" ng-model="employee.email"
+							class="form-control" disabled>
 					</div>
 				</div>
 
@@ -45,8 +48,9 @@
 				</div>
 				</br> <input class="btn btn-primary" id="edit" type="button" value="Edit">
 				<input class="btn btn-primary" id="save" type="button" value="Save"
-					disabled ng-click="saveMethode()"> <input class="btn btn-primary"
-					id="cancel" type="button" value="Cancel" disabled>
+					disabled ng-click="saveMethode()"> <input
+					class="btn btn-primary" id="cancel" type="button" value="Cancel"
+					disabled>
 	</div>
 </div>
 <script>

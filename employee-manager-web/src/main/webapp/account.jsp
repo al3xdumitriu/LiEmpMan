@@ -70,8 +70,9 @@
 				</span> <br></br>
 			</div>
 			<div class="form-group">
-			<label for="confirmPassword" class="col-lg-2 control-label">Password confirmation<span
-					style="color: red">*</span></label>
+				<label for="confirmPassword" class="col-lg-2 control-label">Password
+					confirmation<span style="color: red">*</span>
+				</label>
 				<div class="col-lg-10">
 					<input type="password" name="confirmPassword" class="form-control"
 						ng-model="accountCtrl.account.confirmPassword"
@@ -93,9 +94,9 @@
 				successfully!</div>
 			<br></br>
 			<div>
-			<button class="btn btn-primary" ng-disabled="!accountForm.$valid" type="submit">Create
-				Account</button>
+				<button class="btn btn-primary" ng-disabled="!accountForm.$valid"
+					type="submit">Create Account</button>
+			</div>
+		</form>
 	</div>
-	</form>
-</div>
 </div>

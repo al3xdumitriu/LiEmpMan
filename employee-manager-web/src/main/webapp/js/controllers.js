@@ -1,49 +1,69 @@
 var employeeManagerControllers = angular.module('employeeManagerControllers',
 		[ 'employeeManagerServices' ]);
 
-employeeManagerControllers.controller('mainController', [ '$scope',
-		'employeesService', function($scope, EmployeesService) {
-			$scope.content = "content";
+employeeManagerControllers.controller('headerController', [ '$scope',
+		'$location', function($scope, $location) {
+
+			var urls = {
+				"/" : true,
+				"/register" : true
+			};
+			$scope.showHeader = urls[$location.$$url];
+
 		} ]);
 
-employeeManagerControllers.controller('headerController', [ '$scope',
-		function($scope) {
-			$scope.header = "header";
+employeeManagerControllers.controller('contentMenuController', [ '$scope', '$location',
+		'employeesService', function($scope, $location) {
+
+			var urls = {
+				"/" : true,
+				"/register" : true
+			};
+			$scope.showContentMenu = urls[$location.$$url];
+
 		} ]);
 
 employeeManagerControllers.controller('footerController', [ '$scope',
-		function($scope) {
-			$scope.footer = "footer";
+		'$location', function($scope, $location) {
+
+			var urls = {
+				"/" : true,
+				"/register" : true
+			};
+
+			$scope.showFooter = urls[$location.$$url];
 		} ]);
 
-employeeManagerControllers.controller('StarCtrl', ['$scope','$routeParams' , 'StarService', function ($scope,$routeParams,StarService) {
-    var skills = StarService.skills({ id :  $routeParams.id });
-        
-	$scope.skills =  skills;
-}]);
+employeeManagerControllers.controller('StarCtrl', [ '$scope', '$routeParams',
+		'StarService', function($scope, $routeParams, StarService) {
 
-employeeManagerControllers.directive('starRating', function () {
-    return {
-        restrict: 'A',
-        template: '<ul class="rating">' +
-            '<li ng-repeat="star in stars" ng-class="star">' +
-            '\u2605' +
-            '</li>' +
-            '</ul>',
-        scope: {
-            ratingValue: '=',
-            max: '='
-        },
-        link: function (scope, elem, attrs) {
-        	console.log("Recognized the fundoo-rating directive usage");
-            scope.stars = [];
-            for (var i = 0; i < scope.max; i++) {
-                scope.stars.push({
-                    filled: i < scope.ratingValue
-                });
-            }
-        }
-    }
+			var skills = StarService.skills({
+				id : $routeParams.id
+			});
+
+			$scope.skills = skills;
+		} ]);
+
+employeeManagerControllers.directive('starRating', function() {
+	return {
+		restrict : 'A',
+		template : '<ul class="rating">'
+				+ '<li ng-repeat="star in stars" ng-class="star">' + '\u2605'
+				+ '</li>' + '</ul>',
+		scope : {
+			ratingValue : '=',
+			max : '='
+		},
+		link : function(scope, elem, attrs) {
+			console.log("Recognized the fundoo-rating directive usage");
+			scope.stars = [];
+			for (var i = 0; i < scope.max; i++) {
+				scope.stars.push({
+					filled : i < scope.ratingValue
+				});
+			}
+		}
+	}
 });
 
 employeeManagerControllers
@@ -72,22 +92,26 @@ employeeManagerControllers
 										})
 										.success(
 												function(data) {
-													setTimeout(function(){$window.location.href = "http://" + $scope.ip + ":8080/employee-manager-web/index.jsp#/"}, 2000);
+													setTimeout(
+															function() {
+																$window.location.href = "http://localhost:8080/employee-manager-web/index.jsp#/"
+															}, 2000);
 												});
 								$scope.submission();
 							};
 						} ]);
 
 employeeManagerControllers.controller('LoginController', LoginController);
-LoginController.$inject = [ '$scope', '$routeParams', '$location',
+LoginController.$inject = [ '$scope', '$routeParams', '$location', '$route',
 		'AuthenticationService' ];
 
-function LoginController($scope, $routeParams, $location, AuthenticationService) {
+function LoginController($scope, $routeParams, $location, $route,
+		AuthenticationService) {
 
 	var vm = this;
 
 	vm.login = login;
-	
+
 	vm.register = register;
 
 	vm.loginFailed;
@@ -104,24 +128,26 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 					if (response.success) {
 						AuthenticationService.SetCredentials(vm.username,
 								vm.password, response.employeeId);
-						$location.path('/profile/'+response.employeeId);
+
+						$location.path('/profile/' + response.employeeId);
+
 					} else {
 						$scope.loginFailed = response.message
 						vm.dataLoading = false;
 					}
 				});
-	};
+	}
+	;
 
-	
 	function register() {
 		$location.path('/account');
 	}
 }
 
 employeeManagerControllers.controller('EmployeeDetailsController', [ '$scope',
-		'$routeParams', 'employeesService', '$http',
-		function($scope, $routeParams, employeesService, $http) {
-
+		'$routeParams', 'employeesService', '$http', '$route',
+		function($scope, $routeParams, employeesService, $http, $route) {
+				
 			$scope.employee = employeesService.employee({
 				id : $routeParams.id
 			});
@@ -186,4 +212,3 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 			}
 
 		} ]);
-
