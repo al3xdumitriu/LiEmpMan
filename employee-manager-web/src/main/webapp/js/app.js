@@ -1,7 +1,7 @@
 var applicationModule = angular.module('appModule', [ 'ngRoute', 'ngCookies',
 		'employeeManagerControllers', 'employeeManagerServices' ]);
 
-applicationModule.config(function($routeProvider) {
+applicationModule.config(function($routeProvider,$sceDelegateProvider) {
 
 	$routeProvider.when('/', {
 		
@@ -40,6 +40,14 @@ applicationModule.config(function($routeProvider) {
 		redirectTo : '/employesse'
 
 	});
+	
+	$sceDelegateProvider.resourceUrlWhitelist([
+	                                            'self',
+	                                            '*://www.youtu.be/**',
+	                                            '*://www.youtube.com/**'
+	                                            
+	                                          ]);
+	
 }).run(run);
 
 run.$inject = [ '$rootScope', '$location', '$cookieStore', '$http' ];

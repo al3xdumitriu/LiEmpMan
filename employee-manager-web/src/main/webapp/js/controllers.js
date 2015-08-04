@@ -188,94 +188,96 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 			}
 
 		} ]);
-employeeManagerControllers
-		.controller(
-				'myCtrlEvent',
-				[
-						'$scope',
-						'$http',
-						'$routeParams',
-						'$sce',
-						function($scope, $http, $routeParams,$sce) {
+employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
+		'$routeParams', '$sce', function($scope, $http, $routeParams, $sce) {
 
-							$scope.urlfinal = "/employee-manager-container/rest/event";
+			$scope.urlfinal = "/employee-manager-container/rest/event";
 
-							$http.get($scope.urlfinal).success(
-									function(response) {
-										$scope.events = response;
-									});
+			$http.get($scope.urlfinal).success(function(response) {
+				$scope.events = response;
+			});
 
-							$scope.limit = "2";
-							$scope.add = function() {
-								$scope.limit = parseInt($scope.limit) + 2;
-							}
-							$scope.ascunde = true;
+			$scope.limit = "5";
+			$scope.add = function() {
+				$scope.limit = parseInt($scope.limit) + 2;
+			}
+			$scope.ascunde = true;
 
-							$scope.arata = function() {
-								$scope.ascunde = !$scope.ascunde;
-							}
+			$scope.arata = function() {
+				$scope.ascunde = !$scope.ascunde;
+			}
 
-							$scope.achievementTest = {
-								id : 213213,
-								name : '',
-								description : '',
-								employeeId : {
-									id : $routeParams.id
-								}
-							};
-							$scope.urlvalid = $sce.trustAsResourceUrl("http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0");
-							$scope.incearcaVideo=function(){
-								
-								$scope.urlvalid = $sce.trustAsResourceUrl("http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0");
-								
-								/*alert($scope.urlvalid);*/
-								
-							}
+			$scope.achievementTest = {
+				id : 213213,
+				name : '',
+				description : '',
+				employeeId : {
+					id : $routeParams.id
+				}
+			};
+			/*
+			 * $scope.urlvalid =
+			 * $sce.trustAsResourceUrl("http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0");
+			 * $scope.incearcaVideo=function(){
+			 * 
+			 * $scope.urlvalid =
+			 * $sce.trustAsResourceUrl("http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0");
+			 * 
+			 * alert($scope.urlvalid);
+			 *  }
+			 */
+			$scope.arataLocatia = function(eventId, coordEvent) {
+				var mapCanvas = document.getElementById(eventId);
+				var mapOptions = {
+					center : new google.maps.LatLng(47.160456, 27.589030),
+					zoom : 14,
+					mapTypeId : google.maps.MapTypeId.ROADMAP
+				}
+				var map = new google.maps.Map(mapCanvas, mapOptions)
 
-							$scope.arataLocatia = function(eventId,coordEvent) {
-								var mapCanvas = document
-										.getElementById(eventId);
-								var mapOptions = {
-									center : new google.maps.LatLng(47.160456,
-											27.589030),
-									zoom : 14,
-									mapTypeId : google.maps.MapTypeId.ROADMAP
-								}
-								var map = new google.maps.Map(mapCanvas,
-										mapOptions)
+				var directionsService = new google.maps.DirectionsService();
 
-								var directionsService = new google.maps.DirectionsService();
+				var directionsDisplay = new google.maps.DirectionsRenderer();
+				directionsDisplay.setMap(map);
 
-								var directionsDisplay = new google.maps.DirectionsRenderer();
-								directionsDisplay.setMap(map);
+				var request = {
+					origin : "47.155576, 27.612222",
+					destination : coordEvent,
+					travelMode : google.maps.TravelMode.DRIVING
+				};
+				directionsService.route(request, function(response, status) {
+					if (status == google.maps.DirectionsStatus.OK) {
+						directionsDisplay.setDirections(response);
+					}
+				});
 
-								var request = {
-									origin : "47.155576, 27.612222",
-									destination : coordEvent,
-									travelMode : google.maps.TravelMode.DRIVING
-								};
-								directionsService
-										.route(
-												request,
-												function(response, status) {
-													if (status == google.maps.DirectionsStatus.OK) {
-														directionsDisplay
-																.setDirections(response);
-													}
-												});
+			}
 
-							}
-							
-							
+			$scope.eventTest = {
+				    id: null,
+				    name: null,
+				    coordinates: null,
+				    video: null,
+				    startDate: null,
+				    endDate: null,
+				    description: null,
+				    participantsNumber: null,
+				    eventEvaluations: null,
+				    coordinatorId: null,
+				    organizers: null,
+				    eventTypeId: null,
+				    eventStatusId: null
+			}	
+			
+			$scope.incearcaPost = function() {
+				$scope.ascunde = !$scope.ascunde;
+				$http({
+					method : 'POST',
+					url : '/employee-manager-container/rest/event',
+					data : $scope.eventTest
 
-							/*
-							 * $scope.incearcaPost = function() { $scope.ascunde =
-							 * !$scope.ascunde; $http({ method : 'POST', url :
-							 * '/employee-manager-container/rest/achievement',
-							 * data : $scope.achievementTest
-							 * 
-							 * }); $scope.achievementTest = { id : 213213, name :
-							 * '', description : '', employeeId : { id : 190 } }; }
-							 */
+				});
+				
+			}
 
-						} ]);
+		} ]);
