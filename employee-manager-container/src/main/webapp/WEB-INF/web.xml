@@ -60,7 +60,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>employee-manager</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/index.jsp</url-pattern>
     </servlet-mapping>
  
 </web-app>

@@ -9,11 +9,6 @@ applicationModule.config(function($routeProvider) {
 		controller : 'LoginController',
 		controllerAs : 'vm'
 			
-	}).when('/content', {
-
-		templateUrl : 'content.jsp',
-		controller : 'mainController'
-			
 	}).when('/profile/:id', {
 
 		templateUrl : 'profile.jsp',
@@ -39,6 +34,7 @@ applicationModule.config(function($routeProvider) {
 
 run.$inject = [ '$rootScope', '$location', '$cookieStore', '$http' ];
 function run($rootScope, $location, $cookieStore, $http) {
+	
 	// keep user logged in after page refresh
 	$rootScope.globals = $cookieStore.get('globals') || {};
 	if ($rootScope.globals.currentUser) {
