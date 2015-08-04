@@ -236,6 +236,35 @@ employeeManagerControllers.controller('myCtrlEvent', [ '$scope', '$http',
 
 			}
 
+			$scope.parseazaLink= function(link){
+
+				if(link.indexOf('embed')!=-1)return link;
+				else {
+					
+					if(link.indexOf('v=')!=-1)
+					{var positionV=link.indexOf('v=');
+					positionV=positionV+2;
+					if(link.indexOf('&')!=-1) {
+						var positionS=link.indexOf('&');				
+						var noutate='https://www.youtube.com/embed/'+link.substring(positionV,positionS);
+						/*alert("pozitia initiala "+positionV + "poz finala " +positionS + "=substring" +noutate);
+						*/link=null;
+						return noutate;
+						}else{
+							var noutate='https://www.youtube.com/embed/'+link.substring(positionV,100);
+							link=null;
+							/*alert("pozitia initiala "+positionV+2 + "poz finala " +positionS + "=substring" +noutate);
+							*/
+							return noutate;
+						}
+					
+					
+					}
+				}
+				link=null;
+				return null;
+			}
+			
 			$scope.eventTest = {
 				    id: null,
 				    name: null,

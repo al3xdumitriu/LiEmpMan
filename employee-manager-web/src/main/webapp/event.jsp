@@ -21,7 +21,7 @@
 
 
 					<div ng-if="event.video!=null">
-						<iframe width="420" height="315" ng-src="{{event.video}}">
+						<iframe width="420" height="315" ng-src="{{parseazaLink(event.video)}}">
 						</iframe>
 					</div>
 					<div ng-if="event.coordinates!=null">
@@ -46,7 +46,7 @@
 					<br>	Url:<br> <input type="text" ng-model="eventTest.video" class="form-control">
 					<br>	Coordinates:<br> <input type="text" ng-model="eventTest.coordinates" class="form-control">
 					<br> <br>
-					<div ng-if="eventTest.name!=''">
+					<div ng-if="eventTest.name!=null">
 
 						<button ng-click="incearcaPost()" class="btn btn-primary">posteaza!</button>
 
