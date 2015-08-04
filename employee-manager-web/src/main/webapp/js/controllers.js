@@ -16,34 +16,35 @@ employeeManagerControllers.controller('footerController', [ '$scope',
 			$scope.footer = "footer";
 		} ]);
 
-employeeManagerControllers.controller('StarCtrl', ['$scope','$routeParams' , 'StarService', function ($scope,$routeParams,StarService) {
-    var skills = StarService.skills({ id :  $routeParams.id });
-        
-	$scope.skills =  skills;
-}]);
+employeeManagerControllers.controller('StarCtrl', [ '$scope', '$routeParams',
+		'StarService', function($scope, $routeParams, StarService) {
+			var skills = StarService.skills({
+				id : $routeParams.id
+			});
 
-employeeManagerControllers.directive('starRating', function () {
-    return {
-        restrict: 'A',
-        template: '<ul class="rating">' +
-            '<li ng-repeat="star in stars" ng-class="star">' +
-            '\u2605' +
-            '</li>' +
-            '</ul>',
-        scope: {
-            ratingValue: '=',
-            max: '='
-        },
-        link: function (scope, elem, attrs) {
-        	console.log("Recognized the fundoo-rating directive usage");
-            scope.stars = [];
-            for (var i = 0; i < scope.max; i++) {
-                scope.stars.push({
-                    filled: i < scope.ratingValue
-                });
-            }
-        }
-    }
+			$scope.skills = skills;
+		} ]);
+
+employeeManagerControllers.directive('starRating', function() {
+	return {
+		restrict : 'A',
+		template : '<ul class="rating">'
+				+ '<li ng-repeat="star in stars" ng-class="star">' + '\u2605'
+				+ '</li>' + '</ul>',
+		scope : {
+			ratingValue : '=',
+			max : '='
+		},
+		link : function(scope, elem, attrs) {
+			console.log("Recognized the fundoo-rating directive usage");
+			scope.stars = [];
+			for (var i = 0; i < scope.max; i++) {
+				scope.stars.push({
+					filled : i < scope.ratingValue
+				});
+			}
+		}
+	}
 });
 
 employeeManagerControllers
@@ -56,7 +57,7 @@ employeeManagerControllers
 						function($scope, $http, $window) {
 
 							$scope.submissionSuccess = false;
-							
+
 							$scope.ip = location.hostname;
 
 							$scope.submission = function() {
@@ -72,7 +73,56 @@ employeeManagerControllers
 										})
 										.success(
 												function(data) {
-													setTimeout(function(){$window.location.href = "http://" + $scope.ip + ":8080/employee-manager-web/index.jsp#/"}, 2000);
+													setTimeout(
+															function() {
+																$window.location.href = "http://"
+																		+ $scope.ip
+																		+ ":8080/employee-manager-web/index.jsp#/"
+															}, 1500);
+												});
+								$scope.submission();
+							};
+						} ]);
+
+employeeManagerControllers
+		.controller(
+				'EmailController',
+				[
+						'$scope',
+						'$http',
+						'$window',
+						function($scope, $http, $window) {
+
+							$scope.submissionSuccess = false;
+
+							$scope.ip = location.hostname;
+							
+							$scope.email = {
+									to:'',
+									from:'',
+									subject:'',
+									text:''
+							}
+
+							$scope.submission = function() {
+								$scope.submissionSuccess = !$scope.submissionSuccess;
+							}
+
+							this.sendEmail = function(email) {
+								$http(
+										{
+											method : 'POST',
+											url : '/employee-manager-container/rest/sendEmail',
+											data : email
+										})
+										.success(
+												function(data) {
+													setTimeout(
+															function() {
+																$window.location.href = "http://"
+																		+ $scope.ip
+																		+ ":8080/employee-manager-web/index.jsp#/"
+															}, 1500);
 												});
 								$scope.submission();
 							};
@@ -87,7 +137,7 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 	var vm = this;
 
 	vm.login = login;
-	
+
 	vm.register = register;
 
 	vm.loginFailed;
@@ -104,15 +154,15 @@ function LoginController($scope, $routeParams, $location, AuthenticationService)
 					if (response.success) {
 						AuthenticationService.SetCredentials(vm.username,
 								vm.password, response.employeeId);
-						$location.path('/profile/'+response.employeeId);
+						$location.path('/profile/' + response.employeeId);
 					} else {
 						$scope.loginFailed = response.message
 						vm.dataLoading = false;
 					}
 				});
-	};
+	}
+	;
 
-	
 	function register() {
 		$location.path('/account');
 	}
@@ -186,4 +236,3 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 			}
 
 		} ]);
-

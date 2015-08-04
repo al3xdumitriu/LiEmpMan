@@ -351,12 +351,19 @@
 				<artifactId>spring-expression</artifactId>
 				<version>4.2.0.RELEASE</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context-support</artifactId>
 				<version>3.2.8.RELEASE</version>
 			</dependency>
+
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>1.4.7</version>
+			</dependency>
+
 
 		</dependencies>
 	</dependencyManagement>

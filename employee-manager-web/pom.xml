@@ -32,6 +32,20 @@
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>employee-manager-web</finalName>

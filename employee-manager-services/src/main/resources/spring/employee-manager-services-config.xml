@@ -20,21 +20,22 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<!-- SMTP settings -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" autowire="byName">
 		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="465" />
+		<property name="port" value="587" />
 		<property name="username" value="levitestmail@gmail.com" />
 		<property name="password" value="levimail15" />
 
 		<property name="javaMailProperties">
-			<!-- additional properties specific to JavaMail -->
 			<props>
-				<prop key="mail.transport.protocol">smtp</prop>
 				<prop key="mail.smtp.auth">true</prop>
 				<prop key="mail.smtp.starttls.enable">true</prop>
 			</props>
 		</property>
+	</bean>
+
+	<bean id="mail" class="org.employee_manager.services.email.MailMail" autowire="byName">
+	<property name="mailSender" ref="mailSender" />
 	</bean>
 
 	<tx:annotation-driven />

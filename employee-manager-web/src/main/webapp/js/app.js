@@ -30,6 +30,12 @@ applicationModule.config(function($routeProvider) {
 		controller : 'AccountController',
 		controllerAs : 'accountCtrl'
 			
+	}).when('/email', {
+
+		templateUrl : 'email.jsp',
+		controller : 'EmailController',
+		controllerAs : 'emailCtrl'
+			
 	}).otherwise({
 
 		redirectTo : '/employesse'
