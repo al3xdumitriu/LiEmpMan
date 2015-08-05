@@ -31,8 +31,6 @@ employeeManagerControllers.controller('footerController', [ '$scope',
 				"/register" : true
 			};
 
-			$scope.showFooter = urls[$location.$$url];
-		} ]);
 
 employeeManagerControllers.controller('StarCtrl', [ '$scope', '$routeParams',
 		'StarService', function($scope, $routeParams, StarService) {
@@ -94,7 +92,7 @@ employeeManagerControllers
 												function(data) {
 													setTimeout(
 															function() {
-																$window.location.href = "http://localhost:8080/employee-manager-web/index.jsp#/"
+																$window.location.href = "../../"
 															}, 2000);
 												});
 								$scope.submission();
