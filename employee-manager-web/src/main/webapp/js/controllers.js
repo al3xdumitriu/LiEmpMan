@@ -96,12 +96,12 @@ employeeManagerControllers
 							$scope.submissionSuccess = false;
 
 							$scope.ip = location.hostname;
-							
+
 							$scope.email = {
-									to:'',
-									from:'',
-									subject:'',
-									text:''
+								to : '',
+								from : '',
+								subject : '',
+								text : ''
 							}
 
 							$scope.submission = function() {
@@ -124,8 +124,18 @@ employeeManagerControllers
 																		+ ":8080/employee-manager-web/index.jsp#/"
 															}, 1500);
 												});
+								this.addEmail(email);
 								$scope.submission();
 							};
+
+							this.addEmail = function(email) {
+								$http({
+									method : 'POST',
+									url : '/employee-manager-container/rest/sendEmail/db',
+									data : email
+								})
+							};
+
 						} ]);
 
 employeeManagerControllers.controller('LoginController', LoginController);

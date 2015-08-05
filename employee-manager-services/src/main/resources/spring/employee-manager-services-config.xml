@@ -20,7 +20,7 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" autowire="byName">
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
 		<property name="username" value="levitestmail@gmail.com" />
@@ -34,8 +34,10 @@
 		</property>
 	</bean>
 
-	<bean id="mail" class="org.employee_manager.services.email.MailMail" autowire="byName">
-	<property name="mailSender" ref="mailSender" />
+	<bean id="mail" class="org.employee_manager.services.email.MailMail">
+		<property name="mailSender">
+			<ref bean="mailSender" />
+		</property>
 	</bean>
 
 	<tx:annotation-driven />

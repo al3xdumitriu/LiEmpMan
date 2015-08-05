@@ -7,18 +7,18 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.employee_manager.model.Email;
+import org.employee_manager.services.EmailService;
 import org.employee_manager.services.email.MailMail;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Path("/sendEmail")
 public class EmailRestService {
+	
+	@Autowired
+	private EmailService emailService;
 
 	@Autowired
 	private MailMail mail;
-
-	public MailMail getMail() {
-		return mail;
-	}
 
 	public void setMail(MailMail mail) {
 		this.mail = mail;
@@ -33,6 +33,22 @@ public class EmailRestService {
 
 		try {
 			mail.sendMail(email.getFrom(), email.getTo(), email.getSubject(), email.getText());
+			resultResponse = Response.status(Response.Status.OK).build();
+		} catch (Exception e) {
+			resultResponse = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+		}
+		return resultResponse;
+	}
+	
+	@POST
+	@Path("/db")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response sendMailToDb(Email email) {
+
+		Response resultResponse = null;
+
+		try {
+			emailService.save(email);
 			resultResponse = Response.status(Response.Status.OK).build();
 		} catch (Exception e) {
 			resultResponse = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

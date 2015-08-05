@@ -1,5 +1,7 @@
 package org.employee_manager.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,25 +11,30 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="EMAIL")
-public class Email {
-	
+@Table(name = "EMAIL_SEND")
+public class Email implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "EMAIL_ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_EMAIL")
 	@SequenceGenerator(name = "SEQ_GEN_EMAIL", sequenceName = "email_id_sequence", allocationSize = 10)
 	private long id;
-	
-	@Column(name="TO")
+
+	@Column(name = "EMAIL_TO")
 	private String to;
-	
-	@Column(name="FROM")
+
+	@Column(name = "EMAIL_FROM")
 	private String from;
-	
-	@Column(name="SUBJECT")
+
+	@Column(name = "EMAIL_SUBJECT")
 	private String subject;
-	
-	@Column(name="TEXT")
+
+	@Column(name = "EMAIL_TEXT")
 	private String text;
 
 	public long getId() {
