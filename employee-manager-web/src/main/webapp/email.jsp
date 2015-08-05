@@ -55,6 +55,22 @@
 						required.</span>
 				</span> <br></br>
 			</div>
+			<div class="form-group">
+				<label for="image" class="col-lg-2 control-label">Image</label>
+				<div class="col-lg-10">
+					<input type="text" name="image" class="form-control"
+						ng-model="emailCtrl.email.image">
+				</div>
+				<br></br>
+			</div>
+			<div class="form-group">
+				<label for="attachment" class="col-lg-2 control-label">Attachment</label>
+				<div class="col-lg-10">
+					<input type="text" name="attachment" class="form-control"
+						ng-model="emailCtrl.email.attachment">
+				</div>
+				<br></br>
+			</div>
 			<div ng-show=submissionSuccess>Your mail was sent successfully!</div>
 			<br></br>
 			<div>

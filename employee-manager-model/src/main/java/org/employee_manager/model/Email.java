@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "EMAIL_SEND")
@@ -17,7 +18,7 @@ public class Email implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "EMAIL_ID", nullable = false)
@@ -36,6 +37,20 @@ public class Email implements Serializable {
 
 	@Column(name = "EMAIL_TEXT")
 	private String text;
+	
+	@Transient
+	private String image;
+	
+	@Transient
+	private String attachment;
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public static void setSerialversionuid(long serialversionuid) {
+		serialVersionUID = serialversionuid;
+	}
 
 	public long getId() {
 		return id;
@@ -75,5 +90,21 @@ public class Email implements Serializable {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getAttachment() {
+		return attachment;
+	}
+
+	public void setAttachment(String attachment) {
+		this.attachment = attachment;
 	}
 }

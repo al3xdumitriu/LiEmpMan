@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Path("/sendEmail")
 public class EmailRestService {
-	
+
 	@Autowired
 	private EmailService emailService;
 
@@ -32,14 +32,14 @@ public class EmailRestService {
 		Response resultResponse = null;
 
 		try {
-			mail.sendMail(email.getFrom(), email.getTo(), email.getSubject(), email.getText());
+			mail.sendMail(email.getFrom(), email.getTo(), email.getSubject(), email.getText(), email.getImage(), email.getAttachment());
 			resultResponse = Response.status(Response.Status.OK).build();
 		} catch (Exception e) {
 			resultResponse = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}
 		return resultResponse;
 	}
-	
+
 	@POST
 	@Path("/db")
 	@Consumes(MediaType.APPLICATION_JSON)

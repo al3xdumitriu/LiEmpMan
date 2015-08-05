@@ -101,7 +101,9 @@ employeeManagerControllers
 								to : '',
 								from : '',
 								subject : '',
-								text : ''
+								text : '',
+								image : '',
+								attachment : ''
 							}
 
 							$scope.submission = function() {

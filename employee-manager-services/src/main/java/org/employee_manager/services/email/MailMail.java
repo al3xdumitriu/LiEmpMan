@@ -22,7 +22,7 @@ public class MailMail {
 		this.mailSender = mailSender;
 	}
 
-	public void sendMail(String from, String to, String subject, String msg) {
+	public void sendMail(String from, String to, String subject, String msg, String image, String attachment) {
 
 //		 SimpleMailMessage message = new SimpleMailMessage();
 //		 message.setFrom(from);
@@ -41,11 +41,11 @@ public class MailMail {
 			helper.setSubject(subject);
 			helper.setText(msg);
 
-			FileSystemResource res = new FileSystemResource(new File("E:\\BobandTim.jpg"));
-			helper.addInline("BobandTim", res);
+			FileSystemResource res = new FileSystemResource(new File(image));
+			helper.addInline("image.jpg", res);
 			
-			FileSystemResource file = new FileSystemResource(new File("E:\\myFile.txt"));
-			helper.addAttachment("myFile.txt", file);
+			FileSystemResource file = new FileSystemResource(new File(attachment));
+			helper.addAttachment("attachment.txt", file);
 			mailSender.send(message);
 		} catch (MailException e) {
 			e.printStackTrace();
