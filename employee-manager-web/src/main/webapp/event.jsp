@@ -12,23 +12,33 @@
 					">
 
 					<p>
-
-						<b>{{event.name}} </b>
+<br><br>
+						<label>Title:</label><input id="titlu{{event.id}}" type="text" value="{{event.name}}" class="form-control">
+						<br>	<label>StartDate:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'mm/dd/yyyy hh:mm a'" class="form-control" >
+						<br>	<label>EndDate:</label><br> <input id="fDate{{event.id}}" type="text" ng-value="event.endDate | date:'mm/dd/yyyy hh:mm a'" class="form-control" >
+						<br>	<label>Description:</label><br>
+						<textarea id="descr{{event.id}}"  rows="4" cols="40" class="form-control" >
+						{{event.description}}
+						</textarea>
+						<br>	<label>Coordinates:</label><br> <input id="coord{{event.id}}" type="text" ng-model="event.coordinates" class="form-control">
+						<br>	<label>URI:</label><br> <input id="uri{{event.id}}" type="text" ng-model="event.video" class="form-control">
+						
 					</p>
 
 					<div ng-if="event.video!=null">
-						<iframe width="420" height="315" ng-src="{{parseazaLink(event.video)}}">
+						<iframe id="video{{event.id}}" width="420" height="315" ng-src="{{parseazaLink(event.video)}}">
 						</iframe>
 					</div>
+					<button ng-click="editEvent(event.id)"
+							class="btn btn-primary">Edit</button>
 					<div ng-if="event.coordinates!=null">
+					<div ng-if="event.coordinates!=''">
 						<button ng-click="arataLocatia(event.id,event.coordinates)"
-							class="btn btn-primary">Arataa Locatia</button>
+							class="btn btn-primary">Arata Locatia</button>
 						<div id="{{event.id}}" class="map-canvas"></div>
 					</div>
+					</div>
 					
-					<textarea rows="4" cols="40" class="form-control" disabled>
-			{{event.description}}
-			</textarea>
 
 				</div>
 				<br>
@@ -38,10 +48,13 @@
 				Event!</button>
 			<div ng-hide=ascunde class="well bs-component">
 				<form name="eventForm">
-					<br> 	Title: <input type="text" ng-model="eventTest.name" class="form-control"><br> 
-					<br>	Description:<br> <input type="text" ng-model="eventTest.description" class="form-control">
-					<br>	Url:<br> <input type="text" ng-model="eventTest.video" class="form-control">
-					<br>	Coordinates:<br> <input type="text" ng-model="eventTest.coordinates" class="form-control">
+					
+					<br> 	<label>Title:</label> <input type="text" ng-model="eventTest.name" class="form-control"><br> 
+					<br>	<label>Description:</label><br> <input type="text" ng-model="eventTest.description" class="form-control">
+					<br>	<label>Url:</label><br> <input type="text" ng-model="eventTest.video" class="form-control">
+					<br>	<label>Coordinates:</label><br> <input type="text" ng-model="eventTest.coordinates" class="form-control">
+					<br>	<label>StartDate:</label><br> <input type="datetime-local" ng-model="eventTest.startDate" class="form-control">
+					<br>	<label>EndDate:</label><br> <input type="datetime-local" ng-model="eventTest.endDate" class="form-control">
 					<br> <br>
 					<div ng-if="eventTest.name!=null">
 

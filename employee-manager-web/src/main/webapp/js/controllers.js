@@ -200,7 +200,10 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			$http.get($scope.urlfinal).success(function(response) {
 				$scope.events = response;
 			});
-
+			
+			
+			
+			
 			$scope.limit = "2";
 			$scope.add = function() {
 				$scope.limit = parseInt($scope.limit) + 2;
@@ -327,6 +330,65 @@ employeeManagerControllers.controller('myCtrlEvent', [
 
 			}
 
+			
+			$scope.editEvent = function(idEvent) {
+				
+			/*	window.alert(document.getElementById("titlu"+idEvent).value);
+				window.alert(document.getElementById("sDate"+idEvent).value);
+				window.alert(document.getElementById("fDate"+idEvent).value);
+				window.alert(document.getElementById("descr"+idEvent).value);			
+				window.alert(document.getElementById("coord"+idEvent).value);*/
+				var urlvideo=null;
+				var sDatee=null;
+				var fDatee=null;
+				var title=null;
+				var descr=null;
+				var coord=null;
+				if(document.getElementById("video"+idEvent)!=null )
+					 urlvideo=document.getElementById("video"+idEvent).src;
+				if(document.getElementById("titlu"+idEvent)!=null)
+					title=document.getElementById("titlu"+idEvent).value;
+				if(document.getElementById("descr"+idEvent)!=null)
+					{
+					descr=document.getElementById("descr"+idEvent).value;
+					descr=descr.trim();
+					}
+				if(document.getElementById("coord"+idEvent)!=null )
+					coord=document.getElementById("coord"+idEvent).value;
+				if(document.getElementById("sDate"+idEvent)!=null )
+					sDatee=Date.parse(document.getElementById("sDate"+idEvent).value);
+				if(document.getElementById("fDate"+idEvent)!=null )
+					fDatee=Date.parse(document.getElementById("fDate"+idEvent).value);
+				
+				$scope.eventEditTest = {
+						id : idEvent,
+						name : title,
+						coordinates : coord,
+						video : urlvideo,
+						startDate : sDatee,
+						endDate : fDatee,
+						description : descr,
+						participantsNumber : null,
+						eventEvaluations : null,
+						coordinatorId : null,
+						organizers : null,
+						eventTypeId : null,
+						eventStatusId : null
+				};
+				
+				$http({
+					method : 'POST',
+					url : '/employee-manager-container/rest/event',
+					data : $scope.eventEditTest
+
+				});
+				
+				
+				
+
+			}
+			
+			
 			/*
 			 * $scope.$on('$viewContentLoaded', function() {
 			 * $scope.incarcaTot(); });
