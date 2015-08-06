@@ -37,6 +37,9 @@ public class Event implements Serializable {
 	@Column(name = "EVENT_VIDEO")
 	private String video;
 
+	@Column(name = "EVENT_ORGANIZATOR_NAME")
+	private String organizatorName;
+	
 	@Column(name = "EVENT_START_DATE")
 	private Date startDate;
 
@@ -171,4 +174,14 @@ public class Event implements Serializable {
 		this.eventStatusId = eventStatusId;
 	}
 
+	public String getOrganizatorName() {
+		return organizatorName;
+	}
+
+	public void setOrganizatorName(String organizatorName) {
+		this.organizatorName = organizatorName;
+	}
+
+	
+	
 }

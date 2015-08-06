@@ -12,8 +12,9 @@
 					">
 
 					<p>
-<br><br>
-						<label>Title:</label><input id="titlu{{event.id}}" type="text" value="{{event.name}}" class="form-control">
+<br>
+						<br>    <label>Title:</label><input id="titlu{{event.id}}" type="text" value="{{event.name}}" class="form-control">
+						<br>    <label>Organizator Name:</label><input id="oName{{event.id}}" type="text" value="{{event.organizatorName}}" class="form-control">
 						<br>	<label>StartDate:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'mm/dd/yyyy hh:mm a'" class="form-control" >
 						<br>	<label>EndDate:</label><br> <input id="fDate{{event.id}}" type="text" ng-value="event.endDate | date:'mm/dd/yyyy hh:mm a'" class="form-control" >
 						<br>	<label>Description:</label><br>
@@ -50,6 +51,7 @@
 				<form name="eventForm">
 					
 					<br> 	<label>Title:</label> <input type="text" ng-model="eventTest.name" class="form-control"><br> 
+					<br> 	<label>Organizator Name:</label> <input type="text" ng-model="eventTest.organizatorName" class="form-control"><br> 
 					<br>	<label>Description:</label><br> <input type="text" ng-model="eventTest.description" class="form-control">
 					<br>	<label>Url:</label><br> <input type="text" ng-model="eventTest.video" class="form-control">
 					<br>	<label>Coordinates/Adress:</label><br> <input type="text" ng-model="eventTest.coordinates" class="form-control">

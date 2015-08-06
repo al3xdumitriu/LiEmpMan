@@ -291,6 +291,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			$scope.eventTest = {
 				id : null,
 				name : null,
+				organizatorName : null,
 				coordinates : null,
 				video : null,
 				startDate : null,
@@ -315,6 +316,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 				$scope.eventTest = {
 					id : null,
 					name : null,
+					organizatorName : null,
 					coordinates : null,
 					video : null,
 					startDate : null,
@@ -338,12 +340,15 @@ employeeManagerControllers.controller('myCtrlEvent', [
 				var sDatee=null;
 				var fDatee=null;
 				var title=null;
+				var orgName=null;
 				var descr=null;
 				var coord=null;
 				if(document.getElementById("video"+idEvent)!=null )
 					 urlvideo=document.getElementById("video"+idEvent).src;
 				if(document.getElementById("titlu"+idEvent)!=null)
 					title=document.getElementById("titlu"+idEvent).value;
+				if(document.getElementById("oName"+idEvent)!=null)
+					orgName=document.getElementById("oName"+idEvent).value;
 				if(document.getElementById("descr"+idEvent)!=null)
 					{
 					descr=document.getElementById("descr"+idEvent).value;
@@ -359,6 +364,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 				$scope.eventEditTest = {
 						id : idEvent,
 						name : title,
+						organizatorName : orgName,
 						coordinates : coord,
 						video : urlvideo,
 						startDate : sDatee,
