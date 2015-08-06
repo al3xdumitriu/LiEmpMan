@@ -47,6 +47,7 @@
 				<input class="btn btn-primary" id="save" type="button" value="Save"
 					disabled ng-click="saveMethode()"> <input class="btn btn-primary"
 					id="cancel" type="button" value="Cancel" disabled>
+					<input class="btn btn-primary" id="edit" type="button"  ng-click="serialize()" value="XML">
 	</div>
 </div>
 <script>
