@@ -208,13 +208,13 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			$scope.add = function() {
 				$scope.limit = parseInt($scope.limit) + 2;
 			}
-			$scope.ascunde = true;
+			$scope.hide = true;
 
-			$scope.arata = function() {
-				$scope.ascunde = !$scope.ascunde;
+			$scope.showForm = function() {
+				$scope.hide = !$scope.hide;
 			}
 
-			$scope.arataLocatia = function(eventId, coordEvent) {
+			$scope.showLocation = function(eventId, coordEvent) {
 
 				var mapCanvas = document.getElementById(eventId);
 				var mapOptions = {
@@ -242,16 +242,6 @@ employeeManagerControllers.controller('myCtrlEvent', [
 
 			}
 
-			$scope.incarcaTot = function() {
-
-				for (i = 0; i < $scope.events.length; i++) {
-					/* alert($scope.events[i].id); */
-					if ($scope.events[i].coordinates != null)
-						$scope.arataLocatia($scope.events[i].id,
-								$scope.events[i].coordinates);
-				}
-
-			};
 
 			$scope.parseazaLink = function(link) {
 
@@ -264,22 +254,22 @@ employeeManagerControllers.controller('myCtrlEvent', [
 						positionV = positionV + 2;
 						if (link.indexOf('&') != -1) {
 							var positionS = link.indexOf('&');
-							var noutate = 'https://www.youtube.com/embed/'
+							var newLink = 'https://www.youtube.com/embed/'
 									+ link.substring(positionV, positionS);
 							/*
 							 * alert("pozitia initiala "+positionV + "poz finala "
 							 * +positionS + "=substring" +noutate);
 							 */link = null;
-							return noutate;
+							return newLink;
 						} else {
-							var noutate = 'https://www.youtube.com/embed/'
+							var newLink = 'https://www.youtube.com/embed/'
 									+ link.substring(positionV, 100);
 							link = null;
 							/*
 							 * alert("pozitia initiala "+positionV+2 + "poz
 							 * finala " +positionS + "=substring" +noutate);
 							 */
-							return noutate;
+							return newLink;
 						}
 
 					}
@@ -305,8 +295,8 @@ employeeManagerControllers.controller('myCtrlEvent', [
 				eventStatusId : null
 			};
 
-			$scope.incearcaPost = function() {
-				$scope.ascunde = !$scope.ascunde;
+			$scope.postEvent = function() {
+				$scope.hide = !$scope.hide;
 				$http({
 					method : 'POST',
 					url : '/employee-manager-container/rest/event',
@@ -391,9 +381,6 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			}
 			
 			
-			/*
-			 * $scope.$on('$viewContentLoaded', function() {
-			 * $scope.incarcaTot(); });
-			 */
+		
 
 		} ]);
