@@ -1,7 +1,7 @@
 var applicationModule = angular.module('appModule', [ 'ngRoute', 'ngCookies',
 		'employeeManagerControllers', 'employeeManagerServices' ]);
 
-applicationModule.config(function($routeProvider) {
+applicationModule.config(function($routeProvider,$sceDelegateProvider) {
 
 	$routeProvider.when('/', {
 		
@@ -14,11 +14,20 @@ applicationModule.config(function($routeProvider) {
 		templateUrl : 'content.jsp',
 		controller : 'mainController'
 			
-	}).when('/myProfile', {
+	}).when('/profile/:id', {
 
-		templateUrl : 'myProfile.jsp',
-		controller : 'LoginController',
-		controllerAs : 'vm'
+		templateUrl : 'profile.jsp',
+		controller : 'EmployeeDetailsController',
+
+	}).when('/achievement/:id', {
+
+		templateUrl : 'achievement.jsp',
+		controller : 'myCtrlAchievEmp',
+
+	}).when('/event', {
+
+		templateUrl : 'event.jsp',
+		controller : 'myCtrlEvent',
 
 	}).when('/account', {
 
@@ -31,6 +40,13 @@ applicationModule.config(function($routeProvider) {
 		redirectTo : '/employesse'
 
 	});
+	
+	$sceDelegateProvider.resourceUrlWhitelist([
+	                                            'self',
+	                                            '*://www.youtube.com/**'
+	                                            
+	                                          ]);
+	
 }).run(run);
 
 run.$inject = [ '$rootScope', '$location', '$cookieStore', '$http' ];
@@ -48,7 +64,7 @@ function run($rootScope, $location, $cookieStore, $http) {
 				// redirect to login page if not logged in and trying to access
 				// a restricted page
 				var restrictedPage = $.inArray($location.path(), [ '/',
-						'/register' ]) === -1;
+						'/account' ]) === -1;
 				var loggedIn = $rootScope.globals.currentUser;
 				if (restrictedPage && !loggedIn) {
 					$location.path('/');
