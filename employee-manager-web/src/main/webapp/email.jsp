@@ -56,18 +56,18 @@
 				</span> <br></br>
 			</div>
 			<div class="form-group">
-				<label for="image" class="col-lg-2 control-label">Image</label>
+				<label for="imageName" class="col-lg-2 control-label">Image</label>
 				<div class="col-lg-10">
-					<input type="text" name="image" accept="image/*" class="form-control"
-						ng-model="emailCtrl.email.image">
+					<input type="text" name="imageName" accept="image/*" class="form-control"
+						ng-model="emailCtrl.email.imageName">
 				</div>
 				<br></br>
 			</div>
 			<div class="form-group">
-				<label for="attachment" class="col-lg-2 control-label">Attachment</label>
+				<label for="attachmentName" class="col-lg-2 control-label">Attachment</label>
 				<div class="col-lg-10">
-					<input type="text" name="attachment" class="form-control"
-						ng-model="emailCtrl.email.attachment">
+					<input type="text" name="attachmentName" class="form-control"
+						ng-model="emailCtrl.email.attachmentName">
 				</div>
 				<br></br>
 			</div>

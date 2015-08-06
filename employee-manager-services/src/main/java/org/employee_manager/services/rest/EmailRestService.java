@@ -34,7 +34,7 @@ public class EmailRestService {
 		Response resultResponse = null;
 
 		try {
-			mail.sendMail(email.getFrom(), email.getTo(), email.getSubject(), email.getText(), email.getImage(), email.getAttachment());
+			mail.sendMail(email.getFrom(), email.getTo(), email.getSubject(), email.getText(), email.getImageName(), email.getAttachmentName());
 			resultResponse = Response.status(Response.Status.OK).build();
 		} catch (Exception e) {
 			resultResponse = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

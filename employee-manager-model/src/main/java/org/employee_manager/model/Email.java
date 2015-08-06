@@ -38,12 +38,18 @@ public class Email implements Serializable {
 
 	@Column(name = "EMAIL_TEXT")
 	private String text;
+
+	@Column(name = "IMAGE_NAME")
+	private String imageName;
 	
-	@Transient
-	private String image;
+	@Column(name = "IMAGE_DATA")
+	private byte[] imageData;
+
+	@Column(name = "ATTACHMENT_NAME")
+	private String attachmentName;
 	
-	@Transient
-	private String attachment;
+	@Column(name = "ATTACHMENT_DATA")
+	private byte[] attachmentData;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -93,19 +99,35 @@ public class Email implements Serializable {
 		this.text = text;
 	}
 
-	public String getImage() {
-		return image;
+	public String getImageName() {
+		return imageName;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
-	public String getAttachment() {
-		return attachment;
+	public byte[] getImageData() {
+		return imageData;
 	}
 
-	public void setAttachment(String attachment) {
-		this.attachment = attachment;
+	public void setImageData(byte[] imageData) {
+		this.imageData = imageData;
+	}
+
+	public String getAttachmentName() {
+		return attachmentName;
+	}
+
+	public void setAttachmentName(String attachmentName) {
+		this.attachmentName = attachmentName;
+	}
+
+	public byte[] getAttachmentData() {
+		return attachmentData;
+	}
+
+	public void setAttachmentData(byte[] attachmentData) {
+		this.attachmentData = attachmentData;
 	}
 }
