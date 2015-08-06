@@ -20,11 +20,14 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
+	<context:property-placeholder
+		location="file:${EMPLOYEE_MANAGER_EMAIL_CONFIG}/employeeManagerEmail.properties" />
+	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="587" />
-		<property name="username" value="levitestmail@gmail.com" />
-		<property name="password" value="levimail15" />
+		<property name="host" value="${employee.manager.email.host}" />
+		<property name="port" value="${employee.manager.email.port}" />
+		<property name="username" value="${employee.manager.email.username}" />
+		<property name="password" value="${employee.manager.email.password}" />
 
 		<property name="javaMailProperties">
 			<props>
