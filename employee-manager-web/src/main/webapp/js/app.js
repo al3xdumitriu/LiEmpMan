@@ -43,7 +43,6 @@ applicationModule.config(function($routeProvider,$sceDelegateProvider) {
 	
 	$sceDelegateProvider.resourceUrlWhitelist([
 	                                            'self',
-	                                            '*://www.youtu.be/**',
 	                                            '*://www.youtube.com/**'
 	                                            
 	                                          ]);

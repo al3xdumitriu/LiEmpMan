@@ -20,7 +20,7 @@
 						<textarea id="descr{{event.id}}"  rows="4" cols="40" class="form-control" >
 						{{event.description}}
 						</textarea>
-						<br>	<label>Coordinates:</label><br> <input id="coord{{event.id}}" type="text" ng-model="event.coordinates" class="form-control">
+						<br>	<label>Coordinates/Adress:</label><br> <input id="coord{{event.id}}" type="text" ng-model="event.coordinates" class="form-control">
 						<br>	<label>URI:</label><br> <input id="uri{{event.id}}" type="text" ng-model="event.video" class="form-control">
 						
 					</p>
@@ -52,7 +52,7 @@
 					<br> 	<label>Title:</label> <input type="text" ng-model="eventTest.name" class="form-control"><br> 
 					<br>	<label>Description:</label><br> <input type="text" ng-model="eventTest.description" class="form-control">
 					<br>	<label>Url:</label><br> <input type="text" ng-model="eventTest.video" class="form-control">
-					<br>	<label>Coordinates:</label><br> <input type="text" ng-model="eventTest.coordinates" class="form-control">
+					<br>	<label>Coordinates/Adress:</label><br> <input type="text" ng-model="eventTest.coordinates" class="form-control">
 					<br>	<label>StartDate:</label><br> <input type="datetime-local" ng-model="eventTest.startDate" class="form-control">
 					<br>	<label>EndDate:</label><br> <input type="datetime-local" ng-model="eventTest.endDate" class="form-control">
 					<br> <br>

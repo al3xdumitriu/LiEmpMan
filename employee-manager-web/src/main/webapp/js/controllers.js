@@ -333,11 +333,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			
 			$scope.editEvent = function(idEvent) {
 				
-			/*	window.alert(document.getElementById("titlu"+idEvent).value);
-				window.alert(document.getElementById("sDate"+idEvent).value);
-				window.alert(document.getElementById("fDate"+idEvent).value);
-				window.alert(document.getElementById("descr"+idEvent).value);			
-				window.alert(document.getElementById("coord"+idEvent).value);*/
+
 				var urlvideo=null;
 				var sDatee=null;
 				var fDatee=null;
