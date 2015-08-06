@@ -53,6 +53,9 @@ public class Account implements Serializable {
 
 	@OneToMany(mappedBy = "accountId")
 	private Set<Role> roles;
+	
+	@Transient
+	private String capchaAnswer;
 
 	public long getId() {
 		return id;
@@ -109,6 +112,15 @@ public class Account implements Serializable {
 	public void setEmployeeIdJson(long employeeIdJson) {
 		this.employeeIdJson = employeeIdJson;
 	}
+
+	public String getCapchaAnswer() {
+		return capchaAnswer;
+	}
+
+	public void setCapchaAnswer(String capchaAnswer) {
+		this.capchaAnswer = capchaAnswer;
+	}
+	
 	
 	
 	

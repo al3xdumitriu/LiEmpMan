@@ -48,7 +48,7 @@ employeeManagerControllers.directive('starRating', function () {
 
 employeeManagerControllers
 		.controller(
-				'AccountController',
+				'AccountControllerxxx',
 				[
 						'$scope',
 						'$http',
@@ -70,28 +70,87 @@ employeeManagerControllers
 										})
 										.success(
 												function(data) {
-													setTimeout(function(){$window.location.href = "http://localhost:8080/employee-manager-web/index.jsp#/"}, 2000);
+													setTimeout(function(){$window.location.href = "../../"}, 2000);
 												});
 								$scope.submission();
 							};
 						} ]);
 
+
+employeeManagerControllers.controller('AccountController', AccountController);
+AccountController.$inject = [ '$scope', '$routeParams','vcRecaptchaService',
+                    		'AuthenticationService','$http','$window' ];
+
+function AccountController($scope, $routeParams, vcRecaptchaService,
+		AuthenticationService, $http,$window) {
+
+	
+	var vm = this;
+	$scope.ip = location.hostname;
+	$scope.submissionSuccess = false;
+	  $scope.submission = function() {
+	  $scope.submissionSuccess = !$scope.submissionSuccess;
+	}
+	vm.publicKey = "6LdjuAoTAAAAAN_VK2hwBJecTvmt8fdk_1EYHdtE";
+	vm.signup = function() {
+
+		/* vcRecaptchaService.getResponse() gives you the g-captcha-response */
+
+		if (vcRecaptchaService.getResponse() === "") { // if string is empty
+			alert("Please resolve the captcha and submit!")
+		} else {
+
+			$scope.account = {
+				username : vm.account.username,
+				password : vm.account.password,
+				employeeId : {name:vm.account.employeeId.name,email:vm.account.employeeId.email,phone:vm.account.employeeId.phone},
+				capchaAnswer : vcRecaptchaService.getResponse()
+			};
+			/* MAKE AJAX REQUEST to our server with g-captcha-string */
+
+			$http({
+				method : 'POST',
+				url : '/employee-manager-container/rest/account',
+				data : $scope.account
+
+			}).success(function(response) {
+				if (response.success.valueType === "TRUE") {
+					alert("Successfully verified and signed up the user");
+					setTimeout(function() { $window.location.href = "http://"+ $scope.ip+ ":8080/employee-manager-web/index.jsp#/"}, 1500);
+				} else {
+					alert("User verification failed");
+				}
+			});
+		}
+	}
+}
+
+
 employeeManagerControllers.controller('LoginController', LoginController);
 LoginController.$inject = [ '$scope', '$routeParams', '$location',
-		'AuthenticationService' ];
+		'AuthenticationService','$rootScope'];//am ramas aici--> am adaugat rootScope
 
-function LoginController($scope, $routeParams, $location, AuthenticationService) {
+function LoginController($scope, $routeParams, $location, AuthenticationService,$rootScope) {
 
 	var vm = this;
 
+	publicKey = "6LdjuAoTAAAAAN_VK2hwBJecTvmt8fdk_1EYHdtE";
+	
 	vm.login = login;
 	
 	vm.register = register;
 
 	vm.loginFailed;
+	
+	nrAttempts=0;
 
-	function initController() { // reset login status //
+	function initController() { // reset login status //and increments the number of attempts
 		AuthenticationService.ClearCredentials();
+		$rootScope.attempts = {
+				nrAttempts : nrAttempts + 1
+		};		
+		nrAttempts=nrAttempts+1;
+		alert(nrAttempts);
 	}
 	;
 	function login() {

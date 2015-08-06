@@ -24,6 +24,9 @@
 
 <script src="js/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js"></script>
+
+<script type="text/javascript" src="js/angular-recaptcha.min.js"></script>
 
 <!-- Created Scripts -->
 
@@ -32,6 +35,8 @@
 <script src="js/controllers.js"></script>
 
 <script src="js/services.js"></script>
+
+
 
 </head>
 

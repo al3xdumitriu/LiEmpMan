@@ -1,8 +1,15 @@
+<script
+  src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
+  async defer>
+ </script>
+ 
+
 <div class="col-lg-6">
 	<h2>Create Account</h2>
 	<div class="well bs-component">
 		<form name="accountForm" class="form-horizontal"
-			ng-submit="accountCtrl.addAccount(accountCtrl.account)" novalidate>
+			ng-submit="accountCtrl.signup()" novalidate>
+			
 			<div class="form-group">
 				<label for="name" class="col-lg-2 control-label">Name<span
 					style="color: red">*</span></label>
@@ -92,10 +99,13 @@
 			<div ng-show=submissionSuccess>Your account was created
 				successfully!</div>
 			<br></br>
+			<!--Recaptcha Widget--->
+				<div vc-recaptcha key="accountCtrl.publicKey"></div>
 			<div>
-			<button class="btn btn-primary" ng-disabled="!accountForm.$valid" type="submit">Create
+			<button class="btn btn-primary"  type="submit">Create
 				Account</button>
 	</div>
+	
 	</form>
 </div>
 </div>
