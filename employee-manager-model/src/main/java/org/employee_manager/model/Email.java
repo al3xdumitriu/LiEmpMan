@@ -1,5 +1,6 @@
 package org.employee_manager.model;
 
+import java.io.File;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -44,12 +45,12 @@ public class Email implements Serializable {
 	@Transient
 	private String attachment;
 
-	public static long getSerialversionuid() {
+	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
 
-	public static void setSerialversionuid(long serialversionuid) {
-		serialVersionUID = serialversionuid;
+	public static void setSerialVersionUID(long serialVersionUID) {
+		Email.serialVersionUID = serialVersionUID;
 	}
 
 	public long getId() {

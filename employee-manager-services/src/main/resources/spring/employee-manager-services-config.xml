@@ -34,7 +34,7 @@
 		</property>
 	</bean>
 
-	<bean id="mail" class="org.employee_manager.services.email.MailMail">
+	<bean id="mail" class="org.employee_manager.services.email.Mail">
 		<property name="mailSender">
 			<ref bean="mailSender" />
 		</property>

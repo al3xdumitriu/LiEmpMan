@@ -1,5 +1,7 @@
 package org.employee_manager.services.rest;
 
+import java.io.File;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -8,7 +10,7 @@ import javax.ws.rs.core.Response;
 
 import org.employee_manager.model.Email;
 import org.employee_manager.services.EmailService;
-import org.employee_manager.services.email.MailMail;
+import org.employee_manager.services.email.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Path("/sendEmail")
@@ -18,9 +20,9 @@ public class EmailRestService {
 	private EmailService emailService;
 
 	@Autowired
-	private MailMail mail;
+	private Mail mail;
 
-	public void setMail(MailMail mail) {
+	public void setMail(Mail mail) {
 		this.mail = mail;
 	}
 

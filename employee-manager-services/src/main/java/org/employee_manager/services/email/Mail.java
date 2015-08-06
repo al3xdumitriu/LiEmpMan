@@ -13,8 +13,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
-public class MailMail {
-	
+public class Mail {
+
 	@Autowired
 	private JavaMailSenderImpl mailSender;
 
@@ -24,12 +24,12 @@ public class MailMail {
 
 	public void sendMail(String from, String to, String subject, String msg, String image, String attachment) {
 
-//		 SimpleMailMessage message = new SimpleMailMessage();
-//		 message.setFrom(from);
-//		 message.setTo(to);
-//		 message.setSubject(subject);
-//		 message.setText(msg);
-//		 mailSender.send(message);
+		// SimpleMailMessage message = new SimpleMailMessage();
+		// message.setFrom(from);
+		// message.setTo(to);
+		// message.setSubject(subject);
+		// message.setText(msg);
+		// mailSender.send(message);
 
 		MimeMessage message = mailSender.createMimeMessage();
 
@@ -41,12 +41,18 @@ public class MailMail {
 			helper.setSubject(subject);
 			helper.setText(msg);
 
-			FileSystemResource res = new FileSystemResource(new File(image));
-			helper.addInline("image.jpg", res);
-			
-			FileSystemResource file = new FileSystemResource(new File(attachment));
-			helper.addAttachment("attachment.txt", file);
+			if (image != null) {
+				FileSystemResource res = new FileSystemResource(image);
+				helper.addInline(image, res);
+			}
+
+			if (attachment != null) {
+				FileSystemResource file = new FileSystemResource(attachment);
+				helper.addAttachment(attachment, file);
+			}
+
 			mailSender.send(message);
+
 		} catch (MailException e) {
 			e.printStackTrace();
 		} catch (MessagingException e) {

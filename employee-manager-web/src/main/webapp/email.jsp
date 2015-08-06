@@ -1,5 +1,5 @@
 <div class="col-lg-6">
-	<h2>Send Email</h2>
+	<h2>Send Feedback</h2>
 	<div class="well bs-component">
 		<form name="emailForm" class="form-horizontal"
 			ng-submit="emailCtrl.sendEmail(emailCtrl.email)" novalidate>
@@ -58,7 +58,7 @@
 			<div class="form-group">
 				<label for="image" class="col-lg-2 control-label">Image</label>
 				<div class="col-lg-10">
-					<input type="text" name="image" class="form-control"
+					<input type="text" name="image" accept="image/*" class="form-control"
 						ng-model="emailCtrl.email.image">
 				</div>
 				<br></br>
@@ -71,11 +71,11 @@
 				</div>
 				<br></br>
 			</div>
-			<div ng-show=submissionSuccess>Your mail was sent successfully!</div>
+			<div ng-show=submissionSuccess>Your feedback was sent successfully!</div>
 			<br></br>
 			<div>
 				<button class="btn btn-primary" ng-disabled="!emailForm.$valid"
-					type="submit">Send Email</button>
+					type="submit">Send Feedback</button>
 			</div>
 		</form>
 	</div>
