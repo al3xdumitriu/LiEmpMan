@@ -9,16 +9,11 @@ applicationModule.config(function($routeProvider,$sceDelegateProvider) {
 		controller : 'LoginController',
 		controllerAs : 'vm'
 			
-	}).when('/content', {
-
-		templateUrl : 'content.jsp',
-		controller : 'mainController'
-			
 	}).when('/profile/:id', {
 
 		templateUrl : 'profile.jsp',
 		controller : 'EmployeeDetailsController',
-
+	
 	}).when('/achievement/:id', {
 
 		templateUrl : 'achievement.jsp',
@@ -51,6 +46,7 @@ applicationModule.config(function($routeProvider,$sceDelegateProvider) {
 
 run.$inject = [ '$rootScope', '$location', '$cookieStore', '$http' ];
 function run($rootScope, $location, $cookieStore, $http) {
+	
 	// keep user logged in after page refresh
 	$rootScope.globals = $cookieStore.get('globals') || {};
 	if ($rootScope.globals.currentUser) {

@@ -1,20 +1,28 @@
 var employeeManagerControllers = angular.module('employeeManagerControllers',
-		[ 'employeeManagerServices' ]);
+    ['employeeManagerServices']);
 
-employeeManagerControllers.controller('mainController', [ '$scope',
-		'employeesService', function($scope, EmployeesService) {
-			$scope.content = "content";
-		} ]);
+employeeManagerControllers.controller('headerController', ['$scope',
+    '$location', function ($scope, $location) {
 
-employeeManagerControllers.controller('headerController', [ '$scope',
-		function($scope) {
-			$scope.header = "header";
-		} ]);
+        var urls = {
+            "/": true,
+            "/register": true
+        };
+        $scope.showHeader = urls[$location.$$url];
 
-employeeManagerControllers.controller('footerController', [ '$scope',
-		function($scope) {
-			$scope.footer = "footer";
-		} ]);
+    }]);
+
+employeeManagerControllers.controller('contentMenuController', ['$scope', '$location',
+    'employeesService', function ($scope, $location) {
+
+        var urls = {
+            "/": true,
+            "/register": true
+        };
+        $scope.showContentMenu = urls[$location.$$url];
+
+    }]);
+
 
 employeeManagerControllers.controller('StarCtrl', [ '$scope', '$routeParams',
 		'StarService', function($scope, $routeParams, StarService) {
@@ -48,146 +56,153 @@ employeeManagerControllers.directive('starRating', function() {
 });
 
 employeeManagerControllers
-		.controller(
-				'AccountController',
-				[
-						'$scope',
-						'$http',
-						'$window',
-						function($scope, $http, $window) {
+    .controller(
+    'AccountController',
+    [
+        '$scope',
+        '$http',
+        '$window',
+        function ($scope, $http, $window) {
 
-							$scope.submissionSuccess = false;
+            $scope.submissionSuccess = false;
 
-							$scope.submission = function() {
-								$scope.submissionSuccess = !$scope.submissionSuccess;
-							}
+            $scope.ip = location.hostname;
 
-							this.addAccount = function(account) {
-								$http(
-										{
-											method : 'POST',
-											url : '/employee-manager-container/rest/account',
-											data : account
-										})
-										.success(
-												function(data) {
-													setTimeout(
-															function() {
-																$window.location.href = "http://localhost:8080/employee-manager-web/index.jsp#/"
-															}, 2000);
-												});
-								$scope.submission();
-							};
-						} ]);
+            $scope.submission = function () {
+                $scope.submissionSuccess = !$scope.submissionSuccess;
+            }
+
+            this.addAccount = function (account) {
+                $http(
+                    {
+                        method: 'POST',
+                        url: '/employee-manager-container/rest/account',
+                        data: account
+                    })
+                    .success(
+            function(data) {
+             setTimeout(
+               function() {
+                $window.location.href = "http://"
+                  + $scope.ip
+                  + ":8080/employee-manager-web/index.jsp#/"
+               }, 1500);
+            });
+                $scope.submission();
+            };
+        }]);
 
 employeeManagerControllers.controller('LoginController', LoginController);
-LoginController.$inject = [ '$scope', '$routeParams', '$location',
-		'AuthenticationService' ];
+LoginController.$inject = ['$scope', '$routeParams', '$location', '$route',
+    'AuthenticationService'];
 
-function LoginController($scope, $routeParams, $location, AuthenticationService) {
+function LoginController($scope, $routeParams, $location, $route,
+                         AuthenticationService) {
 
-	var vm = this;
+    var vm = this;
 
-	vm.login = login;
+    vm.login = login;
 
-	vm.register = register;
+    vm.register = register;
 
-	vm.loginFailed;
+    vm.loginFailed;
+    function initController() { // reset login status //
+        AuthenticationService.ClearCredentials();
+    }
+    ;
+    function login() {
+        initController();
+        vm.dataLoading = true;
+        AuthenticationService.Login(vm.username, vm.password,
+            function (response) {
+                if (response.success) {
+                    AuthenticationService.SetCredentials(vm.username,
+                        vm.password, response.employeeId);
 
-	function initController() { // reset login status //
-		AuthenticationService.ClearCredentials();
-	}
-	;
-	function login() {
-		initController();
-		vm.dataLoading = true;
-		AuthenticationService.Login(vm.username, vm.password,
-				function(response) {
-					if (response.success) {
-						AuthenticationService.SetCredentials(vm.username,
-								vm.password, response.employeeId);
-						$location.path('/profile/' + response.employeeId);
-					} else {
-						$scope.loginFailed = response.message
-						vm.dataLoading = false;
-					}
-				});
-	}
-	;
+                    $location.path('/profile/' + response.employeeId);
 
-	function register() {
-		$location.path('/account');
-	}
+                } else {
+                    $scope.loginFailed = response.message
+                    vm.dataLoading = false;
+                }
+            });
+    }
+    ;
+
+    function register() {
+        $location.path('/account');
+    }
 }
 
-employeeManagerControllers.controller('EmployeeDetailsController', [ '$scope',
-		'$routeParams', 'employeesService', '$http',
-		function($scope, $routeParams, employeesService, $http) {
+employeeManagerControllers.controller('EmployeeDetailsController', ['$scope',
+    '$routeParams', 'employeesService', '$http', '$route',
+    function ($scope, $routeParams, employeesService, $http, $route) {
 
-			$scope.employee = employeesService.employee({
-				id : $routeParams.id
-			});
+        $scope.employee = employeesService.employee({
+            id: $routeParams.id
+        });
 
-			$scope.saveMethode = function() {
-				$http({
-					method : 'PUT',
-					url : '/employee-manager-container/rest/employee',
-					data : $scope.employee
-				})
-			};
-		} ]);
+        $scope.saveMethode = function () {
+            $http({
+                method: 'PUT',
+                url: '/employee-manager-container/rest/employee',
+                data: $scope.employee
+            })
+        };
+    }]);
 
 employeeManagerControllers.controller('myCtrlAchievEmp', [
-		'$scope',
-		'$http',
-		'$routeParams',
-		function($scope, $http, $routeParams) {
+    '$scope',
+    '$http',
+    '$routeParams',
+    function ($scope, $http, $routeParams) {
 
-			$scope.urlfinal = "/employee-manager-container/rest/employee/"
-					+ $routeParams.id + "/achievement";
+        $scope.urlfinal = "/employee-manager-container/rest/employee/"
+            + $routeParams.id + "/achievement";
 
-			$http.get($scope.urlfinal).success(function(response) {
-				$scope.achievements = response;
-			});
+        $http.get($scope.urlfinal).success(function (response) {
+            $scope.achievements = response;
+        });
 
-			$scope.limit = "4";
-			$scope.add = function() {
-				$scope.limit = parseInt($scope.limit) + 4;
-			}
-			$scope.ascunde = true;
+        $scope.limit = "4";
+        $scope.add = function () {
+            $scope.limit = parseInt($scope.limit) + 4;
+        }
+        $scope.ascunde = true;
 
-			$scope.arata = function() {
-				$scope.ascunde = !$scope.ascunde;
-			}
+        $scope.arata = function () {
+            $scope.ascunde = !$scope.ascunde;
+        }
 
-			$scope.achievementTest = {
-				id : 213213,
-				name : '',
-				description : '',
-				employeeId : {
-					id : $routeParams.id
-				}
-			};
+        $scope.achievementTest = {
+            id: 213213,
+            name: '',
+            description: '',
+            employeeId: {
+                id: $routeParams.id
+            }
+        };
 
-			$scope.incearcaPost = function() {
-				$scope.ascunde = !$scope.ascunde;
-				$http({
-					method : 'POST',
-					url : '/employee-manager-container/rest/achievement',
-					data : $scope.achievementTest
+        $scope.incearcaPost = function () {
+            $scope.ascunde = !$scope.ascunde;
+            $http({
+                method: 'POST',
+                url: '/employee-manager-container/rest/achievement',
+                data: $scope.achievementTest
 
-				});
-				$scope.achievementTest = {
-					id : 213213,
-					name : '',
-					description : '',
-					employeeId : {
-						id : $routeParams.id
-					}
-				};
-			}
+            });
+            $scope.achievementTest = {
+                id: 213213,
+                name: '',
+                description: '',
+                employeeId: {
+                    id: $routeParams.id
+                }
+            };
+        }
+    }]);
 
-		} ]);
+
 employeeManagerControllers.controller('myCtrlEvent', [
 		'$scope',
 		'$http',
