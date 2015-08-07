@@ -5,7 +5,7 @@ employeeManagerServices.factory('employeesService', [ '$resource',
 
 function($resource) {
 
-	return $resource('/employee-manager-container/rest/:call/:id', {
+	return $resource('/employee-manager-container/rest/:call/:id/:cv', {
 		id : "@id"
 	}, {
 
@@ -24,6 +24,7 @@ function($resource) {
 			},
 			isArray : false
 		}
+		
 	});
 
 } ]);

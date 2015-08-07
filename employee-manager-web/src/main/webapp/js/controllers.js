@@ -141,6 +141,12 @@ employeeManagerControllers.controller('EmployeeDetailsController', [ '$scope',
 					id : $routeParams.id
 				});
 			};
+			
+			$scope.serialize = function() {
+				employeesService.employee({
+					id : $routeParams.id
+				});
+			};
 		} ]);
 
 employeeManagerControllers.controller('myCtrlAchievEmp', [

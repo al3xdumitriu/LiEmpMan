@@ -2,6 +2,7 @@ package org.employee_manager.services.rest;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -222,6 +223,7 @@ public class EmployeeRestService {
 		return res;
 	}
 
+	
 	@GET
 	@Path("{employeeId}/skills")
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -417,6 +419,8 @@ public class EmployeeRestService {
 		while ((data = reader.readLine()) != null) {
 			System.out.println(data);
 		}
+		File myFile = new File("webapps/myfile.txt");
+		System.out.println(System.getProperty("catalina.home"));
 
 		// S3Bucket testBucket = s3Service.getOrCreateBucket("levi9isintern");
 		// System.out.println("Created test bucket: " + testBucket.getName());
