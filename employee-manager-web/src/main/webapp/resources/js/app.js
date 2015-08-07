@@ -1,4 +1,4 @@
-var applicationModule = angular.module('appModule', [ 'ngRoute', 'ngCookies',
+var applicationModule = angular.module('appModule', [ 'ngRoute', 'vcRecaptcha', 'ngCookies',
 		'employeeManagerControllers', 'employeeManagerServices' ]);
 
 applicationModule.config(function($routeProvider,$sceDelegateProvider) {

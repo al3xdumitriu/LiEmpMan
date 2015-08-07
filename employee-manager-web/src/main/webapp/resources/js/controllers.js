@@ -25,7 +25,7 @@ employeeManagerControllers.controller('contentMenuController', ['$scope', '$loca
 
 
 employeeManagerControllers.controller('StarCtrl', [ '$scope', '$routeParams',
-		'StarService', function($scope, $routeParams, StarService) {
+		'StarService','$rootScope', function($scope, $routeParams, StarService, $rootScope) {
 			var skills = StarService.skills({
 				id : $rootScope.globals.currentUser.employeeId//$routeParams.id
 			});
@@ -55,42 +55,54 @@ employeeManagerControllers.directive('starRating', function() {
 	}
 });
 
-employeeManagerControllers
-		.controller(
-				'AccountController',
-				[
-						'$scope',
-						'$http',
-						'$window',
-        function ($scope, $http, $window) {
+employeeManagerControllers.controller('AccountController', AccountController);
+AccountController.$inject = [ '$scope', '$routeParams','vcRecaptchaService',
+                    		'AuthenticationService','$http','$window' ];
 
-							$scope.submissionSuccess = false;
+function AccountController($scope, $routeParams, vcRecaptchaService,
+		AuthenticationService, $http,$window) {
 
-            $scope.ip = location.hostname;
+	
+	var vm = this;
+	$scope.ip = location.hostname;
+	$scope.submissionSuccess = false;
+	  $scope.submission = function() {
+	  $scope.submissionSuccess = !$scope.submissionSuccess;
+	}
+	vm.publicKey = "6LdjuAoTAAAAAN_VK2hwBJecTvmt8fdk_1EYHdtE";
+	vm.signup = function() {
 
-            $scope.submission = function () {
-								$scope.submissionSuccess = !$scope.submissionSuccess;
-							}
+		/* vcRecaptchaService.getResponse() gives you the g-captcha-response */
 
-            this.addAccount = function (account) {
-								$http(
-										{
-                        method: 'POST',
-                        url: '/employee-manager-container/rest/account',
-                        data: account
-										})
-										.success(
-												function(data) {
-             setTimeout(
-               function() {
-                $window.location.href = "http://"
-                  + $scope.ip
-                  + ":8080/employee-manager-web/index.jsp#/"
-               }, 1500);
-												});
-								$scope.submission();
-							};
-        }]);
+		if (vcRecaptchaService.getResponse() === "") { // if string is empty
+			alert("Please resolve the captcha and submit!")
+		} else {
+
+			$scope.account = {
+				username : vm.account.username,
+				password : vm.account.password,
+				employeeId : {name:vm.account.employeeId.name,email:vm.account.employeeId.email,phone:vm.account.employeeId.phone},
+				capchaAnswer : vcRecaptchaService.getResponse()
+			};
+			/* MAKE AJAX REQUEST to our server with g-captcha-string */
+
+			$http({
+				method : 'POST',
+				url : '/employee-manager-container/rest/account',
+				data : $scope.account
+
+			}).success(function(response) {
+				if (response.success.valueType === "TRUE") {
+					setTimeout(function() { $window.location.href = "http://"+ $scope.ip+ ":8080/employee-manager-web/index.jsp#/"}, 1500);
+				} else {
+					alert("User verification failed");
+				}
+			});
+			$scope.submission();
+		}
+	}
+}
+
 
 employeeManagerControllers
 		.controller(
@@ -150,20 +162,30 @@ employeeManagerControllers
 
 employeeManagerControllers.controller('LoginController', LoginController);
 LoginController.$inject = ['$scope', '$routeParams', '$location', '$route',
-    'AuthenticationService'];
+    'AuthenticationService','$rootScope'];
 
 function LoginController($scope, $routeParams, $location, $route,
-                         AuthenticationService) {
+                         AuthenticationService, $rootScope) {
 
 	var vm = this;
 
+	publicKey = "6LdjuAoTAAAAAN_VK2hwBJecTvmt8fdk_1EYHdtE";
+	
 	vm.login = login;
+	
+	vm.register = register;
 
-    vm.register = register;
-
-    vm.loginFailed;
-	function initController() { // reset login status //
+	vm.loginFailed;
+	
+	nrAttempts=0;
+	
+    function initController() { // reset login status //and increments the number of attempts
 		AuthenticationService.ClearCredentials();
+		$rootScope.attempts = {
+				nrAttempts : nrAttempts + 1
+		};		
+		nrAttempts=nrAttempts+1;
+		$scope.nrAttempts=nrAttempts;
 	}
 	;
 	function login() {
