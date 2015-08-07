@@ -1,17 +1,10 @@
 package org.employee_manager.services.rest;
 
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
+
 import java.util.List;
 
-import javax.json.Json;
 import javax.json.JsonObject;
-import javax.json.JsonReader;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,19 +12,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.apache.log4j.Logger;
 import org.employee_manager.model.Account;
-import org.employee_manager.model.Employee;
 import org.employee_manager.services.AccountService;
 import org.employee_manager.services.EmployeeService;
 import org.employee_manager.util.Const;
 import org.employee_manager.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Path("/account")
 public class AccountRestService {
