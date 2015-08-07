@@ -1,7 +1,7 @@
 var applicationModule = angular.module('appModule', [ 'ngRoute', 'ngCookies',
 		'employeeManagerControllers', 'employeeManagerServices' ]);
 
-applicationModule.config(function($routeProvider) {
+applicationModule.config(function($routeProvider,$sceDelegateProvider) {
 
 	$routeProvider.when('/', {
 		
@@ -9,20 +9,20 @@ applicationModule.config(function($routeProvider) {
 		controller : 'LoginController',
 		controllerAs : 'vm'
 			
-	}).when('/content', {
-
-		templateUrl : 'content.jsp',
-		controller : 'mainController'
-			
-	}).when('/profile/:id', {
+	}).when('/profile', {
 
 		templateUrl : 'profile.jsp',
 		controller : 'EmployeeDetailsController',
-
+			
 	}).when('/achievement/:id', {
 
 		templateUrl : 'achievement.jsp',
 		controller : 'myCtrlAchievEmp',
+
+	}).when('/event', {
+
+		templateUrl : 'event.jsp',
+		controller : 'myCtrlEvent',
 
 	}).when('/account', {
 
@@ -41,10 +41,18 @@ applicationModule.config(function($routeProvider) {
 		redirectTo : '/employesse'
 
 	});
+	
+	$sceDelegateProvider.resourceUrlWhitelist([
+	                                            'self',
+	                                            '*://www.youtube.com/**'
+	                                            
+	                                          ]);
+	
 }).run(run);
 
 run.$inject = [ '$rootScope', '$location', '$cookieStore', '$http' ];
 function run($rootScope, $location, $cookieStore, $http) {
+	
 	// keep user logged in after page refresh
 	$rootScope.globals = $cookieStore.get('globals') || {};
 	if ($rootScope.globals.currentUser) {

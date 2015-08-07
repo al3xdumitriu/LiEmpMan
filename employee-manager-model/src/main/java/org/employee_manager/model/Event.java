@@ -30,7 +30,16 @@ public class Event implements Serializable {
 
 	@Column(name = "EVENT_NAME")
 	private String name;
+	
+	@Column(name = "EVENT_COORDINATES")
+	private String coordinates;
 
+	@Column(name = "EVENT_VIDEO")
+	private String video;
+
+	@Column(name = "EVENT_ORGANIZATOR_NAME")
+	private String organizatorName;
+	
 	@Column(name = "EVENT_START_DATE")
 	private Date startDate;
 
@@ -77,6 +86,22 @@ public class Event implements Serializable {
 		this.name = name;
 	}
 
+	public String getCoordinates() {
+		return coordinates;
+	}
+
+	public void setCoordinates(String coordinates) {
+		this.coordinates = coordinates;
+	}
+
+	public String getVideo() {
+		return video;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
+	}
+	
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -149,4 +174,14 @@ public class Event implements Serializable {
 		this.eventStatusId = eventStatusId;
 	}
 
+	public String getOrganizatorName() {
+		return organizatorName;
+	}
+
+	public void setOrganizatorName(String organizatorName) {
+		this.organizatorName = organizatorName;
+	}
+
+	
+	
 }
