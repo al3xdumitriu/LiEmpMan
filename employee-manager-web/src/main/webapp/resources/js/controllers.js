@@ -27,7 +27,7 @@ employeeManagerControllers.controller('contentMenuController', ['$scope', '$loca
 employeeManagerControllers.controller('StarCtrl', [ '$scope', '$routeParams',
 		'StarService', function($scope, $routeParams, StarService) {
 			var skills = StarService.skills({
-				id : $routeParams.id
+				id : $rootScope.globals.currentUser.employeeId//$routeParams.id
 			});
 
 			$scope.skills = skills;
@@ -119,7 +119,7 @@ function LoginController($scope, $routeParams, $location, $route,
                     AuthenticationService.SetCredentials(vm.username,
                         vm.password, response.employeeId);
 
-                    $location.path('/profile/' + response.employeeId);
+                    $location.path('/profile');
 
                 } else {
                     $scope.loginFailed = response.message
@@ -135,11 +135,11 @@ function LoginController($scope, $routeParams, $location, $route,
 }
 
 employeeManagerControllers.controller('EmployeeDetailsController', ['$scope',
-    '$routeParams', 'employeesService', '$http', '$route',
-    function ($scope, $routeParams, employeesService, $http, $route) {
+    '$routeParams', 'employeesService', '$http', '$route', '$rootScope',
+    function ($scope, $routeParams, employeesService, $http, $route,$rootScope) {
 
         $scope.employee = employeesService.employee({
-            id: $routeParams.id
+            id: $rootScope.globals.currentUser.employeeId   //$routeParams.id
         });
 
         $scope.saveMethode = function () {
@@ -154,11 +154,11 @@ employeeManagerControllers.controller('EmployeeDetailsController', ['$scope',
 employeeManagerControllers.controller('myCtrlAchievEmp', [
     '$scope',
     '$http',
-    '$routeParams',
-    function ($scope, $http, $routeParams) {
+    '$routeParams','$rootScope',
+    function ($scope, $http, $routeParams,$rootScope) {
 
         $scope.urlfinal = "/employee-manager-container/rest/employee/"
-            + $routeParams.id + "/achievement";
+            + $rootScope.globals.currentUser.employeeId /*$routeParams.id*/ + "/achievement";
 
         $http.get($scope.urlfinal).success(function (response) {
             $scope.achievements = response;
@@ -179,7 +179,7 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
             name: '',
             description: '',
             employeeId: {
-                id: $routeParams.id
+                id: $rootScope.globals.currentUser.employeeId //$routeParams.id
             }
         };
 
@@ -196,7 +196,7 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
                 name: '',
                 description: '',
                 employeeId: {
-                    id: $routeParams.id
+                    id: $rootScope.globals.currentUser.employeeId //$routeParams.id
                 }
             };
         }

@@ -9,7 +9,7 @@ applicationModule.config(function($routeProvider,$sceDelegateProvider) {
 		controller : 'LoginController',
 		controllerAs : 'vm'
 			
-	}).when('/profile/:id', {
+	}).when('/profile', {
 
 		templateUrl : 'profile.jsp',
 		controller : 'EmployeeDetailsController',
