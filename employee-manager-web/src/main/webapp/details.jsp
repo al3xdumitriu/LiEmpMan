@@ -52,7 +52,6 @@
 					class="btn btn-primary" id="cancel" type="button" value="Cancel"
 					disabled>
 					<input class="btn btn-primary" id="edit" type="button"  ng-click="serialize()" value="Save XML">
-					<input class="btn btn-primary" id="edit2" type="button"  value="Down">
 					
 	</div>
 </div>

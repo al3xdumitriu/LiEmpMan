@@ -352,7 +352,7 @@ public class EmployeeRestService {
 		System.out.println(xslFile.toString());
 		// apply XSL template to XML file
 		applyTemplateXSL(inFile, outFile, xslFile);
-		upToAmazon(outFile);
+		upToAmazon(outFile, emp);
 
 	}
 
@@ -389,20 +389,20 @@ public class EmployeeRestService {
 
 	}
 
-	public void upToAmazon(String uploadFile) throws ServiceException, IOException {
+	public void upToAmazon(String uploadFile, Employee emp) throws ServiceException, IOException {
 		String awsAccessKey = "AKIAJT7FQSI4MYQAXNBQ";
 		String awsSecretKey = "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";
 		AWSCredentials awsCredentials = new AWSCredentials(awsAccessKey, awsSecretKey);
 		S3Service s3Service = new RestS3Service(awsCredentials);
 		FileInputStream fis = new FileInputStream(uploadFile);
 		ByteArrayOutputStream ous = new ByteArrayOutputStream();
-
+		
 		try {
 			byte[] buffer = new byte[4096];
 			int read = 0;
 			while ((read = fis.read(buffer)) != -1) {
 				ous.write(buffer, 0, read);
-				S3Object fileToBeImported = new S3Object("key3.xml", ous.toByteArray());
+				S3Object fileToBeImported = new S3Object(emp.getName()+emp.getId()+"CV.xml", ous.toByteArray());
 				s3Service.putObject("levi9isintern", fileToBeImported);
 			}
 		} catch (Exception e) {
