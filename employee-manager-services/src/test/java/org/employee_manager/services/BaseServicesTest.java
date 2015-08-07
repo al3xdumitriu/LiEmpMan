@@ -55,4 +55,7 @@ public abstract class BaseServicesTest {
 
 	@Autowired
 	protected SkillEvaluationService skillEvaluationService;
+	
+	@Autowired
+	protected EmailService emailService;
 }

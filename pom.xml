@@ -58,7 +58,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 	<profiles>
 		<profile>
 			<id>release</id>
@@ -111,8 +111,8 @@
 				</plugins>
 			</build>
 		</profile>
-	</profiles>	
-	
+	</profiles>
+
 	<repositories>
 		<repository>
 			<id>nexus</id>
@@ -120,8 +120,8 @@
 			<url>https://repo.levi9.com/content/repositories/levi9-employeemanager.releases</url>
 			<layout>default</layout>
 		</repository>
-	</repositories>	
-	
+	</repositories>
+
 	<distributionManagement>
 		<repository>
 			<id>levi9-employee-manager-release-repo</id>
@@ -134,10 +134,10 @@
 			<url>https://repo.levi9.com/content/repositories/levi9-employeemanager.snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
-	
+
 	<scm>
 		<connection>scm:git:https://git.levi9.com/levi9-employee-manager.git</connection>
-	</scm>		
+	</scm>
 
 	<dependencyManagement>
 		<dependencies>
@@ -345,6 +345,20 @@
 				<version>${jersey-media-json-jackson.version}</version>
 				<scope>runtime</scope>
 			</dependency>
+
+<!-- 			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>4.2.0.RELEASE</version>
+			</dependency> -->
+
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>1.4.7</version>
+			</dependency>
+
+
 		</dependencies>
 	</dependencyManagement>
 
