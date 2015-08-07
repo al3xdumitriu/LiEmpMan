@@ -66,7 +66,7 @@ public class EmployeeRestService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
+
 	@POST
 	@Path("{id}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -223,7 +223,6 @@ public class EmployeeRestService {
 		return res;
 	}
 
-	
 	@GET
 	@Path("{employeeId}/skills")
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -338,13 +337,13 @@ public class EmployeeRestService {
 
 		// Object to XML Conversion
 		xstream.toXML(emp, fileOut);
-		System.out.println("SerializedCountry XML:" + xml);
-
-		// XML to Object Conversion
-		System.out.println("Desiarilization");
-		Employee deSerializedCountry = (Employee) xstream.fromXML(xml);
-		System.out.println(deSerializedCountry.toString());
-
+		/*
+		 * System.out.println("SerializedCountry XML:" + xml);
+		 * 
+		 * // XML to Object Conversion System.out.println("Desiarilization");
+		 * Employee deSerializedCountry = (Employee) xstream.fromXML(xml);
+		 * System.out.println(deSerializedCountry.toString());
+		 */
 		String inFile = "E://fis.xml";
 		String outFile = "E://fisXSL.xml";
 		// File xslFile = new
@@ -357,7 +356,8 @@ public class EmployeeRestService {
 
 	}
 
-	public void applyTemplateXSL(String inFilename, String outFilename, String xslFilename) {
+	public void applyTemplateXSL(String inFilename, String outFilename, String xslFilename)
+			throws FileNotFoundException {
 		try {
 			// Create transformer factory
 			TransformerFactory factory = TransformerFactory.newInstance();
@@ -375,8 +375,7 @@ public class EmployeeRestService {
 			// Apply the XSL file to the source file and write the result to the
 			// output file
 			xformer.transform(source, result);
-		} catch (FileNotFoundException e) {
-		} catch (TransformerConfigurationException e) {
+
 			// An error occurred in the XSL file
 		} catch (TransformerException e) {
 			// An error occurred while applying the XSL file
@@ -403,7 +402,7 @@ public class EmployeeRestService {
 			int read = 0;
 			while ((read = fis.read(buffer)) != -1) {
 				ous.write(buffer, 0, read);
-				S3Object fileToBeImported = new S3Object("key1.xml", ous.toByteArray());
+				S3Object fileToBeImported = new S3Object("key3.xml", ous.toByteArray());
 				s3Service.putObject("levi9isintern", fileToBeImported);
 			}
 		} catch (Exception e) {
@@ -411,17 +410,16 @@ public class EmployeeRestService {
 			e.getMessage();
 		}
 
-		S3Object objectComplete = s3Service.getObject("levi9isintern", "key1.xml");
-		System.out.println("S3Object, complete: " + objectComplete.toString());
-		System.out.println("Greeting:");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(objectComplete.getDataInputStream()));
-		String data = null;
-		while ((data = reader.readLine()) != null) {
-			System.out.println(data);
-		}
-		File myFile = new File("webapps/myfile.txt");
-		System.out.println(System.getProperty("catalina.home"));
-
+		/*
+		 * S3Object objectComplete = s3Service.getObject("levi9isintern",
+		 * "key2.xml"); System.out.println("S3Object, complete: " +
+		 * objectComplete.toString()); System.out.println("Greeting:");
+		 * BufferedReader reader = new BufferedReader(new
+		 * InputStreamReader(objectComplete.getDataInputStream())); String data
+		 * = null; while ((data = reader.readLine()) != null) {
+		 * System.out.println(data); }
+		 * 
+		 */
 		// S3Bucket testBucket = s3Service.getOrCreateBucket("levi9isintern");
 		// System.out.println("Created test bucket: " + testBucket.getName());
 		// S3Bucket[] myBuckets = s3Service.listAllBuckets();
