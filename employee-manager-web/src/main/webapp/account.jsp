@@ -6,7 +6,7 @@
  <script>
  </script>
  
-
+<div id="registerContent">
 <div class="col-lg-6">
 	<h2>Create Account</h2>
 	<div class="well bs-component">
@@ -117,5 +117,6 @@
 	</div>
 	
 	</form>
+</div>
 </div>
 </div>
