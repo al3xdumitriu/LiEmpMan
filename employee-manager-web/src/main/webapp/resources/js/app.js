@@ -14,17 +14,27 @@ applicationModule.config(function($routeProvider) {
 		templateUrl : 'content.jsp',
 		controller : 'mainController'
 			
-	}).when('/myProfile', {
+	}).when('/profile/:id', {
 
-		templateUrl : 'myProfile.jsp',
-		controller : 'LoginController',
-		controllerAs : 'vm'
+		templateUrl : 'profile.jsp',
+		controller : 'EmployeeDetailsController',
+
+	}).when('/achievement/:id', {
+
+		templateUrl : 'achievement.jsp',
+		controller : 'myCtrlAchievEmp',
 
 	}).when('/account', {
 
 		templateUrl : 'account.jsp',
 		controller : 'AccountController',
 		controllerAs : 'accountCtrl'
+			
+	}).when('/email', {
+
+		templateUrl : 'email.jsp',
+		controller : 'EmailController',
+		controllerAs : 'emailCtrl'
 			
 	}).otherwise({
 
@@ -48,7 +58,7 @@ function run($rootScope, $location, $cookieStore, $http) {
 				// redirect to login page if not logged in and trying to access
 				// a restricted page
 				var restrictedPage = $.inArray($location.path(), [ '/',
-						'/register' ]) === -1;
+						'/account' ]) === -1;
 				var loggedIn = $rootScope.globals.currentUser;
 				if (restrictedPage && !loggedIn) {
 					$location.path('/');
