@@ -46,37 +46,6 @@ employeeManagerControllers.directive('starRating', function () {
     }
 });
 
-employeeManagerControllers
-		.controller(
-				'AccountControllerxxx',
-				[
-						'$scope',
-						'$http',
-						'$window',
-						function($scope, $http, $window) {
-
-							$scope.submissionSuccess = false;
-
-							$scope.submission = function() {
-								$scope.submissionSuccess = !$scope.submissionSuccess;
-							}
-
-							this.addAccount = function(account) {
-								$http(
-										{
-											method : 'POST',
-											url : '/employee-manager-container/rest/account',
-											data : account
-										})
-										.success(
-												function(data) {
-													setTimeout(function(){$window.location.href = "../../"}, 2000);
-												});
-								$scope.submission();
-							};
-						} ]);
-
-
 employeeManagerControllers.controller('AccountController', AccountController);
 AccountController.$inject = [ '$scope', '$routeParams','vcRecaptchaService',
                     		'AuthenticationService','$http','$window' ];
@@ -115,12 +84,12 @@ function AccountController($scope, $routeParams, vcRecaptchaService,
 
 			}).success(function(response) {
 				if (response.success.valueType === "TRUE") {
-					alert("Successfully verified and signed up the user");
 					setTimeout(function() { $window.location.href = "http://"+ $scope.ip+ ":8080/employee-manager-web/index.jsp#/"}, 1500);
 				} else {
 					alert("User verification failed");
 				}
 			});
+			$scope.submission();
 		}
 	}
 }
@@ -150,7 +119,7 @@ function LoginController($scope, $routeParams, $location, AuthenticationService,
 				nrAttempts : nrAttempts + 1
 		};		
 		nrAttempts=nrAttempts+1;
-		alert(nrAttempts);
+		$scope.nrAttempts=nrAttempts;
 	}
 	;
 	function login() {

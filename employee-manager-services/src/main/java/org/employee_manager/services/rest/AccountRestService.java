@@ -28,6 +28,8 @@ import org.employee_manager.model.Account;
 import org.employee_manager.model.Employee;
 import org.employee_manager.services.AccountService;
 import org.employee_manager.services.EmployeeService;
+import org.employee_manager.util.Const;
+import org.employee_manager.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -85,9 +87,10 @@ public class AccountRestService {
 	public Response saveAccount(Account account) {
 
 		Response resultResponse = null;
-		String secret = "6LdjuAoTAAAAAKZVEikePF0gpEuabkaal0gGIkZ2";
+		String secret = Const.CAPCHA_PRIVATE_KEY;
 		try {
-			JsonObject jsonObject=this.validateCaptcha(secret, account.getCapchaAnswer(), "user_ip_address");
+			JsonObject jsonObject=Util.validateCaptcha(secret, account.getCapchaAnswer(), "user_ip_address");
+			if(jsonObject.getBoolean("success") ==equals(true) );
 			accountService.save(account);
 			employeeService.save(account.getEmployeeId());
 			resultResponse = Response.status(Response.Status.CREATED).entity(jsonObject).build();
@@ -115,39 +118,5 @@ public class AccountRestService {
 		return resultResponse;
 	}
 	
-	private JsonObject validateCaptcha(String secret, String response, String remoteip)
-	{
-	    JsonObject jsonObject = null;
-	    URLConnection connection = null;
-	    InputStream is = null;
-	    String charset = java.nio.charset.StandardCharsets.UTF_8.name();
-
-	    String url = "https://www.google.com/recaptcha/api/siteverify";
-	    try {            
-	        String query = String.format("secret=%s&response=%s&remoteip=%s", 
-	        URLEncoder.encode(secret, charset), 
-	        URLEncoder.encode(response, charset),
-	        URLEncoder.encode(remoteip, charset));
-
-	        connection = new URL(url + "?" + query).openConnection();
-	        is = connection.getInputStream();
-	        JsonReader rdr = Json.createReader(is);
-	        jsonObject = rdr.readObject();
-
-	    } catch (IOException ex) {
-	    	System.out.println(ex.getStackTrace());
-	        //Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-	    }
-	    finally {
-	        if (is != null) {
-	            try {
-	                is.close();
-	            } catch (IOException e) {
-	            }
-
-	        }
-	    }
-	    return jsonObject;
-	}
 	
 }

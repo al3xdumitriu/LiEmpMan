@@ -3,6 +3,9 @@
   async defer>
  </script>
  
+ <script>
+ </script>
+ 
 
 <div class="col-lg-6">
 	<h2>Create Account</h2>
@@ -102,8 +105,9 @@
 			<!--Recaptcha Widget--->
 				<div vc-recaptcha key="accountCtrl.publicKey"></div>
 			<div>
-			<button class="btn btn-primary"  type="submit">Create
+			<button class="btn btn-primary" ng-disabled="!accountForm.$valid" type="submit">Create
 				Account</button>
+				
 	</div>
 	
 	</form>
