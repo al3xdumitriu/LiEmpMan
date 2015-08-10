@@ -29,11 +29,11 @@ public class SkillEvaluation implements Serializable {
 	private long id;
 
 	@JoinColumn(name = "SKILL_ID")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Skill skillId;
 
 	@JoinColumn(name = "EVALUATION_ID")
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
 	private Evaluation evaluationId;
 
 	public long getId() {

@@ -24,13 +24,119 @@ employeeManagerControllers.controller('contentMenuController', ['$scope', '$loca
     }]);
 
 
-employeeManagerControllers.controller('StarCtrl', [ '$scope', '$routeParams',
-		'StarService','$rootScope', function($scope, $routeParams, StarService, $rootScope) {
+employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
+		'$routeParams', 'StarService',
+		function($scope, $http, $routeParams, StarService) {
 			var skills = StarService.skills({
-				id : $rootScope.globals.currentUser.employeeId//$routeParams.id
+				id : $routeParams.id
 			});
+			console.log(skills);
 
 			$scope.skills = skills;
+			console.log($scope.skills);
+
+			$scope.show = false;
+
+			$scope.skill = {
+				name : '',
+				description : '',
+				experience : ''
+			};
+
+			$scope.showSkill = function() {
+				$scope.show = !$scope.show;
+			}
+
+			$scope.save = function() {
+				$scope.show = false;
+				$http.post('/employee-manager-container/rest/skill', {
+					id : 213213,
+					name : $scope.skill.name,
+					description : $scope.skill.description,
+					experience : $scope.skill.experience,
+					employeeId : {
+						id : $routeParams.id
+					}
+				}).then(function(response) {
+					var skills = StarService.skills({
+						id : $routeParams.id
+					});
+					$scope.skills = skills;
+				});
+
+				$scope.skill = {
+					name : '',
+					description : '',
+					experience : ''
+				}
+			};
+
+			// For chart
+			$scope.myDataSource = {
+				chart : {
+					caption : "Skill evaluation",
+					subCaption : "Average grade for each skill",
+				}
+			};
+			$scope.skills.$promise.then(function(result) {
+				$scope.skills = result;
+				var skillsChart = [];
+				for (var i = 0; i < result.length; i++) {
+					var currentSkill = {
+						label : result[i].name,
+						value : result[i].rating
+					};
+
+					skillsChart.push(currentSkill);
+				}
+				;
+				$scope.myDataSource.data = skillsChart;
+			});
+
+		} ]);
+
+employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http',
+		'$routeParams', 'StarService',
+		function($scope, $http, $routeParams, StarService) {
+			$scope.showEvaluation = false;
+			$scope.giveEvaluation = function() {
+				$scope.showEvaluation = true;
+
+				var skills = StarService.skills({
+					id : $scope.employeeId
+				});
+				$scope.skills = skills;
+			};
+
+			$scope.evaluation = [];
+
+			$scope.submitEvaluation = function(skills) {
+				$scope.showEvaluation = false;
+
+				var data = [];
+				for (var i = 0; i < skills.length; ++i) {
+					if ($scope.evaluation[i]) {
+						data.push({
+							grade : $scope.evaluation[i].grade,
+							skillEvaluation : {
+								skillId : {
+									id : skills[i].id
+								}
+							}
+						})
+					}
+				}
+
+				$http({
+					method : 'POST',
+					url : '/employee-manager-container/rest/evaluation',
+					data : data
+
+				});
+
+				$scope.evaluation = [];
+			};
+
 		} ]);
 
 employeeManagerControllers.directive('starRating', function() {

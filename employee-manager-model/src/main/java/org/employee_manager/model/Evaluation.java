@@ -40,7 +40,7 @@ public class Evaluation implements Serializable {
 	@Column(name = "EVALUATION_COMMENT")
 	private String comment;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "EMPLOYEE_ID")
 	@JsonBackReference(value="employee-evaluations")
