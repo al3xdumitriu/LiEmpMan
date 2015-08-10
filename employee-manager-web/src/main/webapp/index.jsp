@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
 
-    <title>Employees</title>
+    <title>Levi9 Employee Manager</title>
 
     <!-- CSS -->
     <link href="resources/js/bootstrap-3.3.5-dist/css-blue-theme/bootstrap-them.css"
@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="resources/css/star.css"/>
 
     <link href="resources/css/index.css" rel="stylesheet" type="text/css"/>
+    
+    <link href="resources/css/login.css" rel="stylesheet" type="text/css"/>
 
     <!-- Downloaded Scripts -->
 

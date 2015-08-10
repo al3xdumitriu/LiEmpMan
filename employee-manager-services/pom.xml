@@ -7,12 +7,12 @@
 	<parent>
 		<groupId>com.levi9</groupId>
 		<artifactId>employee-manager-root</artifactId>
-		<version>1.4.0-SNAPSHOT</version>
+		<version>1.5.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.levi9</groupId>
 	<artifactId>employee-manager-services</artifactId>
-	<version>1.4.0-SNAPSHOT</version>
+	<version>1.5.0-SNAPSHOT</version>
 
 	<name>employee-manager-services</name>
 	<url>http://maven.apache.org</url>
