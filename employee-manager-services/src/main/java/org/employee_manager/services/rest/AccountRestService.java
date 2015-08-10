@@ -20,7 +20,9 @@ import org.employee_manager.services.AccountService;
 import org.employee_manager.services.EmployeeService;
 import org.employee_manager.util.Const;
 import org.employee_manager.util.Util;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 @Path("/account")
 public class AccountRestService {
@@ -73,7 +75,7 @@ public class AccountRestService {
 	@POST
 	@Path("")
 	@Consumes({MediaType.APPLICATION_FORM_URLENCODED, MediaType.APPLICATION_JSON})
-	public Response saveAccount(Account account) {
+	public Response saveAccount(Account account){
 
 		Response resultResponse = null;
 		String secret = Const.CAPCHA_PRIVATE_KEY;
@@ -83,7 +85,12 @@ public class AccountRestService {
 			accountService.save(account);
 			employeeService.save(account.getEmployeeId());
 			resultResponse = Response.status(Response.Status.CREATED).entity(jsonObject).build();
-		} catch (Exception e) {
+		}
+		catch(DataIntegrityViolationException e)
+		{
+			resultResponse = Response.status(Response.Status.CONFLICT).entity("exists").build();
+		}
+		catch (Exception e) {
 			resultResponse = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}
 		return resultResponse;
