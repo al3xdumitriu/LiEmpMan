@@ -213,6 +213,31 @@ public class EmployeeRestService {
 			} else {
 
 				employeeFound = employeeService.findById(idParse);
+				//serialize(employeeFound);
+			}
+		} catch (Exception e) {
+			status = 404;
+			e.getStackTrace();
+		}
+		res = Response.status(status).entity(employeeFound).build();
+		return res;
+	}
+	
+	@GET
+	@Path("{id}/savexml")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response saveEmployeeXML(@PathParam("id") String id) {
+		Long idParse = Long.parseLong(id);
+		Employee employeeFound = new Employee();
+		Response res = null;
+		int status = 200;
+		try {
+			if (id == null) {
+				status = 404;
+				res = Response.status(status).entity(employeeFound).build();
+			} else {
+
+				employeeFound = employeeService.findById(idParse);
 				serialize(employeeFound);
 			}
 		} catch (Exception e) {

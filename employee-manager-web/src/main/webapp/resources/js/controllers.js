@@ -205,6 +205,13 @@ employeeManagerControllers.controller('EmployeeDetailsController', ['$scope',
                 data: $scope.employee
             })
         };
+        
+        $scope.serialize = function () {
+            $http({
+                method: 'GET',
+                url: '/employee-manager-container/rest/employee/'+$rootScope.globals.currentUser.employeeId+'/savexml'
+            })
+        };
     }]);
 
 employeeManagerControllers.controller('myCtrlAchievEmp', [
