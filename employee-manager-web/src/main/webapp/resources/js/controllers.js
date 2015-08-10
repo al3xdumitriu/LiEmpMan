@@ -250,6 +250,7 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
         });
 
         $scope.limit = "4";
+        $scope.hideRaport = true;
         $scope.add = function () {
             $scope.limit = parseInt($scope.limit) + 4;
         }
@@ -257,6 +258,7 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 
         $scope.arata = function () {
             $scope.ascunde = !$scope.ascunde;
+            $scope.hideRaport = true;
         }
 
         $scope.achievementTest = {
@@ -284,6 +286,7 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
                     id: $rootScope.globals.currentUser.employeeId //$routeParams.id
                 }
             };
+            $scope.hideRaport = false;
         }
     }]);
 
@@ -309,9 +312,10 @@ employeeManagerControllers.controller('myCtrlEvent', [
 				$scope.limit = parseInt($scope.limit) + 2;
 			}
 			$scope.hide = true;
-
+			$scope.hideRaport = true;
 			$scope.showForm = function() {
 				$scope.hide = !$scope.hide;
+				$scope.hideRaport = true;
 			}
 
 			$scope.showLocation = function(eventId, coordEvent) {
@@ -419,6 +423,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 					eventTypeId : null,
 					eventStatusId : null
 				};
+				$scope.hideRaport = false;
 
 			}
 
@@ -475,7 +480,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 
 				});
 				
-				
+				$scope.hideRaport = false;
 				
 
 			}

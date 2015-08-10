@@ -36,6 +36,9 @@
 					</div>
 				</form>
 			</div>
+			<div ng-hide=hideRaport class="well bs-component">
+				<center>Changes were made succesfully!!</center>
+			</div>
 		</div>
 	</div>
 </div>

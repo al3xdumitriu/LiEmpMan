@@ -19,7 +19,7 @@
 					">
 
 					<p>
-<br><br><br>
+<br>
 						<br>    <label>Title:</label><input id="titlu{{event.id}}" type="text" value="{{event.name}}" class="form-control">
 						<br>    <label>Organizator Name:</label><input id="oName{{event.id}}" type="text" value="{{event.organizatorName}}" class="form-control">
 						<br>	<label>StartDate:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'mm/dd/yyyy hh:mm a'" class="form-control" >
@@ -47,7 +47,8 @@
 					</div>
 					</div>
 					
-
+					<hr style="height:1px;border:none;color:#333;background-color:#333;" />
+					<hr style="height:1px;border:none;color:#333;background-color:#333;" />
 				</div>
 				<br>
 			</div>
@@ -73,8 +74,9 @@
 					
 				</form>
 			</div>
-			
-			
+			<div ng-hide=hideRaport class="well bs-component">
+				<center>Changes were made succesfully!!</center>
+			</div>
 			
 		</div>
 	</div>
