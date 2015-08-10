@@ -401,8 +401,11 @@ employeeManagerControllers.controller('myCtrlEvent', [
 		'$scope',
 		'$http',
 		'$routeParams',
+		'$location',
 		'$sce',
-		function($scope, $http, $routeParams, $sce) {
+		'$window',
+		'$timeout',
+		function($scope, $http, $routeParams, $sce,$location,$window,$timeout) {
 
 			$scope.urlfinal = "/employee-manager-container/rest/event";
 
@@ -416,16 +419,25 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			$scope.limit = "2";
 			$scope.add = function() {
 				$scope.limit = parseInt($scope.limit) + 2;
+
 			}
+			
+			$scope.areMoreEvents=function() {
+				if($scope.limit<$scope.events.length) return true;
+				else return false;
+			}
+			
 			$scope.hide = true;
 			$scope.hideRaport = true;
 			$scope.showForm = function() {
 				$scope.hide = !$scope.hide;
 				$scope.hideRaport = true;
 			}
-
+			
+			$scope.arrayCoordinations=[];
+			
 			$scope.showLocation = function(eventId, coordEvent) {
-
+				$scope.arrayCoordinations[eventId]=1;
 				var mapCanvas = document.getElementById(eventId);
 				var mapOptions = {
 					center : new google.maps.LatLng(47.160456, 27.589030),
@@ -452,6 +464,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 
 			}
 
+			
 
 			$scope.parseazaLink = function(link) {
 
@@ -466,19 +479,14 @@ employeeManagerControllers.controller('myCtrlEvent', [
 							var positionS = link.indexOf('&');
 							var newLink = 'https://www.youtube.com/embed/'
 									+ link.substring(positionV, positionS);
-							/*
-							 * alert("pozitia initiala "+positionV + "poz finala "
-							 * +positionS + "=substring" +noutate);
-							 */link = null;
+							
+							 link = null;
 							return newLink;
 						} else {
 							var newLink = 'https://www.youtube.com/embed/'
 									+ link.substring(positionV, 100);
 							link = null;
-							/*
-							 * alert("pozitia initiala "+positionV+2 + "poz
-							 * finala " +positionS + "=substring" +noutate);
-							 */
+
 							return newLink;
 						}
 
@@ -530,10 +538,22 @@ employeeManagerControllers.controller('myCtrlEvent', [
 					eventStatusId : null
 				};
 				$scope.hideRaport = false;
-
+			
+/*				$location.reload(true);
+				$route.reload();*/
+				
+				$timeout(function(){ $scope.reloadPage(); }, 2000);
+				
+				
 			}
 
 			
+			
+			$scope.reloadPage = function() {
+				
+				$window.location.reload();
+			
+			}
 			$scope.editEvent = function(idEvent) {
 				
 
