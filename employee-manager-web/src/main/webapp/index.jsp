@@ -48,6 +48,10 @@
     
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 
+<script
+  src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
+  async defer>
+ </script>
 
 </head>
 <body ng-app="appModule">

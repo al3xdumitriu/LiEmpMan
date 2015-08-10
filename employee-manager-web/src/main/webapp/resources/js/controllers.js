@@ -74,7 +74,7 @@ function AccountController($scope, $routeParams, vcRecaptchaService,
 
 		/* vcRecaptchaService.getResponse() gives you the g-captcha-response */
 
-		if (vcRecaptchaService.getResponse() === "") { // if string is empty
+		if (vcRecaptchaService.getResponse() == "") { // if string is empty
 			alert("Please resolve the captcha and submit!")
 		} else {
 

@@ -1,8 +1,3 @@
-<script
-  src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
-  async defer>
- </script>
-
 <div>
 <div align="center" style= "position: absolute; top :30%;left:40%">
     <h2>Please Login</h2>

@@ -1,10 +1,4 @@
-<script
-  src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
-  async defer>
- </script>
- 
- <script>
- </script>
+
  
 <div id="registerContent">
 <div class="col-lg-6">
