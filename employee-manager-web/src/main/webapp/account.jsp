@@ -1,18 +1,19 @@
+
+ 
 <div id="registerContent">
-    <div class="col-lg-6">
-        <h2>Create Account</h2>
-
-        <div class="well bs-component">
-            <form name="accountForm" class="form-horizontal"
-                  ng-submit="accountCtrl.addAccount(accountCtrl.account)" novalidate>
-                <div class="form-group">
-                    <label for="name" class="col-lg-2 control-label">Name<span
-                            style="color: red">*</span></label>
-
-                    <div class="col-lg-10">
-                        <input type="text" name="name" class="form-control"
-                               ng-model="accountCtrl.account.employeeId.name" required>
-                    </div>
+<div class="col-lg-6">
+	<h2>Create Account</h2>
+	<div class="well bs-component">
+		<form name="accountForm" class="form-horizontal"
+			ng-submit="accountCtrl.signup()" novalidate>
+			
+			<div class="form-group">
+				<label for="name" class="col-lg-2 control-label">Name<span
+					style="color: red">*</span></label>
+				<div class="col-lg-10">
+					<input type="text" name="name" class="form-control"
+						ng-model="accountCtrl.account.employeeId.name" required>
+				</div>
 				<span style="color: red"
                       ng-show="accountForm.name.$dirty && accountForm.name.$invalid">
 					<span ng-show="accountForm.name.$error.required">Name is
@@ -92,25 +93,24 @@
 					<span ng-show="accountForm.confirmPassword.$error.required">Password
 						confirmation is required.</span>
 				</span> <br></br>
-                </div>
-                <div ng-show="accountForm.password.$error.minlength">Must be at
-                    least 6 characters.
-                </div>
-                <div
-                        ng-show="!accountForm.confirmPassword.$valid && accountForm.confirmPassword.$dirty">Passwords
-                    don't match.
-                </div>
-                <div ng-show=submissionSuccess>Your account was created
-                    successfully!
-                </div>
-                <br></br>
-
-                <div>
-                    <button class="btn btn-primary" ng-disabled="!accountForm.$valid"
-                            type="submit">Create Account
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+			</div>
+			<div ng-show="accountForm.password.$error.minlength">Must be at
+				least 6 characters.</div>
+			<div
+				ng-show="!accountForm.confirmPassword.$valid && accountForm.confirmPassword.$dirty">Passwords
+				don't match.</div>
+			<div ng-show=submissionSuccess>Your account was created
+				successfully!</div>
+			<br></br>
+			<!--Recaptcha Widget--->
+				<div vc-recaptcha key="accountCtrl.publicKey"></div>
+			<div>
+			<button class="btn btn-primary" ng-disabled="!accountForm.$valid" type="submit">Create
+				Account</button>
+				
+	</div>
+	
+	</form>
+</div>
+</div>
 </div>

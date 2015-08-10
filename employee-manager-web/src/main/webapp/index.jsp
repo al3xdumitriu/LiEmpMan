@@ -22,9 +22,13 @@
 
     <script src="resources/js/angular-cookies.js"></script>
 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js"></script>
     <script src="resources/js/angular-resource.js"></script>
 
+<script type="text/javascript" src="js/angular-recaptcha.min.js"></script>
     <script src="resources/js/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+<!-- Created Scripts -->
 
 
     <!-- Created Scripts -->
@@ -44,6 +48,10 @@
     
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 
+<script
+  src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
+  async defer>
+ </script>
 
 </head>
 <body ng-app="appModule">
