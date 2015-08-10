@@ -24,11 +24,11 @@ employeeManagerControllers.controller('contentMenuController', ['$scope', '$loca
     }]);
 
 
-employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
+employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http', '$rootScope',
 		'$routeParams', 'StarService',
-		function($scope, $http, $routeParams, StarService) {
+		function($scope, $http, $rootScope, $routeParams, StarService) {
 			var skills = StarService.skills({
-				id : $routeParams.id
+				id : $rootScope.globals.currentUser.employeeId
 			});
 			console.log(skills);
 
@@ -55,11 +55,11 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
 					description : $scope.skill.description,
 					experience : $scope.skill.experience,
 					employeeId : {
-						id : $routeParams.id
+						id : $rootScope.globals.currentUser.employeeId
 					}
 				}).then(function(response) {
 					var skills = StarService.skills({
-						id : $routeParams.id
+						id : $rootScope.globals.currentUser.employeeId
 					});
 					$scope.skills = skills;
 				});
