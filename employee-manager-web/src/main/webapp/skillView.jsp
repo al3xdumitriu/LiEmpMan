@@ -1,12 +1,19 @@
 
-<div ng-controller="StarCtrl"> 
+<div ng-controller="StarCtrl" class="well bs-component">
+	<h1>
+		<font color="#0597F2">Skills</font>
+	</h1>
    <div class=" thumbnail">
-   <h1>Skills</h1>
    <!-- For Display -->
-   	<span ng-repeat="skill in skills">
-   			{{skill.name}} : {{skill.rating}} 
-       		<div star-rating rating-value="skill.rating" max="5" ></div>
-    </span>
+   <form class="form-horizontal" role="form" name="evaluationForm">
+   		<span ng-repeat="skill in skills">
+   			<div class="form-group">
+				<label class="col-sm-2">{{skill.name}} - </label>
+				<div class="col-sm-2" star-rating rating-value="skill.rating" max="5">
+				</div>
+			</div> 
+    	</span>
+    </form>
     
     <!-- Chart -->
     <div fusioncharts
@@ -17,12 +24,12 @@
  	</div>
  	
     <!-- For Add -->
-       <button ng-click="showSkill()" class="btn btn-primary">Add Skill</button>
+       <button ng-click="showSkill()" class="btn btn-primary">Add Skill</button><p></p>
        <div ng-show=show class="well bs-component">
 			<form name="skillForm">
-				<br> Name: <input type="text" ng-model="skill.name" class="form-control">
-				<br> Description:<br> <input type="text" ng-model="skill.description" class="form-control"> 
-				<br> Experience:<br> <input type="text" ng-model="skill.experience" class="form-control"> 
+				<br><b> Name: </b><input type="text" ng-model="skill.name" class="form-control">
+				<br><b> Description: </b><br> <input type="text" ng-model="skill.description" class="form-control"> 
+				<br><b> Experience: </b><br> <input type="text" ng-model="skill.experience" class="form-control"> 
 				<br> <br>
 				<div ng-if="skill.name!=''">
 
