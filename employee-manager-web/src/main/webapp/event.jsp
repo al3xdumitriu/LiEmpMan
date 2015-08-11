@@ -24,12 +24,12 @@
 					
 					
 						<br>    <label>Title:</label><input id="titlu{{event.id}}" type="text" ng-model="event.name" class="form-control" ng-maxlength="255">
-						<br>    <label>Organizator Name:</label><input id="oName{{event.id}}" type="text" ng-model="event.organizatorName" class="form-control" ng-maxlength="255">
-						<br>	<label>StartDate:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'mm/dd/yyyy hh:mm a'" class="form-control" >
-						<br>	<label>EndDate:</label><br> <input id="fDate{{event.id}}" type="text" ng-value="event.endDate | date:'mm/dd/yyyy hh:mm a'" class="form-control" >
+						<br>    <label>Organizer Name:</label><input id="oName{{event.id}}" type="text" ng-model="event.organizatorName" class="form-control" ng-maxlength="255">
+						<br>	<label>Start Date:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'mm/dd/yyyy hh:mm a'" class="form-control" >
+						<br>	<label>End Date:</label><br> <input id="fDate{{event.id}}" type="text" ng-value="event.endDate | date:'mm/dd/yyyy hh:mm a'" class="form-control" >
 						<br>	<label>Description:</label><br>
 						<textarea id="descr{{event.id}}" ng-model="event.description"  rows="4" cols="40" class="form-control noresize" ng-maxlength="255"></textarea>
-						<br>	<label>URI:</label><br> <input id="uri{{event.id}}" type="text" ng-model="event.video" class="form-control" ng-maxlength="255">
+						<br>	<label>URL:</label><br> <input id="uri{{event.id}}" type="text" ng-model="event.video" class="form-control" ng-maxlength="255">
 						
 					
 					
@@ -74,15 +74,15 @@
 				<form name="eventForm">
 					
 					<br> 	<label>Title:</label> <input type="text" ng-model="eventTest.name" class="form-control" ng-maxlength="255"><br> 
-					<br> 	<label>Organizator Name:</label> <input type="text" ng-model="eventTest.organizatorName" class="form-control" ng-maxlength="255"><br> 
+					<br> 	<label>Organizer Name:</label> <input type="text" ng-model="eventTest.organizatorName" class="form-control" ng-maxlength="255"><br> 
 					<br>	<label>Description:</label><br>
 						<textarea  ng-model="eventTest.description" rows="4" cols="40" class="form-control noresize" ng-maxlength="255">
 {{event.description}}
 						</textarea>
-					<br>	<label>Url:</label><br> <input type="text" ng-model="eventTest.video" class="form-control" ng-maxlength="255">
+					<br>	<label>URL:</label><br> <input type="text" ng-model="eventTest.video" class="form-control" ng-maxlength="255">
 					<br>	<label>Coordinates/Address:</label><br> <input type="text" ng-model="eventTest.coordinates" class="form-control" ng-maxlength="255">
-					<br>	<label>StartDate:</label><br> <input type="datetime-local" ng-model="eventTest.startDate" class="form-control">
-					<br>	<label>EndDate:</label><br> <input type="datetime-local" ng-model="eventTest.endDate" class="form-control">
+					<br>	<label>Start Date:</label><br> <input type="datetime-local" ng-model="eventTest.startDate" class="form-control">
+					<br>	<label>End Date:</label><br> <input type="datetime-local" ng-model="eventTest.endDate" class="form-control">
 					<br> 	<br>
 					<div align="right" ng-if="eventTest.name!=null">
 						<button ng-click="postEvent()" ng-disabled="!eventForm.$valid"  class="btn btn-primary">Save</button>

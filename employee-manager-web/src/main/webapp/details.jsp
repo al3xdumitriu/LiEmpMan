@@ -1,57 +1,76 @@
+<link rel="stylesheet" href="resources/css/profile.css"/>
 <div>
-	<div>
-		<form>
-			<img ng-src="{{profileImage}}" alt="Profile image">
+	<div >
+		<form name="detailsForm">
+			<img id="avatar" src="http://www.techrepublic.com/152-fly/bundles/techrepubliccore/images/icons/standard/icon-user-default.png" alt="Avatar">
 			<fieldset>
-				<legend>My profile</legend>
-
+				<h1 class="page-header">
+					<font color="#0597F2">My profile</font>
+				</h1>
+				<div class="well bs-component">
 				<div ng-model="employee.id"></div>
 				<div>
-					<label for="userName">Username:</label><br>
+					<label for="userName">Name:</label><br>
 
 					<div>
-						<input type="text" id="userName" ng-model="employee.name"
-							class="form-control" disabled>
+						<input type="text" id="userName" ng-model="employee.name" name="name"
+							class="form-control" disabled required>
 					</div>
+					<span style="color: red" ng-show="detailsForm.name.$error.required && detailsForm.name.$dirty">Name is required.</span>
 				</div>
 
 				<div>
 					<label for="phone">Phone:</label><br>
 					<div>
 						<input type="text" id="phone" ng-model="employee.phone"
-							class="form-control" disabled>
+							class="form-control" name="phone" disabled required>
 					</div>
+					<span style="color: red" ng-show="detailsForm.phone.$error.required && detailsForm.phone.$dirty">Phone is required.</span>
 				</div>
 
 				<div>
 					<label for="email">Email:</label><br>
 					<div>
-						<input type="text" id="email" ng-model="employee.email"
-							class="form-control" disabled>
+						<input type="text" id="email" ng-model="employee.email" name="email"
+							class="form-control" disabled required>
 					</div>
+					<span style="color: red" ng-show="detailsForm.email.$error.required && detailsForm.email.$dirty">Email is required.</span>
 				</div>
 
 				<div>
 					<label for="jobTitle">Job Title:</label><br>
 					<div>
-						<input type="text" id="jobTitle" ng-model="employee.jobTitle"
-							class="form-control" disabled>
+						<input type="text" id="jobTitle" ng-model="employee.jobTitle" name="job"
+							class="form-control" disabled required>
 					</div>
+					<span style="color: red" ng-show="detailsForm.job.$error.required && detailsForm.job.$dirty">Job title is required.</span>
 				</div>
 
 				<div>
 					<label for="expLevel">Experience Level:</label><br>
 					<div>
-						<input type="text" id="expLevel"
-							ng-model="employee.experienceLevel" class="form-control" disabled>
+						<input type="text" id="expLevel" name="experience"
+							ng-model="employee.experienceLevel" class="form-control" disabled required>
+					</div>
+					<div >
+					<span style="color: red" ng-show="detailsForm.experience.$error.required && detailsForm.experience.$dirty">Experience level is required.</span>
 					</div>
 				</div>
+				<div ng-hide=hideRaportUpload>
+				<br>
+				<center>Uploaded Successfully</center>
+				</div>
+				</div>
+				<div align="right">
 				</br> <input class="btn btn-primary" id="edit" type="button" value="Edit">
-				<input class="btn btn-primary" id="save" type="button" value="Save"
+				<input class="btn btn-primary" id="save" type="button" value="Save" ng-disabled="!detailsForm.$valid"
 					disabled ng-click="saveMethode()"> <input
 					class="btn btn-primary" id="cancel" type="button" value="Cancel"
 					disabled>
-					<input class="btn btn-primary" id="edit" type="button"  ng-click="serialize()" value="Save XML">
+					<input class="btn btn-primary" id="edit" type="button"  ng-click="serialize()" value="Upload to Amazon">
+					</div>
+					</fieldset>
+					</form>
 					
 	</div>
 </div>
