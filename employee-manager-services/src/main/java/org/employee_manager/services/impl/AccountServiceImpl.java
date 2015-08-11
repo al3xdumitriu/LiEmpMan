@@ -47,5 +47,10 @@ public class AccountServiceImpl implements AccountService {
 		return accountRepository.findAccountByUsernameAndPassword(username,password);
 	}
 
+	@Override
+	public List<Account> findMultipleAccountsByNameAndPassword(String username, String password) {
+		return accountRepository.findMultipleAccountsByNameAndPassword(username,password);
+	}
+
 
 }

@@ -101,9 +101,10 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http', '$rootSco
 		} ]);
 
 employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http',
-		'$routeParams', 'StarService',
-		function($scope, $http, $routeParams, StarService) {
+		'$routeParams', 'StarService', '$timeout',
+		function($scope, $http, $routeParams, StarService, $timeout) {
 			$scope.showEvaluation = false;
+			$scope.savedSuccessfully = false;
 			$scope.giveEvaluation = function() {
 				$scope.showEvaluation = true;
 
@@ -116,8 +117,7 @@ employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http',
 			$scope.evaluation = [];
 
 			$scope.submitEvaluation = function(skills) {
-				$scope.showEvaluation = false;
-
+				$scope.savedSuccessfully = true;
 				var data = [];
 				for (var i = 0; i < skills.length; ++i) {
 					if ($scope.evaluation[i]) {
@@ -140,6 +140,11 @@ employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http',
 				});
 
 				$scope.evaluation = [];
+				
+				$timeout(function(){
+					$scope.showEvaluation = false;
+					$scope.savedSuccessfully = false;
+				}, 3000);
 			};
 
 		} ]);
