@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -22,8 +23,13 @@ import org.hibernate.annotations.LazyCollectionOption;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "ACCOUNT")
+@Table(name = "ACCOUNT", uniqueConstraints=@UniqueConstraint(columnNames = {"USER_NAME"})) 
 public class Account implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 685255686871642942L;
 
 	@Id
 	@Column(name = "ACCOUNT_ID", nullable = false)
@@ -36,7 +42,7 @@ public class Account implements Serializable {
 
 	@Column(name = "PASSWORD")
 	private String password;
-	
+
 	@Transient
 	private String confirmPassword;
 
@@ -45,13 +51,13 @@ public class Account implements Serializable {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonManagedReference
 	public Employee employeeId;
-	
+
 	@Transient
 	private long employeeIdJson;
 
 	@OneToMany(mappedBy = "accountId")
 	private Set<Role> roles;
-	
+
 	@Transient
 	private String capchaAnswer;
 
@@ -118,8 +124,5 @@ public class Account implements Serializable {
 	public void setCapchaAnswer(String capchaAnswer) {
 		this.capchaAnswer = capchaAnswer;
 	}
-	
-	
-	
-	
+
 }

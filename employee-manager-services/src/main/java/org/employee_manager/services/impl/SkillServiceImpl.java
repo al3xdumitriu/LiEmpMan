@@ -23,6 +23,8 @@ public class SkillServiceImpl implements SkillService {
 	
 	@Override
 	public Skill saveSkill(Skill skill) {
+		Employee employee = employeeService.findById(skill.getEmployeeId().getId());
+		skill.setEmployeeId(employee);
 		return this.skillRepository.save(skill);
 	}
 

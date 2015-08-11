@@ -1,5 +1,5 @@
 var employeeManagerControllers = angular.module('employeeManagerControllers',
-		[ 'employeeManagerServices' ]);
+		[ 'employeeManagerServices' ])
 
 employeeManagerControllers.controller('headerController', [ '$scope',
 		'$location', function($scope, $location) {
@@ -23,18 +23,18 @@ employeeManagerControllers.controller('contentMenuController', [ '$scope',
 
 		} ]);
 
-employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
-		'$rootScope', '$routeParams', 'StarService',
-		function($scope, $http, $rootScope, $routeParams, StarService) {
+
+employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http', '$rootScope', 
+		'$routeParams', 'StarService','$timeout',
+		function($scope, $http, $rootScope, $routeParams, StarService, $timeout) {
 			var skills = StarService.skills({
 				id : $rootScope.globals.currentUser.employeeId
 			});
-			console.log(skills);
 
 			$scope.skills = skills;
-			console.log($scope.skills);
 
 			$scope.show = false;
+			$scope.savedSuccessfully = false;
 
 			$scope.skill = {
 				name : '',
@@ -47,7 +47,6 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
 			}
 
 			$scope.save = function() {
-				$scope.show = false;
 				$http.post('/employee-manager-container/rest/skill', {
 					id : 213213,
 					name : $scope.skill.name,
@@ -61,6 +60,12 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
 						id : $rootScope.globals.currentUser.employeeId
 					});
 					$scope.skills = skills;
+					
+					$scope.savedSuccessfully = true;
+					$timeout(function(){
+						$scope.show = false;
+						$scope.savedSuccessfully = false;
+					}, 3000);
 				});
 
 				$scope.skill = {
@@ -68,6 +73,7 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
 					description : '',
 					experience : ''
 				}
+
 			};
 
 			// For chart
@@ -95,9 +101,10 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
 		} ]);
 
 employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http',
-		'$routeParams', 'StarService',
-		function($scope, $http, $routeParams, StarService) {
+		'$routeParams', 'StarService', '$timeout',
+		function($scope, $http, $routeParams, StarService, $timeout) {
 			$scope.showEvaluation = false;
+			$scope.savedSuccessfully = false;
 			$scope.giveEvaluation = function() {
 				$scope.showEvaluation = true;
 
@@ -110,8 +117,7 @@ employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http',
 			$scope.evaluation = [];
 
 			$scope.submitEvaluation = function(skills) {
-				$scope.showEvaluation = false;
-
+				$scope.savedSuccessfully = true;
 				var data = [];
 				for (var i = 0; i < skills.length; ++i) {
 					if ($scope.evaluation[i]) {
@@ -134,6 +140,11 @@ employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http',
 				});
 
 				$scope.evaluation = [];
+				
+				$timeout(function(){
+					$scope.showEvaluation = false;
+					$scope.savedSuccessfully = false;
+				}, 3000);
 			};
 
 		} ]);
@@ -169,10 +180,17 @@ function AccountController($scope, $routeParams, vcRecaptchaService,
 
 	var vm = this;
 	$scope.ip = location.hostname;
+	
 	$scope.submissionSuccess = false;
 	$scope.submission = function() {
 		$scope.submissionSuccess = !$scope.submissionSuccess;
 	}
+	
+	$scope.usernameExists = false;
+	$scope.exists = function() {
+		$scope.usernameExists = !$scope.usernameExists;
+	}
+	
 	vm.publicKey = "6LdjuAoTAAAAAN_VK2hwBJecTvmt8fdk_1EYHdtE";
 	vm.signup = function() {
 
@@ -209,11 +227,15 @@ function AccountController($scope, $routeParams, vcRecaptchaService,
 														+ $scope.ip
 														+ ":8080/employee-manager-web/index.jsp#/"
 											}, 1500);
+									$scope.submission();
 								} else {
 									alert("User verification failed");
 								}
+							}).error(function(response){
+								if (response === "exists"){
+									$scope.exists();
+								}
 							});
-			$scope.submission();
 		}
 	}
 }
@@ -430,8 +452,11 @@ employeeManagerControllers.controller('myCtrlEvent', [
 		'$scope',
 		'$http',
 		'$routeParams',
+		'$location',
 		'$sce',
-		function($scope, $http, $routeParams, $sce) {
+		'$window',
+		'$timeout',
+		function($scope, $http, $routeParams, $sce,$location,$window,$timeout) {
 
 			$scope.urlfinal = "/employee-manager-container/rest/event";
 
@@ -442,16 +467,31 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			$scope.limit = "2";
 			$scope.add = function() {
 				$scope.limit = parseInt($scope.limit) + 2;
+
 			}
+			
+			$scope.areMoreEvents=function() {
+				if($scope.limit<$scope.events.length) return true;
+				else return false;
+			}
+			
 			$scope.hide = true;
 			$scope.hideRaport = true;
 			$scope.showForm = function() {
 				$scope.hide = !$scope.hide;
 				$scope.hideRaport = true;
 			}
-
+			
+			$scope.arrayCoordinations=[];
+			
 			$scope.showLocation = function(eventId, coordEvent) {
+				$scope.arrayCoordinations[eventId]=1;
+				
+				$timeout(function(){ $scope.showDirection(eventId, coordEvent); }, 100);
 
+			}
+
+			$scope.showDirection = function(eventId, coordEvent) {
 				var mapCanvas = document.getElementById(eventId);
 				var mapOptions = {
 					center : new google.maps.LatLng(47.160456, 27.589030),
@@ -475,7 +515,6 @@ employeeManagerControllers.controller('myCtrlEvent', [
 						directionsDisplay.setDirections(response);
 					}
 				});
-
 			}
 
 			$scope.parseazaLink = function(link) {
@@ -491,19 +530,14 @@ employeeManagerControllers.controller('myCtrlEvent', [
 							var positionS = link.indexOf('&');
 							var newLink = 'https://www.youtube.com/embed/'
 									+ link.substring(positionV, positionS);
-							/*
-							 * alert("pozitia initiala "+positionV + "poz finala "
-							 * +positionS + "=substring" +noutate);
-							 */link = null;
+							
+							 link = null;
 							return newLink;
 						} else {
 							var newLink = 'https://www.youtube.com/embed/'
 									+ link.substring(positionV, 100);
 							link = null;
-							/*
-							 * alert("pozitia initiala "+positionV+2 + "poz
-							 * finala " +positionS + "=substring" +noutate);
-							 */
+
 							return newLink;
 						}
 
@@ -555,9 +589,20 @@ employeeManagerControllers.controller('myCtrlEvent', [
 					eventStatusId : null
 				};
 				$scope.hideRaport = false;
-
+			
+/*				$location.reload(true);
+				$route.reload();*/
+				
+				$timeout(function(){ $scope.reloadPage(); }, 2000);
+				
+				
 			}
 
+			$scope.reloadPage = function() {
+				
+				$window.location.reload();
+			
+			}
 			$scope.editEvent = function(idEvent) {
 
 				var urlvideo = null;
