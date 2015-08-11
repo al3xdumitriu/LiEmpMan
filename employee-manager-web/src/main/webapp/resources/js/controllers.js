@@ -354,12 +354,18 @@ employeeManagerControllers.controller('EmployeeDetailsController', [
 			// $routeParams.id
 			});
 
+			$scope.hideRaportSave = true;
+			
 			$scope.saveMethode = function() {
 				$http({
 					method : 'PUT',
 					url : '/employee-manager-container/rest/employee',
 					data : $scope.employee
 				})
+				
+				$scope.hideRaportSave = false;
+				
+				$timeout(function(){ $scope.hideMessageSave(); }, 1000);
 			};
 			
 			$scope.hideRaportUpload = true;
@@ -378,6 +384,10 @@ employeeManagerControllers.controller('EmployeeDetailsController', [
 			
 			$scope.hideMessage = function() {
 				$scope.hideRaportUpload = true;
+			}
+			
+			$scope.hideMessageSave = function() {
+				$scope.hideRaportSave = true;
 			}
 			
 		} ]);

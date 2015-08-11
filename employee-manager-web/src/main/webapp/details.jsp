@@ -16,7 +16,9 @@
 						<input type="text" id="userName" ng-model="employee.name" name="name"
 							class="form-control" disabled required>
 					</div>
-					<span style="color: red" ng-show="detailsForm.name.$error.required && detailsForm.name.$dirty">Name is required.</span>
+						
+					<span style="color: red" ng-show="detailsForm.name.$error.required && detailsForm.name.$dirty" class="rightErrMsg">Name is required.</span>
+					<br>
 				</div>
 
 				<div>
@@ -25,7 +27,8 @@
 						<input type="text" id="phone" ng-model="employee.phone"
 							class="form-control" name="phone" disabled required>
 					</div>
-					<span style="color: red" ng-show="detailsForm.phone.$error.required && detailsForm.phone.$dirty">Phone is required.</span>
+					<span style="color: red" ng-show="detailsForm.phone.$error.required && detailsForm.phone.$dirty" class="rightErrMsg">Phone is required.</span>
+					<br>
 				</div>
 
 				<div>
@@ -34,7 +37,8 @@
 						<input type="text" id="email" ng-model="employee.email" name="email"
 							class="form-control" disabled required>
 					</div>
-					<span style="color: red" ng-show="detailsForm.email.$error.required && detailsForm.email.$dirty">Email is required.</span>
+					<span style="color: red" ng-show="detailsForm.email.$error.required && detailsForm.email.$dirty" class="rightErrMsg">Email is required.</span>
+					<br>
 				</div>
 
 				<div>
@@ -43,7 +47,8 @@
 						<input type="text" id="jobTitle" ng-model="employee.jobTitle" name="job"
 							class="form-control" disabled required>
 					</div>
-					<span style="color: red" ng-show="detailsForm.job.$error.required && detailsForm.job.$dirty">Job title is required.</span>
+					<span style="color: red" ng-show="detailsForm.job.$error.required && detailsForm.job.$dirty" class="rightErrMsg">Job title is required.</span>
+					<br>
 				</div>
 
 				<div>
@@ -52,14 +57,20 @@
 						<input type="text" id="expLevel" name="experience"
 							ng-model="employee.experienceLevel" class="form-control" disabled required>
 					</div>
-					<div >
-					<span style="color: red" ng-show="detailsForm.experience.$error.required && detailsForm.experience.$dirty">Experience level is required.</span>
-					</div>
+				
+					<span style="color: red" ng-show="detailsForm.experience.$error.required && detailsForm.experience.$dirty" class="rightErrMsg">Experience level is required.</span>
+					<br>
 				</div>
 				<div ng-hide=hideRaportUpload>
 				<br>
 				<center>Uploaded Successfully</center>
 				</div>
+				
+				<div ng-hide=hideRaportSave>
+				<br>
+				<center>Saved Successfully</center>
+				</div>
+				
 				</div>
 				<div align="right">
 				</br> <input class="btn btn-primary" id="edit" type="button" value="Edit">
