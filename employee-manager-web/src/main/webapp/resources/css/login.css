@@ -1,0 +1,17 @@
+.help-block{
+	padding-left:22px;;
+}
+
+.leftBtnReg{
+	position:absolute;
+	float:left;
+	padding-left:10px;
+}
+.rigthBtnReg{
+	float:left;
+	padding-left:90px;
+}
+
+.userNameFailed{
+	padding-bottom:10px;
+}

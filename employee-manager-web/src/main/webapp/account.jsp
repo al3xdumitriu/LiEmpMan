@@ -101,6 +101,7 @@
 				don't match.</div>
 			<div ng-show=submissionSuccess>Your account was created
 				successfully!</div>
+				<div ng-show=usernameExists>This username already exists!</div>
 			<br></br>
 			<!--Recaptcha Widget--->
 				<div vc-recaptcha key="accountCtrl.publicKey"></div>
