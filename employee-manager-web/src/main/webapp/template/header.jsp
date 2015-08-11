@@ -1,18 +1,27 @@
 <nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                    aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span> <span
-                    class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand">Menu</a>
-        </div>
+	<div class="container-fluid" ng-controller="header">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand">Levi9 Employee Manager</a>
+			<div class="headerName">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown">Welcome, <b>{{name}}</b><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#" ng-click="logout()" value="Logout">Logout </li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
 
-        <%--<!-- Collect the nav links, forms, and other content for toggling -->
+		<%--<!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse"
              id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -40,5 +49,5 @@
                 </li>
             </ul>
         </div>--%>
-    </div>
+	</div>
 </nav>

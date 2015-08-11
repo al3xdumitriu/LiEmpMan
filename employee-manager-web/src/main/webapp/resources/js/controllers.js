@@ -23,18 +23,18 @@ employeeManagerControllers.controller('contentMenuController', [ '$scope',
 
 		} ]);
 
-employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
-		'$rootScope', '$routeParams', 'StarService',
-		function($scope, $http, $rootScope, $routeParams, StarService) {
+
+employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http', '$rootScope', 
+		'$routeParams', 'StarService','$timeout',
+		function($scope, $http, $rootScope, $routeParams, StarService, $timeout) {
 			var skills = StarService.skills({
 				id : $rootScope.globals.currentUser.employeeId
 			});
-			console.log(skills);
 
 			$scope.skills = skills;
-			console.log($scope.skills);
 
 			$scope.show = false;
+			$scope.savedSuccessfully = false;
 
 			$scope.skill = {
 				name : '',
@@ -47,7 +47,6 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
 			}
 
 			$scope.save = function() {
-				$scope.show = false;
 				$http.post('/employee-manager-container/rest/skill', {
 					id : 213213,
 					name : $scope.skill.name,
@@ -61,6 +60,12 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
 						id : $rootScope.globals.currentUser.employeeId
 					});
 					$scope.skills = skills;
+					
+					$scope.savedSuccessfully = true;
+					$timeout(function(){
+						$scope.show = false;
+						$scope.savedSuccessfully = false;
+					}, 3000);
 				});
 
 				$scope.skill = {
@@ -68,6 +73,7 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
 					description : '',
 					experience : ''
 				}
+
 			};
 
 			// For chart
@@ -95,9 +101,10 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
 		} ]);
 
 employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http',
-		'$routeParams', 'StarService',
-		function($scope, $http, $routeParams, StarService) {
+		'$routeParams', 'StarService', '$timeout',
+		function($scope, $http, $routeParams, StarService, $timeout) {
 			$scope.showEvaluation = false;
+			$scope.savedSuccessfully = false;
 			$scope.giveEvaluation = function() {
 				$scope.showEvaluation = true;
 
@@ -110,8 +117,7 @@ employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http',
 			$scope.evaluation = [];
 
 			$scope.submitEvaluation = function(skills) {
-				$scope.showEvaluation = false;
-
+				$scope.savedSuccessfully = true;
 				var data = [];
 				for (var i = 0; i < skills.length; ++i) {
 					if ($scope.evaluation[i]) {
@@ -134,6 +140,11 @@ employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http',
 				});
 
 				$scope.evaluation = [];
+				
+				$timeout(function(){
+					$scope.showEvaluation = false;
+					$scope.savedSuccessfully = false;
+				}, 3000);
 			};
 
 		} ]);
@@ -381,6 +392,14 @@ employeeManagerControllers.controller('EmployeeDetailsController', [
 				
 				$timeout(function(){ $scope.hideMessage(); }, 1000);
 			};
+
+			$scope.showName = function() {
+				$http({
+					method : 'GET',
+					url : '/employee-manager-container/rest/employee/'
+							+ $rootScope.globals.currentUser.employeeId
+				})
+			};
 			
 			$scope.hideMessage = function() {
 				$scope.hideRaportUpload = true;
@@ -620,7 +639,6 @@ employeeManagerControllers.controller('myCtrlEvent', [
 				
 			}
 
-			
 			$scope.reloadPage = function() {
 				
 				$window.location.reload();
@@ -682,4 +700,36 @@ employeeManagerControllers.controller('myCtrlEvent', [
 
 			}
 
-		} ]); 
+		} ]);
+
+/*employeeManagerControllers.controller('header', header);
+header.$inject = [ '$scope', '$routeParams', '$location',
+		'AuthenticationService', '$rootScope' ];
+
+function header($scope, $routeParams, $location, AuthenticationService,
+		$rootScope) {
+	$scope.name = $rootScope.globals.currentUser.username;
+
+	function logout() {
+		AuthenticationService.ClearCredentials();
+		$location.path('/');
+	}
+	;
+};*/
+
+employeeManagerControllers.controller('header', [
+		'$scope',
+		'$http',
+		'$routeParams',
+		'$rootScope',
+		'$location',
+		'AuthenticationService',
+		function($scope, $http, $routeParams, $rootScope, $location,
+				AuthenticationService) {
+			$scope.name = $rootScope.globals.currentUser.username;
+
+			$scope.logout=function logout() {
+				AuthenticationService.ClearCredentials();
+				$location.path('/');
+			};
+		} ]);

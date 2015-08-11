@@ -7,7 +7,9 @@
 			ng-controller=contentMenuController ng-hide="showContentMenu"></div>
 		<div class="col-md-8">
 			<div>
-				<h2>Give Feedback</h2>
+				<h1 class="page-header">
+					<font color="#0597F2">Give Feedback</font>
+				</h1>
 				<div class="well bs-component">
 					<form name="emailForm" class="form-horizontal"
 						ng-submit="emailCtrl.sendEmail(emailCtrl.email)" novalidate>
