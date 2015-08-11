@@ -32,10 +32,9 @@
 				<br><b> Experience: </b><br> <input type="text" ng-model="skill.experience" class="form-control"> 
 				<br> <br>
 				<div ng-if="skill.name!=''">
-
 					<button ng-click="save()" class="btn btn-primary">Save</button>
-
 				</div>
+				<span ng-show="savedSuccessfully">Saved successfully.</span>
 			</form>
 		</div>
 	</div>
