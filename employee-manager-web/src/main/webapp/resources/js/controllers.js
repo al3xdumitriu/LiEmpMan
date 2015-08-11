@@ -438,6 +438,12 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			
 			$scope.showLocation = function(eventId, coordEvent) {
 				$scope.arrayCoordinations[eventId]=1;
+				
+				$timeout(function(){ $scope.showDirection(eventId, coordEvent); }, 100);
+
+			}
+
+			$scope.showDirection = function(eventId, coordEvent) {
 				var mapCanvas = document.getElementById(eventId);
 				var mapOptions = {
 					center : new google.maps.LatLng(47.160456, 27.589030),
@@ -461,10 +467,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 						directionsDisplay.setDirections(response);
 					}
 				});
-
 			}
-
-			
 
 			$scope.parseazaLink = function(link) {
 
