@@ -380,6 +380,14 @@ employeeManagerControllers.controller('EmployeeDetailsController', [
 							+ '/savexml'
 				})
 			};
+
+			$scope.showName = function() {
+				$http({
+					method : 'GET',
+					url : '/employee-manager-container/rest/employee/'
+							+ $rootScope.globals.currentUser.employeeId
+				})
+			};
 		} ]);
 
 employeeManagerControllers.controller('myCtrlAchievEmp', [
@@ -590,7 +598,6 @@ employeeManagerControllers.controller('myCtrlEvent', [
 				
 			}
 
-			
 			$scope.reloadPage = function() {
 				
 				$window.location.reload();
@@ -652,4 +659,36 @@ employeeManagerControllers.controller('myCtrlEvent', [
 
 			}
 
-		} ]); 
+		} ]);
+
+/*employeeManagerControllers.controller('header', header);
+header.$inject = [ '$scope', '$routeParams', '$location',
+		'AuthenticationService', '$rootScope' ];
+
+function header($scope, $routeParams, $location, AuthenticationService,
+		$rootScope) {
+	$scope.name = $rootScope.globals.currentUser.username;
+
+	function logout() {
+		AuthenticationService.ClearCredentials();
+		$location.path('/');
+	}
+	;
+};*/
+
+employeeManagerControllers.controller('header', [
+		'$scope',
+		'$http',
+		'$routeParams',
+		'$rootScope',
+		'$location',
+		'AuthenticationService',
+		function($scope, $http, $routeParams, $rootScope, $location,
+				AuthenticationService) {
+			$scope.name = $rootScope.globals.currentUser.username;
+
+			$scope.logout=function logout() {
+				AuthenticationService.ClearCredentials();
+				$location.path('/');
+			};
+		} ]);
