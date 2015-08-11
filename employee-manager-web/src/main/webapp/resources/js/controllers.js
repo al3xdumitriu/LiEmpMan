@@ -518,6 +518,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			
 			$scope.hide = true;
 			$scope.hideRaport = true;
+			$scope.hideRaportPost = true;
 			$scope.showForm = function() {
 				$scope.hide = !$scope.hide;
 				$scope.hideRaport = true;
@@ -629,7 +630,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 					eventTypeId : null,
 					eventStatusId : null
 				};
-				$scope.hideRaport = false;
+				$scope.hideRaportPost = false;
 			
 /*				$location.reload(true);
 				$route.reload();*/
@@ -697,8 +698,15 @@ employeeManagerControllers.controller('myCtrlEvent', [
 				});
 
 				$scope.hideRaport = false;
-
+				
+				$timeout(function(){ $scope.hideRaportEventSave(); }, 1000);
+				
 			}
+			
+			$scope.hideRaportEventSave = function(){
+				$scope.hideRaport = true;
+			}
+			
 
 		} ]);
 
