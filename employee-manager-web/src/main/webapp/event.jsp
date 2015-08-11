@@ -20,20 +20,19 @@
 				<div
 					ng-repeat="event in events | limitTo:limit  
 					" class="well bs-component">
+					<form name="eventFormmm">
 					
-					<p>
-
-						<br>    <label>Title:</label><input id="titlu{{event.id}}" type="text" value="{{event.name}}" class="form-control" ng-maxlength="255">
-						<br>    <label>Organizator Name:</label><input id="oName{{event.id}}" type="text" value="{{event.organizatorName}}" class="form-control" ng-maxlength="255">
-						<br>	<label>StartDate:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'mm/dd/yyyy hh:mm a'" class="form-control" ng-maxlength="255">
-						<br>	<label>EndDate:</label><br> <input id="fDate{{event.id}}" type="text" ng-value="event.endDate | date:'mm/dd/yyyy hh:mm a'" class="form-control" ng-maxlength="255">
+					
+						<br>    <label>Title:</label><input id="titlu{{event.id}}" type="text" ng-model="event.name" class="form-control" ng-maxlength="255">
+						<br>    <label>Organizator Name:</label><input id="oName{{event.id}}" type="text" ng-model="event.organizatorName" class="form-control" ng-maxlength="255">
+						<br>	<label>StartDate:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'mm/dd/yyyy hh:mm a'" class="form-control" >
+						<br>	<label>EndDate:</label><br> <input id="fDate{{event.id}}" type="text" ng-value="event.endDate | date:'mm/dd/yyyy hh:mm a'" class="form-control" >
 						<br>	<label>Description:</label><br>
-						<textarea id="descr{{event.id}}"  rows="4" cols="40" class="form-control noresize" ng-maxlength="255">
-{{event.description}}
-						</textarea>
+						<textarea id="descr{{event.id}}" ng-model="event.description"  rows="4" cols="40" class="form-control noresize" ng-maxlength="255"></textarea>
 						<br>	<label>URI:</label><br> <input id="uri{{event.id}}" type="text" ng-model="event.video" class="form-control" ng-maxlength="255">
 						
-					</p>
+					
+					
 
 					<center><div ng-if="event.video!=null">
 						<iframe id="video{{event.id}}" width="420" height="315" ng-src="{{parseazaLink(event.video)}}">
@@ -42,6 +41,7 @@
 					</center>
 					<br>	<label>Coordinates/Address:</label><br> <input id="coord{{event.id}}" type="text" ng-model="event.coordinates" class="form-control" ng-maxlength="255">
 						<br>
+					
 					<div align="right">
 					
 					<span ng-if="event.coordinates!=null">
@@ -51,11 +51,12 @@
 						<br>
 						<button ng-click="showLocation(event.id,event.coordinates)"
 							class="btn btn-primary">Show Directions</button>
+
 					</span>
 					</span>
-					<button ng-click="editEvent(event.id)"
-							class="btn btn-primary">Save</button>
+					<button ng-click="editEvent(event.id)" ng-disabled="!eventFormmm.$valid" class="btn btn-primary">Savee</button>
 					</div>
+					</form>
 					
 				</div>
 				
