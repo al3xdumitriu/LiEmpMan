@@ -1,17 +1,30 @@
-.help-block{
-	padding-left:22px;;
+.help-block {
+	padding-left: 22px;;
 }
 
-.leftBtnReg{
-	position:absolute;
-	float:left;
-	padding-left:10px;
-}
-.rigthBtnReg{
-	float:left;
-	padding-left:90px;
+.leftBtnReg {
+	position: absolute;
+	float: left;
+	padding-left: 10px;
 }
 
-.userNameFailed{
-	padding-bottom:10px;
+.rigthBtnReg {
+	float: left;
+	padding-left: 90px;
+}
+
+.userNameFailed {
+	padding-bottom: 10px;
+}
+
+.
+.caret-up {
+	width: 0;
+	height: 0;
+	border-left: 4px solid rgba(0, 0, 0, 0);
+	border-right: 4px solid rgba(0, 0, 0, 0);
+	border-bottom: 4px solid;
+	display: inline-block;
+	margin-left: 2px;
+	vertical-align: middle;
 }

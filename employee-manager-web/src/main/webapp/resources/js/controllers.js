@@ -1,31 +1,30 @@
 var employeeManagerControllers = angular.module('employeeManagerControllers',
-    ['employeeManagerServices']);
+		[ 'employeeManagerServices' ]);
 
-employeeManagerControllers.controller('headerController', ['$scope',
-    '$location', function ($scope, $location) {
+employeeManagerControllers.controller('headerController', [ '$scope',
+		'$location', function($scope, $location) {
 
-        var urls = {
-            "/": true,
-            "/register": true
-        };
-        $scope.showHeader = urls[$location.$$url];
+			var urls = {
+				"/" : true,
+				"/register" : true
+			};
+			$scope.showHeader = urls[$location.$$url];
 
-    }]);
+		} ]);
 
-employeeManagerControllers.controller('contentMenuController', ['$scope', '$location',
-    'employeesService', function ($scope, $location) {
+employeeManagerControllers.controller('contentMenuController', [ '$scope',
+		'$location', 'employeesService', function($scope, $location) {
 
-        var urls = {
-            "/": true,
-            "/register": true
-        };
-        $scope.showContentMenu = urls[$location.$$url];
+			var urls = {
+				"/" : true,
+				"/register" : true
+			};
+			$scope.showContentMenu = urls[$location.$$url];
 
-    }]);
+		} ]);
 
-
-employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http', '$rootScope',
-		'$routeParams', 'StarService',
+employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http',
+		'$rootScope', '$routeParams', 'StarService',
 		function($scope, $http, $rootScope, $routeParams, StarService) {
 			var skills = StarService.skills({
 				id : $rootScope.globals.currentUser.employeeId
@@ -162,18 +161,17 @@ employeeManagerControllers.directive('starRating', function() {
 });
 
 employeeManagerControllers.controller('AccountController', AccountController);
-AccountController.$inject = [ '$scope', '$routeParams','vcRecaptchaService',
-                    		'AuthenticationService','$http','$window' ];
+AccountController.$inject = [ '$scope', '$routeParams', 'vcRecaptchaService',
+		'AuthenticationService', '$http', '$window' ];
 
 function AccountController($scope, $routeParams, vcRecaptchaService,
-		AuthenticationService, $http,$window) {
+		AuthenticationService, $http, $window) {
 
-	
 	var vm = this;
 	$scope.ip = location.hostname;
 	$scope.submissionSuccess = false;
-	  $scope.submission = function() {
-	  $scope.submissionSuccess = !$scope.submissionSuccess;
+	$scope.submission = function() {
+		$scope.submissionSuccess = !$scope.submissionSuccess;
 	}
 	vm.publicKey = "6LdjuAoTAAAAAN_VK2hwBJecTvmt8fdk_1EYHdtE";
 	vm.signup = function() {
@@ -187,7 +185,11 @@ function AccountController($scope, $routeParams, vcRecaptchaService,
 			$scope.account = {
 				username : vm.account.username,
 				password : vm.account.password,
-				employeeId : {name:vm.account.employeeId.name,email:vm.account.employeeId.email,phone:vm.account.employeeId.phone},
+				employeeId : {
+					name : vm.account.employeeId.name,
+					email : vm.account.employeeId.email,
+					phone : vm.account.employeeId.phone
+				},
 				capchaAnswer : vcRecaptchaService.getResponse()
 			};
 			/* MAKE AJAX REQUEST to our server with g-captcha-string */
@@ -197,18 +199,24 @@ function AccountController($scope, $routeParams, vcRecaptchaService,
 				url : '/employee-manager-container/rest/account',
 				data : $scope.account
 
-			}).success(function(response) {
-				if (response.success.valueType === "TRUE") {
-					setTimeout(function() { $window.location.href = "http://"+ $scope.ip+ ":8080/employee-manager-web/index.jsp#/"}, 1500);
-				} else {
-					alert("User verification failed");
-				}
-			});
+			})
+					.success(
+							function(response) {
+								if (response.success.valueType === "TRUE") {
+									setTimeout(
+											function() {
+												$window.location.href = "http://"
+														+ $scope.ip
+														+ ":8080/employee-manager-web/index.jsp#/"
+											}, 1500);
+								} else {
+									alert("User verification failed");
+								}
+							});
 			$scope.submission();
 		}
 	}
 }
-
 
 employeeManagerControllers
 		.controller(
@@ -267,43 +275,44 @@ employeeManagerControllers
 						} ]);
 
 employeeManagerControllers.controller('LoginController', LoginController);
-LoginController.$inject = ['$scope', '$routeParams', '$location', '$route',
-    'AuthenticationService','$rootScope'];
+LoginController.$inject = [ '$scope', '$routeParams', '$location', '$route',
+		'AuthenticationService', '$rootScope' ];
 
 function LoginController($scope, $routeParams, $location, $route,
-                         AuthenticationService, $rootScope) {
+		AuthenticationService, $rootScope) {
 
 	var vm = this;
 
 	publicKey = "6LdjuAoTAAAAAN_VK2hwBJecTvmt8fdk_1EYHdtE";
-	
+
 	vm.login = login;
-	
+
 	vm.register = register;
 
 	vm.loginFailed;
-	
-	nrAttempts=0;
-	
-    function initController() { // reset login status //and increments the number of attempts
+
+	nrAttempts = 0;
+
+	function initController() { // reset login status //and increments the
+		// number of attempts
 		AuthenticationService.ClearCredentials();
 		$rootScope.attempts = {
-				nrAttempts : nrAttempts + 1
-		};		
-		nrAttempts=nrAttempts+1;
-		$scope.nrAttempts=nrAttempts;
+			nrAttempts : nrAttempts + 1
+		};
+		nrAttempts = nrAttempts + 1;
+		$scope.nrAttempts = nrAttempts;
 	}
 	;
 	function login() {
 		initController();
 		vm.dataLoading = true;
 		AuthenticationService.Login(vm.username, vm.password,
-            function (response) {
+				function(response) {
 					if (response.success) {
 						AuthenticationService.SetCredentials(vm.username,
 								vm.password, response.employeeId);
 
-                    $location.path('/profile');
+						$location.path('/profile');
 
 					} else {
 						$scope.loginFailed = response.message
@@ -313,89 +322,109 @@ function LoginController($scope, $routeParams, $location, $route,
 	}
 	;
 
-    function register() {
-        $location.path('/account');
-    }
+	function register() {
+		$location.path('/account');
+	}
 }
 
-employeeManagerControllers.controller('EmployeeDetailsController', ['$scope',
-    '$routeParams', 'employeesService', '$http', '$route', '$rootScope',
-    function ($scope, $routeParams, employeesService, $http, $route,$rootScope) {
+employeeManagerControllers.controller('EmployeeDetailsController', [
+		'$scope',
+		'$routeParams',
+		'employeesService',
+		'$http',
+		'$route',
+		'$rootScope',
+		function($scope, $routeParams, employeesService, $http, $route,
+				$rootScope) {
 
-        $scope.employee = employeesService.employee({
-            id: $rootScope.globals.currentUser.employeeId   //$routeParams.id
-        });
+			$scope.employee = employeesService.employee({
+				id : $rootScope.globals.currentUser.employeeId
+			// $routeParams.id
+			});
 
-        $scope.saveMethode = function () {
-            $http({
-                method: 'PUT',
-                url: '/employee-manager-container/rest/employee',
-                data: $scope.employee
-            })
-        };
-        
-        $scope.serialize = function () {
-            $http({
-                method: 'GET',
-                url: '/employee-manager-container/rest/employee/'+$rootScope.globals.currentUser.employeeId+'/savexml'
-            })
-        };
-    }]);
+			$scope.saveMethode = function() {
+				$http({
+					method : 'PUT',
+					url : '/employee-manager-container/rest/employee',
+					data : $scope.employee
+				})
+			};
+
+			$scope.serialize = function() {
+				$http({
+					method : 'GET',
+					url : '/employee-manager-container/rest/employee/'
+							+ $rootScope.globals.currentUser.employeeId
+							+ '/savexml'
+				})
+			};
+
+			$scope.showName = function() {
+				$http({
+					method : 'GET',
+					url : '/employee-manager-container/rest/employee/'
+							+ $rootScope.globals.currentUser.employeeId
+				})
+			};
+		} ]);
 
 employeeManagerControllers.controller('myCtrlAchievEmp', [
-    '$scope',
-    '$http',
-    '$routeParams','$rootScope',
-    function ($scope, $http, $routeParams,$rootScope) {
+		'$scope',
+		'$http',
+		'$routeParams',
+		'$rootScope',
+		function($scope, $http, $routeParams, $rootScope) {
 
-        $scope.urlfinal = "/employee-manager-container/rest/employee/"
-            + $rootScope.globals.currentUser.employeeId /*$routeParams.id*/ + "/achievement";
+			$scope.urlfinal = "/employee-manager-container/rest/employee/"
+					+ $rootScope.globals.currentUser.employeeId /* $routeParams.id */
+					+ "/achievement";
 
-        $http.get($scope.urlfinal).success(function (response) {
-            $scope.achievements = response;
-        });
+			$http.get($scope.urlfinal).success(function(response) {
+				$scope.achievements = response;
+			});
 
-        $scope.limit = "4";
-        $scope.hideRaport = true;
-        $scope.add = function () {
-            $scope.limit = parseInt($scope.limit) + 4;
-        }
-        $scope.ascunde = true;
+			$scope.limit = "4";
+			$scope.hideRaport = true;
+			$scope.add = function() {
+				$scope.limit = parseInt($scope.limit) + 4;
+			}
+			$scope.ascunde = true;
 
-        $scope.arata = function () {
-            $scope.ascunde = !$scope.ascunde;
-            $scope.hideRaport = true;
-        }
+			$scope.arata = function() {
+				$scope.ascunde = !$scope.ascunde;
+				$scope.hideRaport = true;
+			}
 
-        $scope.achievementTest = {
-            id: 213213,
-            name: '',
-            description: '',
-            employeeId: {
-                id: $rootScope.globals.currentUser.employeeId //$routeParams.id
-            }
-        };
+			$scope.achievementTest = {
+				id : 213213,
+				name : '',
+				description : '',
+				employeeId : {
+					id : $rootScope.globals.currentUser.employeeId
+				// $routeParams.id
+				}
+			};
 
-        $scope.incearcaPost = function () {
-            $scope.ascunde = !$scope.ascunde;
-            $http({
-                method: 'POST',
-                url: '/employee-manager-container/rest/achievement',
-                data: $scope.achievementTest
+			$scope.incearcaPost = function() {
+				$scope.ascunde = !$scope.ascunde;
+				$http({
+					method : 'POST',
+					url : '/employee-manager-container/rest/achievement',
+					data : $scope.achievementTest
 
-            });
-            $scope.achievementTest = {
-                id: 213213,
-                name: '',
-                description: '',
-                employeeId: {
-                    id: $rootScope.globals.currentUser.employeeId //$routeParams.id
-                }
-            };
-            $scope.hideRaport = false;
-        }
-    }]);
-
+				});
+				$scope.achievementTest = {
+					id : 213213,
+					name : '',
+					description : '',
+					employeeId : {
+						id : $rootScope.globals.currentUser.employeeId
+					// $routeParams.id
+					}
+				};
+				$scope.hideRaport = false;
+			}
+		} ]);
 
 employeeManagerControllers.controller('myCtrlEvent', [
 		'$scope',
@@ -409,10 +438,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			$http.get($scope.urlfinal).success(function(response) {
 				$scope.events = response;
 			});
-			
-			
-			
-			
+
 			$scope.limit = "2";
 			$scope.add = function() {
 				$scope.limit = parseInt($scope.limit) + 2;
@@ -451,7 +477,6 @@ employeeManagerControllers.controller('myCtrlEvent', [
 				});
 
 			}
-
 
 			$scope.parseazaLink = function(link) {
 
@@ -533,65 +558,92 @@ employeeManagerControllers.controller('myCtrlEvent', [
 
 			}
 
-			
 			$scope.editEvent = function(idEvent) {
-				
 
-				var urlvideo=null;
-				var sDatee=null;
-				var fDatee=null;
-				var title=null;
-				var orgName=null;
-				var descr=null;
-				var coord=null;
-				if(document.getElementById("video"+idEvent)!=null )
-					 urlvideo=document.getElementById("video"+idEvent).src;
-				if(document.getElementById("titlu"+idEvent)!=null)
-					title=document.getElementById("titlu"+idEvent).value;
-				if(document.getElementById("oName"+idEvent)!=null)
-					orgName=document.getElementById("oName"+idEvent).value;
-				if(document.getElementById("descr"+idEvent)!=null)
-					{
-					descr=document.getElementById("descr"+idEvent).value;
-					descr=descr.trim();
-					}
-				if(document.getElementById("coord"+idEvent)!=null )
-					coord=document.getElementById("coord"+idEvent).value;
-				if(document.getElementById("sDate"+idEvent)!=null )
-					sDatee=Date.parse(document.getElementById("sDate"+idEvent).value);
-				if(document.getElementById("fDate"+idEvent)!=null )
-					fDatee=Date.parse(document.getElementById("fDate"+idEvent).value);
-				
+				var urlvideo = null;
+				var sDatee = null;
+				var fDatee = null;
+				var title = null;
+				var orgName = null;
+				var descr = null;
+				var coord = null;
+				if (document.getElementById("video" + idEvent) != null)
+					urlvideo = document.getElementById("video" + idEvent).src;
+				if (document.getElementById("titlu" + idEvent) != null)
+					title = document.getElementById("titlu" + idEvent).value;
+				if (document.getElementById("oName" + idEvent) != null)
+					orgName = document.getElementById("oName" + idEvent).value;
+				if (document.getElementById("descr" + idEvent) != null) {
+					descr = document.getElementById("descr" + idEvent).value;
+					descr = descr.trim();
+				}
+				if (document.getElementById("coord" + idEvent) != null)
+					coord = document.getElementById("coord" + idEvent).value;
+				if (document.getElementById("sDate" + idEvent) != null)
+					sDatee = Date.parse(document.getElementById("sDate"
+							+ idEvent).value);
+				if (document.getElementById("fDate" + idEvent) != null)
+					fDatee = Date.parse(document.getElementById("fDate"
+							+ idEvent).value);
+
 				$scope.eventEditTest = {
-						id : idEvent,
-						name : title,
-						organizatorName : orgName,
-						coordinates : coord,
-						video : urlvideo,
-						startDate : sDatee,
-						endDate : fDatee,
-						description : descr,
-						participantsNumber : null,
-						eventEvaluations : null,
-						coordinatorId : null,
-						organizers : null,
-						eventTypeId : null,
-						eventStatusId : null
+					id : idEvent,
+					name : title,
+					organizatorName : orgName,
+					coordinates : coord,
+					video : urlvideo,
+					startDate : sDatee,
+					endDate : fDatee,
+					description : descr,
+					participantsNumber : null,
+					eventEvaluations : null,
+					coordinatorId : null,
+					organizers : null,
+					eventTypeId : null,
+					eventStatusId : null
 				};
-				
+
 				$http({
 					method : 'POST',
 					url : '/employee-manager-container/rest/event',
 					data : $scope.eventEditTest
 
 				});
-				
+
 				$scope.hideRaport = false;
-				
 
 			}
-			
-			
-		
 
+		} ]);
+
+/*employeeManagerControllers.controller('header', header);
+header.$inject = [ '$scope', '$routeParams', '$location',
+		'AuthenticationService', '$rootScope' ];
+
+function header($scope, $routeParams, $location, AuthenticationService,
+		$rootScope) {
+	$scope.name = $rootScope.globals.currentUser.username;
+
+	function logout() {
+		AuthenticationService.ClearCredentials();
+		$location.path('/');
+	}
+	;
+};*/
+
+employeeManagerControllers.controller('header', [
+		'$scope',
+		'$http',
+		'$routeParams',
+		'$rootScope',
+		'$location',
+		'AuthenticationService',
+		function($scope, $http, $routeParams, $rootScope, $location,
+				AuthenticationService) {
+			$scope.name = $rootScope.globals.currentUser.username;
+
+			$scope.logout=function logout() {
+				AuthenticationService.ClearCredentials();
+				$location.path('/');
+			};
 		} ]);
