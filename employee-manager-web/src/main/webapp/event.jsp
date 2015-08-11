@@ -54,7 +54,7 @@
 
 					</span>
 					</span>
-					<button ng-click="editEvent(event.id)" ng-disabled="!eventFormmm.$valid" class="btn btn-primary">Savee</button>
+					<button ng-click="editEvent(event.id)" ng-disabled="!eventFormmm.$valid" class="btn btn-primary">Save</button>
 					</div>
 					</form>
 					
