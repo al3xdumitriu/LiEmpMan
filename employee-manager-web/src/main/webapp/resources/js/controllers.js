@@ -24,18 +24,17 @@ employeeManagerControllers.controller('contentMenuController', ['$scope', '$loca
     }]);
 
 
-employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http', '$rootScope',
-		'$routeParams', 'StarService',
-		function($scope, $http, $rootScope, $routeParams, StarService) {
+employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http', '$rootScope', 
+		'$routeParams', 'StarService','$timeout',
+		function($scope, $http, $rootScope, $routeParams, StarService, $timeout) {
 			var skills = StarService.skills({
 				id : $rootScope.globals.currentUser.employeeId
 			});
-			console.log(skills);
 
 			$scope.skills = skills;
-			console.log($scope.skills);
 
 			$scope.show = false;
+			$scope.savedSuccessfully = false;
 
 			$scope.skill = {
 				name : '',
@@ -48,7 +47,6 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http', '$rootSco
 			}
 
 			$scope.save = function() {
-				$scope.show = false;
 				$http.post('/employee-manager-container/rest/skill', {
 					id : 213213,
 					name : $scope.skill.name,
@@ -62,6 +60,12 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http', '$rootSco
 						id : $rootScope.globals.currentUser.employeeId
 					});
 					$scope.skills = skills;
+					
+					$scope.savedSuccessfully = true;
+					$timeout(function(){
+						$scope.show = false;
+						$scope.savedSuccessfully = false;
+					}, 3000);
 				});
 
 				$scope.skill = {
@@ -69,6 +73,7 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http', '$rootSco
 					description : '',
 					experience : ''
 				}
+
 			};
 
 			// For chart
