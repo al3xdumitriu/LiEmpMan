@@ -3,10 +3,9 @@
 <div id="registerContent">
 	<div class="col-lg-6">
 		<h1 align="center">Register</h1>
-		<br></br>
-		<div class="well bs-component">
+		<div class="well bs-component" style="padding-top: 35px;">
 			<form name="accountForm" class="form-horizontal"
-				ng-submit="accountCtrl.signup()" novalidate style="height: 550px;">
+				ng-submit="accountCtrl.signup()" novalidate>
 
 				<div class="form-group">
 					<label for="name" class="accountLabel">Name<span
@@ -19,11 +18,10 @@
 						</div>
 					</div>
 					<span style="color: red"
-						ng-show="accountForm.name.$dirty && accountForm.name.$invalid">
+						ng-show="accountForm.name.$dirty && accountForm.name.$invalid"><br></br>
 						<span class="errorMessage"
 						ng-show="accountForm.name.$error.required">Name is
-							required.</span>
-					</span> <br></br>
+							required.</span> </span> <br></br>
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.name.$error.maxlength">Input must be
 						less than or equal to 255 characters.</div>
@@ -34,17 +32,16 @@
 						style="color: red">*</span></label>
 					<div class="accountInput">
 						<div class="col-lg-7">
-							<input type="text" name="email" class="form-control"
+							<input type="email" name="email" class="form-control"
 								ng-model="accountCtrl.account.employeeId.email"
 								ng-maxlength="255" style="width: 390px;" required>
 						</div>
 					</div>
 					<span style="color: red"
-						ng-show="accountForm.email.$dirty && accountForm.email.$invalid">
+						ng-show="accountForm.email.$dirty && accountForm.email.$invalid"><br></br>
 						<span class="errorMessage"
 						ng-show="accountForm.email.$error.required">Email is
-							required.</span>
-					</span> <br></br>
+							required.</span> </span> <br></br>
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.email.$error.maxlength">Input must be
 						less than or equal to 255 characters.</div>
@@ -62,11 +59,10 @@
 						</div>
 					</div>
 					<span style="color: red"
-						ng-show="accountForm.phone.$dirty && accountForm.phone.$invalid">
+						ng-show="accountForm.phone.$dirty && accountForm.phone.$invalid"><br></br>
 						<span class="errorMessage"
 						ng-show="accountForm.phone.$error.required">Phone number is
-							required.</span>
-					</span> <br></br>
+							required.</span> </span> <br></br>
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.phone.$error.maxlength">Input must be
 						less than or equal to 255 characters.</div>
@@ -83,11 +79,10 @@
 						</div>
 					</div>
 					<span style="color: red"
-						ng-show="accountForm.username.$dirty && accountForm.username.$invalid">
+						ng-show="accountForm.username.$dirty && accountForm.username.$invalid"><br></br>
 						<span class="errorMessage"
 						ng-show="accountForm.username.$error.required">Username is
-							required.</span>
-					</span> <br></br>
+							required.</span> </span> <br></br>
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.username.$error.maxlength">Input must
 						be less than or equal to 255 characters.</div>
@@ -103,11 +98,10 @@
 								ng-maxlength="255" style="width: 390px;" required>
 						</div>
 					</div>
-					<span class="errorMessage" style="color: red"
-						ng-show="accountForm.password.$dirty && accountForm.password.$invalid">
-						<span ng-show="accountForm.password.$error.required">Password
-							is required.</span>
-					</span> <br></br>
+					<span style="color: red"
+						ng-show="accountForm.password.$dirty && accountForm.password.$invalid"><br></br>
+						<span class="errorMessage" ng-show="accountForm.password.$error.required">Password
+							is required.</span> </span> <br></br>
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.password.$error.minlength">Must be at
 						least 6 characters.</div>
@@ -130,10 +124,9 @@
 						</div>
 					</div>
 					<span class="errorMessage" style="color: red"
-						ng-show="accountForm.confirmPassword.$dirty && accountForm.confirmPassword.$invalid">
+						ng-show="accountForm.confirmPassword.$dirty && accountForm.confirmPassword.$invalid"><br></br>
 						<span ng-show="accountForm.confirmPassword.$error.required">Password
-							confirmation is required.</span>
-					</span> <br></br>
+							confirmation is required.</span> </span> <br></br>
 				</div>
 
 				<span class="errorMessage" style="color: red; padding-right: 5px;"
@@ -155,6 +148,7 @@
 					<button class="btn btn-primary" type="submit"
 						onclick="window.history.back()" style="width: 71px;">Back</button>
 				</div>
+				<br></br> <br></br>
 			</form>
 		</div>
 	</div>
