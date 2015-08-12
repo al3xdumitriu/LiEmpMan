@@ -62,7 +62,7 @@
 						ng-show="accountForm.phone.$dirty && accountForm.phone.$invalid"><br></br>
 						<span class="errorMessage"
 						ng-show="accountForm.phone.$error.required">Phone number is
-							required.</span> </span> <br></br>
+							required.</span> </span>
 							
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.phone.$dirty && accountForm.phone.$invalid">Invalid phone number.</div>
