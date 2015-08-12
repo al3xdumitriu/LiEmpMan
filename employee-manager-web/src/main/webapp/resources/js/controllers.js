@@ -106,7 +106,9 @@ employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http', '$r
 			$scope.showEvaluation = false;
 			$scope.savedSuccessfully = false;
 			
-			var employees = employeesServ.employees({});
+			var employees = employeesServ.employees({
+				id : $rootScope.globals.currentUser.employeeId
+			});
 			$scope.employees = employees;
 
 			$scope.giveEvaluation = function() {

@@ -20,5 +20,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	void updateById(@Param("name") String name,@Param("cnp") Long cnp, @Param("phone") String phone,
 			@Param("email") String email, @Param("experienceLevel") String experienceLevel,
 			@Param("jobTitle") String jobTitle,  @Param("id") Long id);
+	
+	@Query("select e from Employee e where e.id NOT IN (:id)")
+	List<Employee> getAllExceptCurrentEmployee(@Param("id") Long id);
 
 }
