@@ -36,6 +36,11 @@ applicationModule.config(function($routeProvider,$sceDelegateProvider) {
 		controller : 'EmailController',
 		controllerAs : 'emailCtrl'
 			
+	}).when('/projects', {
+
+		templateUrl : 'projects.jsp',
+		controller : 'ProjectsController'
+
 	}).otherwise({
 
 		redirectTo : '/employesse'

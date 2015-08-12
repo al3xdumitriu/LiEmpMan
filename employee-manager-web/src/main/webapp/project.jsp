@@ -3,8 +3,6 @@
         <legend>Projects</legend>
     </h1>
     <div class="well bs-component" ng-controller="ProjectController">
-        <br class=" thumbnail">
-
         <div ng-repeat="project in projects">
             <div class="row">
                 <div class="col-md-4">

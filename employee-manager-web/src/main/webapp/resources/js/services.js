@@ -1,307 +1,329 @@
 var employeeManagerServices = angular.module('employeeManagerServices',
-		[ 'ngResource' ]);
+    ['ngResource']);
 
-employeeManagerServices.factory('employeesService', [ '$resource',
+employeeManagerServices.factory('employeesService', ['$resource',
 
-function($resource) {
+    function ($resource) {
 
-	return $resource('/employee-manager-container/rest/:call/:id', {
-		id : "@id"
-	}, {
+        return $resource('/employee-manager-container/rest/:call/:id', {
+            id: "@id"
+        }, {
 
-		employees : {
-			method : 'GET',
-			params : {
-				call : 'employee'
-			},
-			isArray : true
-		},
+            employees: {
+                method: 'GET',
+                params: {
+                    call: 'employee'
+                },
+                isArray: true
+            },
 
-		employee : {
-			method : 'GET',
-			params : {
-				call : 'employee'
-			},
-			isArray : false
-		}
-	});
+            employee: {
+                method: 'GET',
+                params: {
+                    call: 'employee'
+                },
+                isArray: false
+            }
+        });
 
-} ]);
+    }]);
 
-employeeManagerServices.factory('employeesServ', [ '$resource',
-function($resource) {
-	return $resource('/employee-manager-container/rest/:call', {},
-			{	employees : {
-				method : 'GET',
-				params : {
-					call : 'employee'
-				},
-				isArray : true
-			}
-	});
+employeeManagerServices.factory('employeesServ', ['$resource',
+    function ($resource) {
+        return $resource('/employee-manager-container/rest/:call', {},
+            {
+                employees: {
+                    method: 'GET',
+                    params: {
+                        call: 'employee'
+                    },
+                    isArray: true
+                }
+            });
 
-} ]);
+    }]);
 
 employeeManagerServices
-.factory(
-		'StarService',
-		[
-				'$resource',
+    .factory(
+    'StarService',
+    [
+        '$resource',
 
-				function($resource) {
+        function ($resource) {
 
-					return $resource(
-							'/employee-manager-container/rest/:call/:id/skills',
-							{
-								id : "@id"
-							}, {
+            return $resource(
+                '/employee-manager-container/rest/:call/:id/skills',
+                {
+                    id: "@id"
+                }, {
 
-								skills : {
-									method : 'GET',
-									params : {
-										call : 'employee'
-									},
-									isArray : true
-								}
+                    skills: {
+                        method: 'GET',
+                        params: {
+                            call: 'employee'
+                        },
+                        isArray: true
+                    }
 
-							});
+                });
 
-				} ]);
-						
-						
+        }]);
+
+
 employeeManagerServices.factory('AuthenticationService', AuthenticationService);
 
-AuthenticationService.$inject = [ '$http', '$cookieStore', '$rootScope',
-		'$timeout', 'UserService' ];
+AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope',
+    '$timeout', 'UserService'];
 function AuthenticationService($http, $cookieStore, $rootScope, $timeout,
-		UserService) {
-	var service = {};
+                               UserService) {
+    var service = {};
 
-	service.Login = Login;
-	service.SetCredentials = SetCredentials;
-	service.ClearCredentials = ClearCredentials;
+    service.Login = Login;
+    service.SetCredentials = SetCredentials;
+    service.ClearCredentials = ClearCredentials;
 
-	return service;
+    return service;
 
-	function Login(username, password, callback) {
+    function Login(username, password, callback) {
 
-		/*
-		 * Dummy authentication for testing, uses $timeout to simulate api call
-		 * ----------------------------------------------
-		 */
+        /*
+         * Dummy authentication for testing, uses $timeout to simulate api call
+         * ----------------------------------------------
+         */
 
-		var response;
-		UserService.GetByUsername(username, password).then(function(user) {
-			if (user !== null && user.data.password === password) {
-				response = {
-					success : true,
-					employeeId : user.data.employeeId.id
-				};
-			} else {
-				response = {
-					success : false,
-					message : 'Username or password is incorrect'
-				};
-			}
-			callback(response);
-		});
+        var response;
+        UserService.GetByUsername(username, password).then(function (user) {
+            if (user !== null && user.data.password === password) {
+                response = {
+                    success: true,
+                    employeeId: user.data.employeeId.id
+                };
+            } else {
+                response = {
+                    success: false,
+                    message: 'Username or password is incorrect'
+                };
+            }
+            callback(response);
+        });
 
-	}
-    	
-            var response;
-            UserService.GetByUsername(username,password)
-                .then(function (user) {
-                    if (user !== null && user.data.password === password) {
-                        response = { success: true, employeeId : user.data.employeeIdJson };
-                    } else {
-                        response = { success: false, message: 'Username or password is incorrect' };
-                    }
-                    callback(response);
-                });        
-        
-    
+    }
 
-	function SetCredentials(username, password, employeeId) {
-		var authdata = Base64.encode(username + ':' + password);
+    var response;
+    UserService.GetByUsername(username, password)
+        .then(function (user) {
+            if (user !== null && user.data.password === password) {
+                response = {success: true, employeeId: user.data.employeeIdJson};
+            } else {
+                response = {success: false, message: 'Username or password is incorrect'};
+            }
+            callback(response);
+        });
 
-		$rootScope.globals = {
-			currentUser : {
-				username : username,
-				employeeId : employeeId,
-				authdata : authdata
-			}
-		};
 
-		$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint
-																				// ignore:line
-		$cookieStore.put('globals', $rootScope.globals);
-	}
+    function SetCredentials(username, password, employeeId) {
+        var authdata = Base64.encode(username + ':' + password);
 
-	function ClearCredentials() {
-		$rootScope.globals = {};
-		$cookieStore.remove('globals');
-		$http.defaults.headers.common.Authorization = 'Basic ';
-	}
+        $rootScope.globals = {
+            currentUser: {
+                username: username,
+                employeeId: employeeId,
+                authdata: authdata
+            }
+        };
+
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint
+        // ignore:line
+        $cookieStore.put('globals', $rootScope.globals);
+    }
+
+    function ClearCredentials() {
+        $rootScope.globals = {};
+        $cookieStore.remove('globals');
+        $http.defaults.headers.common.Authorization = 'Basic ';
+    }
 }
 
 // Base64 encoding service used by AuthenticationService
 var Base64 = {
 
-	keyStr : 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
+    keyStr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
 
-	encode : function(input) {
-		var output = "";
-		var chr1, chr2, chr3 = "";
-		var enc1, enc2, enc3, enc4 = "";
-		var i = 0;
+    encode: function (input) {
+        var output = "";
+        var chr1, chr2, chr3 = "";
+        var enc1, enc2, enc3, enc4 = "";
+        var i = 0;
 
-		do {
-			chr1 = input.charCodeAt(i++);
-			chr2 = input.charCodeAt(i++);
-			chr3 = input.charCodeAt(i++);
+        do {
+            chr1 = input.charCodeAt(i++);
+            chr2 = input.charCodeAt(i++);
+            chr3 = input.charCodeAt(i++);
 
-			enc1 = chr1 >> 2;
-			enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-			enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-			enc4 = chr3 & 63;
+            enc1 = chr1 >> 2;
+            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+            enc4 = chr3 & 63;
 
-			if (isNaN(chr2)) {
-				enc3 = enc4 = 64;
-			} else if (isNaN(chr3)) {
-				enc4 = 64;
-			}
+            if (isNaN(chr2)) {
+                enc3 = enc4 = 64;
+            } else if (isNaN(chr3)) {
+                enc4 = 64;
+            }
 
-			output = output + this.keyStr.charAt(enc1)
-					+ this.keyStr.charAt(enc2) + this.keyStr.charAt(enc3)
-					+ this.keyStr.charAt(enc4);
-			chr1 = chr2 = chr3 = "";
-			enc1 = enc2 = enc3 = enc4 = "";
-		} while (i < input.length);
+            output = output + this.keyStr.charAt(enc1)
+                + this.keyStr.charAt(enc2) + this.keyStr.charAt(enc3)
+                + this.keyStr.charAt(enc4);
+            chr1 = chr2 = chr3 = "";
+            enc1 = enc2 = enc3 = enc4 = "";
+        } while (i < input.length);
 
-		return output;
-	},
+        return output;
+    },
 
-	decode : function(input) {
-		var output = "";
-		var chr1, chr2, chr3 = "";
-		var enc1, enc2, enc3, enc4 = "";
-		var i = 0;
+    decode: function (input) {
+        var output = "";
+        var chr1, chr2, chr3 = "";
+        var enc1, enc2, enc3, enc4 = "";
+        var i = 0;
 
-		// remove all characters that are not A-Z, a-z, 0-9, +, /, or =
-		var base64test = /[^A-Za-z0-9\+\/\=]/g;
-		if (base64test.exec(input)) {
-			window
-					.alert("There were invalid base64 characters in the input text.\n"
-							+ "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n"
-							+ "Expect errors in decoding.");
-		}
-		input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+        // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
+        var base64test = /[^A-Za-z0-9\+\/\=]/g;
+        if (base64test.exec(input)) {
+            window
+                .alert("There were invalid base64 characters in the input text.\n"
+                + "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n"
+                + "Expect errors in decoding.");
+        }
+        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
 
-		do {
-			enc1 = this.keyStr.indexOf(input.charAt(i++));
-			enc2 = this.keyStr.indexOf(input.charAt(i++));
-			enc3 = this.keyStr.indexOf(input.charAt(i++));
-			enc4 = this.keyStr.indexOf(input.charAt(i++));
+        do {
+            enc1 = this.keyStr.indexOf(input.charAt(i++));
+            enc2 = this.keyStr.indexOf(input.charAt(i++));
+            enc3 = this.keyStr.indexOf(input.charAt(i++));
+            enc4 = this.keyStr.indexOf(input.charAt(i++));
 
-			chr1 = (enc1 << 2) | (enc2 >> 4);
-			chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-			chr3 = ((enc3 & 3) << 6) | enc4;
+            chr1 = (enc1 << 2) | (enc2 >> 4);
+            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+            chr3 = ((enc3 & 3) << 6) | enc4;
 
-			output = output + String.fromCharCode(chr1);
+            output = output + String.fromCharCode(chr1);
 
-			if (enc3 != 64) {
-				output = output + String.fromCharCode(chr2);
-			}
-			if (enc4 != 64) {
-				output = output + String.fromCharCode(chr3);
-			}
+            if (enc3 != 64) {
+                output = output + String.fromCharCode(chr2);
+            }
+            if (enc4 != 64) {
+                output = output + String.fromCharCode(chr3);
+            }
 
-			chr1 = chr2 = chr3 = "";
-			enc1 = enc2 = enc3 = enc4 = "";
+            chr1 = chr2 = chr3 = "";
+            enc1 = enc2 = enc3 = enc4 = "";
 
-		} while (i < input.length);
+        } while (i < input.length);
 
-		return output;
-	}
+        return output;
+    }
 };
 
 angular.module('employeeManagerServices').factory('UserService', UserService);
 
-UserService.$inject = [ '$http' ];
+UserService.$inject = ['$http'];
 function UserService($http) {
-	var service = {};
+    var service = {};
 
-	service.GetByUsername = GetByUsername;
+    service.GetByUsername = GetByUsername;
 
-	return service;
+    return service;
 
-	function GetByUsername(username, password) {
-		return $http.get(
-				'/employee-manager-container/rest/account?username=' + username
-						+ '&password=' + password).then(handleSuccess,
-				handleError('Error getting user by username'));
-	}
+    function GetByUsername(username, password) {
+        return $http.get(
+            '/employee-manager-container/rest/account?username=' + username
+            + '&password=' + password).then(handleSuccess,
+            handleError('Error getting user by username'));
+    }
 
-	function handleSuccess(data) {
-		return data;
-	}
+    function handleSuccess(data) {
+        return data;
+    }
 
-	function handleError(error) {
-		return function() {
-			return {
-				success : false,
-				message : error
-			};
-		};
-	}
+    function handleError(error) {
+        return function () {
+            return {
+                success: false,
+                message: error
+            };
+        };
+    }
 }
 
 employeeManagerServices
-	.factory(
-	'ProjectService',
-	[
-		'$resource',
+    .factory(
+    'ProjectService',
+    [
+        '$resource',
 
-		function ($resource) {
+        function ($resource) {
 
-			return $resource(
-				'/employee-manager-container/rest/:call/:id/project',
-				{
-					id: "@id"
-				}, {
+            return $resource(
+                '/employee-manager-container/rest/:call/:id/project',
+                {
+                    id: "@id"
+                }, {
 
-					projects: {
-						method: 'GET',
-						params: {
-							call: 'employee'
-						},
-						isArray: true
-					}
+                    projects: {
+                        method: 'GET',
+                        params: {
+                            call: 'employee'
+                        },
+                        isArray: true
+                    }
 
-				});
+                });
 
-		}]);
+        }]);
 
 employeeManagerServices
-	.factory(
-	'EmployeeProjectService',
-	[
-		'$resource',
+    .factory(
+    'EmployeeProjectService',
+    [
+        '$resource',
 
-		function ($resource) {
+        function ($resource) {
 
-			return $resource(
-				'/employee-manager-container/rest/:call/:id/employeeProjectEvaluationList',
-				{
-					id: "@id"
-				}, {
+            return $resource(
+                '/employee-manager-container/rest/:call/:id/employeeProjectEvaluationList',
+                {
+                    id: "@id"
+                }, {
 
-					employeeProjects: {
-						method: 'GET',
-						params: {
-							call: 'employee'
-						},
-						isArray: true
-					}
-				});
-		}]);
+                    employeeProjects: {
+                        method: 'GET',
+                        params: {
+                            call: 'employee'
+                        },
+                        isArray: true
+                    }
+                });
+        }]);
+
+employeeManagerServices
+    .factory(
+    'ProjectsService',
+    [
+        '$resource',
+
+        function ($resource) {
+            return $resource('/employee-manager-container/rest/:call', {},
+                {
+                    projects: {
+                        method: 'GET',
+                        params: {
+                            call: 'project'
+                        },
+                        isArray: true
+                    }
+                });
+
+        }]);
+
+
