@@ -1,5 +1,4 @@
 
-
 <div id="registerContent">
 	<div class="col-lg-6">
 		<h2>Create Account</h2>
@@ -41,25 +40,30 @@
 						ng-show="accountForm.email.$error.maxlength">Input must be
 						less than or equal to 255 characters.</div>
 				</div>
+				
 				<div class="form-group">
 					<label for="phone" class="col-lg-2 control-label">Phone
 						Number<span style="color: red">*</span>
 					</label>
 
+
 					<div class="col-lg-10">
-						<input type="text" name="phone" class="form-control"
-							ng-model="accountCtrl.account.employeeId.phone"
-							ng-maxlength="255" required>
+						<input type="text" name="phone" class="form-control" ng-pattern="/^\+?\d{2,4}\s??[- ]?\d{3}[- ]?\d{3}[- ]?\d{0,3}$/"
+							ng-model="accountCtrl.account.employeeId.phone"`
+							 required >
 					</div>
 					<span style="color: red"
 						ng-show="accountForm.phone.$dirty && accountForm.phone.$invalid">
 						<span ng-show="accountForm.phone.$error.required">Phone
 							number is required.</span>
+						<span ng-show="accountForm.phone.$invalid">Invalid Phone number</span>
+
 					</span> <br></br>
 					<div style="color: red"
 						ng-show="accountForm.phone.$error.maxlength">Input must be
 						less than or equal to 255 characters.</div>
 				</div>
+				
 				<div class="form-group">
 					<label for="username" class="col-lg-2 control-label">Username<span
 						style="color: red">*</span></label>
