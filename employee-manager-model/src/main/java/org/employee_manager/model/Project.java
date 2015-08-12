@@ -91,8 +91,6 @@ public class Project implements Serializable {
 		this.endDate = endDate;
 	}
 
-
-
 	public String getStatus() {
 		return status;
 	}
