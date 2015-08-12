@@ -242,3 +242,53 @@ function UserService($http) {
 		};
 	}
 }
+
+employeeManagerServices
+	.factory(
+	'ProjectService',
+	[
+		'$resource',
+
+		function ($resource) {
+
+			return $resource(
+				'http://localhost:8080/employee-manager-container/rest/:call/:id/project',
+				{
+					id: "@id"
+				}, {
+
+					projects: {
+						method: 'GET',
+						params: {
+							call: 'employee'
+						},
+						isArray: true
+					}
+
+				});
+
+		}]);
+
+employeeManagerServices
+	.factory(
+	'EmployeeProjectService',
+	[
+		'$resource',
+
+		function ($resource) {
+
+			return $resource(
+				'http://localhost:8080/employee-manager-container/rest/:call/:id/employeeProjectEvaluationList',
+				{
+					id: "@id"
+				}, {
+
+					employeeProjects: {
+						method: 'GET',
+						params: {
+							call: 'employee'
+						},
+						isArray: true
+					}
+				});
+		}]);

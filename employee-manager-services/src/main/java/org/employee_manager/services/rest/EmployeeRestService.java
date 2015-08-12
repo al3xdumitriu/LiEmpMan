@@ -34,13 +34,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.employee_manager.model.Achievement;
-import org.employee_manager.model.Employee;
-import org.employee_manager.model.EmployeeProject;
-import org.employee_manager.model.Evaluation;
-import org.employee_manager.model.Project;
-import org.employee_manager.model.Skill;
-import org.employee_manager.model.SkillEvaluation;
+import org.employee_manager.model.*;
 import org.employee_manager.services.EmployeeService;
 import org.employee_manager.services.SkillService;
 import org.employee_manager.services.repositories.EmployeeRepository;
@@ -138,35 +132,6 @@ public class EmployeeRestService {
 			e.getStackTrace();
 		}
 		res = Response.status(status).entity(skills).build();
-		return res;
-	}
-
-	@GET
-	@Path("{id}/project")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getEmployeeProjects(@PathParam("id") String id) {
-		Long idParse = Long.parseLong(id);
-		Employee employeeFound = new Employee();
-
-		List<EmployeeProject> employeeProjects = new ArrayList<EmployeeProject>();
-		List<Project> project = new ArrayList<Project>();
-
-		Response res = null;
-		int status = 200;
-		try {
-			if (id == null) {
-				status = 404;
-				res = Response.status(status).entity(employeeFound).build();
-			} else {
-				employeeFound = employeeService.findById(idParse);
-				employeeProjects.addAll(employeeFound.getEmployeeProjects());
-
-			}
-		} catch (Exception e) {
-			status = 404;
-			e.getStackTrace();
-		}
-		res = Response.status(status).entity(employeeProjects).build();
 		return res;
 	}
 
@@ -450,5 +415,70 @@ public class EmployeeRestService {
 		// S3Bucket[] myBuckets = s3Service.listAllBuckets();
 		// System.out.println("How many buckets to I have in S3? " +
 		// myBuckets.length);
+	}
+
+	@GET
+	@Path("{id}/project")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Response getEmployeeProjects(@PathParam("id") long id) {
+
+		List<Project> projectsList = new ArrayList<>();
+		Employee employee = null;
+		Long longId = new Long(id);
+		Response response = null;
+
+		try {
+			employee = employeeService.findById(longId);
+			employee.setEvaluations(null);
+
+			for (EmployeeProject employeeProject : employee.getEmployeeProjects()) {
+				employeeProject.setEmployeeId(null);
+				employeeProject.getProjectId().setEmployeeProjects(null);
+				for (ProjectEvaluation projectEvaluation : employeeProject.getProjectId().getProjectEvaluations()) {
+					if (projectEvaluation != null) {
+						projectEvaluation.setIdProject(null);
+						if( projectEvaluation.getEvaluationId()!=null) {
+							projectEvaluation.getEvaluationId().setProjectEvaluation(null);
+							projectEvaluation.getEvaluationId().setEmployeeId(null);
+							projectEvaluation.getEvaluationId().setSkillEvaluation(null);
+							projectEvaluation.getEvaluationId().setOrganizerEvaluation(null);
+							projectEvaluation.getEvaluationId().setCoordinatorEvaluation(null);
+							projectEvaluation.getEvaluationId().setEventEvaluation(null);
+						}
+					}
+				}
+				projectsList.add(employeeProject.getProjectId());
+			}
+			response = Response.status(Status.OK).entity(projectsList).build();
+
+		} catch (Exception e) {
+
+			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		return response;
+	}
+
+
+	@GET
+	@Path("{id}/employeeProjectEvaluationList")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Response getEmployeeProjectEvaluationList(@PathParam("id") long id) {
+
+		List<EmployeeProject> projectEvaluationList = new ArrayList<>();
+		Employee employee = null;
+		Long longId = new Long(id);
+		Response response = null;
+
+		try {
+			employee = employeeService.findById(longId);
+			employee.setEvaluations(null);
+			projectEvaluationList.addAll(employee.getEmployeeProjects());
+
+			response = Response.status(Status.OK).entity(projectEvaluationList).build();
+		} catch (Exception e) {
+
+			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		return response;
 	}
 }
