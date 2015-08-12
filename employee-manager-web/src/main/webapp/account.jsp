@@ -55,7 +55,7 @@
 						<div class="col-lg-7">
 							<input type="text" name="phone" class="form-control"
 								ng-model="accountCtrl.account.employeeId.phone"
-								ng-maxlength="255" style="width: 390px;" required ng-pattern="/^\+?\d{2,4}\s??[- ]?\d{3}[- ]?\d{3}[- ]?\d{0,3}$/">
+								ng-maxlength="16" ng-minlength="10" style="width: 390px;" required ng-pattern="/^\+?\d{2,4}\s??[- ]?\d{3}[- ]?\d{3}[- ]?\d{0,3}$/">
 						</div>
 					</div>
 					<span style="color: red"
@@ -66,9 +66,6 @@
 							
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.phone.$dirty && accountForm.phone.$invalid">Invalid phone number.</div>
-					<div class="errorMessage" style="color: red"
-						ng-show="accountForm.phone.$error.maxlength">Input must be
-						less than or equal to 15 characters.</div>
 				</div>
 
 				<div class="form-group">
