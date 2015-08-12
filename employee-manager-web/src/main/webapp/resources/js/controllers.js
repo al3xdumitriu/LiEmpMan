@@ -273,15 +273,6 @@ employeeManagerControllers
 											url : '/employee-manager-container/rest/sendEmail',
 											data : email
 										})
-										.success(
-												function(data) {
-													setTimeout(
-															function() {
-																$window.location.href = "http://"
-																		+ $scope.ip
-																		+ ":8080/employee-manager-web/index.jsp#/"
-															}, 1500);
-												});
 								this.addEmail(email);
 								$scope.submission();
 							};

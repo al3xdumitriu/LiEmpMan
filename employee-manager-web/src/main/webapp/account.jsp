@@ -38,10 +38,14 @@
 						</div>
 					</div>
 					<span style="color: red"
-						ng-show="accountForm.email.$dirty && accountForm.email.$invalid"><br></br>
-						<span class="errorMessage"
+						ng-show="accountForm.email.$dirty && accountForm.email.$invalid">
+						<br></br> <span class="errorMessage"
 						ng-show="accountForm.email.$error.required">Email is
-							required.</span> </span> <br></br>
+							required.</span> <br></br>
+					</span> <span class="errorMessage" style="color: red"
+						ng-show="accountForm.email.$error.email">Email is not
+						valid.</span> <br></br>
+					</span>
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.email.$error.maxlength">Input must be
 						less than or equal to 255 characters.</div>
@@ -100,8 +104,9 @@
 					</div>
 					<span style="color: red"
 						ng-show="accountForm.password.$dirty && accountForm.password.$invalid"><br></br>
-						<span class="errorMessage" ng-show="accountForm.password.$error.required">Password
-							is required.</span> </span> <br></br>
+						<span class="errorMessage"
+						ng-show="accountForm.password.$error.required">Password is
+							required.</span> </span> <br></br>
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.password.$error.minlength">Must be at
 						least 6 characters.</div>
