@@ -752,3 +752,33 @@ employeeManagerControllers.controller('header', [
 				$location.path('/');
 			};
 		} ]);
+
+employeeManagerControllers.controller('ProjectController', ['$scope', '$routeParams',
+	'ProjectService', 'EmployeeProjectService','$rootScope', function ($scope, $routeParams, ProjectService, EmployeeProjectService, $rootScope) {
+
+		var projects = ProjectService.projects({
+			id:  $rootScope.globals.currentUser.employeeId
+		});
+
+		var employeeProjects = EmployeeProjectService.employeeProjects({
+			id:  $rootScope.globals.currentUser.employeeId
+		});
+
+		$scope.projects = projects;
+
+		$scope.getRatingsAverage = function (project) {
+			var average = 0;
+			for (var i = 0; i < project.projectEvaluations.length; i++) {
+				average += project.projectEvaluations[i].evaluationId.grade;
+			};
+
+			return average/project.projectEvaluations.length;
+		};
+
+		$scope.getHoursAllocated = function (project) {
+
+			var hoursAllocated = employeeProjects[project.id - 1].hoursAllocated;
+			return hoursAllocated;
+		};
+
+	}]);

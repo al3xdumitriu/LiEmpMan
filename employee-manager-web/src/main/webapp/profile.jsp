@@ -8,9 +8,12 @@
         <div class="col-md-8">
             <div ng-include="'details.jsp'"></div>
             <div ng-include="'achievement.jsp'" ng-controller="myCtrlAchievEmp"/>
-	    </br>
-	    <div ng-include="'skillView.jsp'"/>
-	    <div ng-include="'evaluation.jsp'" />
+            </br>
+            <div ng-include="'skillView.jsp'"/>
+            <div ng-include="'project.jsp'"/>
+            <div ng-include="'evaluation.jsp'"/>
         </div>
+
     </div>
+</div>
 </div>
