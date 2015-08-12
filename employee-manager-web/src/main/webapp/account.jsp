@@ -21,7 +21,7 @@
 						ng-show="accountForm.name.$dirty && accountForm.name.$invalid"><br></br>
 						<span class="errorMessage"
 						ng-show="accountForm.name.$error.required">Name is
-							required.</span> </span> <br></br>
+							required.</span> </span>
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.name.$error.maxlength">Input must be
 						less than or equal to 255 characters.</div>
@@ -41,14 +41,10 @@
 						ng-show="accountForm.email.$dirty && accountForm.email.$invalid">
 						<br></br> <span class="errorMessage"
 						ng-show="accountForm.email.$error.required">Email is
-							required.</span> <br></br>
-					</span> <span class="errorMessage" style="color: red"
+							required.</span>
+					</span><span class="errorMessage" style="color: red"
 						ng-show="accountForm.email.$error.email">Email is not
-						valid.</span> <br></br>
-					</span>
-					<div class="errorMessage" style="color: red"
-						ng-show="accountForm.email.$error.maxlength">Input must be
-						less than or equal to 255 characters.</div>
+						valid.</span>
 				</div>
 
 				<div class="form-group">
@@ -59,20 +55,21 @@
 						<div class="col-lg-7">
 							<input type="text" name="phone" class="form-control"
 								ng-model="accountCtrl.account.employeeId.phone"
-								ng-maxlength="255" style="width: 390px;" required ng-pattern="/^\+?\d{2,4}\s??[- ]?\d{3}[- ]?\d{3}[- ]?\d{0,3}$/">
+								ng-maxlength="255" style="width: 390px;" required
+								ng-pattern="/^\+?\d{2,4}\s??[- ]?\d{3}[- ]?\d{3}[- ]?\d{0,3}$/">
 						</div>
 					</div>
 					<span style="color: red"
 						ng-show="accountForm.phone.$dirty && accountForm.phone.$invalid"><br></br>
 						<span class="errorMessage"
 						ng-show="accountForm.phone.$error.required">Phone number is
-							required.</span> </span> <br></br>
-							
+							required.</span> </span>
 					<div class="errorMessage" style="color: red"
-						ng-show="accountForm.phone.$dirty && accountForm.phone.$invalid">Invalid phone number.</div>
+						ng-show="accountForm.phone.$dirty && accountForm.phone.$invalid">Invalid
+						phone number.</div>
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.phone.$error.maxlength">Input must be
-						less than or equal to 15 characters.</div>
+						less than or equal to 255 characters.</div>
 				</div>
 
 				<div class="form-group">
@@ -89,7 +86,7 @@
 						ng-show="accountForm.username.$dirty && accountForm.username.$invalid"><br></br>
 						<span class="errorMessage"
 						ng-show="accountForm.username.$error.required">Username is
-							required.</span> </span> <br></br>
+							required.</span> </span>
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.username.$error.maxlength">Input must
 						be less than or equal to 255 characters.</div>
@@ -109,7 +106,7 @@
 						ng-show="accountForm.password.$dirty && accountForm.password.$invalid"><br></br>
 						<span class="errorMessage"
 						ng-show="accountForm.password.$error.required">Password is
-							required.</span> </span> <br></br>
+							required.</span> </span>
 					<div class="errorMessage" style="color: red"
 						ng-show="accountForm.password.$error.minlength">Must be at
 						least 6 characters.</div>
@@ -132,9 +129,9 @@
 						</div>
 					</div>
 					<span class="errorMessage" style="color: red"
-						ng-show="accountForm.confirmPassword.$dirty && accountForm.confirmPassword.$invalid"><br></br>
+						ng-show="accountForm.confirmPassword.$dirty && accountForm.confirmPassword.$invalid">
 						<span ng-show="accountForm.confirmPassword.$error.required">Password
-							confirmation is required.</span> </span> <br></br>
+							confirmation is required.</span> </span>
 				</div>
 
 				<span class="errorMessage" style="color: red; padding-right: 5px;"
