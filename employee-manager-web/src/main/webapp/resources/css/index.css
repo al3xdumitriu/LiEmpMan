@@ -1,24 +1,86 @@
 #contentDiv {
-    margin: auto;
-    width: 60%;
-    padding: 10px;
+	margin: auto;
+	width: 60%;
+	padding: 10px;
 }
 
 #loginContent {
-    position: absolute;
-    width: 300px;
-    height: 200px;
-    z-index: 15;
-    top: 45%;
-    left: 50%;
-    margin: -100px 0 0 -150px;
+	position: absolute;
+	width: 300px;
+	height: 200px;
+	z-index: 15;
+	top: 45%;
+	left: 50%;
+	margin: -100px 0 0 -150px;
 }
 
 #registerContent {
-    position: absolute;
-    width: 1300px;
-    height: 300px;
-    top: 30%;
-    left: 42%;
-    margin: -100px 0 0 -150px;
+	position: absolute;
+	width: 1300px;
+	height: 300px;
+	top: 30%;
+	left: 42%;
+	margin: -100px 0 0 -150px;
+}
+
+.headerName {
+	float: right;
+	padding-left: 1490px;
+	padding-top: 5px;
+}
+
+.headerName .nav nav-pills nav-stacked {
+	
+}
+
+.headerName .nav>li>a:hover, .nav>li>a:focus {
+	background-color: none;
+	border-radius: none;
+}
+
+.headerName .nav-pills>li>a {
+	position: relative;
+	border-radius: 0;
+	background-color: transparent;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 18px;
+	color: #ffffff;
+}
+
+.headerName .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+	padding-bottom: -10px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 18px;
+	background-color: transparent;
+	color: #ffffff;
+}
+
+.headerName .dropdown-menu>li>a {
+	display: block;
+	padding-right: 20px;
+	clear: both;
+	font-weight: normal;
+	line-height: 1.42857143;
+	color: #333333;
+	white-space: nowrap;
+	background-color: transparent;
+	border: none;
+}
+
+.headerName .dropdown-menu>li>a:hover {
+	color: #2fa4e7;
+}
+
+.headerName ul.dropdown-menu {
+	padding-left: 1px;
+	min-width: 5px;
+	margin-left: 60px;
+}
+
+.headerName .open>.dropdown-menu {
+	margin-left: 70px;
+}
+
+.headerName ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;    
 }

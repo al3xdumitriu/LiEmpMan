@@ -14,6 +14,8 @@
     <link href="resources/css/index.css" rel="stylesheet" type="text/css"/>
     
     <link href="resources/css/login.css" rel="stylesheet" type="text/css"/>
+    
+    <link href="resources/css/account.css" rel="stylesheet" type="text/css"/>
 
     <!-- Downloaded Scripts -->
 
@@ -54,7 +56,7 @@
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 
 <script
-  src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
+  src="https://www.google.com/recaptcha/api.js?hl=en&onload=vcRecaptchaApiLoaded&render=explicit"
   async defer>
  </script>
 

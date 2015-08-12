@@ -51,7 +51,7 @@ employeeManagerServices
 				function($resource) {
 
 					return $resource(
-							'http://localhost:8080/employee-manager-container/rest/:call/:id/skills',
+							'/employee-manager-container/rest/:call/:id/skills',
 							{
 								id : "@id"
 							}, {

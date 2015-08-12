@@ -17,5 +17,7 @@ public interface AccountService {
 	Account findAccountByName(String username);
 	
 	Account findAccountByNameAndPassword(String username,String password);
+	
+	List<Account> findMultipleAccountsByNameAndPassword(String username, String password);
 
 }

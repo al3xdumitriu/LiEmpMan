@@ -277,15 +277,6 @@ employeeManagerControllers
 											url : '/employee-manager-container/rest/sendEmail',
 											data : email
 										})
-										.success(
-												function(data) {
-													setTimeout(
-															function() {
-																$window.location.href = "http://"
-																		+ $scope.ip
-																		+ ":8080/employee-manager-web/index.jsp#/"
-															}, 1500);
-												});
 								this.addEmail(email);
 								$scope.submission();
 							};
@@ -360,22 +351,31 @@ employeeManagerControllers.controller('EmployeeDetailsController', [
 		'$http',
 		'$route',
 		'$rootScope',
+		'$timeout',
 		function($scope, $routeParams, employeesService, $http, $route,
-				$rootScope) {
+				$rootScope,$timeout) {
 
 			$scope.employee = employeesService.employee({
 				id : $rootScope.globals.currentUser.employeeId
 			// $routeParams.id
 			});
 
+			$scope.hideRaportSave = true;
+			
 			$scope.saveMethode = function() {
 				$http({
 					method : 'PUT',
 					url : '/employee-manager-container/rest/employee',
 					data : $scope.employee
 				})
+				
+				$scope.hideRaportSave = false;
+				
+				$timeout(function(){ $scope.hideMessageSave(); }, 1000);
 			};
-
+			
+			$scope.hideRaportUpload = true;
+			
 			$scope.serialize = function() {
 				$http({
 					method : 'GET',
@@ -383,7 +383,27 @@ employeeManagerControllers.controller('EmployeeDetailsController', [
 							+ $rootScope.globals.currentUser.employeeId
 							+ '/savexml'
 				})
+				$scope.hideRaportUpload = false;
+				
+				$timeout(function(){ $scope.hideMessage(); }, 1000);
 			};
+
+			$scope.showName = function() {
+				$http({
+					method : 'GET',
+					url : '/employee-manager-container/rest/employee/'
+							+ $rootScope.globals.currentUser.employeeId
+				})
+			};
+			
+			$scope.hideMessage = function() {
+				$scope.hideRaportUpload = true;
+			}
+			
+			$scope.hideMessageSave = function() {
+				$scope.hideRaportSave = true;
+			}
+			
 		} ]);
 
 employeeManagerControllers.controller('myCtrlAchievEmp', [
@@ -391,7 +411,9 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 		'$http',
 		'$routeParams',
 		'$rootScope',
-		function($scope, $http, $routeParams, $rootScope) {
+		'$timeout',
+		'$window',
+		function($scope, $http, $routeParams, $rootScope,$timeout,$window) {
 
 			$scope.urlfinal = "/employee-manager-container/rest/employee/"
 					+ $rootScope.globals.currentUser.employeeId /* $routeParams.id */
@@ -406,8 +428,16 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 			$scope.add = function() {
 				$scope.limit = parseInt($scope.limit) + 4;
 			}
+			
+			$scope.areMoreAchievements=function() {
+				if($scope.limit<$scope.achievements.length) return true;
+				else return false;
+			}
+			
 			$scope.ascunde = true;
 
+			
+			
 			$scope.arata = function() {
 				$scope.ascunde = !$scope.ascunde;
 				$scope.hideRaport = true;
@@ -423,7 +453,7 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 				}
 			};
 
-			$scope.incearcaPost = function() {
+			$scope.postAchiev = function() {
 				$scope.ascunde = !$scope.ascunde;
 				$http({
 					method : 'POST',
@@ -441,7 +471,17 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 					}
 				};
 				$scope.hideRaport = false;
+				
+				$timeout(function(){ $scope.reloadPage(); }, 1000);
+				
 			}
+			
+			$scope.reloadPage = function() {
+				
+				$window.location.reload();
+			
+			}
+			
 		} ]);
 
 employeeManagerControllers.controller('myCtrlEvent', [
@@ -473,6 +513,7 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			
 			$scope.hide = true;
 			$scope.hideRaport = true;
+			$scope.hideRaportPost = true;
 			$scope.showForm = function() {
 				$scope.hide = !$scope.hide;
 				$scope.hideRaport = true;
@@ -584,17 +625,16 @@ employeeManagerControllers.controller('myCtrlEvent', [
 					eventTypeId : null,
 					eventStatusId : null
 				};
-				$scope.hideRaport = false;
+				$scope.hideRaportPost = false;
 			
 /*				$location.reload(true);
 				$route.reload();*/
 				
-				$timeout(function(){ $scope.reloadPage(); }, 2000);
+				$timeout(function(){ $scope.reloadPage(); }, 1000);
 				
 				
 			}
 
-			
 			$scope.reloadPage = function() {
 				
 				$window.location.reload();
@@ -653,7 +693,46 @@ employeeManagerControllers.controller('myCtrlEvent', [
 				});
 
 				$scope.hideRaport = false;
-
+				
+				$timeout(function(){ $scope.hideRaportEventSave(); }, 1000);
+				
 			}
+			
+			$scope.hideRaportEventSave = function(){
+				$scope.hideRaport = true;
+			}
+			
 
-		} ]); 
+		} ]);
+
+/*employeeManagerControllers.controller('header', header);
+header.$inject = [ '$scope', '$routeParams', '$location',
+		'AuthenticationService', '$rootScope' ];
+
+function header($scope, $routeParams, $location, AuthenticationService,
+		$rootScope) {
+	$scope.name = $rootScope.globals.currentUser.username;
+
+	function logout() {
+		AuthenticationService.ClearCredentials();
+		$location.path('/');
+	}
+	;
+};*/
+
+employeeManagerControllers.controller('header', [
+		'$scope',
+		'$http',
+		'$routeParams',
+		'$rootScope',
+		'$location',
+		'AuthenticationService',
+		function($scope, $http, $routeParams, $rootScope, $location,
+				AuthenticationService) {
+			$scope.name = $rootScope.globals.currentUser.username;
+
+			$scope.logout=function logout() {
+				AuthenticationService.ClearCredentials();
+				$location.path('/');
+			};
+		} ]);

@@ -1,0 +1,20 @@
+.errorMessage{
+	float:right;
+	padding-right:20px;
+}
+.recaptcha{
+	float:right;
+	padding-right:20px;
+}
+.registerButton{
+	float:right;
+	padding-right:20px;
+}
+.accountLabel{
+	float:left;
+	padding-left:20px;
+}
+.accountInput{
+	float:right;
+	padding-right:5px;
+}

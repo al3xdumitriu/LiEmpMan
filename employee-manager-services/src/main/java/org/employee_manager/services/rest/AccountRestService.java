@@ -23,6 +23,7 @@ import org.employee_manager.util.Util;
 import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 
 @Path("/account")
 public class AccountRestService {
@@ -51,7 +52,17 @@ public class AccountRestService {
 				account.setRoles(null);
 				account.setEmployeeIdJson(account.getEmployeeId().getId());
 				resultResponse = Response.status(Response.Status.OK).entity(account).build();
-				//JsonObject jsonObject=this.validateCaptcha(secret, account.getCapchaAnswer(), "user_ip_address");
+
+				/*
+				 * in case there are multiple accounts with the same credentials
+				 * in the dataBase ( this should never happend) retrieve the
+				 * first account(log in with the first account)
+				 */
+			} catch (IncorrectResultSizeDataAccessException e) {
+				List<Account> multipleAccounts = accountService.findMultipleAccountsByNameAndPassword(username,
+						password);
+				multipleAccounts.get(0).setRoles(null);
+				resultResponse = Response.status(Response.Status.OK).entity(multipleAccounts.get(0)).build();
 			} catch (Exception e) {
 				resultResponse = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 			}
