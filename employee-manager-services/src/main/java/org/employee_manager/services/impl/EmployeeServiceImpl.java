@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService { 
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -46,6 +46,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 			Long id) {
 		this.employeeRepository.updateById(name, cnp, phone, email, experienceLevel, jobTitle, id);
 		
+	}
+
+	@Override
+	public List<Employee> getAllExceptCurrentEmployee(Long id) {
+		return employeeRepository.getAllExceptCurrentEmployee(id);
 	}
 
 	

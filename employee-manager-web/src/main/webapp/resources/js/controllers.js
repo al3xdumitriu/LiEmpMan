@@ -106,7 +106,9 @@ employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http', '$r
 			$scope.showEvaluation = false;
 			$scope.savedSuccessfully = false;
 			
-			var employees = employeesServ.employees({});
+			var employees = employeesServ.employees({
+				id : $rootScope.globals.currentUser.employeeId
+			});
 			$scope.employees = employees;
 
 			$scope.giveEvaluation = function() {
@@ -363,6 +365,11 @@ employeeManagerControllers.controller('EmployeeDetailsController', [
 			$scope.hideRaportSave = true;
 			
 			$scope.saveMethode = function() {
+				
+				$scope.employee.skills=null;
+				$scope.employee.evaluations=null;
+				$scope.employee.employeeProjects=null;
+				
 				$http({
 					method : 'PUT',
 					url : '/employee-manager-container/rest/employee',

@@ -64,11 +64,9 @@
 						ng-show="accountForm.phone.$error.required">Phone number is
 							required.</span> </span>
 					<div class="errorMessage" style="color: red"
-						ng-show="accountForm.phone.$dirty && accountForm.phone.$invalid">Invalid
+						ng-show="accountForm.phone.$error.pattern">Invalid
 						phone number.</div>
-					<div class="errorMessage" style="color: red"
-						ng-show="accountForm.phone.$error.maxlength">Input must be
-						less than or equal to 255 characters.</div>
+
 				</div>
 
 				<div class="form-group">

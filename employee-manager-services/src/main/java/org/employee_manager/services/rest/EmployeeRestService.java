@@ -106,6 +106,31 @@ public class EmployeeRestService {
 		res = Response.status(status).entity(allEmployees).build();
 		return res;
 	}
+	
+	@GET
+	@Path("{employeeId}/exceptCurrentEmp")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getAllExceptCurrentEmp(@PathParam("employeeId") String employeeId) {
+		List<Employee> allEmployees = new ArrayList<Employee>();
+		Response res = null;
+		int status = 200;
+		Long id = Long.parseLong(employeeId);
+		try {
+			allEmployees = employeeService.getAllExceptCurrentEmployee(id);
+			res = Response.status(status).entity(allEmployees).build();
+		} catch (Exception e) {
+			status = 404;
+			e.getStackTrace();
+		}
+		for (Employee employeeFound : allEmployees) {
+			employeeFound.setEmployeeProjects(null);
+			employeeFound.setAchievements(null);
+			employeeFound.setEvaluations(null);
+			employeeFound.setSkills(null);
+		}
+		res = Response.status(status).entity(allEmployees).build();
+		return res;
+	}
 
 	@GET
 	@Path("{id}/skill")

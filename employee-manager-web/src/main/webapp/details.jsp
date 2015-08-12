@@ -25,9 +25,10 @@
 					<label for="phone">Phone:</label><br>
 					<div>
 						<input type="text" id="phone" ng-model="employee.phone"
-							class="form-control" name="phone" disabled required>
+							class="form-control" name="phone" disabled required ng-pattern="/^\+?\d{2,4}\s??[- ]?\d{3}[- ]?\d{3}[- ]?\d{0,3}$/">
 					</div>
 					<span style="color: red" ng-show="detailsForm.phone.$error.required && detailsForm.phone.$dirty" class="rightErrMsg">Phone is required.</span>
+					<div class="errorMessage" style="color: red" ng-show="detailsForm.phone.$error.pattern">Invalid phone number.</div>
 					<br>
 				</div>
 
