@@ -100,16 +100,20 @@ employeeManagerControllers.controller('StarCtrl', [ '$scope', '$http', '$rootSco
 
 		} ]);
 
-employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http',
-		'$routeParams', 'StarService', '$timeout',
-		function($scope, $http, $routeParams, StarService, $timeout) {
+employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http', '$rootScope',
+		'$routeParams', 'StarService', '$timeout','employeesServ',
+		function($scope, $http, $rootScope, $routeParams, StarService, $timeout, employeesServ) {
 			$scope.showEvaluation = false;
 			$scope.savedSuccessfully = false;
+			
+			var employees = employeesServ.employees({});
+			$scope.employees = employees;
+
 			$scope.giveEvaluation = function() {
 				$scope.showEvaluation = true;
 
 				var skills = StarService.skills({
-					id : $scope.employeeId
+					id : $scope.employee.id
 				});
 				$scope.skills = skills;
 			};
@@ -273,15 +277,6 @@ employeeManagerControllers
 											url : '/employee-manager-container/rest/sendEmail',
 											data : email
 										})
-										.success(
-												function(data) {
-													setTimeout(
-															function() {
-																$window.location.href = "http://"
-																		+ $scope.ip
-																		+ ":8080/employee-manager-web/index.jsp#/"
-															}, 1500);
-												});
 								this.addEmail(email);
 								$scope.submission();
 							};

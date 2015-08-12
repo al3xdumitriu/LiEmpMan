@@ -8,11 +8,11 @@
              ng-controller=contentMenuController ng-hide="showContentMenu"></div>
 
 <div class="col-md-8">
-	<h1 class="page-header">
-					<font color="#0597F2">Events</font>
+			<h1 class="page-header">
+				<font color="#0597F2">Events</font>
 
-				</h1>	
-	<div>
+			</h1>
+			<div>
 		<div>
 			<br>
 			<div >

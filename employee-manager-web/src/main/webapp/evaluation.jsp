@@ -10,7 +10,10 @@
 	<legend>Evaluation</legend>
 </h1>
 <div ng-controller="EvaluationCtrl" class="well bs-component">
-    Chose Employee for evaluation: <input type="text" ng-model="employeeId" class="form-control"> </br>
+    Chose Employee for evaluation:
+    <select ng-model="employee" ng-options="employee.name for employee in employees"></select>
+    
+    
     <div align="right">
     	<button ng-click="giveEvaluation()" class="btn btn-primary">Give Evaluation</button> <p></p>
     </div>

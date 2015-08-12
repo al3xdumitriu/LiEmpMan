@@ -28,6 +28,19 @@ function($resource) {
 
 } ]);
 
+employeeManagerServices.factory('employeesServ', [ '$resource',
+function($resource) {
+	return $resource('/employee-manager-container/rest/:call', {},
+			{	employees : {
+				method : 'GET',
+				params : {
+					call : 'employee'
+				},
+				isArray : true
+			}
+	});
+
+} ]);
 
 employeeManagerServices
 .factory(
@@ -38,7 +51,7 @@ employeeManagerServices
 				function($resource) {
 
 					return $resource(
-							'http://localhost:8080/employee-manager-container/rest/:call/:id/skills',
+							'/employee-manager-container/rest/:call/:id/skills',
 							{
 								id : "@id"
 							}, {
