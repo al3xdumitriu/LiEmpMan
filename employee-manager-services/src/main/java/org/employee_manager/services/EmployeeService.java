@@ -17,4 +17,6 @@ public interface EmployeeService {
 	List<Employee> findAll();
 
 	void updateById(String name, Long cnp,String phone, String email, String experienceLevel,String jobTitle,Long id);
+	
+	List<Employee> getAllExceptCurrentEmployee(Long id);
 }

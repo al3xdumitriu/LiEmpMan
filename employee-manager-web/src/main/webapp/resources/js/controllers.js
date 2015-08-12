@@ -98,7 +98,16 @@ employeeManagerControllers.controller('StarCtrl', ['$scope', '$http', '$rootScop
             $scope.myDataSource.data = skillsChart;
         });
 
-    }]);
+employeeManagerControllers.controller('EvaluationCtrl', [ '$scope', '$http', '$rootScope',
+		'$routeParams', 'StarService', '$timeout','employeesServ',
+		function($scope, $http, $rootScope, $routeParams, StarService, $timeout, employeesServ) {
+			$scope.showEvaluation = false;
+			$scope.savedSuccessfully = false;
+			
+			var employees = employeesServ.employees({
+				id : $rootScope.globals.currentUser.employeeId
+			});
+			$scope.employees = employees;
 
 employeeManagerControllers.controller('EvaluationCtrl', ['$scope', '$http', '$rootScope',
     '$routeParams', 'StarService', '$timeout', 'employeesServ',
@@ -360,7 +369,38 @@ employeeManagerControllers.controller('EmployeeDetailsController', [
             // $routeParams.id
         });
 
-        $scope.hideRaportSave = true;
+			$scope.hideRaportSave = true;
+			
+			$scope.saveMethode = function() {
+				
+				$scope.employee.skills=null;
+				$scope.employee.evaluations=null;
+				$scope.employee.employeeProjects=null;
+				
+				$http({
+					method : 'PUT',
+					url : '/employee-manager-container/rest/employee',
+					data : $scope.employee
+				})
+				
+				$scope.hideRaportSave = false;
+				
+				$timeout(function(){ $scope.hideMessageSave(); }, 1000);
+			};
+			
+			$scope.hideRaportUpload = true;
+			
+			$scope.serialize = function() {
+				$http({
+					method : 'GET',
+					url : '/employee-manager-container/rest/employee/'
+							+ $rootScope.globals.currentUser.employeeId
+							+ '/savexml'
+				})
+				$scope.hideRaportUpload = false;
+				
+				$timeout(function(){ $scope.hideMessage(); }, 1000);
+			};
 
         $scope.saveMethode = function () {
             $http({

@@ -13,63 +13,84 @@
 				<div class="well bs-component">
 					<form name="emailForm" class="form-horizontal"
 						ng-submit="emailCtrl.sendEmail(emailCtrl.email)" novalidate>
+
 						<div class="form-group">
 							<label for="to" class="col-lg-2 control-label">To<span
 								style="color: red">*</span></label>
 							<div class="col-lg-10">
 								<input type="email" name="to" class="form-control"
-									ng-model="emailCtrl.email.to" required>
+									ng-maxlength="255" ng-model="emailCtrl.email.to" required>
 							</div>
 							<span style="color: red"
 								ng-show="emailForm.to.$dirty && emailForm.to.$invalid"> <span
-								ng-show="emailForm.to.$error.required">Email is required.</span>
-							</span> <br></br>
+								class="errorMessage" ng-show="emailForm.to.$error.required">Email
+									is required.</span>
+							</span>
+							<div class="errorMessage" style="color: red"
+								ng-show="emailForm.to.$error.maxlength">Input must be less
+								than or equal to 255 characters.</div>
 						</div>
+
 						<div class="form-group">
 							<label for="from" class="col-lg-2 control-label">From<span
 								style="color: red">*</span></label>
 							<div class="col-lg-10">
 								<input type="email" name="from" class="form-control"
-									ng-model="emailCtrl.email.from" required>
+									ng-maxlength="255" ng-model="emailCtrl.email.from" required>
 							</div>
 							<span style="color: red"
 								ng-show="emailForm.from.$dirty && emailForm.from.$invalid">
-								<span ng-show="emailForm.from.$error.required">Email is
+								<span class="errorMessage"
+								ng-show="emailForm.from.$error.required">Email is
 									required.</span>
-							</span> <br></br>
+							</span>
+							<div class="errorMessage" style="color: red"
+								ng-show="emailForm.from.$error.maxlength">Input must be
+								less than or equal to 255 characters.</div>
 						</div>
+
 						<div class="form-group">
 							<label for="subject" class="col-lg-2 control-label">Subject<span
 								style="color: red">*</span>
 							</label>
 							<div class="col-lg-10">
 								<input type="text" name="subject" class="form-control"
-									ng-model="emailCtrl.email.subject" required>
+									ng-maxlength="255" ng-model="emailCtrl.email.subject" required>
 							</div>
 							<span style="color: red"
 								ng-show="emailForm.subject.$dirty && emailForm.subject.$invalid">
-								<span ng-show="emailForm.subject.$error.required">Subject
-									is required.</span>
-							</span> <br></br>
+								<span class="errorMessage"
+								ng-show="emailForm.subject.$error.required">Subject is
+									required.</span>
+							</span>
+							<div class="errorMessage" style="color: red"
+								ng-show="emailForm.subject.$error.maxlength">Input must be
+								less than or equal to 255 characters.</div>
 						</div>
 						<div class="form-group">
 							<label for="text" class="col-lg-2 control-label">Message<span
 								style="color: red">*</span></label>
 							<div class="col-lg-10">
 								<input type="text" name="text" class="form-control"
-									ng-model="emailCtrl.email.text" required>
+									ng-maxlength="255" ng-model="emailCtrl.email.text" required>
 							</div>
 							<span style="color: red"
 								ng-show="emailForm.text.$dirty && emailForm.text.$invalid">
-								<span ng-show="emailForm.text.$error.required">Message is
+								<span class="errorMessage"
+								ng-show="emailForm.text.$error.required">Message is
 									required.</span>
-							</span> <br></br>
+							</span>
+							<div class="errorMessage" style="color: red"
+								ng-show="emailForm.text.$error.maxlength">Input must be
+								less than or equal to 255 characters.</div>
 						</div>
+
 						<div class="form-group">
 							<label for="imageName" class="col-lg-2 control-label">Image</label>
 							<div class="col-lg-10">
 								<input type="text" name="imageName" accept="image/*"
-									class="form-control" ng-model="emailCtrl.email.imageName">
+									class="form-control" ng-maxlength="255"
+									ng-model="emailCtrl.email.imageName">
 							</div>
 							<br></br>
 						</div>
@@ -77,7 +98,7 @@
 							<label for="attachmentName" class="col-lg-2 control-label">Attachment</label>
 							<div class="col-lg-10">
 								<input type="text" name="attachmentName" class="form-control"
-									ng-model="emailCtrl.email.attachmentName">
+									ng-maxlength="255" ng-model="emailCtrl.email.attachmentName">
 							</div>
 							<br></br>
 						</div>
