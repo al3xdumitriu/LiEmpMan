@@ -34,7 +34,7 @@ public class ProjectRestService {
                     project.setProjectEvaluations(null);
                 }
 
-                response = Response.status(Response.Status.FOUND).entity(projectList).build();
+                response = Response.status(Response.Status.OK).entity(projectList).build();
             } else {
                 response = Response.status(Response.Status.NOT_FOUND).entity(projectList).build();
             }
