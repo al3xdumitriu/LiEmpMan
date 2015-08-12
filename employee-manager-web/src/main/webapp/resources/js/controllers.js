@@ -435,8 +435,16 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
 			}
 			
 			$scope.areMoreAchievements=function() {
-				if($scope.limit<$scope.achievements.length) return true;
-				else return false;
+				if($scope.achievements === undefined)
+					{
+					return true;
+					
+					}
+				else {
+					if($scope.limit<$scope.achievements.length) return true;
+					else return false;
+				}
+				
 			}
 			
 			$scope.ascunde = true;
@@ -512,8 +520,16 @@ employeeManagerControllers.controller('myCtrlEvent', [
 			}
 			
 			$scope.areMoreEvents=function() {
-				if($scope.limit<$scope.events.length) return true;
-				else return false;
+				
+				if($scope.events === undefined)
+				{
+				return true;
+				
+				}
+				else {
+					if($scope.limit<$scope.events.length) return true;
+					else return false;
+					}
 			}
 			
 			$scope.hide = true;

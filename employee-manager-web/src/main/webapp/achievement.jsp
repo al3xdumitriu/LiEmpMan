@@ -30,14 +30,14 @@
 				
 				<form name="achievementForm">
 					 <b>Title:</b> <input type="text" ng-model="achievementTest.name"
-						class="form-control"><br> 
+						class="form-control" ng-maxlength="255"><br> 
 						<b>Description:</b><br> 
 
-					<textarea rows="4" cols="40" ng-model="achievementTest.description"  class="form-control" ></textarea><br> 
+					<textarea rows="4" cols="40" ng-model="achievementTest.description"  class="form-control" ng-maxlength="1000"></textarea><br> 
 					
 					<div ng-if="achievementTest.name!=''">
 
-						<button ng-click="postAchiev()" class="btn btn-primary">Save</button>
+						<button ng-click="postAchiev()" class="btn btn-primary" ng-disabled="!achievementForm.$valid">Save</button>
 
 					</div>
 				</form>

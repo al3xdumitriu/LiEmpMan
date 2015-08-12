@@ -46,7 +46,7 @@ public class Event implements Serializable {
 	@Column(name = "EVENT_END_DATE")
 	private Date endDate;
 
-	@Column(name = "EVENT_DESCRIPTION")
+	@Column(name = "EVENT_DESCRIPTION",length=1000)
 	private String description;
 
 	@Column(name = "EVENT_PARTICIPANTS_NUMBER")

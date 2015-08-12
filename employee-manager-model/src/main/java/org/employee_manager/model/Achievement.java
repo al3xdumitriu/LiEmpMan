@@ -37,7 +37,7 @@ public class Achievement implements Serializable {
 	@Column(name = "ACHIEVEMENT_NAME")
 	private String name;
 
-	@Column(name = "ACHIEVEMENT_DESCRIPTION")
+	@Column(name = "ACHIEVEMENT_DESCRIPTION",length=1000)
 	private String description;
 
 	@ManyToOne()
