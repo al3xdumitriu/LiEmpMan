@@ -25,14 +25,29 @@
 				
 				<form name="eventForm">
 					
-					<br> 	<label>Title:</label> <input type="text" ng-model="eventTest.name" class="form-control" ng-maxlength="255"><br> 
-					<br> 	<label>Organizer Name:</label> <input type="text" ng-model="eventTest.organizatorName" class="form-control" ng-maxlength="255"><br> 
+					<br> 	<label>Title:</label> <input type="text" name="titleEventPost" ng-model="eventTest.name" class="form-control" ng-maxlength="255"> 
+					<div align="right" style="color: red"
+						ng-show="eventForm.titleEventPost.$error.maxlength">Input must be
+						less than or equal to 255 characters.</div>
+					<br> 	<label>Organizer Name:</label> <input type="text" ng-model="eventTest.organizatorName" name="orgNamePost" class="form-control" ng-maxlength="255"> 
+										<div align="right" style="color: red"
+						ng-show="eventForm.orgNamePost.$error.maxlength">Input must be
+						less than or equal to 255 characters.</div>
 					<br>	<label>Description:</label><br>
-						<textarea  ng-model="eventTest.description" rows="4" cols="40" class="form-control noresize" ng-maxlength="1000">
+						<textarea  ng-model="eventTest.description" rows="4" cols="40" name="descriptionEventPost" class="form-control noresize" ng-maxlength="1000">
 {{event.description}}
 						</textarea>
-					<br>	<label>URL:</label><br> <input type="text" ng-model="eventTest.video" class="form-control" ng-maxlength="255">
-					<br>	<label>Coordinates/Address:</label><br> <input type="text" ng-model="eventTest.coordinates" class="form-control" ng-maxlength="255">
+							<div align="right" style="color: red"
+						ng-show="eventForm.descriptionEventPost.$error.maxlength">Input must be
+						less than or equal to 1000 characters.</div>
+					<br>	<label>URL:</label><br> <input type="text" name="urlEventPost" ng-model="eventTest.video" class="form-control" ng-maxlength="255">
+					<div align="right" style="color: red"
+						ng-show="eventForm.urlEventPost.$error.maxlength">Input must be
+						less than or equal to 255 characters.</div>
+					<br>	<label>Coordinates/Address:</label><br> <input type="text" name="coordAddrPost" ng-model="eventTest.coordinates" class="form-control" ng-maxlength="255">
+					<div align="right" style="color: red"
+						ng-show="eventForm.coordAddrPost.$error.maxlength">Input must be
+						less than or equal to 255 characters.</div>
 					<br>	<label>Start Date:</label><br> <input type="datetime-local" ng-model="eventTest.startDate" class="form-control">
 					<br>	<label>End Date:</label><br> <input type="datetime-local" ng-model="eventTest.endDate" class="form-control">
 					<br> 	<br>
@@ -52,14 +67,26 @@
 					<form name="eventFormmm">
 					
 					
-						<br>    <label>Title:</label><input id="titlu{{event.id}}" type="text" ng-model="event.name" class="form-control" ng-maxlength="255">
-						<br>    <label>Organizer Name:</label><input id="oName{{event.id}}" type="text" ng-model="event.organizatorName" class="form-control" ng-maxlength="255">
+						<br>    <label>Title:</label><input id="titlu{{event.id}}" type="text" ng-model="event.name" name="titleEvent" class="form-control" ng-maxlength="255">
+											<div align="right" style="color: red"
+						ng-show="eventFormmm.titleEvent.$error.maxlength">Input must be
+						less than or equal to 255 characters.</div>
+						
+						<br>    <label>Organizer Name:</label><input id="oName{{event.id}}" type="text" ng-model="event.organizatorName" name="orgEvent" class="form-control" ng-maxlength="255">
+																	<div align="right" style="color: red"
+						ng-show="eventFormmm.orgEvent.$error.maxlength">Input must be
+						less than or equal to 255 characters.</div>
 						<br>	<label>Start Date:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'mm/dd/yyyy hh:mm a'" class="form-control" >
 						<br>	<label>End Date:</label><br> <input id="fDate{{event.id}}" type="text" ng-value="event.endDate | date:'mm/dd/yyyy hh:mm a'" class="form-control" >
 						<br>	<label>Description:</label><br>
-						<textarea id="descr{{event.id}}" ng-model="event.description"  rows="4" cols="40" class="form-control noresize" ng-maxlength="1000"></textarea>
-						<br>	<label>URL:</label><br> <input id="uri{{event.id}}" type="text" ng-model="event.video" class="form-control" ng-maxlength="255">
-						
+						<textarea id="descr{{event.id}}" ng-model="event.description"  rows="4" cols="40" name="descrEvent" class="form-control noresize" ng-maxlength="1000"></textarea>
+																	<div align="right" style="color: red"
+						ng-show="eventFormmm.descrEvent.$error.maxlength">Input must be
+						less than or equal to 1000 characters.</div>
+						<br>	<label>URL:</label><br> <input id="uri{{event.id}}" type="text" ng-model="event.video" name="url" class="form-control" ng-maxlength="255">
+																	<div align="right" style="color: red"
+						ng-show="eventFormmm.url.$error.maxlength">Input must be
+						less than or equal to 255 characters.</div>
 					
 					
 
@@ -68,7 +95,10 @@
 						</iframe>
 					</div>
 					</center>
-					<br>	<label>Coordinates/Address:</label><br> <input id="coord{{event.id}}" type="text" ng-model="event.coordinates" class="form-control" ng-maxlength="255">
+					<br>	<label>Coordinates/Address:</label><br> <input id="coord{{event.id}}" type="text" name="coordAddrEvent" ng-model="event.coordinates" class="form-control" ng-maxlength="255">
+																	<div align="right" style="color: red"
+						ng-show="eventFormmm.coordAddrEvent.$error.maxlength">Input must be
+						less than or equal to 255 characters.</div>
 						<br>
 					<div ng-hide=hideRaport >
 				<center>Changes were made successfully</center>

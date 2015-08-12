@@ -29,11 +29,21 @@
 			<div ng-hide=ascunde class="well bs-component">
 				
 				<form name="achievementForm">
-					 <b>Title:</b> <input type="text" ng-model="achievementTest.name"
-						class="form-control" ng-maxlength="255"><br> 
+					 <b>Title:</b> <input type="text" ng-model="achievementTest.name" name="title"
+						class="form-control" ng-maxlength="255">
+						
+						<div align="right" style="color: red"
+						ng-show="achievementForm.title.$error.maxlength">Input must be
+						less than or equal to 255 characters.</div>
+			
+						<br> 
 						<b>Description:</b><br> 
 
-					<textarea rows="4" cols="40" ng-model="achievementTest.description"  class="form-control" ng-maxlength="1000"></textarea><br> 
+					<textarea rows="4" cols="40" ng-model="achievementTest.description" name="description" class="form-control" ng-maxlength="1000"></textarea><br> 
+					
+					<div align="right" style="color: red"
+						ng-show="achievementForm.description.$error.maxlength">Input must be
+						less than or equal to 1000 characters.</div>
 					
 					<div ng-if="achievementTest.name!=''">
 

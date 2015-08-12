@@ -14,10 +14,12 @@
 
 					<div>
 						<input type="text" id="userName" ng-model="employee.name" name="name"
-							class="form-control" disabled required>
+							class="form-control" disabled required ng-maxlength="255">
 					</div>
 						
 					<span style="color: red" ng-show="detailsForm.name.$error.required && detailsForm.name.$dirty" class="rightErrMsg">Name is required.</span>
+					<div align="right" style="color: red" ng-show="detailsForm.name.$error.maxlength">Input must be less than or equal to 255 characters.</div>
+					
 					<br>
 				</div>
 
@@ -35,10 +37,14 @@
 				<div>
 					<label for="email">Email:</label><br>
 					<div>
-						<input type="text" id="email" ng-model="employee.email" name="email"
-							class="form-control" disabled required>
+						<input type="email" id="email" ng-model="employee.email" name="email"
+							class="form-control" disabled required ng-maxlength="255">
 					</div>
 					<span style="color: red" ng-show="detailsForm.email.$error.required && detailsForm.email.$dirty" class="rightErrMsg">Email is required.</span>
+					<div align="right" style="color: red" ng-show="detailsForm.email.$error.maxlength">Input must be less than or equal to 255 characters.</div>
+										<div align="right" style="color: red"
+						ng-show="detailsForm.email.$error.email">Email is not
+						valid.</div>
 					<br>
 				</div>
 
@@ -46,9 +52,10 @@
 					<label for="jobTitle">Job Title:</label><br>
 					<div>
 						<input type="text" id="jobTitle" ng-model="employee.jobTitle" name="job"
-							class="form-control" disabled required>
+							class="form-control" disabled required ng-maxlength="255">
 					</div>
 					<span style="color: red" ng-show="detailsForm.job.$error.required && detailsForm.job.$dirty" class="rightErrMsg">Job title is required.</span>
+					<div align="right" style="color: red" ng-show="detailsForm.job.$error.maxlength">Input must be less than or equal to 255 characters.</div>
 					<br>
 				</div>
 
@@ -56,9 +63,9 @@
 					<label for="expLevel">Experience Level:</label><br>
 					<div>
 						<input type="text" id="expLevel" name="experience"
-							ng-model="employee.experienceLevel" class="form-control" disabled required>
+							ng-model="employee.experienceLevel" class="form-control" disabled required ng-maxlength="255">
 					</div>
-				
+				<div align="right" style="color: red" ng-show="detailsForm.experience.$error.maxlength">Input must be less than or equal to 255 characters.</div>
 					<span style="color: red" ng-show="detailsForm.experience.$error.required && detailsForm.experience.$dirty" class="rightErrMsg">Experience level is required.</span>
 					<br>
 				</div>
