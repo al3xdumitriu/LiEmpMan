@@ -792,7 +792,7 @@ employeeManagerControllers.controller('ProjectController', ['$scope', '$routePar
             return average/project.projectEvaluations.length;
         };
 
-        $scope.getHoursAllocated = function (project) {
+        $scope.hoursAllocated = function (project) {
 
             var hoursAllocated = employeeProjects[project.id - 1].hoursAllocated;
             return hoursAllocated;
