@@ -1,15 +1,14 @@
-<ul class="nav nav-pills nav-stacked">
-    <li class="active"><a href="/employee-manager-web/#/profile/">My
+<ul ng-controller="menuActive" class="nav nav-pills nav-stacked">
+    <li ng-class="{ active: isActive('/profile')}"><a href="#/profile/">My
         Profile</a></li>
-    <li><a href="/employee-manager-web/index.jsp#/projects">Projects</a></li>
-    <li><a href="/employee-manager-web/index.jsp#/event">Events</a></li>
-    <li><a href=""
+    <li ng-class="{ active: isActive('/projects')}"> <a href="#/projects">Projects</a></li>
+    <li ng-class="{ active: isActive('/event')}"><a href="#/event">Events</a></li>
+   <!--  <li><a href=""
            data-toggle="dropdown">Evaluations<span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li><a href="">Received</a></li>
             <li><a href="">Given</a></li>
         </ul>
-    </li>
-    <li><a href="/employee-manager-web/index.jsp#/email">Give Feedback</a></li>
-    <li><a href="">Colleagues</a></li>
+    </li> -->
+    <li ng-class="{ active: isActive('/email')}"><a href="#/email">Give Feedback</a></li>
 </ul>
