@@ -19,7 +19,7 @@
 								style="color: red">*</span></label>
 							<div class="col-lg-10">
 								<input type="email" name="to" class="form-control"
-									ng-maxlength="255" ng-model="emailCtrl.email.to" required>
+									ng-maxlength="255" ng-model="emailCtrl.email.to" placeholder="email@example.com" required>
 							</div>
 							<span style="color: red"
 								ng-show="emailForm.to.$dirty && emailForm.to.$invalid"> <span
@@ -36,7 +36,7 @@
 								style="color: red">*</span></label>
 							<div class="col-lg-10">
 								<input type="email" name="from" class="form-control"
-									ng-maxlength="255" ng-model="emailCtrl.email.from" required>
+									ng-maxlength="255" ng-model="emailCtrl.email.from" placeholder="email@example.com" required>
 							</div>
 							<span style="color: red"
 								ng-show="emailForm.from.$dirty && emailForm.from.$invalid">
@@ -55,7 +55,7 @@
 							</label>
 							<div class="col-lg-10">
 								<input type="text" name="subject" class="form-control"
-									ng-maxlength="255" ng-model="emailCtrl.email.subject" required>
+									ng-maxlength="255" ng-model="emailCtrl.email.subject" placeholder="subject" required>
 							</div>
 							<span style="color: red"
 								ng-show="emailForm.subject.$dirty && emailForm.subject.$invalid">
@@ -72,7 +72,7 @@
 								style="color: red">*</span></label>
 							<div class="col-lg-10">
 								<input type="text" name="text" class="form-control"
-									ng-maxlength="255" ng-model="emailCtrl.email.text" required>
+									ng-maxlength="255" ng-model="emailCtrl.email.text" placeholder="message" required>
 							</div>
 							<span style="color: red"
 								ng-show="emailForm.text.$dirty && emailForm.text.$invalid">
@@ -89,7 +89,7 @@
 							<label for="imageName" class="col-lg-2 control-label">Image</label>
 							<div class="col-lg-10">
 								<input type="text" name="imageName" accept="image/*"
-									class="form-control" ng-maxlength="255"
+									class="form-control" ng-maxlength="255" placeholder="E:\\image.jpg"
 									ng-model="emailCtrl.email.imageName">
 							</div>
 							<br></br>
@@ -97,7 +97,7 @@
 						<div class="form-group">
 							<label for="attachmentName" class="col-lg-2 control-label">Attachment</label>
 							<div class="col-lg-10">
-								<input type="text" name="attachmentName" class="form-control"
+								<input type="text" name="attachmentName" class="form-control" placeholder="E:\\file.txt"
 									ng-maxlength="255" ng-model="emailCtrl.email.attachmentName">
 							</div>
 							<br></br>

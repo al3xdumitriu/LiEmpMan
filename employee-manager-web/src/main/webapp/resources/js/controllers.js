@@ -281,6 +281,7 @@ employeeManagerControllers
                     })
                 this.addEmail(email);
                 $scope.submission();
+                emailForm.reset();
             };
 
             this.addEmail = function(email) {
