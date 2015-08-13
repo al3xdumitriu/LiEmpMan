@@ -6,8 +6,7 @@
         <div ng-repeat="project in projects">
             <div class="row">
                 <div class="col-md-4">
-                    <b>{{project.name}}</b>3
-                    
+                    <b>{{project.name}}</b>
                 </div>
                 <div class="col-md-4" star-rating rating-value="getRatingsAverage(project)" max="5"></div>
                 <div class="col-md-4"><b>{{getHoursAllocated(project)}}h/week</b></div>

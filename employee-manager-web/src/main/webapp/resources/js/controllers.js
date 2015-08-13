@@ -806,3 +806,11 @@ employeeManagerControllers.controller('ProjectsController', ['$scope', '$rootSco
         var projects = ProjectsService.projects({});
         $scope.projects = projects;
     }]);
+
+employeeManagerControllers.controller('menuActive',  [ '$scope',
+                                                       '$location', function($scope, $location) {
+	$scope.isActive = function (viewLocation) {
+	     var active = (viewLocation === $location.path());
+	     return active;
+	}
+   }]);
