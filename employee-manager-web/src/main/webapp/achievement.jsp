@@ -45,7 +45,7 @@
 						ng-show="achievementForm.description.$error.maxlength">Input must be
 						less than or equal to 1000 characters.</div>
 					
-					<div ng-if="achievementTest.name!=''">
+					<div align="right" ng-if="achievementTest.name!=''">
 
 						<button ng-click="postAchiev()" class="btn btn-primary" ng-disabled="!achievementForm.$valid">Save</button>
 
