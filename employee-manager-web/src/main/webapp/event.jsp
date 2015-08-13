@@ -75,8 +75,8 @@
 																	<div align="right" style="color: red"
 						ng-show="eventFormmm.orgEvent.$error.maxlength">Input must be
 						less than or equal to 255 characters.</div>
-						<br>	<label>Start Date:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'mm/dd/yyyy hh:mm a'" class="form-control" >
-						<br>	<label>End Date:</label><br> <input id="fDate{{event.id}}" type="text" ng-value="event.endDate | date:'mm/dd/yyyy hh:mm a'" class="form-control" >
+						<br>	<label>Start Date:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'MM/dd/yyyy hh:mm a'" class="form-control" >
+						<br>	<label>End Date:</label><br> <input id="fDate{{event.id}}" type="text" ng-value="event.endDate | date:'MM/dd/yyyy hh:mm a'" class="form-control" >
 						<br>	<label>Description:</label><br>
 						<textarea id="descr{{event.id}}" ng-model="event.description"  rows="4" cols="40" name="descrEvent" class="form-control noresize" ng-maxlength="1000"></textarea>
 																	<div align="right" style="color: red"
