@@ -46,6 +46,7 @@ applicationModule.config(function($routeProvider,$sceDelegateProvider) {
 		redirectTo : '/employesse'
 
 	});
+
 	
 	$sceDelegateProvider.resourceUrlWhitelist([
 	                                            'self',
