@@ -253,11 +253,18 @@ employeeManagerControllers
         '$scope',
         '$http',
         '$window',
-        function($scope, $http, $window) {
+        '$timeout',
+        function($scope, $http, $window, $timeout) {
 
             $scope.submissionSuccess = false;
 
             $scope.ip = location.hostname;
+            
+            $scope.hideSuccessMessage = true;
+            
+            $scope.hideSuccessMessageFct = function() {
+                $scope.hideSuccessMessage = !$scope.hideSuccessMessage;
+            }
 
             $scope.email = {
                 to : '',
@@ -282,6 +289,8 @@ employeeManagerControllers
                 this.addEmail(email);
                 $scope.submission();
                 emailForm.reset();
+                $scope.hideSuccessMessageFct();
+                $timeout(function(){ $scope.hideSuccessMessageFct(); }, 1500);
             };
 
             this.addEmail = function(email) {

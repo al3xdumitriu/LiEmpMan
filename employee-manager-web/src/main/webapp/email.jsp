@@ -102,8 +102,9 @@
 							</div>
 							<br></br>
 						</div>
+						<div ng-hide=hideSuccessMessage>
 						<div ng-show=submissionSuccess>Your feedback was sent
-							successfully!</div>
+							successfully!</div></div>
 						<br></br>
 						<div>
 							<button class="btn btn-primary" ng-disabled="!emailForm.$valid"
