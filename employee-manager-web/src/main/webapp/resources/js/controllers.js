@@ -440,10 +440,10 @@ employeeManagerControllers.controller('myCtrlAchievEmp', [
             $scope.achievements = response;
         });
 
-        $scope.limit = "4";
+        $scope.limit = "2";
         $scope.hideRaport = true;
         $scope.add = function() {
-            $scope.limit = parseInt($scope.limit) + 4;
+            $scope.limit = parseInt($scope.limit) + 2;
         }
 
         $scope.areMoreAchievements=function() {
