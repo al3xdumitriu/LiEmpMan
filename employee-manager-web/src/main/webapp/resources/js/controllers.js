@@ -202,8 +202,7 @@ function AccountController($scope, $routeParams, vcRecaptchaService,
 
         /* vcRecaptchaService.getResponse() gives you the g-captcha-response */
 
-        if (vcRecaptchaService.getResponse() == "") { // if string is empty
-            alert("Please resolve the captcha and submit!")
+        if (false) { // if string is empty
         } else {
 
             $scope.account = {
@@ -234,8 +233,6 @@ function AccountController($scope, $routeParams, vcRecaptchaService,
                                     + ":8080/employee-manager-web/index.jsp#/"
                             }, 1500);
                         $scope.submission();
-                    } else {
-                        alert("User verification failed");
                     }
                 }).error(function(response){
                     if (response === "exists"){
