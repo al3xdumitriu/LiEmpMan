@@ -192,6 +192,10 @@ function AccountController($scope, $routeParams, vcRecaptchaService,
         $scope.submissionSuccess = !$scope.submissionSuccess;
     }
 
+    $scope.setRecaptchaId = function(widgetId) {
+        $scope.recaptchaId = widgetId;
+    };
+    
     $scope.usernameExists = false;
     $scope.exists = function() {
         $scope.usernameExists = !$scope.usernameExists;
@@ -213,7 +217,7 @@ function AccountController($scope, $routeParams, vcRecaptchaService,
                     email : vm.account.employeeId.email,
                     phone : vm.account.employeeId.phone
                 },
-                capchaAnswer : vcRecaptchaService.getResponse()
+                capchaAnswer : vcRecaptchaService.getResponse($scope.recaptchaId)
             };
             /* MAKE AJAX REQUEST to our server with g-captcha-string */
 

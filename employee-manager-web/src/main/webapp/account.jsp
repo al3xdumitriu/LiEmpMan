@@ -145,7 +145,7 @@
 					ng-show=usernameExists>This username already exists!</div>
 				<br></br>
 				<!--Recaptcha Widget--->
-				<div class="recaptcha" vc-recaptcha key="accountCtrl.publicKey"></div>
+				<div class="recaptcha" vc-recaptcha key="accountCtrl.publicKey" on-create="setRecaptchaId(widgetId)"></div>
 				<br></br> <br></br> <br></br>
 				<div class="registerButton">
 					<button class="btn btn-primary" ng-disabled="!accountForm.$valid"
