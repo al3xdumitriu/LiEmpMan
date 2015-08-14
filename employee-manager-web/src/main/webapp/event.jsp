@@ -47,8 +47,8 @@
 					<div align="right" style="color: red"
 						ng-show="eventForm.coordAddrPost.$error.maxlength">Input must be
 						less than or equal to 255 characters.</div>
-					<br>	<label>Start Date:</label><br> <input type="datetime-local" ng-model="eventTest.startDate" class="form-control">
-					<br>	<label>End Date:</label><br> <input type="datetime-local" ng-model="eventTest.endDate" class="form-control">
+					<br>	<label>Start Date:</label><br> <input type="text" placeholder="YYYY-MM-DD" ng-model="startDatee" class="form-control">
+					<br>	<label>End Date:</label><br> <input type="text" placeholder="YYYY-MM-DD" ng-model="endDatee" class="form-control">
 					<br> 	<br>
 					<div align="right" ng-if="eventTest.name!=null">
 						<button ng-click="postEvent()" ng-disabled="!eventForm.$valid"  class="btn btn-primary">Save</button>
@@ -75,8 +75,8 @@
 																	<div align="right" style="color: red"
 						ng-show="eventFormmm.orgEvent.$error.maxlength">Input must be
 						less than or equal to 255 characters.</div>
-						<br>	<label>Start Date:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'MM/dd/yyyy hh:mm a'" class="form-control" >
-						<br>	<label>End Date:</label><br> <input id="fDate{{event.id}}" type="text" ng-value="event.endDate | date:'MM/dd/yyyy hh:mm a'" class="form-control" >
+						<br>	<label>Start Date:</label><br> <input id="sDate{{event.id}}" type="text" ng-value="event.startDate |  date:'yyyy-MM-dd'" class="form-control" >
+						<br>	<label>End Date:</label><br> <input id="fDate{{event.id}}" type="text" ng-value="event.endDate | date:'yyyy-MM-dd'" class="form-control" >
 						<br>	<label>Description:</label><br>
 						<textarea id="descr{{event.id}}" ng-model="event.description"  rows="4" cols="40" name="descrEvent" class="form-control noresize" ng-maxlength="1000"></textarea>
 																	<div align="right" style="color: red"

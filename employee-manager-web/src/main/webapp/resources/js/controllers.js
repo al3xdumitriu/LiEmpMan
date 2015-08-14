@@ -521,7 +521,8 @@ employeeManagerControllers.controller('myCtrlEvent', [
         $http.get($scope.urlfinal).success(function(response) {
             $scope.events = response;
         });
-
+        $scope.startDatee=null;
+        $scope.endDatee=null;
         $scope.limit = "2";
         $scope.add = function() {
             $scope.limit = parseInt($scope.limit) + 2;
@@ -633,7 +634,14 @@ employeeManagerControllers.controller('myCtrlEvent', [
 
         $scope.postEvent = function() {
             $scope.hide = !$scope.hide;
-            $http({
+
+           if ($scope.startDatee==null)$scope.eventTest.startDate = null;
+           else $scope.eventTest.startDate = new Date($scope.startDatee);
+           
+           if ($scope.endDatee==null) $scope.eventTest.endDate = null;
+           $scope.eventTest.endDate = new Date($scope.endDatee);
+           
+           $http({
                 method : 'POST',
                 url : '/employee-manager-container/rest/event',
                 data : $scope.eventTest
