@@ -19,7 +19,7 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-
+<!--
 	<context:property-placeholder
 		location="file:${EMPLOYEE_MANAGER_EMAIL_CONFIG}/employeeManagerEmail.properties" />
 	
@@ -42,6 +42,6 @@
 			<ref bean="mailSender" />
 		</property>
 	</bean>
-
+-->
 	<tx:annotation-driven />
 </beans>
